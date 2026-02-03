@@ -14,7 +14,7 @@ type options = {
     id: number,
     text: string,
     next?: number
-}
+} 
 
 type choices = {
     selection: number,
