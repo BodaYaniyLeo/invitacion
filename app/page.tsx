@@ -1,6 +1,5 @@
 "use client"
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -17,20 +16,13 @@ export default function Home() {
         </p>
         <div className="flex flex-col items-center">
           {arrayAnimations.map(a =>
-            <Link
-              href={`/${a}`}
+            <button
               key={a}
-              className="w-full border-1 p-2 rounded-full my-2 block text-center"
+              className="w-full border-1 p-2 rounded-full my-2"
+              onClick={() => router.push(`/${a}`)}
             >
               Animación {a}
-            </Link>
-            // <button
-            //   key={a}
-            //   className="w-full border-1 p-2 rounded-full my-2"
-            //   onClick={() => router.push(`/${a}`)}
-            // >
-            //   Animación {a}
-            // </button>
+            </button>
           )
           }
         </div>
