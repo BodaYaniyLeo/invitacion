@@ -1,6 +1,8 @@
 "use client"
 import { Ref, RefObject, useRef, useState } from 'react'
 import './src/styles/tramos.css'
+import { ChevronLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation';
 
 type sections = {
     section: number,
@@ -15,14 +17,17 @@ type options = {
 }
 
 
-export const Opacity = ({ story }: { story?: Array<sections> }) => {
+export const opacity = ({ story }: { story?: Array<sections> }) => {
 
     const [nextPage, setNextPage] = useState<number>(0)
     const [section, setSection] = useState<number>(1)
     const [animation, setAnimation] = useState<boolean>(false)
 
+    const router = useRouter();
+
     return (
         <>
+            <ChevronLeft className='fixed top-0 left-0 z-9 w-12 h-12' onClick={() => router.push(`/`)} />
             <div
                 className='text-center h-screen p-4 flex flex-col relative'
             >

@@ -1,5 +1,5 @@
-import { Scroll } from '../Scroll';
-import { Opacity } from '../Opacity';
+import { scroll } from '../scroll';
+import { opacity } from '../opacity';
 
 type sections = {
     section: number,
@@ -71,14 +71,14 @@ const story: Array<sections> = [
 ];
 
 const animations: Record<string, React.ComponentType<{ story: Array<sections> }>> = {
-    Scroll,
-    Opacity
+    scroll,
+    opacity
 }
 
 export function generateStaticParams() {
     return [
-        { animation: 'Scroll' },
-        { animation: 'Opacity' },
+        { animation: 'scroll' },
+        { animation: 'opacity' },
     ];
 }
 

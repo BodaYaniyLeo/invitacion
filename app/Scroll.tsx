@@ -1,6 +1,8 @@
 "use client"
-import { Ref, RefObject, useRef, useState } from 'react'
+import { Ref, RefObject, use, useRef, useState } from 'react'
 import './src/styles/tramos.css'
+import { ChevronLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 type sections = {
     section: number,
@@ -19,7 +21,7 @@ type choices = {
     option: number
 }
 
-export const Scroll = ({ story }: { story: Array<sections> }) => {
+export const scroll = ({ story }: { story: Array<sections> }) => {
 
     const [currentIndex, setCurrentIndex] = useState<number>(0)
     const [answer, setAnswer] = useState<choices[]>([{ selection: 1, option: 1 }])
@@ -32,6 +34,7 @@ export const Scroll = ({ story }: { story: Array<sections> }) => {
 
     const refs = useRef<Array<HTMLDivElement | null>>([])
 
+    const router = useRouter();
 
     const handleDecision = (next: number, id: number) => {
         setAnswer(prev => {
@@ -55,6 +58,7 @@ export const Scroll = ({ story }: { story: Array<sections> }) => {
 
     return (
         <>
+            <ChevronLeft className='fixed top-0 left-0 z-9 w-12 h-12' onClick={() => router.push(`/`)} />
             {story.map((s, index) => {
                 if (index <= currentIndex) {
                     return (

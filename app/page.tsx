@@ -6,7 +6,7 @@ export default function Home() {
 
   const router = useRouter();
 
-  const arrayAnimations = ['Scroll', 'Opacity']
+  const arrayAnimations = ['scroll', 'opacity']
 
   return (
     <div className="h-screen content-center">
