@@ -24,13 +24,13 @@ export const Opacity = ({ story }: { story?: Array<sections> }) => {
     return (
         <>
             <div
-                className='text-center h-screen p-4 flex flex-col'
+                className='text-center h-screen p-4 flex flex-col relative'
             >
                 <div className={`flex-1 content-center whitespace-pre-wrap ${animation && 'opacityAnimated'}`}>
                     {story && story[nextPage].text[section - 1]}
                 </div>
                 <div
-                    className={`flex justify-between fixed bottom-0 left-0 right-0 p-4  ${animation && 'opacityAnimated'}`}
+                    className={`flex justify-between absolute bottom-0 left-0 right-0 p-4 max-w-100 ${animation && 'opacityAnimated'}`}
                 >
                     {story && story[nextPage].choices?.map((c, i) => {
                         if (section * 2 === c.id || (section * 2) - 1 === c.id) {
