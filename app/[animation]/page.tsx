@@ -79,6 +79,7 @@ export function generateStaticParams() {
     return [
         { animation: 'scroll' },
         { animation: 'opacity' },
+        { animation: 'carousel' },
     ];
 }
 

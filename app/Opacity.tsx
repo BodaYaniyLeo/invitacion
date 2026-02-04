@@ -17,7 +17,7 @@ type options = {
 }
 
 
-export const opacity = ({ story }: { story?: Array<sections> }) => {
+export const opacity = ({ story }: { story: Array<sections> }) => {
 
     const [nextPage, setNextPage] = useState<number>(0)
     const [section, setSection] = useState<number>(1)
@@ -32,12 +32,12 @@ export const opacity = ({ story }: { story?: Array<sections> }) => {
                 className='text-center h-screen p-4 flex flex-col relative'
             >
                 <div className={`flex-1 content-center whitespace-pre-wrap ${animation && 'opacityAnimated'}`}>
-                    {story && story[nextPage].text[section - 1]}
+                    {story[nextPage].text[section - 1]}
                 </div>
                 <div
                     className={`flex justify-between absolute bottom-0 left-0 right-0 p-4 max-w-100 ${animation && 'opacityAnimated'}`}
                 >
-                    {story && story[nextPage].choices?.map((c, i) => {
+                    {story[nextPage].choices?.map((c, i) => {
                         if (section * 2 === c.id || (section * 2) - 1 === c.id) {
                             return (
 

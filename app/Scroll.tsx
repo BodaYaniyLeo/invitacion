@@ -1,5 +1,5 @@
 "use client"
-import { Ref, RefObject, use, useRef, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import './src/styles/tramos.css'
 import { ChevronLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -14,7 +14,7 @@ type options = {
     id: number,
     text: string,
     next?: number
-} 
+}
 
 type choices = {
     selection: number,
