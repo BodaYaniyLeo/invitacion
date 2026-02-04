@@ -17,7 +17,7 @@ type options = {
 }
 
 
-export const opacity = ({ story }: { story: Array<sections> }) => {
+export const Opacity = ({ story }: { story: Array<sections> }) => {
 
     const [nextPage, setNextPage] = useState<number>(0)
     const [section, setSection] = useState<number>(1)

@@ -21,7 +21,7 @@ type choices = {
     option: number
 }
 
-export const scroll = ({ story }: { story: Array<sections> }) => {
+export const Scroll = ({ story }: { story: Array<sections> }) => {
 
     const [currentIndex, setCurrentIndex] = useState<number>(0)
     const [answer, setAnswer] = useState<choices[]>([{ selection: 1, option: 1 }])
