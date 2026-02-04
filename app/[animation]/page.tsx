@@ -1,5 +1,6 @@
-import { scroll } from '../scroll';
-import { opacity } from '../opacity';
+import { opacity } from "../opacity";
+import { scroll } from "../scroll";
+
 
 type sections = {
     section: number,
