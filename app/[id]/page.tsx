@@ -1,4 +1,5 @@
 import { createClient } from '@/app/lib/supabase'
+import { Invitation } from '../src/components/Invitation'
 
 export const dynamic = "force-dynamic"
 
@@ -23,7 +24,7 @@ export default async function Page({
 
     return (
         <div>
-            <h1>{data[0].name}</h1>
+            <Invitation />
         </div>
     )
 }
