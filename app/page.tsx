@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="h-screen content-center justify-items-center">
-      <Invitation />
+      {/* <Invitation /> */}
 
       {/* <div className="text-center">
         <p className="mb-2">

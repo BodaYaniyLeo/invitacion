@@ -1,5 +1,6 @@
+'use client'
 import Image from 'next/image'
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import backHero from '../assets/images/backHero.svg'
 import frontHero from '../assets/images/frontHero.svg'
 import textHero from '../assets/images/logoHero.svg'
