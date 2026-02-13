@@ -13,6 +13,8 @@ export const Invitation = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useLayoutEffect(() => {
+        window.scroll(0, 0)
+
         gsap.registerPlugin(ScrollTrigger);
 
         const video = videoRef.current;
@@ -84,8 +86,7 @@ export const Invitation = () => {
                     { opacity: 1, visibility: 'visible', duration: 0.5 })
                 .to(video, {
                     currentTime: duration,
-                    ease: 'none',
-                    duration: 10,
+                    duration: 2,
                     onUpdate: () => {
                         if (video.paused) video.play().then(() => video.pause());
                     }
@@ -98,7 +99,6 @@ export const Invitation = () => {
             video.onloadedmetadata = setupTimeline;
         }
 
-        return () => ScrollTrigger.getAll().forEach(t => t.kill());
     }, []);
 
     return (
