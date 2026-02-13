@@ -5,17 +5,19 @@ import { Invitation } from "../src/components/Invitation"
 export default async function Page({
     params,
 }: {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }) {
+
+    const { id } = await params
 
     const supabase = createServerSupabaseClient()
 
     const { data, error } = await supabase
         .from("guests")
         .select("*")
-        .eq("slug", params.id)
+        .eq("slug", id)
 
-    if (error || !data) {
+    if (error || !data?.length) {
         return <div>Grupo no encontrado</div>
     }
 

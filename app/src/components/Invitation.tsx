@@ -13,6 +13,9 @@ export const Invitation = () => {
 
 
     useLayoutEffect(() => {
+        
+        const heightWindow = window.innerHeight
+        console.log(heightWindow)
         gsap.registerPlugin(ScrollTrigger)
 
         const heroAnimation = gsap.timeline({
@@ -20,7 +23,7 @@ export const Invitation = () => {
             scrollTrigger: {
                 scrub: 1,
                 start: "top top",
-                end: " 800"
+                end: heightWindow * 2
             }
         })
 
@@ -86,57 +89,11 @@ export const Invitation = () => {
                 opacity: 0
             }, '>')
 
-
-        // const dateAnimation = gsap.timeline({
-        //     ease: "power2.out",
-        //     scrollTrigger: {
-        //         scrub: 1,
-        //         start: "250",
-        //         end: " 850"
-        //     }
-        // })
-
-        // dateAnimation
-        //     .to('#dateLogo', {
-        //         scale: 0.8
-        //     })
-        //     .fromTo('#dateLogo',
-        //         {
-        //             webkitMaskImage:
-        //                 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-        //             maskImage:
-        //                 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-        //             opacity: 0
-
-        //         },
-        //         {
-        //             webkitMaskImage:
-        //                 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-        //             maskImage:
-        //                 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-        //             opacity: 1
-        //         },)
-        //     .to('#heroMask', { display: 'none' }, '>')
-        //     .to('#dateLogo h3', {
-        //         backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
-        //         opacity: 0.8658
-
-        //     }, '>')
-
-        //     .to('#dateLogo', {
-        //         webkitMaskImage:
-        //             'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-        //         maskImage:
-        //             'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-        //         opacity: 0
-        //     }, '>')
-
-
     }, [])
 
 
     return (
-        <>
+        <div style={{ height: '300vh' }}>
             <div id="heroMask" className='fixed top-0 w-full h-screen'>
                 <div className='fixed z-index-0 top-0'>
                     <picture
@@ -185,7 +142,7 @@ export const Invitation = () => {
                     </p>
                 </div>
             </div>
-        </>
+        </div>
 
     )
 }
