@@ -85,7 +85,10 @@ export const Invitation = () => {
                 .to(video, {
                     currentTime: duration,
                     ease: 'none',
-                    duration: 2
+                    duration: 10,
+                    onUpdate: () => {
+                        if (video.paused) video.play().then(() => video.pause());
+                    }
                 });
         };
 
