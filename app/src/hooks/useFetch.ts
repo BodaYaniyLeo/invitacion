@@ -1,5 +1,6 @@
-'use client'
-import { createClient } from '@/app/lib/supabase'
+"use client"
+
+import { createBrowserSupabaseClient } from "@/app/lib/supabase/client"
 import React, { useEffect, useState } from 'react'
 
 type dataBase = {
@@ -11,7 +12,7 @@ export const useFetch = () => {
     const [resBase, setResBase] = useState<Array<dataBase>>([{}])
 
     const fetchData = async () => {
-        const supabase = createClient()
+        const supabase = createBrowserSupabaseClient()
         const { data, error } = await supabase
             .from('guests')
             .select('*')
