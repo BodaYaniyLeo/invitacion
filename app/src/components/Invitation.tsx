@@ -85,7 +85,7 @@ export const Invitation = () => {
                 .to(video, {
                     currentTime: duration,
                     ease: 'none',
-                    duration: 10
+                    duration: 2
                 });
         };
 
