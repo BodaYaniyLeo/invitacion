@@ -28,7 +28,7 @@ export const Invitation = () => {
                     trigger: mainTrigger,
                     start: 'top top',
                     end: 'bottom bottom',
-                    scrub: 1.5,
+                    scrub: 1,
                 }
             });
 
