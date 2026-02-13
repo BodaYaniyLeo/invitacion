@@ -156,7 +156,7 @@ export const Invitation = () => {
                         <Image
                             src={textHero}
                             alt="Picture of the author"
-                            className='absolute z-2 top-1/3 -translate-y-1/2 -translate-x-10 max-w-100 w-full max-h-1/4'
+                            className='absolute z-2 top-1/3 -translate-y-1/2 -translate-1/10 max-w-100 w-full max-h-1/4'
                             id='imgTextHero'
                         />
 
