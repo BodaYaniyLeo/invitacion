@@ -43,9 +43,9 @@ export const Invitation = () => {
 
             heroTimeline
                 .to('#heroComplete', { scale: 1.1, duration: 2 })
-                .to('#imgTextHero', { autoAlpha: 0 }, 0.3)
-                .to('#heroComplete', { autoAlpha: 0, duration: 0.8 }, 1)
-                .to('#heroMask', { maskSize: "25vh", webkitMaskSize: "25vh", duration: 2 }, 1)
+                .to('#imgTextHero', { opacity: 0 , duration: 0.8}, 1)
+                .to('#heroComplete', { opacity: 0, duration: 0.5 })
+                .to('#heroMask', { maskSize: "25vh", webkitMaskSize: "25vh", duration: 2 }, 0.5)
                 .to('#heroMask', { scale: 0.8 })
                 .fromTo('#dateLogo',
                     {
@@ -56,7 +56,7 @@ export const Invitation = () => {
                     {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
                         maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-                        opacity: 1,
+                        autoAlpha: 1,
                         scale: 0.8,
                     }, '<')
                 .to('#heroMask', { display: 'none' }, '>')
@@ -78,7 +78,7 @@ export const Invitation = () => {
                     {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)',
                         maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)',
-                        opacity: 1,
+                        autoAlpha: 1,
                         scale: 0.8
                     })
                 .to('#textOrg h2, #textOrg p', {
@@ -88,7 +88,7 @@ export const Invitation = () => {
                 .to('#textOrg', { autoAlpha: 0 }, '>')
                 .fromTo('#firstVideoSec',
                     { autoAlpha: 0, duration: 0.5 },
-                    { opacity: 1 })
+                    { autoAlpha: 1 })
                 .to(video, {
                     currentTime: duration,
                     duration: 1,
@@ -98,7 +98,7 @@ export const Invitation = () => {
                 }, '<')
                 .fromTo('#firstVideoSec',
                     { autoAlpha: 0, duration: 0.5 },
-                    { opacity: 1 }, '<')
+                    { autoAlpha: 1 }, '<')
                 .to(video, {
                     currentTime: duration,
                     duration: 1,
@@ -109,7 +109,7 @@ export const Invitation = () => {
                 .to('#firstVideoSec', { autoAlpha: 0, duration: 3 })
                 .fromTo('#secondVideoSec',
                     { autoAlpha: 0, duration: 0.5 },
-                    { opacity: 1 })
+                    { autoAlpha: 1 })
                 .to(video2, {
                     currentTime: duration2,
                     duration: 1,
@@ -119,7 +119,7 @@ export const Invitation = () => {
                 }, '<')
                 .fromTo('#secondVideoSec',
                     { autoAlpha: 0, duration: 0.5 },
-                    { opacity: 1 }, '<')
+                    { autoAlpha: 1 }, '<')
                 .to(video2, {
                     currentTime: duration2,
                     duration: 1,
@@ -130,7 +130,7 @@ export const Invitation = () => {
                 .to('#secondVideoSec', { autoAlpha: 0, duration: 3 })
                 .fromTo('#thirdVideoSec',
                     { autoAlpha: 0, duration: 0.5 },
-                    { opacity: 1 })
+                    { autoAlpha: 1 })
                 .to(video3, {
                     currentTime: duration2,
                     duration: 1,
@@ -140,7 +140,7 @@ export const Invitation = () => {
                 }, '<')
                 .fromTo('#thirdVideoSec',
                     { autoAlpha: 0, duration: 0.5 },
-                    { opacity: 1 }, '<')
+                    { autoAlpha: 1 }, '<')
                 .to(video3, {
                     currentTime: duration3,
                     duration: 1,
