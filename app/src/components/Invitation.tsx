@@ -11,6 +11,8 @@ import '@/app/src/styles/invitation.css'
 
 export const Invitation = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const video2Ref = useRef<HTMLVideoElement>(null);
+    const video3Ref = useRef<HTMLVideoElement>(null);
 
     useLayoutEffect(() => {
         window.scroll(0, 0)
@@ -18,12 +20,16 @@ export const Invitation = () => {
         gsap.registerPlugin(ScrollTrigger);
 
         const video = videoRef.current;
+        const video2 = video2Ref.current;
+        const video3 = video3Ref.current;
         const mainTrigger = document.querySelector('#mainContainer');
 
-        if (!video) return;
+        if (!video || !video2|| !video3) return;
 
         const setupTimeline = () => {
             const duration = video.duration || 5;
+            const duration2 = video2.duration || 5;
+            const duration3 = video3.duration || 5;
 
             const heroTimeline = gsap.timeline({
                 scrollTrigger: {
@@ -31,20 +37,21 @@ export const Invitation = () => {
                     start: 'top top',
                     end: 'bottom bottom',
                     scrub: 1,
+                    invalidateOnRefresh: true,
                 }
             });
 
             heroTimeline
                 .to('#heroComplete', { scale: 1.1, duration: 2 })
-                .to('#imgTextHero', { opacity: 0 }, 0.3)
-                .to('#heroComplete', { opacity: 0, duration: 0.8 }, 1)
+                .to('#imgTextHero', { autoAlpha: 0 }, 0.3)
+                .to('#heroComplete', { autoAlpha: 0, duration: 0.8 }, 1)
                 .to('#heroMask', { maskSize: "25vh", webkitMaskSize: "25vh", duration: 2 }, 1)
                 .to('#heroMask', { scale: 0.8 })
                 .fromTo('#dateLogo',
                     {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
                         maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-                        opacity: 0,
+                        autoAlpha: 0,
                     },
                     {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
@@ -60,13 +67,13 @@ export const Invitation = () => {
                 .to('#dateLogo', {
                     webkitMaskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
                     maskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-                    opacity: 0
+                    autoAlpha: 0
                 }, '>')
                 .fromTo('#textOrg',
                     {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%)',
                         maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%)',
-                        opacity: 0,
+                        autoAlpha: 0,
                     },
                     {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)',
@@ -78,25 +85,88 @@ export const Invitation = () => {
                     backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
                     opacity: 0.85
                 }, '>')
-                .to('#textOrg', { opacity: 0 }, '>')
-
-            heroTimeline
+                .to('#textOrg', { autoAlpha: 0 }, '>')
                 .fromTo('#firstVideoSec',
-                    { opacity: 0, visibility: 'hidden' },
-                    { opacity: 1, visibility: 'visible', duration: 0.5 })
+                    { autoAlpha: 0, duration: 0.5 },
+                    { opacity: 1 })
                 .to(video, {
                     currentTime: duration,
-                    duration: 2,
+                    duration: 1,
                     onUpdate: () => {
-                        if (video.paused) video.play().then(() => video.pause());
+                        if (video.paused) () => video.pause();
                     }
-                });
+                }, '<')
+                .fromTo('#firstVideoSec',
+                    { autoAlpha: 0, duration: 0.5 },
+                    { opacity: 1 }, '<')
+                .to(video, {
+                    currentTime: duration,
+                    duration: 1,
+                    onUpdate: () => {
+                        if (video.paused) () => video.pause();
+                    }
+                }, '<')
+                .to('#firstVideoSec', { autoAlpha: 0, duration: 3 })
+                .fromTo('#secondVideoSec',
+                    { autoAlpha: 0, duration: 0.5 },
+                    { opacity: 1 })
+                .to(video2, {
+                    currentTime: duration2,
+                    duration: 1,
+                    onUpdate: () => {
+                        if (video2.paused) () => video2.pause();
+                    }
+                }, '<')
+                .fromTo('#secondVideoSec',
+                    { autoAlpha: 0, duration: 0.5 },
+                    { opacity: 1 }, '<')
+                .to(video2, {
+                    currentTime: duration2,
+                    duration: 1,
+                    onUpdate: () => {
+                        if (video2.paused) () => video2.pause();
+                    }
+                }, '<')
+                .to('#secondVideoSec', { autoAlpha: 0, duration: 3 })
+                .fromTo('#thirdVideoSec',
+                    { autoAlpha: 0, duration: 0.5 },
+                    { opacity: 1 })
+                .to(video3, {
+                    currentTime: duration2,
+                    duration: 1,
+                    onUpdate: () => {
+                        if (video3.paused) () => video3.pause();
+                    }
+                }, '<')
+                .fromTo('#thirdVideoSec',
+                    { autoAlpha: 0, duration: 0.5 },
+                    { opacity: 1 }, '<')
+                .to(video3, {
+                    currentTime: duration3,
+                    duration: 1,
+                    onUpdate: () => {
+                        if (video3.paused) () => video3.pause();
+                    }
+                }, '<')
+                .to('#thirdVideoSec', { autoAlpha: 0, duration: 3 })
         };
 
         if (video.readyState >= 1) {
             setupTimeline();
         } else {
             video.onloadedmetadata = setupTimeline;
+        }
+
+        if (video2.readyState >= 1) {
+            setupTimeline();
+        } else {
+            video2.onloadedmetadata = setupTimeline;
+        }
+
+        if (video3.readyState >= 1) {
+            setupTimeline();
+        } else {
+            video3.onloadedmetadata = setupTimeline;
         }
 
     }, []);
@@ -132,11 +202,39 @@ export const Invitation = () => {
             <div
                 id="firstVideoSec"
                 className='fixed top-0 left-0 w-full h-screen'
-                style={{ opacity: 0, visibility: 'hidden', zIndex: 5 }}
+                style={{ zIndex: 5 }}
             >
                 <video
                     ref={videoRef}
-                    src="/videos/firstVideo_fixed.mp4"
+                    src="/videos/firstVideo.mp4"
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full object-cover"
+                />
+            </div>
+            <div
+                id="secondVideoSec"
+                className='fixed top-0 left-0 w-full h-screen'
+                style={{ zIndex: 5 }}
+            >
+                <video
+                    ref={video2Ref}
+                    src="/videos/secondVideo.mp4"
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full object-cover"
+                />
+            </div>
+            <div
+                id="thirdVideoSec"
+                className='fixed top-0 left-0 w-full h-screen'
+                style={{ zIndex: 5 }}
+            >
+                <video
+                    ref={video3Ref}
+                    src="/videos/thirdVideo.mp4"
                     muted
                     playsInline
                     preload="auto"
