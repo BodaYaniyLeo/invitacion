@@ -136,7 +136,7 @@ export const Invitation = () => {
             >
                 <video
                     ref={videoRef}
-                    src="/videos/firstVideo.mp4"
+                    src="/videos/firstVideo_fixed.mp4"
                     muted
                     playsInline
                     preload="auto"
