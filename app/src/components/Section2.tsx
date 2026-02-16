@@ -23,7 +23,7 @@ export const Section2 = () => {
                         start: 'top top',
                         end: '+=200%',
                         scrub: 1,
-                        pin: true,     // Mantiene el video fijo mientras avanza el tiempo
+                        pin: true,
                         invalidateOnRefresh: true,
                     }
                 })
@@ -46,19 +46,16 @@ export const Section2 = () => {
     }, []);
 
     return (
-
-        <div ref={sectionRef} className="relative overflow-hidden">
-            <div className="h-screen w-full">
-                <video
-                    ref={videoRef}
-                    src="/videos/secondVideo.mp4"
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover"
-                    style={{ willChange: "transform" }} // Optimización de GPU
-                />
-            </div>
+        <div ref={sectionRef} className="bg-neutral-950 w-full h-screen overflow-hidden">
+            <video
+                ref={videoRef}
+                src="/videos/secondVideo.mp4"
+                muted
+                playsInline
+                preload="auto"
+                className="w-full h-full object-cover"
+                style={{ willChange: "transform" }}
+            />
         </div>
     )
 

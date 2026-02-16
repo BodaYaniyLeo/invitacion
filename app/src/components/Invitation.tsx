@@ -92,7 +92,7 @@ export const Invitation = () => {
     }, []);
 
     return (
-        <main>
+        <main className='bg-black'>
             <div ref={mainContainerRef} className="relative w-full h-screen overflow-hidden bg-black">
 
                 <div id="heroMask" className="absolute inset-0 z-30 pointer-events-none">

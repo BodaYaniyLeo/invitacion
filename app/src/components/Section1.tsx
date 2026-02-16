@@ -22,7 +22,7 @@ export const Section1 = () => {
                         start: 'top top',
                         end: '+=200%',
                         scrub: 1,
-                        pin: true,     // Mantiene el video fijo mientras avanza el tiempo
+                        pin: true,
                         invalidateOnRefresh: true,
                     }
                 })
@@ -45,7 +45,7 @@ export const Section1 = () => {
     }, []);
 
     return (
-        <div ref={sectionRef} className="bg-black w-full h-screen overflow-hidden">
+        <div ref={sectionRef} className="bg-neutral-950 w-full h-screen overflow-hidden">
             <video
                 ref={videoRef}
                 src="/videos/firstVideo.mp4"
