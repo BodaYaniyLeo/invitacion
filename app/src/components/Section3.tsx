@@ -1,86 +1,62 @@
 'use client'
-import Image from 'next/image'
-import React, { useLayoutEffect, useRef } from 'react'
-import backHero from '../assets/images/backHero.svg'
-import frontHero from '../assets/images/frontHero.svg'
-import textHero from '../assets/images/logoHero.svg'
-import logoCasamiento from '../assets/images/logoCasamiento.svg'
+import { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '@/app/src/styles/invitation.css'
 
 export const Section3 = () => {
 
-    const video3Ref = useRef<HTMLVideoElement>(null);
+    const sectionRef = useRef(null);
+    const videoRef = useRef(null);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
+        const video = videoRef.current;
+        if (!video) return;
 
-        const video3 = video3Ref.current;
-        const mainTrigger = document.querySelector('#mainContainer');
+        let ctx = gsap.context(() => {
+            const setupTimeline = () => {
+                const duration = video.duration || 5;
 
-        if (!video3) return;
-
-        const setupTimeline = () => {
-            const duration3 = video3.duration || 2;
-
-            const heroTimeline = gsap.timeline({
-                scrollTrigger: {
-                    trigger: mainTrigger,
-                    start: '67.5%',
-                    end: '90%',
-                    scrub: 1,
-                    invalidateOnRefresh: true,
-                }
-            });
-
-            heroTimeline
-
-                .fromTo('#thirdVideoSec',
-                    { autoAlpha: 0 },
-                    { autoAlpha: 1 })
-                .to(video3, {
-                    currentTime: duration3,
-                    onUpdate: () => {
-                        if (video3.paused) () => video3.pause();
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: 'top top',
+                        end: '+=200%',
+                        scrub: 1,
+                        pin: true,     // Mantiene el video fijo mientras avanza el tiempo
+                        invalidateOnRefresh: true,
                     }
-                }, '<')
-                .fromTo('#thirdVideoSec',
-                    { autoAlpha: 0},
-                    { autoAlpha: 1 }, '<')
-                .to(video3, {
-                    currentTime: duration3,
-                    onUpdate: () => {
-                        if (video3.paused) () => video3.pause();
-                    }
-                }, '<')
-                .to('#thirdVideoSec', { autoAlpha: 0 })
-        };
+                })
+                    .fromTo(video, { autoAlpha: 0 }, { autoAlpha: 1 })
+                    .to(video, {
+                        currentTime: duration,
+                        ease: "none",
+                    }, '<')
+                    .to(sectionRef.current, { autoAlpha: 0 });
+            };
 
+            if (video.readyState >= 1) {
+                setupTimeline();
+            } else {
+                video.onloadedmetadata = setupTimeline;
+            }
+        });
 
-        if (video3.readyState >= 1) {
-
-        } else {
-            video3.onloadedmetadata = setupTimeline;
-        }
-        setupTimeline();
-
+        return () => ctx.revert();
     }, []);
 
     return (
-        <div style={{ height: '100vh' }}>
-            <div
-                id="thirdVideoSec"
-                className='fixed top-0 left-0 w-full h-screen'
-                style={{ zIndex: 5 }}
-            >
+        <div ref={sectionRef} className="relative overflow-hidden">
+            <div className="h-screen w-full">
                 <video
-                    ref={video3Ref}
+                    ref={videoRef}
                     src="/videos/thirdVideo.mp4"
                     muted
                     playsInline
                     preload="auto"
                     className="w-full h-full object-cover"
+                    style={{ willChange: "transform" }} // Optimización de GPU
                 />
             </div>
         </div>
