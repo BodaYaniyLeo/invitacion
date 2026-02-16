@@ -16,6 +16,12 @@ export const Invitation = () => {
     const mainContainerRef = useRef(null);
 
     useLayoutEffect(() => {
+
+
+        window.setTimeout(function () {
+            window.scroll(0, 0)
+        }, 0);
+
         gsap.registerPlugin(ScrollTrigger);
 
         // Uso de gsap.context para asegurar que todo se limpie al desmontar el componente
