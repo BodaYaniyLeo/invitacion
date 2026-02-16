@@ -4,8 +4,8 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export const Section1 = () => {
-    const sectionRef = useRef(null);
-    const videoRef = useRef(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
