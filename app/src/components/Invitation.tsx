@@ -8,34 +8,27 @@ import logoCasamiento from '../assets/images/logoCasamiento.svg'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '@/app/src/styles/invitation.css'
+import { Section1 } from './Section1'
+import { Section2 } from './Section2'
+import { Section3 } from './Section3'
 
 export const Invitation = () => {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const video2Ref = useRef<HTMLVideoElement>(null);
-    const video3Ref = useRef<HTMLVideoElement>(null);
 
     useLayoutEffect(() => {
         window.scroll(0, 0)
 
         gsap.registerPlugin(ScrollTrigger);
 
-        const video = videoRef.current;
-        const video2 = video2Ref.current;
-        const video3 = video3Ref.current;
         const mainTrigger = document.querySelector('#mainContainer');
 
-        if (!video || !video2|| !video3) return;
 
         const setupTimeline = () => {
-            const duration = video.duration || 5;
-            const duration2 = video2.duration || 5;
-            const duration3 = video3.duration || 5;
 
             const heroTimeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: mainTrigger,
                     start: 'top top',
-                    end: 'bottom bottom',
+                    end: '22.5%',
                     scrub: 1,
                     invalidateOnRefresh: true,
                 }
@@ -43,7 +36,7 @@ export const Invitation = () => {
 
             heroTimeline
                 .to('#heroComplete', { scale: 1.1, duration: 2 })
-                .to('#imgTextHero', { opacity: 0 , duration: 0.8}, 1)
+                .to('#imgTextHero', { opacity: 0, duration: 0.8 }, 1)
                 .to('#heroComplete', { opacity: 0, duration: 0.5 })
                 .to('#heroMask', { maskSize: "25vh", webkitMaskSize: "25vh", duration: 2 }, 0.5)
                 .to('#heroMask', { scale: 0.8 })
@@ -86,93 +79,14 @@ export const Invitation = () => {
                     opacity: 0.85
                 }, '>')
                 .to('#textOrg', { autoAlpha: 0 }, '>')
-                .fromTo('#firstVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 })
-                .to(video, {
-                    currentTime: duration,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video.paused) () => video.pause();
-                    }
-                }, '<')
-                .fromTo('#firstVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 }, '<')
-                .to(video, {
-                    currentTime: duration,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video.paused) () => video.pause();
-                    }
-                }, '<')
-                .to('#firstVideoSec', { autoAlpha: 0, duration: 3 })
-                .fromTo('#secondVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 })
-                .to(video2, {
-                    currentTime: duration2,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video2.paused) () => video2.pause();
-                    }
-                }, '<')
-                .fromTo('#secondVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 }, '<')
-                .to(video2, {
-                    currentTime: duration2,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video2.paused) () => video2.pause();
-                    }
-                }, '<')
-                .to('#secondVideoSec', { autoAlpha: 0, duration: 3 })
-                .fromTo('#thirdVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 })
-                .to(video3, {
-                    currentTime: duration2,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video3.paused) () => video3.pause();
-                    }
-                }, '<')
-                .fromTo('#thirdVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 }, '<')
-                .to(video3, {
-                    currentTime: duration3,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video3.paused) () => video3.pause();
-                    }
-                }, '<')
-                .to('#thirdVideoSec', { autoAlpha: 0, duration: 3 })
         };
 
-        if (video.readyState >= 1) {
-            setupTimeline();
-        } else {
-            video.onloadedmetadata = setupTimeline;
-        }
-
-        if (video2.readyState >= 1) {
-            setupTimeline();
-        } else {
-            video2.onloadedmetadata = setupTimeline;
-        }
-
-        if (video3.readyState >= 1) {
-            setupTimeline();
-        } else {
-            video3.onloadedmetadata = setupTimeline;
-        }
+        setupTimeline();
 
     }, []);
 
     return (
-        <div style={{ height: '750vh' }}>
+        <div style={{ height: '1200vh' }}>
             <div id="heroMask" className='fixed top-0 w-full h-screen z-30'>
                 <div className='fixed z-1 top-0'>
                     <picture id='heroComplete' className='flex h-screen w-screen scale-110 object-cover justify-center relative'>
@@ -199,48 +113,10 @@ export const Invitation = () => {
                 </div>
             </div>
 
-            <div
-                id="firstVideoSec"
-                className='fixed top-0 left-0 w-full h-screen'
-                style={{ zIndex: 5 }}
-            >
-                <video
-                    ref={videoRef}
-                    src="/videos/firstVideo.mp4"
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-            <div
-                id="secondVideoSec"
-                className='fixed top-0 left-0 w-full h-screen'
-                style={{ zIndex: 5 }}
-            >
-                <video
-                    ref={video2Ref}
-                    src="/videos/secondVideo.mp4"
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-            <div
-                id="thirdVideoSec"
-                className='fixed top-0 left-0 w-full h-screen'
-                style={{ zIndex: 5 }}
-            >
-                <video
-                    ref={video3Ref}
-                    src="/videos/thirdVideo.mp4"
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover"
-                />
-            </div>
+            <Section1 />
+            <Section2 />
+            <Section3 />
+
         </div >
     )
 }
