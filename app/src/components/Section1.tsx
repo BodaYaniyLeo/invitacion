@@ -21,7 +21,7 @@ export const Section1 = () => {
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: 'top top',
-                        end: '+=200%',
+                        end: '+=100%',
                         scrub: 1,
                         pin: true,
                         invalidateOnRefresh: true,
