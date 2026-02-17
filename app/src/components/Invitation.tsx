@@ -82,27 +82,27 @@ export const Invitation = () => {
                 .to('#video1 video', {
                     currentTime: 2,
                     ease: 'none',
-                    duration: 2
-                }, "-=1")
+                    duration: 4.5
+                }, "-=2")
                 .fromTo('#text1',
                     { y: '100%' },
-                    { y: '-100%', duration: 1.5 },
-                    '-=0.5'
+                    { y: '-100%', duration: 3 },
+                    '-=2.7'
                 )
-                .to('#video1', { autoAlpha: 0, duration: 0.2 }, '-=1.25')
+                .to('#video1', { autoAlpha: 0, duration: 0.6 }, '-=2.7')
 
-                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 })
+                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
                 .to('#video2 video', {
                     currentTime: 2,
                     ease: 'none',
-                    duration: 2
-                }, "-=1")
+                    duration: 3
+                }, "-=2")
                 .fromTo('#text2',
                     { y: '100%' },
-                    { y: '-100%', duration: 1.5 },
-                    '-=0.5'
+                    { y: '-100%', duration: 3 },
+                    '-=0.8'
                 )
-                .to('#video2', { autoAlpha: 0, duration: 0.2 }, '-=1.25')
+                .to('#video2', { autoAlpha: 0, duration: 0.6 }, '-=2.7')
 
         }, containerRef);
 
