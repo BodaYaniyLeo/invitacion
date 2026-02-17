@@ -1,52 +1,38 @@
 'use client'
-import Image from 'next/image'
-import React, { useLayoutEffect, useRef } from 'react'
-import backHero from '../assets/images/backHero.svg'
-import frontHero from '../assets/images/frontHero.svg'
-import textHero from '../assets/images/logoHero.svg'
-import logoCasamiento from '../assets/images/logoCasamiento.svg'
+import { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import '@/app/src/styles/invitation.css'
+import { HeroSection } from './HeroSection';
+import { VideoSection } from './VideoSection';
 
 export const Invitation = () => {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const video2Ref = useRef<HTMLVideoElement>(null);
-    const video3Ref = useRef<HTMLVideoElement>(null);
+    const containerRef = useRef(null);
 
     useLayoutEffect(() => {
-        window.scroll(0, 0)
-
         gsap.registerPlugin(ScrollTrigger);
 
-        const video = videoRef.current;
-        const video2 = video2Ref.current;
-        const video3 = video3Ref.current;
-        const mainTrigger = document.querySelector('#mainContainer');
-
-        if (!video || !video2|| !video3) return;
-
-        const setupTimeline = () => {
-            const duration = video.duration || 5;
-            const duration2 = video2.duration || 5;
-            const duration3 = video3.duration || 5;
-
-            const heroTimeline = gsap.timeline({
+        let ctx = gsap.context(() => {
+            const masterTl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: mainTrigger,
+                    trigger: containerRef.current,
                     start: 'top top',
                     end: 'bottom bottom',
-                    scrub: 1,
-                    invalidateOnRefresh: true,
+                    scrub: 1.5,
                 }
             });
 
-            heroTimeline
+            masterTl
                 .to('#heroComplete', { scale: 1.1, duration: 2 })
-                .to('#imgTextHero', { opacity: 0 , duration: 0.8}, 1)
+                .to('#imgTextHero', { opacity: 0, duration: 0.8 }, 1)
+
                 .to('#heroComplete', { opacity: 0, duration: 0.5 })
-                .to('#heroMask', { maskSize: "25vh", webkitMaskSize: "25vh", duration: 2 }, 0.5)
+                .to('#heroMask', {
+                    maskSize: "25vh",
+                    webkitMaskSize: "25vh",
+                    duration: 2
+                }, 0.5)
                 .to('#heroMask', { scale: 0.8 })
+
                 .fromTo('#dateLogo',
                     {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
@@ -59,8 +45,9 @@ export const Invitation = () => {
                         autoAlpha: 1,
                         scale: 0.8,
                     }, '<')
+
                 .to('#heroMask', { display: 'none' }, '>')
-                .to('#dateLogo h2', {
+                .to('#dateLogo h3', {
                     backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
                     opacity: 0.85
                 }, '>')
@@ -69,6 +56,7 @@ export const Invitation = () => {
                     maskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
                     autoAlpha: 0
                 }, '>')
+
                 .fromTo('#textOrg',
                     {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%)',
@@ -79,168 +67,36 @@ export const Invitation = () => {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)',
                         maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)',
                         autoAlpha: 1,
-                        scale: 0.8
+                        scale: 0.85
                     })
                 .to('#textOrg h2, #textOrg p', {
                     backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
                     opacity: 0.85
                 }, '>')
                 .to('#textOrg', { autoAlpha: 0 }, '>')
-                .fromTo('#firstVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 })
-                .to(video, {
-                    currentTime: duration,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video.paused) () => video.pause();
-                    }
-                }, '<')
-                .fromTo('#firstVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 }, '<')
-                .to(video, {
-                    currentTime: duration,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video.paused) () => video.pause();
-                    }
-                }, '<')
-                .to('#firstVideoSec', { autoAlpha: 0, duration: 3 })
-                .fromTo('#secondVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 })
-                .to(video2, {
-                    currentTime: duration2,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video2.paused) () => video2.pause();
-                    }
-                }, '<')
-                .fromTo('#secondVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 }, '<')
-                .to(video2, {
-                    currentTime: duration2,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video2.paused) () => video2.pause();
-                    }
-                }, '<')
-                .to('#secondVideoSec', { autoAlpha: 0, duration: 3 })
-                .fromTo('#thirdVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 })
-                .to(video3, {
-                    currentTime: duration2,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video3.paused) () => video3.pause();
-                    }
-                }, '<')
-                .fromTo('#thirdVideoSec',
-                    { autoAlpha: 0, duration: 0.5 },
-                    { autoAlpha: 1 }, '<')
-                .to(video3, {
-                    currentTime: duration3,
-                    duration: 1,
-                    onUpdate: () => {
-                        if (video3.paused) () => video3.pause();
-                    }
-                }, '<')
-                .to('#thirdVideoSec', { autoAlpha: 0, duration: 3 })
-        };
 
-        if (video.readyState >= 1) {
-            setupTimeline();
-        } else {
-            video.onloadedmetadata = setupTimeline;
-        }
+                .to('#heroSection', { opacity: 0, duration: 1},'-=1')
 
-        if (video2.readyState >= 1) {
-            setupTimeline();
-        } else {
-            video2.onloadedmetadata = setupTimeline;
-        }
+                .fromTo('#video1', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
+                .to('#video1 video', {
+                    currentTime: 5,
+                    ease: 'none',
+                    duration: 5
+                }, "<")
 
-        if (video3.readyState >= 1) {
-            setupTimeline();
-        } else {
-            video3.onloadedmetadata = setupTimeline;
-        }
+                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 })
+                .to('#video2 video', { currentTime: 5, ease: 'none', duration: 5 }, "<");
 
+        }, containerRef);
+
+        return () => ctx.revert();
     }, []);
 
     return (
-        <div style={{ height: '750vh' }}>
-            <div id="heroMask" className='fixed top-0 w-full h-screen z-30'>
-                <div className='fixed z-1 top-0'>
-                    <picture id='heroComplete' className='flex h-screen w-screen scale-110 object-cover justify-center relative'>
-                        <Image src={backHero} alt="" className='h-screen w-auto object-cover z-1' />
-                        <Image src={frontHero} alt="" className='h-screen w-auto absolute top-0 left-0 object-cover z-3 top-1/2 left-1/2 -translate-1/2' />
-                        <Image src={textHero} alt="" className='absolute z-2 top-1/3 -translate-y-1/2 -translate-1/10 max-w-100 w-full max-h-1/4' id='imgTextHero' />
-                    </picture>
-                </div>
-            </div>
-
-            <div className='fixed top-0 w-full h-screen z-20' id='dateLogo'>
-                <Image src={logoCasamiento} alt="" className='absolute z-2 top-1/3 left-1/2 translateResize sizeImg max-w-100' />
-                <h2 className='uppercase absolute z-2 top-1/2 left-1/2 translateResize max-w-100 text-center font-bold w-full text-base/8 mt-10'>
-                    Disponible<br />el 1 de enero<br />de 2027
-                </h2>
-            </div>
-
-            <div className='fixed top-0 w-full h-screen z-10' id='textOrg'>
-                <div className='flex flex-col h-full justify-center'>
-                    <h2>Córdoba, Argentina</h2>
-                    <p className='w-full text-base/8 mt-6 text-[22px]'>
-                        Yani y Leo siempre supieron que la vida podía sorprenderlos, pero mientras organizaban su gran día, los imprevistos no tardaron en aparecer. Entre risas, abrazos y momentos inesperados, se han apoyado el uno en el otro más que nunca… y ahora quieren que vos seas parte de esta aventura única, para celebrar juntos el amor que los une y que hace que cada instante valga la pena.
-                    </p>
-                </div>
-            </div>
-
-            <div
-                id="firstVideoSec"
-                className='fixed top-0 left-0 w-full h-screen'
-                style={{ zIndex: 5 }}
-            >
-                <video
-                    ref={videoRef}
-                    src="/videos/firstVideo.mp4"
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-            <div
-                id="secondVideoSec"
-                className='fixed top-0 left-0 w-full h-screen'
-                style={{ zIndex: 5 }}
-            >
-                <video
-                    ref={video2Ref}
-                    src="/videos/secondVideo.mp4"
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-            <div
-                id="thirdVideoSec"
-                className='fixed top-0 left-0 w-full h-screen'
-                style={{ zIndex: 5 }}
-            >
-                <video
-                    ref={video3Ref}
-                    src="/videos/thirdVideo.mp4"
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-        </div >
-    )
-}
+        <div ref={containerRef} style={{ height: '600vh' }} className="bg-black">
+            <HeroSection id="heroSection" />
+            <VideoSection id="video1" src="/videos/firstVideo.mp4" zIndex={10} />
+            <VideoSection id="video2" src="/videos/secondVideo.mp4" zIndex={10} />
+        </div>
+    );
+};
