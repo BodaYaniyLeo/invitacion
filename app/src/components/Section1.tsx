@@ -12,14 +12,12 @@ export const Section1 = () => {
         const video = videoRef.current;
         if (!video) return;
 
-        console.log(video)
-
         let ctx = gsap.context(() => {
             const setupTimeline = () => {
+                const duration = video.duration || 2;
+                console.log(duration)
 
-                const duration = video.duration || 5;
-
-                const tl = gsap.timeline({
+                gsap.timeline({
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: 'top top',
@@ -28,17 +26,13 @@ export const Section1 = () => {
                         pin: true,
                         invalidateOnRefresh: true,
                     }
-                });
-
-                tl.fromTo(video,
-                    { autoAlpha: 0, currentTime: 0.65 },
-                    { autoAlpha: 1, duration: 0.1 }
-                )
+                })
+                    .fromTo(video, { currentTime: 0.65 }, { autoAlpha: 1, duration: 0.1 })
                     .to(video, {
                         currentTime: duration,
                         ease: "none",
                     }, '<')
-                    .to(sectionRef.current, { autoAlpha: 0, duration: 0.1 }, '-=0.35');
+                    .to(videoRef.current, { autoAlpha: 0, duration: 0.3 }, '-=0.15');
             };
 
             if (video.readyState >= 2) {
@@ -48,10 +42,7 @@ export const Section1 = () => {
             }
         });
 
-        return () => {
-            ctx.revert();
-            video.removeEventListener('loadeddata', () => { });
-        };
+        return () => ctx.revert();
     }, []);
 
     return (
