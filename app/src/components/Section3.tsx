@@ -15,7 +15,6 @@ export const Section3 = () => {
         let ctx = gsap.context(() => {
             const setupTimeline = () => {
                 const duration = video.duration || 2;
-                console.log(duration)
 
                 gsap.timeline({
                     scrollTrigger: {

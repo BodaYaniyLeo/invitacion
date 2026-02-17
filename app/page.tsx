@@ -11,8 +11,6 @@ export default function Home() {
 
   const { resBase } = useFetch()
 
-  console.log(resBase)
-
   return (
     <div className="h-screen content-center justify-items-center">
       

@@ -12,9 +12,11 @@ export const Section1 = () => {
         const video = videoRef.current;
         if (!video) return;
 
+        console.log(video)
+
         let ctx = gsap.context(() => {
             const setupTimeline = () => {
-                // Si el video no tiene duración todavía, no podemos animar currentTime correctamente
+
                 const duration = video.duration || 5;
 
                 const tl = gsap.timeline({
