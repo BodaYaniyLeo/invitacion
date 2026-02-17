@@ -27,7 +27,7 @@ export const Section1 = () => {
                         invalidateOnRefresh: true,
                     }
                 })
-                    .fromTo(video, { autoAlpha: 0, currentTime: 0.65 }, { autoAlpha: 1, duration: 0.15 })
+                    .fromTo(video, { autoAlpha: 0, currentTime: 0.65 }, { autoAlpha: 1, duration: 0.1 })
                     .to(video, {
                         currentTime: duration,
                         ease: "none",
@@ -54,7 +54,7 @@ export const Section1 = () => {
                     muted
                     playsInline
                     preload="auto"
-                    className="h-screen w-full object-cover"
+                    className="h-screen w-full object-cover opaciti-0"
                     style={{ willChange: "transform" }}
                 />
             </div>
