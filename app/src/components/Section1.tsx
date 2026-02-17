@@ -19,7 +19,7 @@ export const Section1 = () => {
 
                 gsap.timeline({
                     scrollTrigger: {
-                        trigger: sectionRef.current,
+                        trigger: videoRef.current,
                         start: 'top top',
                         end: '+=100%',
                         scrub: 1,
@@ -47,17 +47,15 @@ export const Section1 = () => {
 
     return (
         <div className="w-full overflow-hidden relative h-[200vh]">
-            <div ref={sectionRef}>
-                <video
-                    ref={videoRef}
-                    src="/videos/firstVideo.mp4"
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="h-screen w-full object-cover opacity-0"
-                    style={{ willChange: "transform" }}
-                />
-            </div>
+            <video
+                ref={videoRef}
+                src="/videos/firstVideo.mp4"
+                muted
+                playsInline
+                preload="auto"
+                className="h-screen w-full object-cover opacity-0"
+                style={{ willChange: "transform" }}
+            />
             <div className='absolute top-5 nameNovios px-[10vw] h-screen section-text'>
                 <h2 className='mb-[25px]'>Leo</h2>
                 <h4 className='text-[30px] mb-[12px]'>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h4>
