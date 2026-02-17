@@ -13,6 +13,10 @@ export const Section1 = () => {
         const video = videoRef.current;
         if (!video) return;
 
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+
         let ctx = gsap.context(() => {
             const setupTimeline = () => {
                 const duration = video.duration || 2;
