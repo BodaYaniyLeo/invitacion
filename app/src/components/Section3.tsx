@@ -21,18 +21,18 @@ export const Section3 = () => {
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: 'top top',
-                        end: '+=400%',
+                        end: '+=100%',
                         scrub: 1,
                         pin: true,
                         invalidateOnRefresh: true,
                     }
                 })
-                    .fromTo(video, { autoAlpha: 0, currentTime: 0.65 }, { autoAlpha: 1, duration: 0.15 })
+                    .fromTo(video, { currentTime: 0.65 }, { autoAlpha: 1, duration: 0.1 })
                     .to(video, {
                         currentTime: duration,
                         ease: "none",
                     }, '<')
-                    .to(sectionRef.current, { autoAlpha: 0, duration: 0.1 }, '-=0.33');
+                    .to(videoRef.current, { autoAlpha: 0, duration: 0.3}, '-=0.2');
             };
 
             if (video.readyState >= 1) {
@@ -54,9 +54,14 @@ export const Section3 = () => {
                     muted
                     playsInline
                     preload="auto"
-                    className="object-cover"
+                    className="h-screen w-full object-cover opacity-0"
                     style={{ willChange: "transform" }}
                 />
+            </div>
+            <div className='absolute top-5 nameNovios px-[10vw] h-screen section-text'>
+                <h2 className='mb-[25px]'>Seccion 3</h2>
+                <h4 className='text-[30px] mb-[12px]'>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
             </div>
         </div>
     )

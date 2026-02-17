@@ -21,18 +21,18 @@ export const Section2 = () => {
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: 'top top',
-                        end: '+=400%',
+                        end: '+=100%',
                         scrub: 1,
                         pin: true,
                         invalidateOnRefresh: true,
                     }
                 })
-                    .fromTo(video, { autoAlpha: 0, currentTime: 0.65 }, { autoAlpha: 1, duration: 0.15 })
+                    .fromTo(video, { currentTime: 0.65 }, { autoAlpha: 1, duration: 0.1 })
                     .to(video, {
                         currentTime: duration,
                         ease: "none",
                     }, '<')
-                    .to(sectionRef.current, { autoAlpha: 0, duration: 0.1 }, '-=0.33');
+                    .to(videoRef.current, { autoAlpha: 0, duration: 0.3}, '-=0.2');
             };
 
             if (video.readyState >= 1) {
@@ -46,7 +46,7 @@ export const Section2 = () => {
     }, []);
 
     return (
-        <div className="w-full overflow-hidden relative h-[300vh]">
+        <div className="w-full overflow-hidden relative h-[200vh]">
             <div ref={sectionRef}>
                 <video
                     ref={videoRef}
@@ -54,11 +54,11 @@ export const Section2 = () => {
                     muted
                     playsInline
                     preload="auto"
-                    className="h-screen w-full object-cover"
+                    className="h-screen w-full object-cover opacity-0"
                     style={{ willChange: "transform" }}
                 />
             </div>
-            <div className='absolute top-[40%] nameNovios px-[10vw] h-screen section-text'>
+            <div className='absolute top-5 nameNovios px-[10vw] h-screen section-text'>
                 <h2 className='mb-[25px]'>Yani</h2>
                 <h4 className='text-[30px] mb-[12px]'>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h4>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>

@@ -27,12 +27,12 @@ export const Section1 = () => {
                         invalidateOnRefresh: true,
                     }
                 })
-                    .fromTo(video, { autoAlpha: 0, currentTime: 0.65 }, { autoAlpha: 1, duration: 0.1 })
+                    .fromTo(video, { currentTime: 0.65 }, { autoAlpha: 1, duration: 0.1 })
                     .to(video, {
                         currentTime: duration,
                         ease: "none",
                     }, '<')
-                    .to(sectionRef.current, { autoAlpha: 0, duration: 0.1 }, '-=0.35');
+                    .to(videoRef.current, { autoAlpha: 0, duration: 0.3}, '-=0.2');
             };
 
             if (video.readyState >= 1) {
@@ -54,7 +54,7 @@ export const Section1 = () => {
                     muted
                     playsInline
                     preload="auto"
-                    className="h-screen w-full object-cover opaciti-0"
+                    className="h-screen w-full object-cover opacity-0"
                     style={{ willChange: "transform" }}
                 />
             </div>
