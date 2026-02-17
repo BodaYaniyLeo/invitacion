@@ -101,9 +101,10 @@ export const Section2 = () => {
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: 'top top',
-                        end: '+=200%',
+                        end: '+=170%',
                         scrub: 1,
                         pin: true,
+                        pinSpacing: false,
                         invalidateOnRefresh: true,
                     }
                 })
@@ -126,7 +127,7 @@ export const Section2 = () => {
     }, []);
 
     return (
-        <div className="w-full overflow-hidden relative h-[200vh]">
+        <div className="w-full overflow-hidden relative h-[170vh]">
             <div ref={sectionRef}>
                 <video
                     ref={videoRef}
@@ -134,7 +135,7 @@ export const Section2 = () => {
                     muted
                     playsInline
                     preload="auto"
-                    className="object-cover"
+                    className="object-cover h-screen w-full"
                     style={{ willChange: "transform" }}
                 />
             </div>
