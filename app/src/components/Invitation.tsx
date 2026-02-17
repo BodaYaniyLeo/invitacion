@@ -72,7 +72,8 @@ export const Invitation = () => {
                     })
                 .to('#textOrg h2, #textOrg p', {
                     backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
-                    opacity: 0.85
+                    opacity: 0.85,
+                    duration: 1
                 }, '>')
                 .to('#textOrg', { autoAlpha: 0 }, '>')
 
@@ -91,7 +92,7 @@ export const Invitation = () => {
                 )
                 .to('#video1', { autoAlpha: 0, duration: 0.6 }, '-=2.7')
 
-                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 })
+                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
                 .to('#video2 video', {
                     currentTime: 2,
                     ease: 'none',
@@ -118,7 +119,7 @@ export const Invitation = () => {
 
 
             <VideoSection id="video1" src="/videos/firstVideo.mp4" zIndex={10} />
-            <VideoSection id="video2" src="/videos/secondVideo.mp4" zIndex={10} />
+            <VideoSection id="video2" src="/videos/secondVideo.mp4" zIndex={9} />
         </div>
     );
 };
