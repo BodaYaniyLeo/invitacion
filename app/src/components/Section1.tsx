@@ -24,12 +24,13 @@ export const Section1 = () => {
                         end: "+=100%",
                         scrub: 1,
                         pin: true,
+                        pinSpacing: false,
                         invalidateOnRefresh: true,
                     }
                 });
 
                 tl
-                    .to(video,{ autoAlpha: 1, duration: 0.1, currentTime: 0.65 })
+                    .to(video, { autoAlpha: 1, duration: 0.1, currentTime: 0.65 })
                     .to(video, {
                         currentTime: video.duration,
                         ease: "none"
@@ -37,6 +38,7 @@ export const Section1 = () => {
                     .fromTo(contentRef.current,
                         { y: '100%' },
                         { y: '-100%' },
+                        '-=0.4'
                     )
                     .to(video, { autoAlpha: 0, duration: 0.05 }, '-=0.4')
             };
@@ -52,7 +54,7 @@ export const Section1 = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="relative w-full h-screen max-h-screen bg-black overflow-hidden">
+        <section ref={containerRef} className="relative w-full h-screen bg-black overflow-hidden">
             <video
                 ref={videoRef}
                 src="/videos/firstVideo.mp4"

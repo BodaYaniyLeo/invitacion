@@ -126,7 +126,7 @@ export const Invitation = () => {
             </div>
 
             <Section1 />
-            {/* <Section2 /> */}
+            <Section2 />
             {/* <Section3 /> */}
         </main>
     )
