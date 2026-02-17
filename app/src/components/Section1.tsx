@@ -14,10 +14,10 @@ export const Section1 = () => {
 
         let ctx = gsap.context(() => {
             const setupTimeline = () => {
-                const duration = video.duration || 2;
-                console.log(duration)
+                // Si el video no tiene duración todavía, no podemos animar currentTime correctamente
+                const duration = video.duration || 5;
 
-                gsap.timeline({
+                const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: 'top top',
@@ -26,23 +26,30 @@ export const Section1 = () => {
                         pin: true,
                         invalidateOnRefresh: true,
                     }
-                })
-                    .fromTo(video, { currentTime: 0.65 }, { autoAlpha: 1, duration: 0.1 })
+                });
+
+                tl.fromTo(video,
+                    { autoAlpha: 0, currentTime: 0.65 },
+                    { autoAlpha: 1, duration: 0.1 }
+                )
                     .to(video, {
                         currentTime: duration,
                         ease: "none",
                     }, '<')
-                    .to(videoRef.current, { autoAlpha: 0, duration: 0.3}, '-=0.2');
+                    .to(sectionRef.current, { autoAlpha: 0, duration: 0.1 }, '-=0.35');
             };
 
-            if (video.readyState >= 1) {
+            if (video.readyState >= 2) {
                 setupTimeline();
             } else {
-                video.onloadedmetadata = setupTimeline;
+                video.addEventListener('loadeddata', setupTimeline);
             }
         });
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert();
+            video.removeEventListener('loadeddata', () => { });
+        };
     }, []);
 
     return (
