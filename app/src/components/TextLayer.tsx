@@ -11,7 +11,7 @@ export const TextLayer = ({ id, title, subtitle, text }: TextLayerProps) => {
     return (
         <div 
             id={id} 
-            className="fixed inset-0 z-[15] flex flex-col  px-[10vw] pointer-events-none section-text"
+            className="fixed inset-0 z-[15] flex flex-col px-[10vw] pointer-events-none section-text"
         >
             <div className="max-w-2xl text-white nameNovios">
                 <h2>

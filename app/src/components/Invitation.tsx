@@ -91,7 +91,7 @@ export const Invitation = () => {
                 )
                 .to('#video1', { autoAlpha: 0, duration: 0.6 }, '-=2.7')
 
-                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
+                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 })
                 .to('#video2 video', {
                     currentTime: 2,
                     ease: 'none',
