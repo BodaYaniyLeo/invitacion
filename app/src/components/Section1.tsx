@@ -8,6 +8,7 @@ export const Section1 = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useLayoutEffect(() => {
+        window.scroll(0, 0)
         gsap.registerPlugin(ScrollTrigger);
         const video = videoRef.current;
         if (!video) return;
@@ -15,11 +16,10 @@ export const Section1 = () => {
         let ctx = gsap.context(() => {
             const setupTimeline = () => {
                 const duration = video.duration || 2;
-                console.log(duration)
 
                 gsap.timeline({
                     scrollTrigger: {
-                        trigger: videoRef.current,
+                        trigger: video,
                         start: 'top top',
                         end: '+=100%',
                         scrub: 1,
