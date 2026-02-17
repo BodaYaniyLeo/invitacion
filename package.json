@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "deploy": "next build && gh-pages -d out",
-    "git": "git add . && git commit -m `subida` && git push origin main"
+    "git": "git add . && git commit -m `especial` && git push origin main"
+
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

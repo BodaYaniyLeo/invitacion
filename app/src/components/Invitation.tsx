@@ -30,7 +30,7 @@ export const Invitation = () => {
                 scrollTrigger: {
                     trigger: mainContainerRef.current,
                     start: 'top top',
-                    end: '+=100%',
+                    end: '+=105%',
                     scrub: 1,
                     pin: true,
                     invalidateOnRefresh: true,
@@ -126,8 +126,8 @@ export const Invitation = () => {
             </div>
 
             <Section1 />
-            <Section2 />
-            <Section3 />
+            {/* <Section2 /> */}
+            {/* <Section3 /> */}
         </main>
     )
 }
