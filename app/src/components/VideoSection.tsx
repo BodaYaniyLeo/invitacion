@@ -9,7 +9,7 @@ export const VideoSection = ({ id, src, zIndex }: VideoProps) => {
         <div 
             id={id} 
             className="fixed top-0 left-0 w-full h-screen" 
-            style={{ zIndex, visibility: 'hidden' }} // GSAP usará autoAlpha para mostrarlo
+            style={{ zIndex, visibility: 'hidden' }}
         >
             <video
                 src={src}

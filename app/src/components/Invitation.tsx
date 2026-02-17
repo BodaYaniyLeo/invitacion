@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { HeroSection } from './HeroSection';
 import { VideoSection } from './VideoSection';
+import { TextLayer } from './TextLayer';
 
 export const Invitation = () => {
     const containerRef = useRef(null);
@@ -75,17 +76,33 @@ export const Invitation = () => {
                 }, '>')
                 .to('#textOrg', { autoAlpha: 0 }, '>')
 
-                .to('#heroSection', { opacity: 0, duration: 1},'-=1')
+                .to('#heroSection', { opacity: 0, duration: 1 }, '-=1')
 
                 .fromTo('#video1', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
                 .to('#video1 video', {
-                    currentTime: 5,
+                    currentTime: 2,
                     ease: 'none',
-                    duration: 5
-                }, "<")
+                    duration: 2
+                }, "-=1")
+                .fromTo('#text1',
+                    { y: '100%' },
+                    { y: '-100%', duration: 1.5 },
+                    '-=0.5'
+                )
+                .to('#video1', { autoAlpha: 0, duration: 0.2 }, '-=1.25')
 
                 .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 })
-                .to('#video2 video', { currentTime: 5, ease: 'none', duration: 5 }, "<");
+                .to('#video2 video', {
+                    currentTime: 2,
+                    ease: 'none',
+                    duration: 2
+                }, "-=1")
+                .fromTo('#text2',
+                    { y: '100%' },
+                    { y: '-100%', duration: 1.5 },
+                    '-=0.5'
+                )
+                .to('#video2', { autoAlpha: 0, duration: 0.2 }, '-=1.25')
 
         }, containerRef);
 
@@ -95,6 +112,11 @@ export const Invitation = () => {
     return (
         <div ref={containerRef} style={{ height: '600vh' }} className="bg-black">
             <HeroSection id="heroSection" />
+
+            <TextLayer id="text1" title="Leo" subtitle="Una historia que apenas comienza..." text="Texto largo con lo que sea" />
+            <TextLayer id="text2" title="Yani" subtitle="El momento que siempre soñamos." text="Texto largo con lo que sea" />
+
+
             <VideoSection id="video1" src="/videos/firstVideo.mp4" zIndex={10} />
             <VideoSection id="video2" src="/videos/secondVideo.mp4" zIndex={10} />
         </div>
