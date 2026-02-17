@@ -51,7 +51,7 @@ export const Section2 = () => {
         });
 
         return () => ctx.revert();
-    }, []);
+    }, []); 
 
     return (
         <section ref={containerRef} className="relative w-full h-screen bg-black overflow-hidden">
