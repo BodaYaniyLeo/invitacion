@@ -63,7 +63,7 @@ export const Invitation = () => {
                     }, '<')
 
                 .to('#heroMask', { display: 'none' }, '>')
-                .to('#dateLogo h2', {
+                .to('#dateLogo h3', {
                     backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
                     opacity: 0.85
                 }, '>')
