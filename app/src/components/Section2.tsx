@@ -54,7 +54,7 @@ export const Section2 = () => {
                     muted
                     playsInline
                     preload="auto"
-                    className="object-cover"
+                    className="h-screen w-full object-cover"
                     style={{ willChange: "transform" }}
                 />
             </div>
