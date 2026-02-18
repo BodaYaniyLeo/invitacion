@@ -9,7 +9,13 @@ interface VideoProps {
     duration: number;
 }
 
-export const ZVideoSection = ({ id, zIndex, progressRef, frames, duration }: VideoProps) => {
+export const ZVideoSection = ({ id,
+    zIndex,
+    progressRef,
+    frames,
+    duration,
+
+}: VideoProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [isReady, setIsReady] = useState(false);
 
@@ -69,7 +75,7 @@ export const ZVideoSection = ({ id, zIndex, progressRef, frames, duration }: Vid
         };
 
         rafId = requestAnimationFrame(renderLoop);
-        
+
         const handleResize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -84,21 +90,21 @@ export const ZVideoSection = ({ id, zIndex, progressRef, frames, duration }: Vid
     }, [frames, duration, progressRef]);
 
     return (
-        <div 
-            id={id} 
+        <div
+            id={id}
             className="fixed top-0 left-0 w-full h-screen pointer-events-none"
-            style={{ 
-                zIndex, 
+            style={{
+                zIndex,
                 opacity: 0,
                 visibility: 'hidden'
             }}
         >
             <canvas
                 ref={canvasRef}
-                style={{ 
-                    width: '100%', 
+                style={{
+                    width: '100%',
                     height: '100%',
-                    display: isReady ? 'block' : 'none' 
+                    display: isReady ? 'block' : 'none'
                 }}
             />
         </div>

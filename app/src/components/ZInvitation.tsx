@@ -105,7 +105,7 @@ export const ZInvitation = () => {
             ScrollTrigger.create({
                 trigger: containerRef.current,
                 start: '55% bottom',
-                end: '70% bottom',
+                end: '65% bottom',
                 scrub: true,
                 animation: tlV1,
             });
@@ -118,7 +118,7 @@ export const ZInvitation = () => {
 
             ScrollTrigger.create({
                 trigger: containerRef.current,
-                start: '70% bottom',
+                start: '65% bottom',
                 end: '85% bottom',
                 scrub: true,
                 animation: tlV2,
@@ -133,7 +133,7 @@ export const ZInvitation = () => {
             ScrollTrigger.create({
                 trigger: containerRef.current,
                 start: '85% bottom',
-                end: '100% bottom',
+                end: '95% bottom',
                 scrub: true,
                 animation: tlV3,
             });
@@ -148,13 +148,50 @@ export const ZInvitation = () => {
         <div ref={containerRef} className="bg-black" style={{ height: '1000vh' }}>
             <ZHeroSection id="heroSection" />
             <div className='h-[500hv]'></div>
-            <ZVideoSection id="video1" zIndex={10} progressRef={v1Progress} frames={video1Frames} duration={VIDEO_DURATION} />
-            <ZVideoSection id="video2" zIndex={11} progressRef={v2Progress} frames={video2Frames} duration={VIDEO_DURATION} />
-            <ZVideoSection id="video3" zIndex={12} progressRef={v3Progress} frames={video3Frames} duration={VIDEO_DURATION} />
+            <ZVideoSection
+                id="video1"
+                zIndex={10}
+                progressRef={v1Progress}
+                frames={video1Frames}
+                duration={VIDEO_DURATION}
+            />
+            <ZVideoSection
+                id="video2"
+                zIndex={11}
+                progressRef={v2Progress}
+                frames={video2Frames}
+                duration={VIDEO_DURATION}
+            />
+            <ZVideoSection
+                id="video3"
+                zIndex={12}
+                progressRef={v3Progress}
+                frames={video3Frames}
+                duration={VIDEO_DURATION}
+            />
 
-            <ZTextLayer id="text1" title="Leo" subtitle="Historia" text="..." contH={150} />
-            <ZTextLayer id="text2" title="Yani" subtitle="Sueño" text="..." contH={100} />
-            <ZTextLayer id="text3" title="Ubicación" subtitle="Lugar" text="..." contH={100} />
+            <ZTextLayer
+                id="text1"
+                title="Leo"
+                subtitle="Historia"
+                text="..."
+                containerH={'550'}
+            />
+            <ZTextLayer
+                id="text2"
+                title="Yani"
+                subtitle="Sueño"
+                text="..."
+                containerH={'800'}
+            />
+            <ZTextLayer
+                id="text3"
+                title="Ubicación"
+                subtitle="Lugar"
+                text="..."
+                containerH={'900'}
+            />
+
         </div>
     );
 };

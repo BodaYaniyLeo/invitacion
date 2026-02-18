@@ -5,16 +5,17 @@ interface TextLayerProps {
     title: string;
     subtitle: string;
     text: string;
-    contH: number;
+    containerH: string;
 }
 
-export const ZTextLayer = ({ id, title, subtitle, text, contH }: TextLayerProps) => {
+export const ZTextLayer = ({ id, title, subtitle, text, containerH }: TextLayerProps) => {
     return (
         <div
             id={id}
-            className="flex flex-col pointer-events-none h-screen relative z-12 top-[600vh]"
+            className="flex flex-col pointer-events-none absolute z-12"
+            style={{top: `${containerH}vh`}}
         >
-            <div className={`section-text h-[${contH}vh]`} >
+            <div className={`section-text h-screen w-screen`} >
                 <div className="max-w-2xl text-white nameNovios px-[10vw]">
                     <h2>
                         {title}
