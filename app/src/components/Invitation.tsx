@@ -21,13 +21,11 @@ export const Invitation = () => {
         let lastTouchY = 0;
         let velocity = 0;
         const speed = 0.08;
-        const touchMultiplier = 0.5;
-
-
+        const touchMultiplier = 1.2;
 
         const onWheel = (e: WheelEvent) => {
             e.preventDefault();
-            targetScroll += e.deltaY * 0.4;
+            targetScroll += e.deltaY * 1;
             targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
         };
 
@@ -49,10 +47,17 @@ export const Invitation = () => {
             lastTouchY = touchY;
         };
 
-        const onTouchEnd = (e: TouchEvent) => {
-            velocity = 0;
-            targetScroll = window.scrollY;
-            currentScroll = window.scrollY;
+        const onTouchEnd = () => {
+            const applyInertia = () => {
+                if (Math.abs(velocity) < 0.5) return;
+
+                velocity *= 0.72;
+                targetScroll += velocity;
+                targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
+
+                requestAnimationFrame(applyInertia);
+            };
+            requestAnimationFrame(applyInertia);
         };
 
         const loop = () => {
@@ -80,8 +85,8 @@ export const Invitation = () => {
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top top',
-                    end: 'bottom bottom',
-                    scrub: true,
+                    end: '50% bottom',
+                    scrub: 1,
                     invalidateOnRefresh: true,
                     anticipatePin: 1,
                     pinSpacing: false,
@@ -145,23 +150,41 @@ export const Invitation = () => {
 
                 .to('#heroSection', { opacity: 0, duration: 1 }, '-=1')
 
-                .fromTo('#video1', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
-                .to(video1Progress.current, { t: 2, ease: 'none', duration: 4.5 }, "-=2")
-                .fromTo('#text1',
-                    { y: '100%' },
-                    { y: '-100%', duration: 3 },
-                    '-=2.7'
-                )
-                .to('#video1', { autoAlpha: 0, duration: 0.6 }, '-=2.7')
+            const v1Tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: '40% bottom',
+                    end: '70% bottom',
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1,
+                    pinSpacing: false,
+                }
+            });
 
-                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
-                .to(video2Progress.current, { t: 2, ease: 'none', duration: 3 }, "-=2")
-                .fromTo('#text2',
-                    { y: '100%' },
-                    { y: '-100%', duration: 3 },
-                    '-=0.8'
-                )
-                .to('#video2', { autoAlpha: 0, duration: 0.6 }, '-=2.7')
+            v1Tl
+                .fromTo('#video1', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
+                .to(video1Progress.current, { t: 2, ease: 'none', duration: 4.5 }, "-=1")
+                .to('#video1', { autoAlpha: 0, duration: 0.5 }, '-=2.5')
+            // .to('#text1', { autoAlpha: 0 })
+
+            const v2Tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: '60% bottom',
+                    end: '90% bottom',
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1,
+                    pinSpacing: false,
+                }
+            });
+
+            v2Tl
+                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '=-0.2')
+                .to(video2Progress.current, { t: 2, ease: 'none', duration: 4.5 }, "-=1")
+                .to('#video2', { autoAlpha: 0, duration: 0.5 }, '-=0.4')
+            // .to('#text1', { autoAlpha: 0 })
 
         }, containerRef);
 
@@ -176,15 +199,28 @@ export const Invitation = () => {
     }, []);
 
     return (
-        <div ref={containerRef} style={{ height: '400vh' }} className="bg-black">
-            <HeroSection id="heroSection" />
+        <div ref={containerRef} className="bg-black">
+            <div className='h-[100vh]'>
+                <HeroSection id="heroSection" />
+            </div>
 
-            <TextLayer id="text1" title="Leo" subtitle="Una historia que apenas comienza..." text="Texto largo con lo que sea" />
-            <TextLayer id="text2" title="Yani" subtitle="El momento que siempre soñamos." text="Texto largo con lo que sea" />
+            <div className='relative inset-0 z-[15]'>
+                <div className='h-[520vh]'></div>
+                <div className='h-[100vh]'>
+                    <TextLayer id="text1" title="Leo" subtitle="Una historia que apenas comienza..." text="Texto largo con lo que sea" />
+                </div>
+                <div className='h-[340vh]'></div>
+                <div className='h-[100vh]'>
+                    <TextLayer id="text2" title="Yani" subtitle="El momento que siempre soñamos." text="Texto largo con lo que sea" />
+                </div>
+            </div>
 
-
-            <VideoSection id="video1" src="/videos/firstVideo_v2.mp4" zIndex={10} />
-            <VideoSection id="video2" src="/videos/secondVideo_v2.mp4" zIndex={9} />
+            <div className='h-[100vh]'>
+                <VideoSection id="video1" src="/videos/firstVideo_v6.mp4" zIndex={10} />
+            </div>
+            <div className='h-[100vh]'>
+                <VideoSection id="video2" src="/videos/secondVideo_v6.mp4" zIndex={9} />
+            </div>
         </div>
     );
 };

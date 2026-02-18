@@ -41,6 +41,7 @@ export const VideoSection = ({ id, src, zIndex }: VideoProps) => {
                 x-webkit-airplay="deny"
                 className="w-full h-full object-cover"
                 data-priority="high"
+                style={{ willChange: 'transform' }}
             />
         </div>
     );

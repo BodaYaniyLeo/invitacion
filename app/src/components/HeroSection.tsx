@@ -15,92 +15,11 @@ interface HeroProps {
 
 export const HeroSection = ({ id }: HeroProps) => {
 
-    const mainContainerRef = useRef(null);
 
-    // useLayoutEffect(() => {
-
-
-    //     window.setTimeout(function () {
-    //         window.scroll(0, 0)
-    //     }, 0);
-
-    //     gsap.registerPlugin(ScrollTrigger);
-
-    //     let ctx = gsap.context(() => {
-
-    //         const heroTimeline = gsap.timeline({
-    //             scrollTrigger: {
-    //                 trigger: mainContainerRef.current,
-    //                 start: 'top top',
-    //                 end: '+=100%',
-    //                 scrub: 1,
-    //                 pin: true,
-    //                 invalidateOnRefresh: true,
-    //             }
-    //         });
-
-    //         heroTimeline
-    //             .to('#heroComplete', { scale: 1.1, duration: 2 })
-    //             .to('#imgTextHero', { opacity: 0, duration: 0.8 }, 1)
-
-    //             .to('#heroComplete', { opacity: 0, duration: 0.5 })
-    //             .to('#heroMask', {
-    //                 maskSize: "25vh",
-    //                 webkitMaskSize: "25vh",
-    //                 duration: 2
-    //             }, 0.5)
-    //             .to('#heroMask', { scale: 0.8 })
-
-    //             .fromTo('#dateLogo',
-    //                 {
-    //                     webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-    //                     maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-    //                     autoAlpha: 0,
-    //                 },
-    //                 {
-    //                     webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-    //                     maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-    //                     autoAlpha: 1,
-    //                     scale: 0.8,
-    //                 }, '<')
-
-    //             .to('#heroMask', { display: 'none' }, '>')
-    //             .to('#dateLogo h3', {
-    //                 backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
-    //                 opacity: 0.85
-    //             }, '>')
-    //             .to('#dateLogo', {
-    //                 webkitMaskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-    //                 maskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-    //                 autoAlpha: 0
-    //             }, '>')
-
-    //             .fromTo('#textOrg',
-    //                 {
-    //                     webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%)',
-    //                     maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%)',
-    //                     autoAlpha: 0,
-    //                 },
-    //                 {
-    //                     webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)',
-    //                     maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)',
-    //                     autoAlpha: 1,
-    //                     scale: 0.85
-    //                 })
-    //             .to('#textOrg h2, #textOrg p', {
-    //                 backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
-    //                 opacity: 0.85
-    //             }, '>')
-    //             .to('#textOrg', { autoAlpha: 0 }, '>');
-
-    //     }, mainContainerRef);
-
-    //     return () => ctx.revert();
-    // }, []);
 
     return (
         <div id={id} className="fixed top-0 left-0 w-full h-screen z-30 pointer-events-none">
-            <div ref={mainContainerRef} className="relative w-full h-screen overflow-hidden bg-black">
+            <div className="relative w-full h-screen overflow-hidden bg-black">
 
                 <div id="heroMask" className="absolute inset-0 z-30 pointer-events-none h-screen">
                     <picture id='heroComplete' className='flex h-screen w-screen scale-110 object-cover justify-center relative'>
@@ -113,7 +32,7 @@ export const HeroSection = ({ id }: HeroProps) => {
                 <div id='dateLogo' className="absolute h-screen inset-0 z-20 opacity-0 flex flex-col items-center justify-center text-white p-6">
                     <Image src={logoCasamiento} alt="Logo" className="absolute z-2 top-1/3 left-1/2 translateResize sizeImg max-w-100" />
                     <h3 className='uppercase absolute z-2 top-1/2 left-1/2 translateResize max-w-100 text-center font-bold w-full text-base/8 mt-10'>
-                        Disponible<br />el 1 de enero<br />de 2027
+                        Disponible<br />el 9 de enero<br />de 2027
                     </h3>
                 </div>
 
