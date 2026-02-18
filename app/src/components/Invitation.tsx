@@ -48,7 +48,7 @@ export const Invitation = () => {
         };
 
         const onTouchEnd = () => {
-            const maxVelocity = 8;
+            const maxVelocity = 15;
             velocity = Math.sign(velocity) * Math.min(Math.abs(velocity), maxVelocity);
 
             const applyInertia = () => {
@@ -279,8 +279,8 @@ export const Invitation = () => {
             <TextLayer id="text1" title="Leo" subtitle="Una historia que apenas comienza..." text="Texto largo con lo que sea" />
             <TextLayer id="text2" title="Yani" subtitle="El momento que siempre soñamos." text="Texto largo con lo que sea" />
 
-            <VideoSection id="video1" src="/videos/firstVideoHD.mp4" zIndex={9} />
-            <VideoSection id="video2" src="/videos/secondVideoHD.mp4" zIndex={9} />
+            <VideoSection id="video1" src="/videos/firstVideo_v6.mp4" zIndex={9} />
+            <VideoSection id="video2" src="/videos/secondVideo_v6.mp4" zIndex={9} />
         </div>
     );
 };

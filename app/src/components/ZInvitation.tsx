@@ -6,74 +6,35 @@ import { ZHeroSection } from './ZHeroSection';
 import { ZVideoSection } from './ZVideoSection';
 import { ZTextLayer } from './ZTextLayer';
 
+const makeFrames = (prefix: string, ext: string, count: number): string[] =>
+    Array.from({ length: count }, (_, i) =>
+        `${prefix}${String(i + 1).padStart(4, '0')}${ext}`
+    );
+
+const VIDEO_DURATION = 2;
+const FRAME_COUNT = 60;
+
+// Rutas limpias para Next.js (carpeta public)
+const video1Frames = makeFrames('/videos/frames/video1/firstVideoMobile_', '.webp', FRAME_COUNT);
+const video2Frames = makeFrames('/videos/frames/video2/secondVideoMobile_', '.webp', FRAME_COUNT);
+const video3Frames = makeFrames('/videos/frames/video3/thirdVideoMobile_', '.webp', FRAME_COUNT);
+
 export const ZInvitation = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const video1Progress = useRef({ t: 0 });
-    const video2Progress = useRef({ t: 0 });
+    const v1Progress = useRef({ t: 0 });
+    const v2Progress = useRef({ t: 0 });
+    const v3Progress = useRef({ t: 0 });
 
     useLayoutEffect(() => {
-
         gsap.registerPlugin(ScrollTrigger);
 
-        let targetScroll = window.scrollY;
-        let currentScroll = window.scrollY;
-        let rafId: number;
-        let lastTouchY = 0;
-        let velocity = 0;
-        const speed = 0.08;
-        const touchMultiplier = 0.8;
-
-        const loop = () => {
-            currentScroll += (targetScroll - currentScroll) * speed;
-            window.scrollTo(0, currentScroll);
-            rafId = requestAnimationFrame(loop);
-        };
-        const onWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            targetScroll += e.deltaY * 1.8;
-            targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
-        };
-
-        const onTouchStart = (e: TouchEvent) => {
-            lastTouchY = e.touches[0].clientY;
-            velocity = 0;
-        };
-
-        const onTouchMove = (e: TouchEvent) => {
-            e.preventDefault();
-            const touchY = e.touches[0].clientY;
-            const delta = (lastTouchY - touchY) * touchMultiplier;
-            velocity = delta;
-            targetScroll += delta;
-            targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
-            lastTouchY = touchY;
-        };
-
-        const onTouchEnd = () => {
-            const maxVelocity = 15;
-            velocity = Math.sign(velocity) * Math.min(Math.abs(velocity), maxVelocity);
-            const applyInertia = () => {
-                if (Math.abs(velocity) < 2) { velocity = 0; return; }
-                velocity *= 0.6;
-                targetScroll += velocity;
-                targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
-                requestAnimationFrame(applyInertia);
-            };
-            requestAnimationFrame(applyInertia);
-        };
-
-        window.addEventListener('wheel', onWheel, { passive: false });
-        window.addEventListener('touchstart', onTouchStart, { passive: false });
-        window.addEventListener('touchmove', onTouchMove, { passive: false });
-        window.addEventListener('touchend', onTouchEnd);
-        rafId = requestAnimationFrame(loop);
-
         let ctx = gsap.context(() => {
+
             const masterTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top top',
-                    end: '50% bottom',
+                    end: '60% bottom',
                     scrub: 1,
                     invalidateOnRefresh: true,
                 }
@@ -136,52 +97,64 @@ export const ZInvitation = () => {
 
                 .to('#heroSection', { opacity: 0, duration: 1 }, '-=1')
 
+            const tlV1 = gsap.timeline();
+            tlV1.to('#video1', { autoAlpha: 1, duration: 0.3 })
+                .to(v1Progress.current, { t: VIDEO_DURATION, ease: 'none', duration: 1 }, 0)
+                .to('#video1', { autoAlpha: 0, duration: 0.4 }, '-=0.35');
 
             ScrollTrigger.create({
                 trigger: containerRef.current,
-                start: '43% bottom',
+                start: '55% bottom',
                 end: '70% bottom',
-                scrub: 0.1,
-                invalidateOnRefresh: true,
-                onEnter: () => { gsap.killTweensOf('#video1'); gsap.set('#video1', { zIndex: 11 }); gsap.to('#video1', { autoAlpha: 1, duration: 0.5 }); },
-                onLeave: () => { gsap.killTweensOf('#video1'); gsap.to('#video1', { autoAlpha: 0, duration: 0.5, onComplete: () => { gsap.set('#video1', { zIndex: 8 }); } }); },
-                onEnterBack: () => { gsap.killTweensOf('#video1'); gsap.set('#video1', { zIndex: 11 }); gsap.to('#video1', { autoAlpha: 1, duration: 0.5 }); },
-                onLeaveBack: () => { gsap.killTweensOf('#video1'); gsap.to('#video1', { autoAlpha: 0, duration: 0.5, onComplete: () => { gsap.set('#video1', { zIndex: 8 }); } }); },
-                animation: gsap.timeline().to(video1Progress.current, { t: 2, ease: 'none', duration: 4.5 }),
+                scrub: true,
+                animation: tlV1,
             });
+
+            // Video 2
+            const tlV2 = gsap.timeline();
+            tlV2.to('#video2', { autoAlpha: 1, duration: 0.1 })
+                .to(v2Progress.current, { t: VIDEO_DURATION, ease: 'none', duration: 1 }, 0)
+                .to('#video2', { autoAlpha: 0, duration: 0.1 });
 
             ScrollTrigger.create({
                 trigger: containerRef.current,
-                start: '70% bottom', // ← diferente al video1
-                end: '100% bottom',
-                scrub: 0.1,
-                invalidateOnRefresh: true,
-                onEnter: () => { gsap.killTweensOf('#video2'); gsap.set('#video2', { zIndex: 11 }); gsap.to('#video2', { autoAlpha: 1, duration: 0.5 }); },
-                onLeave: () => { gsap.killTweensOf('#video2'); gsap.to('#video2', { autoAlpha: 0, duration: 0.5, onComplete: () => { gsap.set('#video2', { zIndex: 8 }); } }); },
-                onEnterBack: () => { gsap.killTweensOf('#video2'); gsap.set('#video2', { zIndex: 11 }); gsap.to('#video2', { autoAlpha: 1, duration: 0.5 }); },
-                onLeaveBack: () => { gsap.killTweensOf('#video2'); gsap.to('#video2', { autoAlpha: 0, duration: 0.5, onComplete: () => { gsap.set('#video2', { zIndex: 8 }); } }); },
-                animation: gsap.timeline().to(video2Progress.current, { t: 2, ease: 'none', duration: 4.5 }),
+                start: '70% bottom',
+                end: '85% bottom',
+                scrub: true,
+                animation: tlV2,
             });
 
+            // Video 3
+            const tlV3 = gsap.timeline();
+            tlV3.to('#video3', { autoAlpha: 1, duration: 0.1 })
+                .to(v3Progress.current, { t: VIDEO_DURATION, ease: 'none', duration: 1 }, 0)
+                .to('#video3', { autoAlpha: 0, duration: 0.1 });
+
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: '85% bottom',
+                end: '100% bottom',
+                scrub: true,
+                animation: tlV3,
+            });
         }, containerRef);
 
         return () => {
             ctx.revert();
-            window.removeEventListener('wheel', onWheel);
-            window.removeEventListener('touchstart', onTouchStart);
-            window.removeEventListener('touchmove', onTouchMove);
-            window.removeEventListener('touchend', onTouchEnd);
-            cancelAnimationFrame(rafId);
         };
     }, []);
 
     return (
-        <div ref={containerRef} className="bg-black" style={{ height: '500vh' }}>
+        <div ref={containerRef} className="bg-black" style={{ height: '1000vh' }}>
             <ZHeroSection id="heroSection" />
-            <ZTextLayer id="text1" title="Leo" subtitle="Una historia que apenas comienza..." text="Texto largo con lo que sea" />
-            <ZTextLayer id="text2" title="Yani" subtitle="El momento que siempre soñamos." text="Texto largo con lo que sea" />
-            <ZVideoSection id="video1" src="/videos/firstVideo_v6.mp4" zIndex={9} progressRef={video1Progress} />
-            <ZVideoSection id="video2" src="/videos/secondVideo_v6.mp4" zIndex={9} progressRef={video2Progress} />
+            <div className='h-[500hv]'></div>
+            <ZVideoSection id="video1" zIndex={10} progressRef={v1Progress} frames={video1Frames} duration={VIDEO_DURATION} />
+            <ZVideoSection id="video2" zIndex={11} progressRef={v2Progress} frames={video2Frames} duration={VIDEO_DURATION} />
+            <ZVideoSection id="video3" zIndex={12} progressRef={v3Progress} frames={video3Frames} duration={VIDEO_DURATION} />
+
+            <ZTextLayer id="text1" title="Leo" subtitle="Historia" text="..." contH={150} />
+            <ZTextLayer id="text2" title="Yani" subtitle="Sueño" text="..." contH={100} />
+            <ZTextLayer id="text3" title="Ubicación" subtitle="Lugar" text="..." contH={100} />
         </div>
     );
 };

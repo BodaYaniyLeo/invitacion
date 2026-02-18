@@ -1,109 +1,105 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface VideoProps {
     id: string;
-    src: string;
     zIndex: number;
     progressRef: React.MutableRefObject<{ t: number }>;
+    frames: string[];
+    duration: number;
 }
 
-export const ZVideoSection = ({ id, src, zIndex, progressRef }: VideoProps) => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
+export const ZVideoSection = ({ id, zIndex, progressRef, frames, duration }: VideoProps) => {
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const [isReady, setIsReady] = useState(false);
+
+    console.log(progressRef.current)
 
     useEffect(() => {
-        const video = videoRef.current;
         const canvas = canvasRef.current;
-        if (!video || !canvas) return;
+        if (!canvas || frames.length === 0) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
+        // Ajustar tamaño
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        // Carga de imágenes
+        const images: HTMLImageElement[] = frames.map((src) => {
+            const img = new Image();
+            img.src = src;
+            return img;
+        });
+
+        // Asegurar que la primera imagen esté lista
+        images[0].onload = () => setIsReady(true);
+
         let rafId: number;
-        let lastTime = -1;
-        let lastProgress = 0;
-        let scrollVelocity = 0;
-        let isSeeking = false;
+        let lastIndex = -1;
 
-        const drawLoop = () => {
-            rafId = requestAnimationFrame(drawLoop);
+        const drawCover = (img: HTMLImageElement) => {
+            const imgRatio = img.naturalWidth / img.naturalHeight;
+            const canvasRatio = canvas.width / canvas.height;
+            let dw, dh, ox, oy;
 
-            const targetTime = progressRef.current.t;
+            if (imgRatio > canvasRatio) {
+                dh = canvas.height; dw = dh * imgRatio;
+                ox = (canvas.width - dw) / 2; oy = 0;
+            } else {
+                dw = canvas.width; dh = dw / imgRatio;
+                ox = 0; oy = (canvas.height - dh) / 2;
+            }
+            ctx.drawImage(img, ox, oy, dw, dh);
+        };
 
-            // Mide la velocidad del scroll (cuánto cambió el progreso)
-            scrollVelocity = Math.abs(targetTime - lastProgress);
-            lastProgress = targetTime;
+        const renderLoop = () => {
+            const progress = Math.min(Math.max(progressRef.current.t / duration, 0), 1);
+            const frameIndex = Math.floor(progress * (images.length - 1));
 
-            // Si el scroll es muy rápido, dibujá el frame actual sin seekear
-            // Si es lento o moderado, seekeá normalmente
-            if (!isSeeking) {
-                if (scrollVelocity > 0.05) {
-                    // Scroll rápido — seek agresivo, acepta saltos de frames
-                    video.currentTime = targetTime;
-                } else if (Math.abs(video.currentTime - targetTime) > 0.016) {
-                    // Scroll lento — seek preciso frame por frame
-                    isSeeking = true;
-                    video.currentTime = targetTime;
-                    video.addEventListener('seeked', () => {
-                        isSeeking = false;
-                    }, { once: true });
+            if (frameIndex !== lastIndex) {
+                const img = images[frameIndex];
+                if (img && img.complete) {
+                    drawCover(img);
+                    lastIndex = frameIndex;
                 }
             }
-
-            // Dibujá siempre el frame disponible, sin esperar el seek
-            if (video.readyState >= 2 && video.currentTime !== lastTime) {
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                lastTime = video.currentTime;
-            }
+            rafId = requestAnimationFrame(renderLoop);
         };
 
-        const onReady = () => {
-            video.currentTime = video.duration;
-            video.addEventListener('seeked', () => {
-                video.currentTime = 0;
-                rafId = requestAnimationFrame(drawLoop);
-            }, { once: true });
-        };
-
-        if (video.readyState >= 4) {
-            onReady();
-        } else {
-            video.addEventListener('canplaythrough', onReady, { once: true });
-        }
-
-        const onResize = () => {
+        rafId = requestAnimationFrame(renderLoop);
+        
+        const handleResize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            lastIndex = -1;
         };
-        window.addEventListener('resize', onResize);
 
+        window.addEventListener('resize', handleResize);
         return () => {
             cancelAnimationFrame(rafId);
-            window.removeEventListener('resize', onResize);
+            window.removeEventListener('resize', handleResize);
         };
-    }, [progressRef]);
+    }, [frames, duration, progressRef]);
 
     return (
-        <div
-            id={id}
-            className="fixed top-0 left-0 w-full h-screen"
-            style={{ zIndex, visibility: 'hidden' }}
+        <div 
+            id={id} 
+            className="fixed top-0 left-0 w-full h-screen pointer-events-none"
+            style={{ 
+                zIndex, 
+                opacity: 0,
+                visibility: 'hidden'
+            }}
         >
-            <video
-                ref={videoRef}
-                src={src}
-                muted
-                playsInline
-                preload="auto"
-                style={{ display: 'none' }}
-            />
             <canvas
                 ref={canvasRef}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                style={{ 
+                    width: '100%', 
+                    height: '100%',
+                    display: isReady ? 'block' : 'none' 
+                }}
             />
         </div>
     );
