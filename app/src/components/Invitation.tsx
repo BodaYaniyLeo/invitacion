@@ -14,6 +14,59 @@ export const Invitation = () => {
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
+        let targetScroll = window.scrollY;
+        let currentScroll = window.scrollY;
+        let rafId: number;
+        let touchStartY = 0;
+        let lastTouchY = 0;
+        let velocity = 0;
+        const speed = 0.08;
+        const touchMultiplier = 0.5;
+
+
+
+        const onWheel = (e: WheelEvent) => {
+            e.preventDefault();
+            targetScroll += e.deltaY * 0.4;
+            targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
+        };
+
+        const onTouchStart = (e: TouchEvent) => {
+            touchStartY = e.touches[0].clientY;
+            lastTouchY = touchStartY;
+            velocity = 0;
+        };
+
+        const onTouchMove = (e: TouchEvent) => {
+            e.preventDefault();
+            const touchY = e.touches[0].clientY;
+            const delta = (lastTouchY - touchY) * touchMultiplier;
+
+            velocity = delta;
+            targetScroll += delta;
+            targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
+
+            lastTouchY = touchY;
+        };
+
+        const onTouchEnd = (e: TouchEvent) => {
+            velocity = 0;
+            targetScroll = window.scrollY;
+            currentScroll = window.scrollY;
+        };
+
+        const loop = () => {
+            currentScroll += (targetScroll - currentScroll) * speed;
+            window.scrollTo(0, currentScroll);
+            rafId = requestAnimationFrame(loop);
+        };
+
+        window.addEventListener('wheel', onWheel, { passive: false });
+        window.addEventListener('touchstart', onTouchStart, { passive: false });
+        window.addEventListener('touchmove', onTouchMove, { passive: false });
+        window.addEventListener('touchend', onTouchEnd);
+        rafId = requestAnimationFrame(loop);
+
         const v1 = containerRef.current?.querySelector('#video1 video') as HTMLVideoElement;
         const v2 = containerRef.current?.querySelector('#video2 video') as HTMLVideoElement;
 
@@ -28,7 +81,10 @@ export const Invitation = () => {
                     trigger: containerRef.current,
                     start: 'top top',
                     end: 'bottom bottom',
-                    scrub: 0.5,
+                    scrub: true,
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1,
+                    pinSpacing: false,
                 }
             });
 
@@ -109,19 +165,26 @@ export const Invitation = () => {
 
         }, containerRef);
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert()
+            window.removeEventListener('wheel', onWheel);
+            window.removeEventListener('touchstart', onTouchStart);
+            window.removeEventListener('touchmove', onTouchMove);
+            window.removeEventListener('touchend', onTouchEnd);
+            cancelAnimationFrame(rafId);
+        };
     }, []);
 
     return (
-        <div ref={containerRef} style={{ height: '600vh' }} className="bg-black">
+        <div ref={containerRef} style={{ height: '400vh' }} className="bg-black">
             <HeroSection id="heroSection" />
 
             <TextLayer id="text1" title="Leo" subtitle="Una historia que apenas comienza..." text="Texto largo con lo que sea" />
             <TextLayer id="text2" title="Yani" subtitle="El momento que siempre soñamos." text="Texto largo con lo que sea" />
 
 
-            <VideoSection id="video1" src="/videos/firstVideo.mp4" zIndex={10} />
-            <VideoSection id="video2" src="/videos/secondVideo.mp4" zIndex={9} />
+            <VideoSection id="video1" src="/videos/firstVideo_v2.mp4" zIndex={10} />
+            <VideoSection id="video2" src="/videos/secondVideo_v2.mp4" zIndex={9} />
         </div>
     );
 };

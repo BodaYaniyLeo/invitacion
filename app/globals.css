@@ -61,6 +61,8 @@ body {
   margin: 0;
   box-sizing: border-box;
   background: var(--background);
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: auto;
 }
 
 body {
