@@ -11,9 +11,9 @@ export const TextLayer = ({ id, title, subtitle, text }: TextLayerProps) => {
     return (
         <div
             id={id}
-            className="flex flex-col justify-center pointer-events-none h-screen"
+            className="flex flex-col justify-center pointer-events-none h-screen relative z-12 top-[250vh]"
         >
-            <div className="section-text">
+            <div className="section-text ">
                 <div className="max-w-2xl text-white nameNovios px-[10vw]">
                     <h2>
                         {title}

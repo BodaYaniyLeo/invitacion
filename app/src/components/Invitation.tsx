@@ -20,7 +20,7 @@ export const Invitation = () => {
         let touchStartY = 0;
         let lastTouchY = 0;
         let velocity = 0;
-        const speed = 0.08;
+        const speed = 0.15;
         const touchMultiplier = 1.2;
 
         const onWheel = (e: WheelEvent) => {
@@ -75,10 +75,19 @@ export const Invitation = () => {
         const v1 = containerRef.current?.querySelector('#video1 video') as HTMLVideoElement;
         const v2 = containerRef.current?.querySelector('#video2 video') as HTMLVideoElement;
 
-        gsap.ticker.add(() => {
-            if (v1 && v1.readyState >= 2) v1.currentTime = video1Progress.current.t;
-            if (v2 && v2.readyState >= 2) v2.currentTime = video2Progress.current.t;
-        });
+        const tickerFn = () => {
+            const v1 = containerRef.current?.querySelector<HTMLVideoElement>('#video1 video');
+            const v2 = containerRef.current?.querySelector<HTMLVideoElement>('#video2 video');
+
+            if (v1 && v1.readyState >= 2 && parseFloat(v1.parentElement?.style.opacity || '0') > 0) {
+                v1.currentTime = video1Progress.current.t;
+            }
+            if (v2 && v2.readyState >= 2 && parseFloat(v2.parentElement?.style.opacity || '0') > 0) {
+                v2.currentTime = video2Progress.current.t;
+            }
+        };
+
+        gsap.ticker.add(tickerFn);
 
         let ctx = gsap.context(() => {
             const masterTl = gsap.timeline({
@@ -88,8 +97,6 @@ export const Invitation = () => {
                     end: '50% bottom',
                     scrub: 1,
                     invalidateOnRefresh: true,
-                    anticipatePin: 1,
-                    pinSpacing: false,
                 }
             });
 
@@ -150,46 +157,112 @@ export const Invitation = () => {
 
                 .to('#heroSection', { opacity: 0, duration: 1 }, '-=1')
 
-            const v1Tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: '40% bottom',
-                    end: '70% bottom',
-                    scrub: 1,
-                    invalidateOnRefresh: true,
-                    anticipatePin: 1,
-                    pinSpacing: false,
-                }
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: '43% bottom',
+                end: '64% bottom',
+                invalidateOnRefresh: true,
+                onEnter: () => {
+                    gsap.killTweensOf('#video1');
+                    gsap.set('#video1', { zIndex: 11 });
+                    gsap.to('#video1', { autoAlpha: 1, duration: 0.3 });
+                },
+                onEnterBack: () => {
+                    gsap.killTweensOf('#video1');
+                    gsap.to('#video1', {
+                        autoAlpha: 1,
+                        duration: 0.3,
+                        onStart: () => { gsap.set('#video1', { zIndex: 11 }); }
+                    });
+                },
+                scrub: 1,
+                animation: gsap.timeline()
+                    .to(video1Progress.current, { t: 2, ease: 'none', duration: 4.5 }),
             });
 
-            v1Tl
-                .fromTo('#video1', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
-                .to(video1Progress.current, { t: 2, ease: 'none', duration: 4.5 }, "-=1")
-                .to('#video1', { autoAlpha: 0, duration: 0.5 }, '-=2.5')
-            // .to('#text1', { autoAlpha: 0 })
-
-            const v2Tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: '60% bottom',
-                    end: '90% bottom',
-                    scrub: 1,
-                    invalidateOnRefresh: true,
-                    anticipatePin: 1,
-                    pinSpacing: false,
-                }
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: '64% bottom',
+                end: '70% bottom',
+                invalidateOnRefresh: true,
+                onEnter: () => {
+                    gsap.killTweensOf('#video1');
+                    gsap.to('#video1', {
+                        autoAlpha: 0,
+                        duration: 1,
+                        onComplete: () => { gsap.set('#video1', { zIndex: 8 }); }
+                    });
+                },
+                onLeaveBack: () => {
+                    gsap.killTweensOf('#video1');
+                    gsap.to('#video1', {
+                        autoAlpha: 1,
+                        duration: 1,
+                        onStart: () => { gsap.set('#video1', { zIndex: 11 }); }
+                    });
+                },
             });
 
-            v2Tl
-                .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '=-0.2')
-                .to(video2Progress.current, { t: 2, ease: 'none', duration: 4.5 }, "-=1")
-                .to('#video2', { autoAlpha: 0, duration: 0.5 }, '-=0.4')
-            // .to('#text1', { autoAlpha: 0 })
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: '70% bottom',
+                end: '86% bottom',
+                invalidateOnRefresh: true,
+                onEnter: () => {
+                    gsap.killTweensOf('#video2');
+                    gsap.to('#video2', {
+                        autoAlpha: 1,
+                        duration: 0.3,
+                        onStart: () => { gsap.set('#video2', { zIndex: 11 }); }
+                    });
+                },
+                onEnterBack: () => {
+                    gsap.killTweensOf('#video2');
+                    gsap.set('#video2', { zIndex: 11 });
+                    gsap.to('#video2', { autoAlpha: 1, duration: 0.3 });
+                },
+                onLeaveBack: () => {
+                    gsap.killTweensOf('#video2');
+                    gsap.to('#video2', {
+                        autoAlpha: 0,
+                        duration: 1,
+                        onComplete: () => { gsap.set('#video2', { zIndex: 8 }); }
+                    });
+                },
+                scrub: 1,
+                animation: gsap.timeline()
+                    .to(video2Progress.current, { t: 2, ease: 'none', duration: 4.5 }),
+            });
+
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: '86% bottom',
+                end: '100% bottom',
+                invalidateOnRefresh: true,
+                onEnter: () => {
+                    gsap.killTweensOf('#video2');
+                    gsap.to('#video2', {
+                        autoAlpha: 0,
+                        duration: 1,
+                        onComplete: () => { gsap.set('#video2', { zIndex: 8 }); }
+                    });
+                },
+                onLeaveBack: () => {
+                    gsap.killTweensOf('#video2');
+                    gsap.to('#video2', {
+                        autoAlpha: 1,
+                        duration: 1,
+                        onStart: () => { gsap.set('#video2', { zIndex: 11 }); }
+                    });
+                },
+            });
+
 
         }, containerRef);
 
         return () => {
-            ctx.revert()
+            ctx.revert();
+            gsap.ticker.remove(tickerFn);
             window.removeEventListener('wheel', onWheel);
             window.removeEventListener('touchstart', onTouchStart);
             window.removeEventListener('touchmove', onTouchMove);
@@ -199,28 +272,14 @@ export const Invitation = () => {
     }, []);
 
     return (
-        <div ref={containerRef} className="bg-black">
-            <div className='h-[100vh]'>
-                <HeroSection id="heroSection" />
-            </div>
+        <div ref={containerRef} className="bg-black" style={{ height: '500vh' }}>
+            <HeroSection id="heroSection" />
 
-            <div className='relative inset-0 z-[15]'>
-                <div className='h-[520vh]'></div>
-                <div className='h-[100vh]'>
-                    <TextLayer id="text1" title="Leo" subtitle="Una historia que apenas comienza..." text="Texto largo con lo que sea" />
-                </div>
-                <div className='h-[340vh]'></div>
-                <div className='h-[100vh]'>
-                    <TextLayer id="text2" title="Yani" subtitle="El momento que siempre soñamos." text="Texto largo con lo que sea" />
-                </div>
-            </div>
+            <TextLayer id="text1" title="Leo" subtitle="Una historia que apenas comienza..." text="Texto largo con lo que sea" />
+            <TextLayer id="text2" title="Yani" subtitle="El momento que siempre soñamos." text="Texto largo con lo que sea" />
 
-            <div className='h-[100vh]'>
-                <VideoSection id="video1" src="/videos/firstVideo_v6.mp4" zIndex={10} />
-            </div>
-            <div className='h-[100vh]'>
-                <VideoSection id="video2" src="/videos/secondVideo_v6.mp4" zIndex={9} />
-            </div>
+            <VideoSection id="video1" src="/videos/firstVideo_v6.mp4" zIndex={9} />
+            <VideoSection id="video2" src="/videos/secondVideo_v6.mp4" zIndex={9} />
         </div>
     );
 };
