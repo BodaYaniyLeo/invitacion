@@ -16,7 +16,9 @@ export const VideoSection = ({ id, src, zIndex }: VideoProps) => {
 
         const forceBuffer = () => {
             video.currentTime = video.duration || 0;
-            setTimeout(() => { video.currentTime = 0; }, 100);
+            video.addEventListener('seeked', () => {
+                video.currentTime = 0;
+            }, { once: true });
         };
 
         if (video.readyState >= 4) {

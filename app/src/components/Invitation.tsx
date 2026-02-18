@@ -20,8 +20,8 @@ export const Invitation = () => {
         let touchStartY = 0;
         let lastTouchY = 0;
         let velocity = 0;
-        const speed = 0.5;
-        const touchMultiplier = 2;
+        const speed = 0.15;
+        const touchMultiplier = 0.8;
 
         const onWheel = (e: WheelEvent) => {
             e.preventDefault();
@@ -173,7 +173,7 @@ export const Invitation = () => {
                         onStart: () => { gsap.set('#video1', { zIndex: 11 }); }
                     });
                 },
-                scrub: 1,
+                scrub: 0.1,
                 animation: gsap.timeline()
                     .to(video1Progress.current, { t: 2, ease: 'none', duration: 4.5 }),
             });
@@ -227,7 +227,7 @@ export const Invitation = () => {
                         onComplete: () => { gsap.set('#video2', { zIndex: 8 }); }
                     });
                 },
-                scrub: 1,
+                scrub: 0.1,
                 animation: gsap.timeline()
                     .to(video2Progress.current, { t: 2, ease: 'none', duration: 4.5 }),
             });
