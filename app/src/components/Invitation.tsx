@@ -20,8 +20,8 @@ export const Invitation = () => {
         let touchStartY = 0;
         let lastTouchY = 0;
         let velocity = 0;
-        const speed = 0.15;
-        const touchMultiplier = 1.2;
+        const speed = 0.5;
+        const touchMultiplier = 2;
 
         const onWheel = (e: WheelEvent) => {
             e.preventDefault();
@@ -72,19 +72,17 @@ export const Invitation = () => {
         window.addEventListener('touchend', onTouchEnd);
         rafId = requestAnimationFrame(loop);
 
-        const v1 = containerRef.current?.querySelector('#video1 video') as HTMLVideoElement;
-        const v2 = containerRef.current?.querySelector('#video2 video') as HTMLVideoElement;
+        let v1: HTMLVideoElement | null = null;
+        let v2: HTMLVideoElement | null = null;
+
+        setTimeout(() => {
+            v1 = containerRef.current?.querySelector<HTMLVideoElement>('#video1 video') ?? null;
+            v2 = containerRef.current?.querySelector<HTMLVideoElement>('#video2 video') ?? null;
+        }, 0);
 
         const tickerFn = () => {
-            const v1 = containerRef.current?.querySelector<HTMLVideoElement>('#video1 video');
-            const v2 = containerRef.current?.querySelector<HTMLVideoElement>('#video2 video');
-
-            if (v1 && v1.readyState >= 2 && parseFloat(v1.parentElement?.style.opacity || '0') > 0) {
-                v1.currentTime = video1Progress.current.t;
-            }
-            if (v2 && v2.readyState >= 2 && parseFloat(v2.parentElement?.style.opacity || '0') > 0) {
-                v2.currentTime = video2Progress.current.t;
-            }
+            if (v1 && v1.readyState >= 3) v1.currentTime = video1Progress.current.t;
+            if (v2 && v2.readyState >= 3) v2.currentTime = video2Progress.current.t;
         };
 
         gsap.ticker.add(tickerFn);
