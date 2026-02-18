@@ -7,7 +7,7 @@ import { VideoSection } from './VideoSection';
 import { TextLayer } from './TextLayer';
 
 export const Invitation = () => {
-    const containerRef = useRef(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const video1Progress = useRef({ t: 0 });
     const video2Progress = useRef({ t: 0 });
 
