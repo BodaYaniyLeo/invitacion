@@ -8,9 +8,19 @@ import { TextLayer } from './TextLayer';
 
 export const Invitation = () => {
     const containerRef = useRef(null);
+    const video1Progress = useRef({ t: 0 });
+    const video2Progress = useRef({ t: 0 });
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
+
+        const v1 = containerRef.current?.querySelector('#video1 video') as HTMLVideoElement;
+        const v2 = containerRef.current?.querySelector('#video2 video') as HTMLVideoElement;
+
+        gsap.ticker.add(() => {
+            if (v1 && v1.readyState >= 2) v1.currentTime = video1Progress.current.t;
+            if (v2 && v2.readyState >= 2) v2.currentTime = video2Progress.current.t;
+        });
 
         let ctx = gsap.context(() => {
             const masterTl = gsap.timeline({
@@ -80,11 +90,7 @@ export const Invitation = () => {
                 .to('#heroSection', { opacity: 0, duration: 1 }, '-=1')
 
                 .fromTo('#video1', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
-                .to('#video1 video', {
-                    currentTime: 2,
-                    ease: 'none',
-                    duration: 4.5
-                }, "-=2")
+                .to(video1Progress.current, { t: 2, ease: 'none', duration: 4.5 }, "-=2")
                 .fromTo('#text1',
                     { y: '100%' },
                     { y: '-100%', duration: 3 },
@@ -93,11 +99,7 @@ export const Invitation = () => {
                 .to('#video1', { autoAlpha: 0, duration: 0.6 }, '-=2.7')
 
                 .fromTo('#video2', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, '-=1')
-                .to('#video2 video', {
-                    currentTime: 2,
-                    ease: 'none',
-                    duration: 3
-                }, "-=2")
+                .to(video2Progress.current, { t: 2, ease: 'none', duration: 3 }, "-=2")
                 .fromTo('#text2',
                     { y: '100%' },
                     { y: '-100%', duration: 3 },
