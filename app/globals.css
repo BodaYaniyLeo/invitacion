@@ -7,7 +7,9 @@
   --lcolor: #000DFF;
   --h1size: min(8.8vw, 15vh);
   --h2size: min(4lvh, 5.7vw);
-  --namesize: min(calc(19vw / 1));
+  --h4size: min(3.8lvh, 4.2vw);
+  --wsizeM: min(19vw);
+  --wsizeL: min(22vw);
 }
 
 @theme inline {
@@ -61,6 +63,7 @@ body {
   margin: 0;
   box-sizing: border-box;
   background: var(--background);
+  max-width: 100vw;
   scroll-behavior: auto;
   -webkit-overflow-scrolling: auto;
 }

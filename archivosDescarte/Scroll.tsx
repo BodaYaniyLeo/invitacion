@@ -27,7 +27,6 @@
 //     const [answer, setAnswer] = useState<choices[]>([{ selection: 1, option: 1 }])
 
 //     const moveTo = (ref: RefObject<HTMLDivElement | null>) => {
-//         console.log(ref)
 //         ref.current?.scrollIntoView({ behavior: "smooth" })
 
 //     }

@@ -1,18 +1,18 @@
 #heroMask {
     background: #ffffff;
     mask-image: url('../assets/images/textHero.svg');
-    mask-position: 50% 35%;
+    mask-position: 50% 40%;
     mask-repeat: no-repeat;
     mask-size: clamp(3500vh, 1500%, 0vh);
 
 }
 
 .translateResize {
-    transform: translate(-49.9%, -27.5%);
+    transform: translate(-50%, -4.5%);
 }
 
 .sizeImg {
-    width: calc(25vh + 2px);
+    width: calc(25vh);
 }
 
 #dateLogo {
@@ -24,7 +24,8 @@
             rgba(0, 0, 0, 0) 30%);
 }
 
-#dateLogo h3 {
+#dateLogo h3,
+#priceData h3 {
     font-family: 'fontBold';
     background-image: radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh);
     -webkit-background-clip: text;
@@ -32,6 +33,20 @@
     -webkit-text-fill-color: transparent;
     font-style: normal;
     font-size: var(--h1size);
+    line-height: 86%;
+    letter-spacing: -.04em;
+}
+
+
+#priceData p,
+#priceData button.choose {
+    font-family: 'fontBold';
+    background-image: radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: normal;
+    font-size: var(--h4size);
     line-height: 86%;
     letter-spacing: -.04em;
 }
@@ -60,7 +75,7 @@
 
 .nameNovios h2 {
     font-family: 'textDesc';
-    font-size: min(var(--namesize), 110px);
+    font-size: min(var(--wsizeM), 110px);
     color: #fff9cb;
     font-style: normal;
     letter-spacing: 0;
@@ -81,4 +96,12 @@
             transparent 0%,
             rgba(0, 0, 0, 0.7) 5%,
             transparent 95%)
+}
+
+.logoCalina {
+    height: var(--wsizeL);
+}
+
+a {
+    font-family: 'fontSemiBold';
 }

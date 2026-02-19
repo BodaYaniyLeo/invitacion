@@ -5,92 +5,65 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { HeroSection } from './HeroSection';
 import { VideoSection } from './VideoSection';
 import { TextLayer } from './TextLayer';
+import { VisitCalina } from './VisitCalina';
+import { Price } from './Price';
 
-export const Invitation = () => {
+type arrayData = {
+    id: number;
+    name: string;
+    lastname: string;
+    payment_coverage: number;
+    state: string;
+    confirm: boolean;
+}
+
+type dataInv = {
+    data: arrayData[]
+}
+
+const makeFrames = (prefix: string, ext: string, count: number): string[] =>
+    Array.from({ length: count }, (_, i) =>
+        `${prefix}${String(i + 1).padStart(4, '0')}${ext}`
+    );
+
+const VIDEO_DURATION = 2;
+const FRAME_COUNT = 60;
+
+const video1Frames = makeFrames('/videos/frames/video1/firstVideoMobile_', '.webp', FRAME_COUNT);
+const video2Frames = makeFrames('/videos/frames/video2/secondVideoMobile_', '.webp', FRAME_COUNT);
+const video3Frames = makeFrames('/videos/frames/video3/thirdVideoMobile_', '.webp', FRAME_COUNT);
+const videoCalinaFrames = makeFrames('/videos/frames/calinaVideo/calinaVideo_', '.webp', FRAME_COUNT);
+
+export const Invitation = ({
+    data
+}: dataInv) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const video1Progress = useRef({ t: 0 });
-    const video2Progress = useRef({ t: 0 });
+    const v1Progress = useRef({ t: 0 });
+    const v2Progress = useRef({ t: 0 });
+    const v3Progress = useRef({ t: 0 });
+    const vCalinaProgress = useRef({ t: 0 });
+
+    const start1 = 40
+    const start2 = 56
+    const start3 = 82
+    const startCalina = 77
+    const startPrice = 86
+    const end1 = 54
+    const end2 = 78
+    const end3 = 98
+    const endCalina = 88
+    const endPrice = 100
+    const text1 = (start1 * 20) + 130
+    const text2 = (start2 * 20) + 350
+    const text3 = (start3 * 20) + 20
+    const videoCalina = (startCalina * 20)
+    const videoPrice = (startPrice * 20)
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        let targetScroll = window.scrollY;
-        let currentScroll = window.scrollY;
-        let rafId: number;
-        let touchStartY = 0;
-        let lastTouchY = 0;
-        let velocity = 0;
-        const speed = 0.08;
-        const touchMultiplier = 0.8;
-
-        const onWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            targetScroll += e.deltaY * 1.8;
-            targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
-        };
-
-        const onTouchStart = (e: TouchEvent) => {
-            touchStartY = e.touches[0].clientY;
-            lastTouchY = touchStartY;
-            velocity = 0;
-        };
-
-        const onTouchMove = (e: TouchEvent) => {
-            e.preventDefault();
-            const touchY = e.touches[0].clientY;
-            const delta = (lastTouchY - touchY) * touchMultiplier;
-
-            velocity = delta;
-            targetScroll += delta;
-            targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
-
-            lastTouchY = touchY;
-        };
-
-        const onTouchEnd = () => {
-            const maxVelocity = 15;
-            velocity = Math.sign(velocity) * Math.min(Math.abs(velocity), maxVelocity);
-
-            const applyInertia = () => {
-                if (Math.abs(velocity) < 0.5) return;
-
-                velocity *= 0.72;
-                targetScroll += velocity;
-                targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
-
-                requestAnimationFrame(applyInertia);
-            };
-            requestAnimationFrame(applyInertia);
-        };
-
-        const loop = () => {
-            currentScroll += (targetScroll - currentScroll) * speed;
-            window.scrollTo(0, currentScroll);
-            rafId = requestAnimationFrame(loop);
-        };
-
-        window.addEventListener('wheel', onWheel, { passive: false });
-        window.addEventListener('touchstart', onTouchStart, { passive: false });
-        window.addEventListener('touchmove', onTouchMove, { passive: false });
-        window.addEventListener('touchend', onTouchEnd);
-        rafId = requestAnimationFrame(loop);
-
-        let v1: HTMLVideoElement | null = null;
-        let v2: HTMLVideoElement | null = null;
-
-        setTimeout(() => {
-            v1 = containerRef.current?.querySelector<HTMLVideoElement>('#video1 video') ?? null;
-            v2 = containerRef.current?.querySelector<HTMLVideoElement>('#video2 video') ?? null;
-        }, 0);
-
-        const tickerFn = () => {
-            if (v1 && v1.readyState >= 3) v1.currentTime = video1Progress.current.t;
-            if (v2 && v2.readyState >= 3) v2.currentTime = video2Progress.current.t;
-        };
-
-        gsap.ticker.add(tickerFn);
-
         let ctx = gsap.context(() => {
+
             const masterTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
@@ -156,131 +129,154 @@ export const Invitation = () => {
                 }, '>')
                 .to('#textOrg', { autoAlpha: 0 }, '>')
 
-                .to('#heroSection', { opacity: 0, duration: 1 }, '-=1')
+                .to('#heroSection', { opacity: 0, duration: 0.3 }, '-=1')
+
+            const tlV1 = gsap.timeline({ paused: true });
+
+            tlV1
+                .to('#video1', { autoAlpha: 1, duration: 2, ease: 'none' }, "-=0.75")
+                .to(v1Progress.current, { t: VIDEO_DURATION, ease: 'none', duration: 9 }, "<")
+                .to('#video1', { autoAlpha: 0, duration: 1, ease: 'none' }, "-=0.5");
 
             ScrollTrigger.create({
                 trigger: containerRef.current,
-                start: '43% bottom',
-                end: '64% bottom',
-                invalidateOnRefresh: true,
-                onEnter: () => {
-                    gsap.killTweensOf('#video1');
-                    gsap.set('#video1', { zIndex: 11 });
-                    gsap.to('#video1', { autoAlpha: 1, duration: 0.3 });
-                },
-                onEnterBack: () => {
-                    gsap.killTweensOf('#video1');
-                    gsap.to('#video1', {
-                        autoAlpha: 1,
-                        duration: 0.3,
-                        onStart: () => { gsap.set('#video1', { zIndex: 11 }); }
-                    });
-                },
-                scrub: 0.1,
-                animation: gsap.timeline()
-                    .to(video1Progress.current, { t: 2, ease: 'none', duration: 2 }),
+                start: `${start1}% bottom`,
+                end: `${end1}% bottom`,
+                scrub: true,
+                animation: tlV1,
             });
+
+            // Video 2
+            const tlV2 = gsap.timeline({ paused: true });
+            tlV2
+                .to('#video2', { autoAlpha: 1, duration: 1, ease: 'none' }, 0.6)
+                .to(v2Progress.current, { t: VIDEO_DURATION, ease: 'none', duration: 9 }, "-=0.5")
+                .to('#video2', { autoAlpha: 0, duration: 1, ease: 'none' }, "-=1")
 
             ScrollTrigger.create({
                 trigger: containerRef.current,
-                start: '64% bottom',
-                end: '70% bottom',
-                invalidateOnRefresh: true,
-                onEnter: () => {
-                    gsap.killTweensOf('#video1');
-                    gsap.to('#video1', {
-                        autoAlpha: 0,
-                        duration: 1,
-                        onComplete: () => { gsap.set('#video1', { zIndex: 8 }); }
-                    });
-                },
-                onLeaveBack: () => {
-                    gsap.killTweensOf('#video1');
-                    gsap.to('#video1', {
-                        autoAlpha: 1,
-                        duration: 1,
-                        onStart: () => { gsap.set('#video1', { zIndex: 11 }); }
-                    });
-                },
+                start: `${start2}% bottom`,
+                end: `${end2}% bottom`,
+                scrub: true,
+                animation: tlV2,
             });
+
+            // Video Calina
+            const tlVCalina = gsap.timeline();
+            tlVCalina
+                .to('#text2', { opacity: 0, duration: 3 }, 5)
+                .to(vCalinaProgress.current, { t: 1, ease: 'none', duration: 4.5 })
 
             ScrollTrigger.create({
                 trigger: containerRef.current,
-                start: '70% bottom',
-                end: '86% bottom',
-                invalidateOnRefresh: true,
-                onEnter: () => {
-                    gsap.killTweensOf('#video2');
-                    gsap.to('#video2', {
-                        autoAlpha: 1,
-                        duration: 0.3,
-                        onStart: () => { gsap.set('#video2', { zIndex: 11 }); }
-                    });
-                },
-                onEnterBack: () => {
-                    gsap.killTweensOf('#video2');
-                    gsap.set('#video2', { zIndex: 11 });
-                    gsap.to('#video2', { autoAlpha: 1, duration: 0.3 });
-                },
-                onLeaveBack: () => {
-                    gsap.killTweensOf('#video2');
-                    gsap.to('#video2', {
-                        autoAlpha: 0,
-                        duration: 1,
-                        onComplete: () => { gsap.set('#video2', { zIndex: 8 }); }
-                    });
-                },
-                scrub: 0.1,
-                animation: gsap.timeline()
-                    .to(video2Progress.current, { t: 2, ease: 'none', duration: 2 }),
+                start: `${startCalina}% bottom`,
+                end: `${endCalina}% bottom`,
+                scrub: true,
+                animation: tlVCalina,
             });
+
+            const tlVFooter = gsap.timeline();
+            tlVFooter
+                .to('#priceData', { autoAlpha: 1, duration: 0.1 })
+                .to('#priceData .toScale', { scale: 0.8 })
+                .to('#priceData h3', {
+                    backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
+                }, '<')
+                .to('#confirmData', { autoAlpha: 1, duration: 0.1 })
+                .to('#priceData', { y: '-20%' }, "-=0.05")
+                .to('#priceData p', {
+                    backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
+                }, '<')
+
 
             ScrollTrigger.create({
                 trigger: containerRef.current,
-                start: '86% bottom',
-                end: '100% bottom',
-                invalidateOnRefresh: true,
-                onEnter: () => {
-                    gsap.killTweensOf('#video2');
-                    gsap.to('#video2', {
-                        autoAlpha: 0,
-                        duration: 1,
-                        onComplete: () => { gsap.set('#video2', { zIndex: 8 }); }
-                    });
-                },
-                onLeaveBack: () => {
-                    gsap.killTweensOf('#video2');
-                    gsap.to('#video2', {
-                        autoAlpha: 1,
-                        duration: 1,
-                        onStart: () => { gsap.set('#video2', { zIndex: 11 }); }
-                    });
-                },
+                start: `${startPrice}% bottom`,
+                end: `${endPrice}% bottom`,
+                scrub: true,
+                animation: tlVFooter,
             });
-
 
         }, containerRef);
 
         return () => {
             ctx.revert();
-            gsap.ticker.remove(tickerFn);
-            window.removeEventListener('wheel', onWheel);
-            window.removeEventListener('touchstart', onTouchStart);
-            window.removeEventListener('touchmove', onTouchMove);
-            window.removeEventListener('touchend', onTouchEnd);
-            cancelAnimationFrame(rafId);
         };
     }, []);
 
     return (
-        <div ref={containerRef} className="bg-black" style={{ height: '500vh' }}>
+        <div ref={containerRef} className="bg-black" style={{ height: '2000vh' }}>
             <HeroSection id="heroSection" />
 
-            <TextLayer id="text1" title="Leo" subtitle="Una historia que apenas comienza..." text="Texto largo con lo que sea" />
-            <TextLayer id="text2" title="Yani" subtitle="El momento que siempre soñamos." text="Texto largo con lo que sea" />
+            <VideoSection
+                id="video1"
+                zIndex={10}
+                progressRef={v1Progress}
+                frames={video1Frames}
+                duration={VIDEO_DURATION}
+                video={'full'}
+            />
 
-            <VideoSection id="video1" src="/videos/firstVideo_v6.mp4" zIndex={9} />
-            <VideoSection id="video2" src="/videos/secondVideo_v6.mp4" zIndex={9} />
+            <VideoSection
+                id="video2"
+                zIndex={11}
+                progressRef={v2Progress}
+                frames={video2Frames}
+                duration={VIDEO_DURATION}
+                video={'full'}
+            />
+
+            {/* <VideoSection
+                id="video3"
+                zIndex={12}
+                progressRef={v3Progress}
+                frames={video3Frames}
+                duration={VIDEO_DURATION}
+                video={'full'}
+            /> */}
+
+
+            {/* <TextLayer
+                id="text1"
+                title="Leo"
+                subtitle="Historia"
+                text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+                containerH={text1}
+            />
+
+            <TextLayer
+                id="text2"
+                title="Yani"
+                subtitle="Sueño"
+                text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+                containerH={text2}
+            /> */}
+
+            <VisitCalina
+                id="videoCalina"
+                zIndex={11}
+                progressRef={vCalinaProgress}
+                frames={videoCalinaFrames}
+                duration={VIDEO_DURATION}
+                video={'salon'}
+                containerH={videoCalina}
+            />
+
+            <Price
+                id="priceData"
+                idText="confirmData"
+                data={data}
+            />
+
+            {/* <TextLayer
+                id="text3"
+                title="Ubicación"
+                subtitle="Lugar"
+                text="..."
+                containerH={text3}
+            /> */}
+
+
         </div>
     );
 };
