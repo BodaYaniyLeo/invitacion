@@ -4,8 +4,7 @@ import Image from 'next/image';
 import logoCasamiento from '../assets/images/logoCasamiento.svg'
 import { useEffect, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
-import { createClient } from '@/app/lib/supabase';
-import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
+import { createServerSupabaseClient } from '@/app/lib/supabase/server';
 
 export type ArrayElements = {
     id: number;
@@ -39,7 +38,7 @@ export const Price = ({
 
     const discount = dataGuest[0]?.payment_coverage
 
-    const supabase = createBrowserSupabaseClient();
+    const supabase = createServerSupabaseClient();
 
     const sendChanges = async () => {
 
