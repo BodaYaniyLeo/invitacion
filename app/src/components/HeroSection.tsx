@@ -19,8 +19,8 @@ export const HeroSection = ({ id }: HeroProps) => {
 
     return (
         <div id={id} className="fixed top-0 left-0 w-full h-screen z-30 pointer-events-none">
-            <div className="relative w-full h-screen overflow-hidden bg-black">
-
+            <div className="relative w-full h-screen overflow-hidden">
+                <div className='bg-black'></div>
                 <div id="heroMask" className="absolute inset-0 z-30 pointer-events-none h-screen">
                     <picture id='heroComplete' className='flex h-screen w-screen scale-110 object-cover justify-center relative'>
                         <Image src={backHero} alt="" className='h-screen w-auto object-cover z-1' />

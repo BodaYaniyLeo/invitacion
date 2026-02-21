@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 
 interface VideoProps {
     id: string;
-    zIndex: number;
     progressRef: React.MutableRefObject<{ t: number }>;
     frames: string[];
     duration: number;
@@ -12,7 +11,6 @@ interface VideoProps {
 
 export const VideoSection = ({
     id,
-    zIndex,
     progressRef,
     frames,
     duration,
@@ -109,7 +107,6 @@ export const VideoSection = ({
             id={id}
             className={`${video === 'full' ? 'fixed w-full h-screen inset-0 pointer-events-none' : 'object-contain'} `}
             style={{
-                zIndex,
                 opacity: video === 'full' ? 0 : 1,
                 visibility: video === 'full' ? 'hidden' : 'visible'
             }}

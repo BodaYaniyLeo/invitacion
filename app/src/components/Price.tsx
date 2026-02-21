@@ -57,9 +57,9 @@ export const Price = ({
     return (
         <div
             id={id}
-            className="fixed w-full h-screen top-0 flex flex-col justify-center items-center opacity-0 invisible"
+            className="fixed inset-0 w-full h-screen flex flex-col justify-center items-center opacity-0 invisible pointer-events-none"
         >
-            <div id='lala' className="flex flex-col items-center justify-center text-white p-6 toScale">
+            <div className="flex flex-col items-center justify-center text-white p-6 toScale">
                 <Image src={logoCasamiento} alt="Logo" className="sizeImg max-w-100" />
                 {discount < 1 ?
                     <>

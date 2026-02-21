@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useFetch } from './src/hooks/useFetch';
-import { Invitation } from './src/components/Invitation';
+import { Invitation } from './src/components/Invitation2';
 
 export default function Home() {
 

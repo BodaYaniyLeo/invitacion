@@ -5,28 +5,24 @@ interface TextLayerProps {
     title: string;
     subtitle: string;
     text: string;
-    containerH: number;
 }
 
-export const TextLayer = ({ id, title, subtitle, text, containerH }: TextLayerProps) => {
+export const TextLayer = ({ id, title, subtitle, text }: TextLayerProps) => {
     return (
         <div
             id={id}
-            className="flex flex-col pointer-events-none absolute z-12"
-            style={{top: `${containerH}vh`}}
+            className="absolute w-full max-w-2xl px-8 flex flex-col items-center text-center"
+            style={{
+                top: '0%',
+                left: '50%',
+                transform: 'translate(-50%, 0%)',
+                willChange: 'transform'
+            }}
         >
-            <div className={`section-text h-screen w-screen`} >
-                <div className="max-w-2xl text-white nameNovios px-[10vw]">
-                    <h2>
-                        {title}
-                    </h2>
-                    <h4 className="text-xl font-light leading-relaxed opacity-80 shadow-black drop-shadow-lg">
-                        {subtitle}
-                    </h4>
-                    <p className="text-xl font-light leading-relaxed opacity-80 shadow-black drop-shadow-lg">
-                        {text}
-                    </p>
-                </div>
+            <div className="text-white drop-shadow-2xl">
+                <h4 className="text-blue-400 tracking-[0.4em] uppercase mb-4 text-sm md:text-lg">{subtitle}</h4>
+                <h2 className="text-6xl md:text-8xl font-black italic uppercase mb-6 leading-none">{title}</h2>
+                <p className="text-lg md:text-2xl text-gray-200 font-light max-w-lg mx-auto leading-relaxed">{text}</p>
             </div>
         </div>
     );

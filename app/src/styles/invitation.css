@@ -4,11 +4,11 @@
     mask-position: 50% 40%;
     mask-repeat: no-repeat;
     mask-size: clamp(3500vh, 1500%, 0vh);
-
+    transform-origin: 50% 40%;
 }
 
 .translateResize {
-    transform: translate(-50%, -4.5%);
+    transform: translate(-49.85%, -4.5%);
 }
 
 .sizeImg {
@@ -22,6 +22,7 @@
     mask-image: radial-gradient(circle at bottom center,
             rgba(0, 0, 0, 1) 0%,
             rgba(0, 0, 0, 0) 30%);
+    transform-origin: 50% 40%;
 }
 
 #dateLogo h3,
@@ -55,22 +56,19 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    width: 100%;
+    background-image: radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh);
+    line-height: 120%;
 }
 
 #textOrg h2 {
     font-size: calc(var(--h2size) * 1.8);
     font-family: 'fontBold';
-    width: 100%;
-    background-image: radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh);
-    line-height: 120%;
 }
 
 #textOrg p {
     font-family: 'fontSemiBold';
-    width: 100%;
-    background-image: radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh);
     font-size: var(--h2size);
-    line-height: 120%;
 }
 
 .nameNovios h2 {
@@ -104,4 +102,13 @@
 
 a {
     font-family: 'fontSemiBold';
+}
+
+.text-layer-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    width: 100%;
 }
