@@ -1,8 +1,4 @@
-'use client'
 import Image from 'next/image'
-import React, { useLayoutEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import backHero from '../assets/images/backHero.svg'
 import frontHero from '../assets/images/frontHero.svg'
 import textHero from '../assets/images/logoHero.svg'
@@ -15,12 +11,9 @@ interface HeroProps {
 
 export const HeroSection = ({ id }: HeroProps) => {
 
-
-
     return (
         <div id={id} className="fixed top-0 left-0 w-full h-dvh z-30 pointer-events-none">
             <div className="relative w-full h-dvh overflow-hidden">
-                <div className='bg-black'></div>
                 <div id="heroMask" className="absolute inset-0 z-30 pointer-events-none h-dvh">
                     <picture id='heroComplete' className='flex h-dvh w-dvw scale-110 object-cover justify-center relative'>
                         <Image src={backHero} alt="" className='h-dvh w-auto object-cover z-1' />

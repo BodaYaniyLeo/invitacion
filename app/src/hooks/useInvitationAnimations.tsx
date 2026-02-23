@@ -1,4 +1,3 @@
-'use client'
 import { useLayoutEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -33,7 +32,6 @@ export const useInvitationAnimations = ({
             ignoreMobileResize: true
         });
 
-        ScrollTrigger.normalizeScroll(true);
 
         let ctx = gsap.context(() => {
 
@@ -53,14 +51,13 @@ export const useInvitationAnimations = ({
             });
 
             presentationTl
-                .set('#heroComplete', { transformOrigin: "50% 40%" })
                 .to('#heroComplete', { scale: 1.1, duration: 2, ease: "none" })
                 .to('#imgTextHero', { opacity: 0, duration: 0.8 }, 1)
 
                 .to('#heroComplete', { opacity: 0, duration: 0.5 })
                 .to('#heroMask', {
-                    maskSize: "25vh",
-                    webkitMaskSize: "25vh",
+                    maskSize: "50%",
+                    webkitMaskSize: "50%",
                     duration: 2
                 }, 0.5)
                 .to('#heroMask', { scale: 0.8 })

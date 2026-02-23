@@ -1,12 +1,7 @@
-'use client'
-
 import Image from 'next/image';
 import logoCalina from '../assets/images/visitCalina.svg'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '@/app/src/styles/invitation.css'
 import { VideoSection } from './VideoSection';
-import { useLayoutEffect, useRef } from 'react';
 
 interface VideoProps {
     id: string;

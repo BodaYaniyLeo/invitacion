@@ -49,15 +49,16 @@ export const Price = ({
 
         if (error) {
             console.log(error.message)
+        } else {
+            alert("¡Gracias por confirmar!");
         }
 
-        console.log(data)
     }
 
     return (
         <div
             id={id}
-            className="w-full h-full flex flex-col justify-center items-center text-white px-6"
+            className="w-full h-full flex flex-col justify-center items-center text-white px-6 pointer-events-auto"
         >
             <div id='finalAnimation' className="flex flex-col items-center justify-center opacity-0 invisible">
                 <Image src={logoCasamiento} alt="Logo" className="max-w-[50dvw] mb-4" />
@@ -86,7 +87,7 @@ export const Price = ({
                 >
                     {dataGuest?.map(g => (
                         <div key={g.id} className="mb-6 last:mb-0 px-2">
-                            <p className="mb-2 text-sm">{g.name} {g.lastname}</p>
+                            <h4 className="mb-2 text-sm">{g.name} {g.lastname}</h4>
                             <AnswerComponent
                                 id={g.id}
                                 setDataGuest={setDataGuest}
