@@ -57,43 +57,60 @@ export const Price = ({
     return (
         <div
             id={id}
-            className="fixed inset-0 w-full h-screen flex flex-col justify-center items-center opacity-0 invisible pointer-events-none"
+            className="w-full h-full flex flex-col justify-center items-center text-white px-6"
         >
-            <div className="flex flex-col items-center justify-center text-white p-6 toScale">
-                <Image src={logoCasamiento} alt="Logo" className="sizeImg max-w-100" />
-                {discount < 1 ?
-                    <>
-                        <h3 className='uppercase max-w-100 text-center font-bold w-full text-base/8 mt-10'>
-                            Pre compra<br /> hasta el 9 de noviembre<br />de 2026
+            <div id='finalAnimation' className="flex flex-col items-center justify-center opacity-0 invisible">
+                <Image src={logoCasamiento} alt="Logo" className="max-w-[50dvw] mb-4" />
+                {discount < 1 ? (
+                    <div className='flex flex-col content-between'>
+                        <h3 className='uppercase text-center font-bold text-base/7'>
+                            Pre compra hasta <br /> el 9 de noviembre de 2026
                         </h3>
-                    </>
-                    : <>
-                        <h3 className='uppercase max-w-100 text-center font-bold w-full text-base/8 mt-10'>
-                            Te esperamos!
-                        </h3>
-                    </>
-                }
-            </div>
-            <div id={idText} className=' opacity-0 invisible'>
-                <p>Confirmar asistencia</p>
-                {dataGuest?.map(g =>
-                    <div key={g.id}>
-                        <p>{g.name} {g.lastname}</p>
-                        <AnswerComponent
-                            id={g.id}
-                            setDataGuest={setDataGuest}
-                            confirm={g.confirm}
-                        />
                     </div>
-
+                ) : (
+                    <h3 className='uppercase text-center font-bold text-base/7'>
+                        Confirmar antes del<br />9 de noviembre de 2026
+                    </h3>
                 )}
-                {discount < 1 &&
-                    <p>Precio sugerido al publico ${priceTarj - priceTarj * dataGuest[0].payment_coverage}</p>
-                }
 
-                <button onClick={() => { sendChanges() }}>Enviar respuesta</button>
             </div>
 
+            <div id={idText} className="flex flex-col w-full max-w-md max-h-[50dvh] bg-white/5 p-4 rounded-xl backdrop-blur-sm  opacity-0 invisible">
+                <p className="flex-none pb-4 font-bold text-center uppercase tracking-wider text-sm">
+                    Confirmar asistencia
+                </p>
+
+                <div
+                    className="flex-1 overflow-y-auto min-h-0 py-2 border-y border-white/10 custom-scrollbar"
+                    data-lenis-prevent
+                >
+                    {dataGuest?.map(g => (
+                        <div key={g.id} className="mb-6 last:mb-0 px-2">
+                            <p className="mb-2 text-sm">{g.name} {g.lastname}</p>
+                            <AnswerComponent
+                                id={g.id}
+                                setDataGuest={setDataGuest}
+                                confirm={g.confirm}
+                            />
+                        </div>
+                    ))}
+                </div>
+
+                <div className="flex-none pt-4">
+                    {discount < 1 &&
+                        <p className="text-xs text-center mb-4 opacity-70">
+                            Precio sugerido al público: ${priceTarj - priceTarj * (dataGuest[0]?.payment_coverage || 0)}
+                        </p>
+                    }
+
+                    <button
+                        className="w-full py-3 bg-[#960696] text-black font-bold rounded-lg uppercase text-xs tracking-widest hover:bg-gray-200 transition-colors"
+                        onClick={() => sendChanges()}
+                    >
+                        Enviar respuesta
+                    </button>
+                </div>
+            </div>
         </div>
-    )
+    );
 };

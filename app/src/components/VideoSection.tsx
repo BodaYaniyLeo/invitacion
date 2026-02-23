@@ -105,7 +105,7 @@ export const VideoSection = ({
     return (
         <div
             id={id}
-            className={`${video === 'full' ? 'fixed w-full h-screen inset-0 pointer-events-none' : 'object-contain'} `}
+            className={`${video === 'full' ? 'w-dvw h-dvh inset-0 pointer-events-none' : 'object-contain'} `}
             style={{
                 opacity: video === 'full' ? 0 : 1,
                 visibility: video === 'full' ? 'hidden' : 'visible'
@@ -116,7 +116,12 @@ export const VideoSection = ({
                 style={{
                     width: '100%',
                     height: '100%',
-                    display: isReady ? 'block' : 'none'
+                    objectFit: 'cover',
+                    display: isReady ? 'block' : 'none',
+                    WebkitMaskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
+                    maskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
+                    WebkitMaskRepeat: "no-repeat",
+                    maskRepeat: "no-repeat"
                 }}
             />
         </div>

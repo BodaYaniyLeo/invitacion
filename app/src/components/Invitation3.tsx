@@ -1,8 +1,7 @@
 'use client'
-import { useLayoutEffect, useRef, useEffect } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Lenis from 'lenis'
 import { HeroSection } from './HeroSection';
 import { VideoSection } from './VideoSection';
 import { TextLayer } from './TextLayer';
@@ -40,57 +39,31 @@ export const Invitation = ({
 }: dataInv) => {
     const mainRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const presentation = useRef<HTMLDivElement>(null);
-    const leoSection = useRef<HTMLDivElement>(null);
-    const yaniSection = useRef<HTMLDivElement>(null);
+    const footerRef = useRef<HTMLDivElement>(null);
 
     const v1Progress = useRef({ t: 0 });
     const v2Progress = useRef({ t: 0 });
     const vCalinaProgress = useRef({ t: 0 });
-
-    useEffect(() => {
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true,
-        });
-
-        // Sincronización estricta con GSAP Ticker
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => lenis.raf(time * 1000));
-        gsap.ticker.lagSmoothing(0);
-
-        return () => {
-            lenis.destroy();
-            gsap.ticker.remove(raf);
-        };
-    }, []);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
         let ctx = gsap.context(() => {
 
-            const presentationTl = gsap.timeline({
+            const masterTl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: presentation.current,
+                    trigger: containerRef.current,
                     start: 'top top',
-                    end: '+=2000',
+                    end: '+=2500',
                     scrub: true,
                     pin: true,
                 }
             });
 
-            // presentationTl.set(['#video1', '#video2'], { autoAlpha: 0 });
-            presentationTl.set('#heroSection', { backdropFilter: "blur(30px)" });
+            masterTl.set(['#video1', '#video2'], { autoAlpha: 0 });
+            masterTl.set('#heroSection', { backdropFilter: "blur(30px)" });
 
-            presentationTl
+            masterTl
                 .set('#heroComplete', { transformOrigin: "50% 40%" })
                 .to('#heroComplete', { scale: 1.1, duration: 2, ease: "none" })
                 .to('#imgTextHero', { opacity: 0, duration: 0.8 }, 1)
@@ -140,6 +113,7 @@ export const Invitation = ({
                     })
                 .to('#textOrg', { scale: 0.85, duration: 2 }, '<')
                 .addLabel("transicionVideo")
+
                 .to('#textOrg h2, #textOrg p', {
                     backgroundImage: 'radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh)',
                     duration: 2
@@ -150,34 +124,37 @@ export const Invitation = ({
                 }, 'transicionVideo-=1')
                 .to('#heroSection', { backdropFilter: "blur(0px)", duration: 0.15, ease: "power1.inOut" }, 'transicionVideo-=0.5')
 
+                .addLabel("escenaVideo1")
+                .to('#video1', { autoAlpha: 1, duration: 0.5 }, "transicionVideo-=1")
+                .to(v1Progress.current, { t: VIDEO_DURATION, duration: 10, ease: "none" }, "transicionVideo-=3")
 
-            const leoTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: leoSection.current,
-                    start: 'top top',
-                    end: '+=2000',
-                    scrub: true,
-                    pin: true,
-                }
-            });
-            leoTl
-                .to('#video1', { autoAlpha: 1, duration: 0.5 })
-                .to(v1Progress.current, { t: VIDEO_DURATION, duration: 10, ease: "none" }, 0)
-                .fromTo('#text1', { y: '100vh' }, { y: '-100vh', opacity: 1, duration: 4 }, 0.5);
+                .fromTo('#text1',
+                    {
+                        y: '100vh',
+                    },
+                    {
+                        y: '-100vh',
+                        opacity: 1,
+                        duration: 4,
+                        ease: "none"
+                    }, "escenaVideo1")
+                .addLabel("escenaVideo2")
+                .to('#video1', { autoAlpha: 0, duration: 0.5 }, "escenaVideo1+=2")
 
-            const yaniTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: yaniSection.current,
-                    start: 'top top',
-                    end: '+=3000',
-                    scrub: true,
-                    pin: true,
-                }
-            });
-            yaniTl
-                .to('#video2', { autoAlpha: 1, duration: 0.5 })
-                .to(v2Progress.current, { t: VIDEO_DURATION, duration: 10, ease: "none" }, 0)
-                .fromTo('#text2', { y: '100vh' }, { y: '-100vh', opacity: 1, duration: 4 }, 0.5);
+                .to('#video2', { autoAlpha: 1, duration: 0.5 }, "-=4")
+                .to(v2Progress.current, { t: VIDEO_DURATION, duration: 8, ease: "none" }, "<")
+
+                .fromTo('#text2',
+                    {
+                        y: '100vh',
+                    },
+                    {
+                        y: '-100vh',
+                        opacity: 1,
+                        duration: 4,
+                        ease: "none"
+                    }, "escenaVideo2-=1.2")
+                .to('#video2', { autoAlpha: 0, duration: 0.5 }, "escenaVideo2+=0.8")
 
             gsap.to(vCalinaProgress.current, {
                 t: VIDEO_DURATION,
@@ -222,21 +199,17 @@ export const Invitation = ({
 
     return (
         <div ref={mainRef}>
-            <div ref={presentation} className="w-full h-screen ">
+            <div ref={containerRef} className="w-dvw h-screen overflow-hidden">
                 <HeroSection id="heroSection" />
-            </div>
-            <div ref={leoSection} className="w-full h-screen">
                 <VideoSection id="video1" progressRef={v1Progress} frames={video1Frames} duration={VIDEO_DURATION} video={'full'} />
+                <VideoSection id="video2" progressRef={v2Progress} frames={video2Frames} duration={VIDEO_DURATION} video={'full'} />
+
                 <div className="absolute inset-0 z-[100] flex items-center justify-center pointer-events-none">
                     <TextLayer id="text1" title="Leo" subtitle="Historia" text="..." />
-                </div>
-            </div>
-            <div ref={yaniSection} className="w-full h-screen">
-                <VideoSection id="video2" progressRef={v2Progress} frames={video2Frames} duration={VIDEO_DURATION} video={'full'} />
-                <div className="absolute top-50 h-screen z-[100] flex items-center justify-center pointer-events-none">
                     <TextLayer id="text2" title="Yani" subtitle="Sueño" text="..." />
                 </div>
             </div>
+
             <div id="triggerCalina" className="relative bg-black h-screen overflow-hidden">
                 <VisitCalina
                     id="videoCalina"

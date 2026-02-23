@@ -1,12 +1,17 @@
 'use client'
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Lenis from 'lenis'
 import { HeroSection } from './HeroSection';
 import { VideoSection } from './VideoSection';
 import { TextLayer } from './TextLayer';
 import { VisitCalina } from './VisitCalina';
 import { Price } from './Price';
+import { Intro } from './Intro'
+import logoCalina from '../assets/images/visitCalina.svg'
+import Image from 'next/image'
+import { FinalLogo } from './FinalLogo'
 
 type arrayData = {
     id: number;
@@ -38,32 +43,61 @@ export const Invitation = ({
     data
 }: dataInv) => {
     const mainRef = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const footerRef = useRef<HTMLDivElement>(null);
+    const presentation = useRef<HTMLDivElement>(null);
+    const leoSection = useRef<HTMLDivElement>(null);
+    const yaniSection = useRef<HTMLDivElement>(null);
 
     const v1Progress = useRef({ t: 0 });
     const v2Progress = useRef({ t: 0 });
     const vCalinaProgress = useRef({ t: 0 });
+
+    useEffect(() => {
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+        });
+
+        function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        return () => {
+            lenis.destroy();
+            gsap.ticker.remove(raf);
+        };
+    }, []);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
         let ctx = gsap.context(() => {
 
-            const masterTl = gsap.timeline({
+            const presentationTl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: containerRef.current,
+                    trigger: presentation.current,
                     start: 'top top',
-                    end: '+=2500',
+                    end: 'bottom top',
                     scrub: true,
                     pin: true,
+                    pinSpacing: false,
                 }
             });
 
-            masterTl.set(['#video1', '#video2'], { autoAlpha: 0 });
-            masterTl.set('#heroSection', { backdropFilter: "blur(30px)" });
+            presentationTl.set(['#video1', '#video2'], {
+                autoAlpha: 0,
+            });
+            presentationTl.set(['#text', '#text'], {
+                y: '100vh'
+            })
 
-            masterTl
+            presentationTl
                 .set('#heroComplete', { transformOrigin: "50% 40%" })
                 .to('#heroComplete', { scale: 1.1, duration: 2, ease: "none" })
                 .to('#imgTextHero', { opacity: 0, duration: 0.8 }, 1)
@@ -100,7 +134,22 @@ export const Invitation = ({
                     autoAlpha: 0
                 }, "-=0.3")
 
-                .fromTo('#textOrg',
+
+            const leoTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#leoContainer",
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true,
+                    pin: leoSection.current,
+                    pinSpacing: false,
+                }
+            });
+
+            leoTl.set('#containerTextOrg', { backdropFilter: "blur(15px)", webkitBackdropFilter: "blur(15px)" });
+
+            leoTl
+                .fromTo('#containerTextOrg',
                     {
                         webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%)',
                         maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%)',
@@ -112,84 +161,89 @@ export const Invitation = ({
                         autoAlpha: 1,
                     })
                 .to('#textOrg', { scale: 0.85, duration: 2 }, '<')
-                .addLabel("transicionVideo")
-
                 .to('#textOrg h2, #textOrg p', {
                     backgroundImage: 'radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh)',
                     duration: 2
                 }, '<')
+                .addLabel("transicionVideo")
                 .to('#textOrg h2, #textOrg p', {
                     autoAlpha: 0,
-                    duration: 0.5
-                }, 'transicionVideo-=1')
-                .to('#heroSection', { backdropFilter: "blur(0px)", duration: 0.15, ease: "power1.inOut" }, 'transicionVideo-=0.5')
+                    duration: 0.6
+                })
+                .to('#containerTextOrg', {
+                    webkitBackdropFilter: "blur(0px)",
+                    backdropFilter: "blur(0px)",
+                    duration: 0.6,
+                    ease: "power1.inOut",
+                }, "<")
 
-                .addLabel("escenaVideo1")
-                .to('#video1', { autoAlpha: 1, duration: 0.5 }, "transicionVideo-=1")
-                .to(v1Progress.current, { t: VIDEO_DURATION, duration: 10, ease: "none" }, "transicionVideo-=3")
+                .to('#video1', { autoAlpha: 1, duration: 0.5 }, 'transicionVideo-=0.2')
+                .addLabel("text1Appear")
+                .to(v1Progress.current, {
+                    t: VIDEO_DURATION, duration: 4, ease: "none",
+                }, 'transicionVideo-=0.75')
+                .to("#video1 canvas", {
+                    WebkitMaskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
+                    maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
+                    duration: 4
+                }, "text1Appear+=0.5")
+                .to('#video1', { autoAlpha: 0, duration: 1 }, "text1Appear+=1.7")
 
-                .fromTo('#text1',
-                    {
-                        y: '100vh',
-                    },
-                    {
-                        y: '-100vh',
-                        opacity: 1,
-                        duration: 4,
-                        ease: "none"
-                    }, "escenaVideo1")
-                .addLabel("escenaVideo2")
-                .to('#video1', { autoAlpha: 0, duration: 0.5 }, "escenaVideo1+=2")
-
-                .to('#video2', { autoAlpha: 1, duration: 0.5 }, "-=4")
-                .to(v2Progress.current, { t: VIDEO_DURATION, duration: 8, ease: "none" }, "<")
-
-                .fromTo('#text2',
-                    {
-                        y: '100vh',
-                    },
-                    {
-                        y: '-100vh',
-                        opacity: 1,
-                        duration: 4,
-                        ease: "none"
-                    }, "escenaVideo2-=1.2")
-                .to('#video2', { autoAlpha: 0, duration: 0.5 }, "escenaVideo2+=0.8")
-
-            gsap.to(vCalinaProgress.current, {
-                t: VIDEO_DURATION,
-                ease: "none",
-                duration: 4,
+            const yaniTl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: "#triggerCalina",
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
+                    trigger: "#yaniContainer",
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true,
+                    pin: yaniSection.current,
+                    pinSpacing: false,
                 }
             });
 
+            yaniTl
+                .to('#video2', { autoAlpha: 1, duration: 0.5 })
+                .addLabel("text2Appear")
+                .to(v2Progress.current, {
+                    t: VIDEO_DURATION, duration: 4, ease: "none",
+                }, '-=0.75')
+                .to("#video2 canvas", {
+                    WebkitMaskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
+                    maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
+                    duration: 4
+                }, "text2Appear+=0.2")
+                .to('#video2', { autoAlpha: 0, duration: 1 }, "text2Appear+=2.2")
+                .to('#text2', { autoAlpha: 0, duration: 1 }, "text2Appear+=3")
 
-            const finalTl = gsap.timeline({
+
+            const catalinaTl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: "#footerPrice",
+                    trigger: "#triggerCalina",
                     start: "top top",
-                    end: "bottom bottom",
-                    pin: true,
+                    end: "bottom top",
                     scrub: 1,
                 }
             });
 
-            finalTl
+            catalinaTl
                 .to(vCalinaProgress.current, { t: VIDEO_DURATION, duration: 2 }, 0)
 
-                .to('#priceData', {
-                    autoAlpha: 1,
-                    pointerEvents: 'auto',
-                    duration: 0.5
-                })
+            const logoFooterTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#footerPrice",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true,
+                    pin: true,
+                }
+            });
 
-                .to('#priceData .toScale', { scale: 0.8, duration: 1 })
-                .to('#confirmData', { autoAlpha: 1, visibility: 'visible', y: 0, duration: 0.5 });
+            logoFooterTl
+                .set(["#finalAnimation", "#confirmData"], { y: "50%" })
+                .to("#finalAnimation", { autoAlpha: 1 })
+                .to("#finalAnimation", { scale: 0.8 })
+                .to("#confirmData", { autoAlpha: 1 })
+                .to(["#finalAnimation", "#confirmData"], { y: 0, duration: 1 })
+
 
         }, mainRef);
 
@@ -200,18 +254,46 @@ export const Invitation = ({
 
     return (
         <div ref={mainRef}>
-            <div ref={containerRef} className="w-full h-screen overflow-hidden">
+            <div ref={presentation} className="w-full h-[300dvh]">
                 <HeroSection id="heroSection" />
-                <VideoSection id="video1" progressRef={v1Progress} frames={video1Frames} duration={VIDEO_DURATION} video={'full'} />
-                <VideoSection id="video2" progressRef={v2Progress} frames={video2Frames} duration={VIDEO_DURATION} video={'full'} />
+            </div>
 
-                <div className="absolute inset-0 z-[100] flex items-center justify-center pointer-events-none">
-                    <TextLayer id="text1" title="Leo" subtitle="Historia" text="..." />
-                    <TextLayer id="text2" title="Yani" subtitle="Sueño" text="..." />
+            <div className="w-full h-[200dvh] relative" id="leoContainer">
+
+                <div ref={leoSection} className="w-full h-dvh">
+                    <Intro />
+                    <VideoSection
+                        id="video1"
+                        progressRef={v1Progress}
+                        frames={video1Frames}
+                        duration={VIDEO_DURATION}
+                        video={'full'}
+                    />
+                </div>
+
+                <div className="absolute bottom-0 left-0 w-full h-dvh z-20 flex items-center justify-center pointer-events-none">
+                    <TextLayer id="text1" title="Leo" subtitle="Historia" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
                 </div>
             </div>
 
-            <div id="triggerCalina" className="relative bg-black h-screen">
+            <div className="w-full h-[200dvh] relative" id="yaniContainer">
+
+                <div ref={yaniSection} className="w-full h-dvh">
+                    <VideoSection
+                        id="video2"
+                        progressRef={v2Progress}
+                        frames={video2Frames}
+                        duration={VIDEO_DURATION}
+                        video={'full'}
+                    />
+                </div>
+
+                <div className="absolute bottom-0 left-0 w-full h-dvh z-20 flex items-center justify-center pointer-events-none">
+                    <TextLayer id="text2" title="Yani" subtitle="Sueño" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
+                </div>
+            </div>
+
+            <div id="triggerCalina" className="w-full h-[100lvh] content-center relative">
                 <VisitCalina
                     id="videoCalina"
                     progressRef={vCalinaProgress}
@@ -219,9 +301,9 @@ export const Invitation = ({
                     duration={VIDEO_DURATION}
                     video={'salon'}
                 />
-
             </div>
-            <div id="footerPrice" className="relative bg-black h-[120vh] overflow-hidden">
+
+            <div id="footerPrice" className="relative h-[100dvh]">
                 <Price
                     id="priceData"
                     idText="confirmData"

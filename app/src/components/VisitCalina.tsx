@@ -31,14 +31,14 @@ export const VisitCalina = ({
             id={id}
             className="flex flex-col justify-center items-center h-screen"
         >
-                <div className='px-[10vw]'>
-                    <Image
-                        src={logoCalina}
-                        alt=""
-                        className='logoCalina'
-                    />
-                </div>
-                <p className='font-bold text-[20px] text-center'>Ven a vivir este momento <br />especial.</p>
+            <div className='px-[10vw]'>
+                <Image
+                    src={logoCalina}
+                    alt=""
+                    className='logoCalina'
+                />
+            </div>
+            <p className='font-bold text-[20px] text-center'>Ven a vivir este momento <br />especial.</p>
             <div className="pointer-events-auto flex flex-col items-center">
                 <div className='bg-white w-[90vw] ratio-4/3 mt-[5vh] p-2'>
                     <VideoSection
