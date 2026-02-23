@@ -12,7 +12,7 @@ export default function Home() {
   const { resBase } = useFetch()
 
   return (
-    <div className="h-screen content-center justify-items-center">
+    <div className="h-dvh content-center justify-items-center">
       
     </div >
 

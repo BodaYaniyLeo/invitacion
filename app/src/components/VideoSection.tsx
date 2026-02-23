@@ -26,32 +26,25 @@ export const VideoSection = ({
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // Ajustar tamaño
         const setCanvasDimensions = () => {
             if (video === 'full') {
-                // Comportamiento de fondo de pantalla completa
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             } else {
-                // Comportamiento de video contenido (4:3)
-                // Tomamos el ancho del contenedor padre o de la ventana con márgenes
                 const containerWidth = canvas.parentElement?.offsetWidth || window.innerWidth;
                 canvas.width = containerWidth;
                 canvas.height = containerWidth * 0.75;
             }
         };
 
-        // Llamamos a la función al inicio
         setCanvasDimensions();
 
-        // Carga de imágenes
         const images: HTMLImageElement[] = frames.map((src) => {
             const img = new Image();
             img.src = src;
             return img;
         });
 
-        // Asegurar que la primera imagen esté lista
         images[0].onload = () => setIsReady(true);
 
         let rafId: number;

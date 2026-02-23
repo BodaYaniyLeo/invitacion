@@ -112,3 +112,12 @@ a {
     z-index: 50;
     width: 100%;
 }
+
+#text1,
+#text2,
+#containerTextOrg,
+#finalAnimation {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
