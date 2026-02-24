@@ -2,6 +2,7 @@
 
 :root {
   --background: #ffffff;
+  --backgroundButtons: #ffffff1a;
   --foreground: #171717;
   --ycolor: #FF01AA;
   --lcolor: #000DFF;
@@ -11,6 +12,7 @@
   --h4size: min(3.8lvh, 4.2vw);
   --wsizeM: min(19vw);
   --wsizeL: min(22vw);
+  --fontBold: "fontBold"
 }
 
 @theme inline {
@@ -18,6 +20,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --colorbuttons: var(--backgroundButtons)
 }
 
 @media (prefers-color-scheme: dark) {

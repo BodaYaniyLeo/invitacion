@@ -190,12 +190,15 @@ export const useInvitationAnimations = ({
             });
 
             logoFooterTl
-                .set(["#finalAnimation", "#confirmData"], { y: "50%" })
+                .set(["#finalAnimation", "#confirmData"], { y: "40%" })
                 .to("#finalAnimation", { autoAlpha: 1 })
-                .to("#finalAnimation", { scale: 0.8 })
+                .to("#finalAnimation", { scale: 0.8, })
+                .to("#finalAnimation h3", {
+                    backgroundImage: 'radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh)',
+                    duration: 2
+                }, "<")
                 .to("#confirmData", { autoAlpha: 1 })
                 .to(["#finalAnimation", "#confirmData"], { y: 0, duration: 1 })
-
 
         }, mainRef);
 

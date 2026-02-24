@@ -29,8 +29,8 @@ export const AnswerComponent = ({
 
     return (
         <div className='flex justify-around my-4'>
-            <button onClick={() => myAnwer(true)} className={`${confirm && 'choose'}`}>Voy</button>
-            <button onClick={() => myAnwer(false)} className={`${!confirm && 'choose'}`}>No voy</button>
+            <button onClick={() => myAnwer(true)} className={`buttonConfirm ${confirm ? 'choose' : ''}`}>Voy</button>
+            <button onClick={() => myAnwer(false)} className={`buttonConfirm ${!confirm ? 'choose' : ''}`}>No voy</button>
         </div>
     )
 }

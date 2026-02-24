@@ -98,7 +98,7 @@ export const VideoSection = ({
     return (
         <div
             id={id}
-            className={`${video === 'full' ? 'w-dvw h-dvh inset-0 pointer-events-none' : 'object-contain'} `}
+            className={`${video === 'full' ? 'h-dvh inset-0 pointer-events-none' : 'object-contain'} `}
             style={{
                 opacity: video === 'full' ? 0 : 1,
                 visibility: video === 'full' ? 'hidden' : 'visible'

@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
@@ -10,6 +10,7 @@ import { VisitCalina } from './VisitCalina';
 import { Price } from './Price';
 import { Intro } from './Intro'
 import { useInvitationAnimations } from '../hooks/useInvitationAnimations'
+import { Countdown } from './Countdown'
 
 type arrayData = {
     id: number;
@@ -34,8 +35,9 @@ const FRAME_COUNT = 120;
 
 const video1Frames = makeFrames('/videos/frames/video1/firstVideoMobile_', '.webp', FRAME_COUNT);
 const video2Frames = makeFrames('/videos/frames/video2/secondVideoMobile_', '.webp', 180);
-const video3Frames = makeFrames('/videos/frames/video3/thirdVideoMobile_', '.webp', FRAME_COUNT);
 const videoCalinaFrames = makeFrames('/videos/frames/calinaVideo/calinaVideo_', '.webp', FRAME_COUNT);
+
+const cacheEstatica: HTMLImageElement[] = [];
 
 export const Invitation = ({
     data
@@ -45,30 +47,74 @@ export const Invitation = ({
     const leoSection = useRef<HTMLDivElement>(null);
     const yaniSection = useRef<HTMLDivElement>(null);
 
+    const [first, setfirst] = useState<string>()
+
     const v1Progress = useRef({ t: 0 });
     const v2Progress = useRef({ t: 0 });
     const vCalinaProgress = useRef({ t: 0 });
 
     useEffect(() => {
+        const allFrames = [...video1Frames, ...video2Frames];
+
+        allFrames.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+            cacheEstatica.push(img);
+        });
+    }, []);
+
+    useEffect(() => {
+        const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+
+        if (connection) {
+            console.log("Tipo de conexión:", connection.effectiveType);
+            console.log("Velocidad estimada:", connection.downlink + " Mb/s");
+            setfirst(connection.effectiveType)
+
+            if (connection.effectiveType === '3g' || connection.effectiveType.includes('2g')) {
+                console.warn("Conexión lenta detectada. Cargando frames de baja resolución.");
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        const priorityFrames = [video1Frames[0], video2Frames[0], videoCalinaFrames[0]];
+
+        const loadSequentially = async (array: string[]) => {
+            for (const src of array) {
+                await new Promise((resolve) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                });
+            }
+        };
+
+        loadSequentially(priorityFrames).then(() => {
+            loadSequentially(video1Frames);
+            setTimeout(() => {
+                loadSequentially([...video2Frames, ...videoCalinaFrames]);
+            }, 2000);
+        });
+    }, []);
+
+    useEffect(() => {
         const lenis = new Lenis({
             duration: 1.5,
-            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
 
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
+        const updateLenis = (time: number) => {
+            lenis.raf(time * 1000);
+        };
 
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.add(updateLenis);
         gsap.ticker.lagSmoothing(0);
 
         return () => {
             lenis.destroy();
-            gsap.ticker.remove(raf);
+            gsap.ticker.remove(updateLenis);
         };
     }, []);
 
@@ -85,7 +131,8 @@ export const Invitation = ({
 
     return (
         <div ref={mainRef} className='bg-black'>
-            <div ref={presentation} className="w-full h-[300dvh]">
+            <p>{first}</p>
+            {/* <div ref={presentation} className="w-full h-[300dvh]">
                 <HeroSection id="heroSection" />
             </div>
 
@@ -134,13 +181,15 @@ export const Invitation = ({
                 />
             </div>
 
+            <Countdown />
+
             <div id="footerPrice" className="relative h-[100dvh]">
                 <Price
                     id="priceData"
                     idText="confirmData"
                     data={data}
                 />
-            </div>
+            </div> */}
         </div>
     );
 };

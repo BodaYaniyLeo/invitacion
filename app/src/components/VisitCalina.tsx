@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logoCalina from '../assets/images/visitCalina.svg'
+import logoCalina from '../assets/images/salon/visitCalina.svg'
 import '@/app/src/styles/invitation.css'
 import { VideoSection } from './VideoSection';
 

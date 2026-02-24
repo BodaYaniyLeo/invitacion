@@ -1,7 +1,7 @@
 'use client'
 import '@/app/src/styles/invitation.css'
 import Image from 'next/image';
-import logoCasamiento from '../assets/images/logoCasamiento.svg'
+import logoCasamiento from '../assets/images/hero/logoCasamiento.svg'
 import { useEffect, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
 import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
@@ -60,7 +60,7 @@ export const Price = ({
             id={id}
             className="w-full h-full flex flex-col justify-center items-center text-white px-6 pointer-events-auto"
         >
-            <div id='finalAnimation' className="flex flex-col items-center justify-center opacity-0 invisible">
+            <div id='finalAnimation' className="flex flex-col items-center justify-center opacity-0 invisible mb-4">
                 <Image src={logoCasamiento} alt="Logo" className="max-w-[50dvw] mb-4" />
                 {discount < 1 ? (
                     <div className='flex flex-col content-between'>
@@ -70,7 +70,7 @@ export const Price = ({
                     </div>
                 ) : (
                     <h3 className='uppercase text-center font-bold text-base/7'>
-                        Confirmar antes del<br />9 de noviembre de 2026
+                        Confirmar antes del 9 de noviembre de 2026
                     </h3>
                 )}
 
