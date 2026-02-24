@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
@@ -47,8 +47,6 @@ export const Invitation = ({
     const leoSection = useRef<HTMLDivElement>(null);
     const yaniSection = useRef<HTMLDivElement>(null);
 
-    const [first, setfirst] = useState<string>()
-
     const v1Progress = useRef({ t: 0 });
     const v2Progress = useRef({ t: 0 });
     const vCalinaProgress = useRef({ t: 0 });
@@ -61,20 +59,6 @@ export const Invitation = ({
             img.src = src;
             cacheEstatica.push(img);
         });
-    }, []);
-
-    useEffect(() => {
-        const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
-
-        if (connection) {
-            console.log("Tipo de conexión:", connection.effectiveType);
-            console.log("Velocidad estimada:", connection.downlink + " Mb/s");
-            setfirst(connection.effectiveType)
-
-            if (connection.effectiveType === '3g' || connection.effectiveType.includes('2g')) {
-                console.warn("Conexión lenta detectada. Cargando frames de baja resolución.");
-            }
-        }
     }, []);
 
     useEffect(() => {
@@ -131,8 +115,7 @@ export const Invitation = ({
 
     return (
         <div ref={mainRef} className='bg-black'>
-            <p>{first}</p>
-            {/* <div ref={presentation} className="w-full h-[300dvh]">
+            <div ref={presentation} className="w-full h-[300dvh]">
                 <HeroSection id="heroSection" />
             </div>
 
@@ -189,7 +172,7 @@ export const Invitation = ({
                     idText="confirmData"
                     data={data}
                 />
-            </div> */}
+            </div>
         </div>
     );
 };
