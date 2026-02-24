@@ -22,9 +22,9 @@ export const HeroSection = ({ id }: HeroProps) => {
                     </picture>
                 </div>
 
-                <div id='dateLogo' className="absolute h-dvh inset-0 z-20 opacity-0 flex flex-col items-center justify-center text-white p-6">
-                    <Image src={logoCasamiento} alt="Logo" className="absolute z-2 top-1/3 left-1/2 translateResize sizeImg max-w-100" />
-                    <h3 className='uppercase absolute z-2 top-1/2 left-1/2 translateResize max-w-100 text-center font-bold w-full text-base/8 mt-10'>
+                <div id='dateLogo' className="absolute h-dvh w-full inset-0 z-20 opacity-0 flex flex-col items-center justify-center text-white p-6 top-1/2 left-1/2">
+                    <Image id='logoDate' src={logoCasamiento} alt="Logo" className="z-2 w-[60vw]" />
+                    <h3 className='uppercase absolute z-2 text-center font-bold w-full text-base/8 mt-10 bottom-1/5'>
                         Disponible<br />el 9 de enero<br />de 2027
                     </h3>
                 </div>

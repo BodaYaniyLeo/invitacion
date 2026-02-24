@@ -56,10 +56,11 @@ export const useInvitationAnimations = ({
 
                 .to('#heroComplete', { opacity: 0, duration: 0.5 })
                 .to('#heroMask', {
-                    maskSize: "50%",
-                    webkitMaskSize: "50%",
+                    maskSize: "60vw",
+                    webkitMaskSize: "60vw",
                     duration: 2
                 }, 0.5)
+                .addLabel("coordinationItems")
                 .to('#heroMask', { scale: 0.8 })
                 .fromTo('#dateLogo',
                     {
@@ -83,7 +84,6 @@ export const useInvitationAnimations = ({
                 .to('#dateLogo', {
                     webkitMaskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
                     maskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-                    autoAlpha: 0
                 }, "-=0.3")
 
 
@@ -195,7 +195,6 @@ export const useInvitationAnimations = ({
                 .to("#finalAnimation", { scale: 0.8, })
                 .to("#finalAnimation h3", {
                     backgroundImage: 'radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh)',
-                    duration: 2
                 }, "<")
                 .to("#confirmData", { autoAlpha: 1 })
                 .to(["#finalAnimation", "#confirmData"], { y: 0, duration: 1 })
