@@ -58,7 +58,8 @@ export const Countdown = () => {
 
                 tlTimer
                     .set("#backgroundLoading", {
-                        backgroundImage: `url(${i.bg})`
+                        backgroundImage: `url(${i.bg})`,
+                        autoAlpha: 0
                     })
                 tlTimer
                     .set("#backgroundChar", {
@@ -66,11 +67,12 @@ export const Countdown = () => {
                         x: 10
                     })
 
-                    .to("#backgroundLoading", { autoAlpha: 1, scale: 1, duration: 2 })
-                    .to("#backgroundChar", { autoAlpha: 1, duration: 2 }, "-=1.8")
-                    .to("#backgroundChar", { x: 0, duration: 4 }, "<")
-                    .to("#backgroundLoading", { autoAlpha: 0, duration: 2 })
-                    .to("#backgroundChar", { autoAlpha: 0, duration: 2 }, "-=1.5")
+                    .to("#backgroundChar", { autoAlpha: 0, duration: 0.75 }, "-=0.6")
+                    .to("#backgroundLoading", { autoAlpha: 1, scale: 1, duration: 1.5 })
+                    .to("#backgroundChar", { autoAlpha: 1, duration: 1.5 }, "-=1.2")
+                    .to("#backgroundChar", { x: 0, duration: 3 }, "<")
+                    .to("#backgroundLoading", { autoAlpha: 0, duration: 0.75 })
+                    .to("#backgroundChar", { autoAlpha: 0, duration: 0.75 }, "-=0.6")
             });
 
             gsap.to("#loadingRingContainer", {
@@ -89,9 +91,9 @@ export const Countdown = () => {
 
     return (
         <>
-            <div className="relative h-dvh w-full overflow-hidden">
-                <div id="backgroundLoading" className="absolute bottom-0 h-dvh w-full bg-cover bg-center bg-no-repeat scale-110"></div>
-                <div id="backgroundChar" className="absolute bottom-0 h-[80dvh] w-full bg-cover bg-bottom bg-no-repeat"></div>
+            <div className="relative h-lvh w-full overflow-hidden">
+                <div id="backgroundLoading" className="absolute bottom-0 h-lvh w-full bg-cover bg-center bg-no-repeat scale-110"></div>
+                <div id="backgroundChar" className="absolute bottom-0 h-[80lvh] w-full bg-cover bg-bottom bg-no-repeat"></div>
                 <div
                     className="absolute inset-0 pointer-events-none"
                     style={{
@@ -99,9 +101,9 @@ export const Countdown = () => {
                     }}
                 ></div>
                 {isMounted
-                    ? <div className="absolute top-[5dvh] h-[85dvh] flex flex-col w-full items-center justify-between">
+                    ? <div className="absolute top-[5lvh] h-[85lvh] flex flex-col w-full items-center justify-between">
                         <div className="flex">
-                            <div className="text-center font-(family-name:--fontBold) text-[40px]">
+                            <div className="text-center text-white font-(family-name:--fontBold) text-[40px]">
                                 {dias === "0" ?
                                     ""
                                     : dias === "1" ?
@@ -117,7 +119,7 @@ export const Countdown = () => {
                             </div>
                         </div>
                         <div>
-                            <div className="flex items-center">
+                            <div className="flex items-center text-white">
                                 <div id="loadingRingContainer" className="w-[24px] h-[24px] relative">
                                     <Image
                                         src={loadRing}

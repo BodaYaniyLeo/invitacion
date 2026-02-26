@@ -11,6 +11,8 @@ import { Price } from './Price';
 import { Intro } from './Intro'
 import { useInvitationAnimations } from '../hooks/useInvitationAnimations'
 import { Countdown } from './Countdown'
+import { FooterConfirm } from './FooterConfirm'
+import { InfoSalon } from './InfoSalon'
 
 type arrayData = {
     id: number;
@@ -115,13 +117,14 @@ export const Invitation = ({
 
     return (
         <div ref={mainRef} className='bg-black'>
-            <div ref={presentation} className="w-full h-[300dvh]">
+            {/* <InfoSalon /> */}
+            <div ref={presentation} className="w-full h-[300lvh]">
                 <HeroSection id="heroSection" />
             </div>
 
-            <div className="w-full h-[200dvh] relative" id="leoContainer">
+            <div className="w-full h-[200lvh] relative" id="leoContainer">
 
-                <div ref={leoSection} className="w-full h-dvh">
+                <div ref={leoSection} className="w-full h-lvh">
                     <Intro />
                     <VideoSection
                         id="video1"
@@ -132,14 +135,14 @@ export const Invitation = ({
                     />
                 </div>
 
-                <div className="absolute bottom-0 left-0 w-full h-dvh z-20 flex items-center justify-center pointer-events-none">
+                <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center pointer-events-none">
                     <TextLayer id="text1" title="Leo" subtitle="Historia" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
                 </div>
             </div>
 
-            <div className="w-full h-[200dvh] relative" id="yaniContainer">
+            <div className="w-full h-[200lvh] relative" id="yaniContainer">
 
-                <div ref={yaniSection} className="w-full h-dvh">
+                <div ref={yaniSection} className="w-full h-lvh">
                     <VideoSection
                         id="video2"
                         progressRef={v2Progress}
@@ -149,7 +152,7 @@ export const Invitation = ({
                     />
                 </div>
 
-                <div className="absolute bottom-0 left-0 w-full h-dvh z-20 flex items-center justify-center pointer-events-none">
+                <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center pointer-events-none">
                     <TextLayer id="text2" title="Yani" subtitle="Sueño" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
                 </div>
             </div>
@@ -162,16 +165,22 @@ export const Invitation = ({
                     duration={VIDEO_DURATION}
                     video={'salon'}
                 />
-            </div>
 
-            <Countdown />
+                <Countdown />
 
-            <div id="footerPrice" className="relative h-[100dvh]">
-                <Price
-                    id="priceData"
-                    idText="confirmData"
-                    data={data}
-                />
+                <div id="footerPrice" className="relative h-[100lvh] content-center">
+                    <Price
+                        id="priceData"
+                        data={data}
+                    />
+                </div>
+
+                <div id="footerConfirm" className="relative -mt-[30lvh]">
+                    <FooterConfirm
+                        id="confirmData"
+                        data={data}
+                    />
+                </div>
             </div>
         </div>
     );

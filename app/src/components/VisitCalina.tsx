@@ -24,7 +24,7 @@ export const VisitCalina = ({
     return (
         <div
             id={id}
-            className="flex flex-col justify-center items-center h-dvh"
+            className="flex flex-col justify-center items-center h-lvh"
         >
             <div className='px-[10vw]'>
                 <Image
@@ -33,9 +33,10 @@ export const VisitCalina = ({
                     className='logoCalina'
                 />
             </div>
-            <p className='font-bold text-[20px] text-center'>Ven a vivir este momento <br />especial.</p>
+            <p className='font-bold text-[20px] text-center text-white'>Ven a vivir este momento <br />especial.</p>
             <div className="pointer-events-auto flex flex-col items-center">
                 <div className='bg-white w-[90vw] ratio-4/3 p-2 mt-5'>
+                
                     <VideoSection
                         {...{
                             id: `${id}-internal-video`,
@@ -47,7 +48,6 @@ export const VisitCalina = ({
                     />
                 </div>
                 <a
-                    href={urlMaps} target='_blank'
                     className='flex mt-4 rounded-full bg-white px-8 py-4 text-black justify-center mt-5'
                 >
                     Descubre como llegar

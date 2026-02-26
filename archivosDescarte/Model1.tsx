@@ -108,7 +108,7 @@
 //     return (
 //         <>
 //             <ChevronLeft className='fixed top-0 left-0 z-9 w-8 h-8' onClick={() => router.push(`/`)} />
-//             <div className='justify-self-center h-screen p-2'>
+//             <div className='justify-self-center h-lvh p-2'>
 //                 <div className='flex flex-col text-green-600 justify-between'>
 //                     <div>
 //                         <p>

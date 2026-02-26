@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -24,6 +24,7 @@ export const useInvitationAnimations = ({
     VIDEO_DURATION
 }: HookProps) => {
 
+    const lastWidth = useRef(typeof window !== 'undefined' ? window.innerWidth : 0);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -32,6 +33,15 @@ export const useInvitationAnimations = ({
             ignoreMobileResize: true
         });
 
+        const handleResize = () => {
+            const currentWidth = window.innerWidth;
+            if (currentWidth !== lastWidth.current) {
+                lastWidth.current = currentWidth;
+                ScrollTrigger.refresh();
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
 
         let ctx = gsap.context(() => {
 
@@ -39,62 +49,60 @@ export const useInvitationAnimations = ({
                 scrollTrigger: {
                     trigger: presentation.current,
                     start: 'top top',
-                    end: 'bottom top',
+                    end: '+=300%',
                     scrub: 0.3,
                     pin: true,
                     pinSpacing: false,
+                    anticipatePin: 1,
                 }
             });
 
-            presentationTl.set(['#video1', '#video2'], {
-                autoAlpha: 0,
-            });
-
             presentationTl
-                .to('#heroComplete', { scale: 1.1, duration: 2, ease: "none" })
-                .to('#imgTextHero', { opacity: 0, duration: 0.8 }, 1)
-
-                .to('#heroComplete', { opacity: 0, duration: 0.5 })
+                .addLabel("heroAnimation")
+                .to('#heroComplete', { scale: 1.1, ease: "none", duration: 0.7 }, "heroAnimation")
+                .to('#imgTextHero', { opacity: 0, duration: 0.4 }, "heroAnimation")
+                .to('#heroComplete', { opacity: 0, duration: 0.4 }, "heroAnimation+=0.3")
                 .to('#heroMask', {
                     maskSize: "60vw",
                     webkitMaskSize: "60vw",
-                    duration: 2
-                }, 0.5)
+                    duration: 0.7
+                }, "heroAnimation")
+
                 .addLabel("coordinationItems")
-                .to('#heroMask', { scale: 0.8 })
-                .fromTo('#dateLogo',
-                    {
-                        webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-                        maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-                        autoAlpha: 0,
-                    },
-                    {
-                        webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-                        maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-                        autoAlpha: 1,
-                        scale: 0.8,
-                    }, '<')
-
+                .to('#heroMask', {
+                    scale: 0.8,
+                    duration: 2,
+                }, "coordinationItems")
+                .to('#dateLogo', {
+                    webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+                    maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+                    autoAlpha: 1,
+                    scale: 0.8,
+                    duration: 2,
+                }, "coordinationItems")
                 .to('#dateLogo h3', {
-                    backgroundImage: 'radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh)',
-                    duration: 1
-                })
+                    backgroundImage: 'radial-gradient(circle at 50% -30vh, rgb(255, 214, 135) 0px, rgb(252, 82, 67) 50vh, rgb(157, 47, 106) 90vh, rgba(32, 31, 66, 0) 150vh)',
+                    duration: 2,
+                    ease: "power1.inOut",
+                }, "coordinationItems-=1")
 
-                .to('#heroMask', { display: 'none' }, '<')
+                .to('#heroMask', { display: 'none' }, "-=1.0")
                 .to('#dateLogo', {
                     webkitMaskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
                     maskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-                }, "-=0.3")
+                    duration: 0.4,
+                }, "-=0.4")
 
 
             const leoTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#leoContainer",
                     start: 'top top',
-                    end: 'bottom top',
+                    end: '+=150%',
                     scrub: 0.3,
                     pin: leoSection.current,
                     pinSpacing: false,
+                    anticipatePin: 1,
                 }
             });
 
@@ -112,34 +120,39 @@ export const useInvitationAnimations = ({
                         maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)',
                         autoAlpha: 1,
                     })
-                .to('#textOrg', { scale: 0.85, duration: 2 }, '<')
-                .to('#textOrg h2, #textOrg p', {
-                    backgroundImage: 'radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh)',
-                    duration: 2
-                }, '<')
                 .addLabel("transicionVideo")
-                .to('#textOrg h2, #textOrg p', {
+                .to('#textOrg', { scale: 0.8, duration: 3.5 }, 'transicionVideo')
+                .to('#textOrg', {
+                    maskImage: "radial-gradient(at 50% 0vh, rgb(0,0,0) 120vh, rgba(0,0,0,0) 200vh)",
+                    webkitMaskImage: "radial-gradient(at 50% 0vh, rgb(0,0,0) 120vh, rgba(0,0,0,0) 200vh)",
+                    duration: 2.5
+                }, 'transicionVideo')
+                .to('#textOrgInner', {
+                    backgroundImage: 'radial-gradient(circle at 40.0899% 1.7982vh, rgb(255,179,135) 0%, rgb(252,82,68) 69.5%, rgb(156,47,106) 99.4%, rgba(32,31,66,0) 149.1%)',
+                    duration: 2.5
+                }, 'transicionVideo')
+                .to('#textOrg', {
                     autoAlpha: 0,
                     duration: 0.6
-                })
+                }, "transicionVideo+=3")
                 .to('#containerTextOrg', {
                     webkitBackdropFilter: "blur(0px)",
                     backdropFilter: "blur(0px)",
-                    duration: 0.6,
+                    duration: 3,
                     ease: "power1.inOut",
-                }, "<")
+                }, "transicionVideo+=1.5")
 
-                .to('#video1', { autoAlpha: 1, duration: 0.5 }, 'transicionVideo-=0.2')
+                .to('#video1', { autoAlpha: 1, duration: 0.5 }, 'transicionVideo+=2.5')
                 .addLabel("text1Appear")
                 .to(v1Progress.current, {
-                    t: VIDEO_DURATION, duration: 4, ease: "none",
-                }, 'transicionVideo-=0.75')
+                    t: VIDEO_DURATION, duration: 8, ease: "none",
+                }, 'transicionVideo')
                 .to("#video1 canvas", {
                     WebkitMaskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     duration: 4
-                }, "text1Appear+=0.5")
-                .to('#video1', { autoAlpha: 0, duration: 1 }, "text1Appear+=1.7")
+                }, "text1Appear")
+                .to('#video1', { autoAlpha: 0, duration: 1 }, "text1Appear+=2.8")
 
             const yaniTl = gsap.timeline({
                 scrollTrigger: {
@@ -149,6 +162,7 @@ export const useInvitationAnimations = ({
                     scrub: 0.3,
                     pin: yaniSection.current,
                     pinSpacing: false,
+                    anticipatePin: 1,
                 }
             });
 
@@ -186,22 +200,23 @@ export const useInvitationAnimations = ({
                     end: "bottom top",
                     scrub: 0.3,
                     pin: true,
+                    anticipatePin: 1,
                 }
             });
 
             logoFooterTl
-                .set(["#finalAnimation", "#confirmData"], { y: "40%" })
-                .to("#finalAnimation", { autoAlpha: 1 })
-                .to("#finalAnimation", { scale: 0.8, })
-                .to("#finalAnimation h3", {
-                    backgroundImage: 'radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh)',
-                }, "<")
+                .to("#finalAnimation", { display: "flex" }, 0.2)
+                .to('#textFinal', {
+                    backgroundImage: 'radial-gradient(circle at 50% 47.9747vh, rgb(255, 212, 128) 0vh, rgb(236, 69, 111) 50vh, rgb(122, 33, 102) 90vh, rgba(32, 31, 66, 0) 122.785vh)',
+                    duration: 4
+                }, '<')
+                .to("#finalAnimation", { scale: 0.8, duration: 4 }, "<")
                 .to("#confirmData", { autoAlpha: 1 })
-                .to(["#finalAnimation", "#confirmData"], { y: 0, duration: 1 })
 
         }, mainRef);
 
         return () => {
+            window.removeEventListener("resize", handleResize);
             ctx.revert();
         };
     }, [VIDEO_DURATION]);

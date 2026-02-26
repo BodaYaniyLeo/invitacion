@@ -62,7 +62,7 @@
 //                 if (index <= currentIndex) {
 //                     return (
 //                         <div key={s.section}
-//                             className='text-center h-screen p-4 flex flex-col'
+//                             className='text-center h-lvh p-4 flex flex-col'
 //                             ref={el => { refs.current[index] = el }}
 //                         >
 //                             <div className='flex-1 content-center whitespace-pre-wrap'>

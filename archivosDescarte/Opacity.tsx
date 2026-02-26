@@ -29,7 +29,7 @@
 //         <>
 //             <ChevronLeft className='fixed top-0 left-0 z-9  w-8 h-8' onClick={() => router.push(`/`)} />
 //             <div
-//                 className='text-center h-screen p-4 flex flex-col relative'
+//                 className='text-center h-lvh p-4 flex flex-col relative'
 //             >
 //                 <div className={`flex-1 content-center whitespace-pre-wrap ${animation && 'opacityAnimated'}`}>
 //                     {story[nextPage].text[section - 1]}

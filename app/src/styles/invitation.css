@@ -1,4 +1,5 @@
 #heroMask {
+    background: red;
     background: #ffffff;
     -webkit-mask-image: url('../assets/images/hero/textHero.svg');
     mask-image: url('../assets/images/hero/textHero.svg');
@@ -18,7 +19,7 @@
     position: absolute;
     inset: 0;
     width: 100%;
-    height: 100dvh;
+    height: 100lvh;
     transform-origin: 50% 50%;
     z-index: 20;
     -webkit-mask-image: radial-gradient(circle at bottom center,
@@ -29,22 +30,9 @@
             rgba(0, 0, 0, 0) 30%);
 }
 
-
-#heroMask {
-    background: red;
-    background: #ffffff;
-    mask-image: url('../assets/images/hero/textHero.svg');
-    mask-position: 50% 50%;
-    mask-repeat: no-repeat;
-    mask-size: clamp(3500vh, 1500%, 0vh);
-    transform-origin: 50% 50%;
-    filter: drop-shadow(1px 0px 0px black) drop-shadow(-1px 0px 0px black) drop-shadow(0px 1px 0px black) drop-shadow(0px -1px 0px black);
-    mask-position: 50% 50%
-}
-
 #dateLogo h3 {
     font-family: 'fontBold';
-    background-image: radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh);
+    background-image: radial-gradient(circle at 50% 200vh, rgb(255, 210, 123) 0%, rgb(223, 58, 147) 15%, rgb(92, 22, 99) 30%, rgba(32, 31, 66, 0) 50%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -56,7 +44,7 @@
 
 #priceData h4 {
     font-family: 'fontBold';
-    background-image: radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh);
+    background-image: radial-gradient(circle at 50% 200vh, rgb(255, 210, 123) 0%, rgb(223, 58, 147) 15%, rgb(92, 22, 99) 30%, rgba(32, 31, 66, 0) 50%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -69,7 +57,7 @@
 
 #priceData p {
     font-family: 'fontBold';
-    background-image: radial-gradient(circle at 50% -30vh, #dfb7df 0, #960696 50vh, #570157 90vh, rgba(32, 31, 66, 0) 150vh);
+    background-image: radial-gradient(circle at 50% 200vh, rgb(255, 210, 123) 0%, rgb(223, 58, 147) 15%, rgb(92, 22, 99) 30%, rgba(32, 31, 66, 0) 50%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -94,39 +82,63 @@
     color: #ffffff33;
 }
 
-#textOrg * {
+#textOrg {
+    transform: translate3d(0px, 0px, 0px) scale(0.8541, 0.8541);
+    mask-image: radial-gradient(at 20% -120vh, rgb(0, 0, 0) 0vh, rgba(0, 0, 0, 0) 50vh);
+    -webkit-mask-image: radial-gradient(at 20% -120vh, rgb(0, 0, 0) 0vh, rgba(0, 0, 0, 0) 50vh);
+    opacity: 1;
+}
+
+#textOrgInner {
+    background-image: radial-gradient(circle at 50% 200vh,
+            rgb(255, 210, 123) 0%,
+            rgb(223, 58, 147) 15%,
+            rgb(92, 22, 99) 30%,
+            rgba(32, 31, 66, 0) 50%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    width: 100%;
-    background-image: radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh);
+}
+
+#textOrgInner h2 {
+    font-size: calc(var(--h2size) * 1.8);
+    font-family: 'fontBold';
+    font-style: normal;
+    letter-spacing: -.0125em;
+    line-height: 100%;
+}
+
+#textOrgInner p {
+    font-family: 'fontSemiBold';
+    font-size: var(--h2size);
+    font-style: normal;
+    text-wrap: pretty;
+    letter-spacing: -.03em;
     line-height: 120%;
 }
 
-#finalAnimation h3 {
+#textFinalContainer {
+    transform: translate3d(0px, 0px, 0px) scale(0.8541, 0.8541);
+    opacity: 1;
+}
+
+#textFinal {
+    background-image: radial-gradient(circle at 50% 90vh, rgb(255, 210, 123) 0vh, rgb(223, 58, 147) 50vh, rgb(92, 22, 99) 100vh);
+    -webkit-text-fill-color: transparent;
+}
+
+#textFinal {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-image: radial-gradient(circle at 50% 60.0674vh, rgb(76, 0, 255) 0vh, rgb(49, 6, 150) 50vh, rgb(16, 0, 54) 90vh, rgba(32, 31, 66, 0) 124.981vh);
+}
+
+#textFinal h3 {
     line-height: 120%;
-    display: block;
-    width: 100%;
-    -webkit-font-smoothing: antialiased;
-    transform: translateZ(0);
     font-family: 'fontBold';
     font-style: normal;
     font-size: var(--h1size);
     letter-spacing: -.04em;
-}
-
-#textOrg h2 {
-    font-size: calc(var(--h2size) * 1.8);
-    font-family: 'fontBold';
-}
-
-#textOrg p {
-    font-family: 'fontSemiBold';
-    font-size: var(--h2size);
 }
 
 .nameNovios h2 {
