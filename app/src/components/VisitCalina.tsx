@@ -26,8 +26,7 @@ export const VisitCalina = ({
             id={id}
             className="flex flex-col justify-center items-center h-lvh relative"
         >
-            {/* <div id='bgCalina' className='absolute inset-0 z-0 opacity-0 invisible'></div> */}
-            <div className='z-1'>
+            <div className='z-11'>
                 <div className='px-[10vw]'>
                     <Image
                         src={logoCalina}

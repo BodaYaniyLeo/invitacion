@@ -45,7 +45,7 @@ export const InfoSalon = ({
             ref={scrollRef}
             className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-green-800 overflow-x-scroll overflow-y-hidden shrink-0 p-[5lvh] opacity-0 invisible pointer-events-auto"
         >
-            <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[5lvh] z-2'>
+            <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[5lvh] z-22'>
                 <button className='flex rounded-full bg-white px-4 text-black items-center size-fit h-9'
                     onClick={() => { handleBackInfo(); console.log('click') }}
                 >

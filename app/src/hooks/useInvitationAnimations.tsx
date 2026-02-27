@@ -60,7 +60,7 @@ export const useInvitationAnimations = ({
 
             presentationTl
                 .addLabel("heroAnimation")
-                .to('#heroComplete', { scale: 1.1, ease: "none", duration: 0.7 }, "heroAnimation")
+                .to('#heroComplete', { scale: 1, ease: "none", duration: 0.7 }, "heroAnimation")
                 .to('#imgTextHero', { opacity: 0, duration: 0.4 }, "heroAnimation")
                 .to('#heroComplete', { opacity: 0, duration: 0.4 }, "heroAnimation+=0.3")
                 .to('#heroMask', {
@@ -70,29 +70,37 @@ export const useInvitationAnimations = ({
                 }, "heroAnimation")
 
                 .addLabel("coordinationItems")
+                .fromTo('#dateLogo',
+                    { autoAlpha: 0, scale: 1 },
+                    {
+                        autoAlpha: 1,
+                        y: "-5%",
+                        scale: 0.8,
+                        duration: 2,
+                        webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+                        maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+                    },
+                    "coordinationItems"
+                )
                 .to('#heroMask', {
+                    y: "-5%",
+                    autoAlpha: 0,
                     scale: 0.8,
                     duration: 2,
                 }, "coordinationItems")
-                .to('#dateLogo', {
-                    webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-                    maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-                    autoAlpha: 1,
-                    scale: 0.8,
-                    duration: 2,
-                }, "coordinationItems")
+
                 .to('#dateLogo h3', {
                     backgroundImage: 'radial-gradient(circle at 50% -30vh, rgb(255, 214, 135) 0px, rgb(252, 82, 67) 50vh, rgb(157, 47, 106) 90vh, rgba(32, 31, 66, 0) 150vh)',
                     duration: 2,
                     ease: "power1.inOut",
                 }, "coordinationItems-=1")
 
-                .to('#heroMask', { display: 'none' }, "-=1.0")
                 .to('#dateLogo', {
                     webkitMaskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
                     maskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-                    duration: 0.4,
-                }, "-=0.4")
+                    autoAlpha: 0,
+                    duration: 0.8,
+                }, "+=0.2");
 
 
             const leoTl = gsap.timeline({
@@ -224,7 +232,7 @@ export const useInvitationAnimations = ({
         animationSalon.set("#infoSalon", { x: "90%", autoAlpha: 0 })
 
         animationSalon
-            .to("#lateralMaps", { zIndex: 9 })
+            .to("#lateralMaps", { zIndex: 19 })
             .to("#lateralMaps", { autoAlpha: 1, duration: 0.3 })
             .to("#infoSalon, #photoSalon", { autoAlpha: 1, duration: 0.3 }, "<")
             .to("#infoSalon", { x: 0, duration: 0.3 }, "<")
