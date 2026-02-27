@@ -1,53 +1,117 @@
+'use client'
 import Image from 'next/image';
 import '@/app/src/styles/invitation.css'
-import salonImage from '@/public/videos/frames/calinaVideo/calinaVideo_0001.webp'
+import ingresoCalina from '../assets/images/salon/calina.webp'
+import arrowLeft from '../assets/images/salon/arrowLeft.webp'
+import { useEffect, useRef, useState } from 'react';
 
-interface VideoProps {
-    id: string;
-    progressRef: React.MutableRefObject<{ t: number }>;
-    frames: string[];
-    duration: number;
-    video: string;
+interface InfoProps {
+    scrollRef: React.RefObject<HTMLDivElement | null>
+    handleBackInfo: () => void
 }
 
-export const InfoSalon = () => {
+export const InfoSalon = ({
+    scrollRef,
+    handleBackInfo
+}: InfoProps) => {
 
-    const urlMaps = "https://www.google.com/maps/place/31%C2%B014'08.8%22S+64%C2%B015'26.3%22W/@-31.2357732,-64.2598859,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-31.2357778!4d-64.2573056?entry=ttu&g_ep=EgoyMDI2MDIxNi4wIKXMDSoASAFQAw%3D%3D"
+    const urlMaps = "https://maps.app.goo.gl/UudM3Bi5m6jQk3nW8"
+    const urlIframe = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3411.4556295631846!2d-64.25989278860048!3d-31.235807887438405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432836e4d2fcdbf%3A0x309c9f5a1dd5927f!2sRinc%C3%B3n%20Calina!5e0!3m2!1ses!2ses!4v1772183044697!5m2!1ses!2ses"
+
+
+    const [advance, setAdvance] = useState<number>(0)
+
+    useEffect(() => {
+        const scrollSection = scrollRef.current
+        if (!scrollSection) return
+
+        const handleScroll = () => {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollSection
+            const scrollMax = scrollWidth - clientWidth
+            const percentage = (scrollLeft / scrollMax) * 100
+
+            setAdvance(percentage)
+        }
+
+        scrollSection.addEventListener('scroll', handleScroll)
+
+        return () => scrollSection.removeEventListener('scroll', handleScroll)
+
+    }, [])
 
     return (
         <div
-            className="flex justify-center items-center h-lvh w-full bg-green-800 overflow-x-scroll"
+            id="lateralMaps"
+            ref={scrollRef}
+            className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-green-800 overflow-x-scroll overflow-y-hidden shrink-0 p-[5lvh] opacity-0 invisible pointer-events-auto"
         >
-            <div className='flex flex-col'>
-
-                <div id="#header">
-                    <button>Atrás</button>
-                    <div>
-                        <span>
-                            BARRA DE AVANCE
-                        </span>
-                    </div>
-                </div>
-                <div className="pointer-events-auto flex flex-col items-center">
-                    <div className='bg-white w-[85vw] aspect-4/3 p-2 mt-5 -rotate-4'>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d24454.58166116321!2d-0.049152!3d39.9900672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2ses!4v1772134392716!5m2!1ses!2ses" style={{ border: 0, aspectRatio: "4/3" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <div>
-                        <h2>
-                        </h2>
-                        <p>
-                            Dirección: Ruta E-53 km 15, jurisdicción Unquillo
-                        </p>
-                        <a
-                            href={urlMaps} target='_blank'
-                            className='flex mt-4 rounded-full bg-white px-8 py-4 text-black justify-center mt-5'
+            <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[5lvh] z-2'>
+                <button className='flex rounded-full bg-white px-4 text-black items-center size-fit h-9'
+                    onClick={() => { handleBackInfo(); console.log('click') }}
+                >
+                    <Image
+                        src={arrowLeft}
+                        alt=''
+                        className='h-[18px] w-auto self-center me-1'
+                    />
+                    Atrás
+                </button>
+                <div className='rounded-full bg-[#ffffff15] px-6 text-black justify-center content-center size-fit w-[45vw] h-9'>
+                    <span className='bg-[#00000090] rounded-full h-[4px] block w-full'>
+                        <span className='bg-white rounded-full h-[4px] block will-change-[width]'
+                            style={{ width: `${advance}%` }}
                         >
-                            Ir a google maps
-                        </a>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div id='infoSalon' className='flex flex-col w-[180vw] shrink-0 h-full'>
+                <div className="pointer-events-auto flex flex-col justify-center h-lvh ">
+                    <div id='mapsSalon' className='bg-white w-[80vw] aspect-4/3 p-2 mt-5 rotate-4'>
+                        <iframe src={urlIframe} style={{ border: 0, aspectRatio: "4/3" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div className='flex h-[40%] items-center'>
+                        <div className='max-w-[80vw] font-[family-name:var(--textDesc)]'>
+                            <h2 className='text-[#ffc2d0] text-[length:var(--h1size)] uppercase font-bold'>
+                                Como llegar al salon
+                            </h2>
+                            <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] uppercase font-bold'>
+                                Dirección: Ruta E-53 km 15, jurisdicción Unquillo
+                            </p>
+                            <a
+                                href={urlMaps} target='_blank'
+                                className='flex rounded-full bg-white px-4 py-2 text-black justify-center mt-5 size-fit'
+                            >
+                                Ir a google maps
+                            </a>
+                        </div>
+                        <div className='w-[100vw] mx-[4vw] font-[family-name:var(--textDesc)] self-end'>
+                            <h4 className='text-[#fff9cb] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
+                                Hospedajes cercanos
+                            </h4>
+                            <div className='flex flex-col mb-4'>
+                                <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                    Hospedaje 1
+                                </p>
+                                <a href="#">Link de sitio o maps</a>
+                                <a href="#">Teléfono</a>
+                            </div>
+                            <div className='flex flex-col mb-4'>
+                                <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                    Hospedaje 2
+                                </p>
+                                <a href="#">Link de sitio o maps</a>
+                                <a href="#">Teléfono</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col'>
+            <div className='flex flex-col w-[180vw] shrink-0 bg-black'>
+                <Image
+                    src={ingresoCalina}
+                    alt=''
+                />
             </div>
         </div>
     )

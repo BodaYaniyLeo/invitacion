@@ -48,6 +48,8 @@ export const Invitation = ({
     const presentation = useRef<HTMLDivElement>(null);
     const leoSection = useRef<HTMLDivElement>(null);
     const yaniSection = useRef<HTMLDivElement>(null);
+    const scrollRef = useRef<HTMLDivElement>(null)
+
 
     const v1Progress = useRef({ t: 0 });
     const v2Progress = useRef({ t: 0 });
@@ -104,7 +106,7 @@ export const Invitation = ({
         };
     }, []);
 
-    useInvitationAnimations({
+    const { infoSalonAnimation } = useInvitationAnimations({
         mainRef,
         presentation,
         leoSection,
@@ -115,9 +117,25 @@ export const Invitation = ({
         VIDEO_DURATION
     });
 
+    const handleInfoSalon = () => {
+        if (infoSalonAnimation.current) {
+            infoSalonAnimation.current.restart();
+            document.body.style.overflow = 'hidden';
+            window.dispatchEvent(new CustomEvent('lock-scroll'));
+        }
+    }
+
+    const handleBackInfo = () => {
+        if (infoSalonAnimation.current) {
+            infoSalonAnimation.current.reversed(true);
+
+            document.body.style.overflow = '';
+            window.dispatchEvent(new CustomEvent('unlock-scroll'));
+        }
+    }
+
     return (
         <div ref={mainRef} className='bg-black'>
-            {/* <InfoSalon /> */}
             <div ref={presentation} className="w-full h-[300lvh]">
                 <HeroSection id="heroSection" />
             </div>
@@ -164,6 +182,7 @@ export const Invitation = ({
                     frames={videoCalinaFrames}
                     duration={VIDEO_DURATION}
                     video={'salon'}
+                    handleInfoSalon={handleInfoSalon}
                 />
 
                 <Countdown />
@@ -182,6 +201,11 @@ export const Invitation = ({
                     />
                 </div>
             </div>
+            <InfoSalon
+                scrollRef={scrollRef}
+                handleBackInfo={handleBackInfo}
+            />
+
         </div>
     );
 };

@@ -25,6 +25,7 @@ export const useInvitationAnimations = ({
 }: HookProps) => {
 
     const lastWidth = useRef(typeof window !== 'undefined' ? window.innerWidth : 0);
+    const infoSalonAnimation = useRef<gsap.core.Timeline | null>(null);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -192,6 +193,9 @@ export const useInvitationAnimations = ({
 
             catalinaTl
                 .to(vCalinaProgress.current, { t: VIDEO_DURATION, duration: 2 }, 0)
+                .to("#bgCalina", { autoAlpha: 1, duration: 3 }, "-=1")
+                .to("#bgCalina", { autoAlpha: 0, duration: 3 }, "-=1")
+
 
             const logoFooterTl = gsap.timeline({
                 scrollTrigger: {
@@ -215,9 +219,31 @@ export const useInvitationAnimations = ({
 
         }, mainRef);
 
+        const animationSalon = gsap.timeline({ paused: true });
+
+        animationSalon.set("#infoSalon", { x: "90%", autoAlpha: 0 })
+
+        animationSalon
+            .to("#lateralMaps", { zIndex: 9 })
+            .to("#lateralMaps", { autoAlpha: 1, duration: 0.3 })
+            .to("#infoSalon, #photoSalon", { autoAlpha: 1, duration: 0.3 }, "<")
+            .to("#infoSalon", { x: 0, duration: 0.3 }, "<")
+            .to("#photoSalon", { x: "-90%", duration: 0.3 }, "<")
+            .to("#mapsSalon, #photoSalon", { rotateZ: -4, duration: 0.3 }, "<")
+            .to("#header", { opacity: 1, duration: 0.3 })
+
+        infoSalonAnimation.current = animationSalon;
+
         return () => {
             window.removeEventListener("resize", handleResize);
             ctx.revert();
+            animationSalon.revert();
         };
+
     }, [VIDEO_DURATION]);
+
+    return {
+        infoSalonAnimation
+    };
+
 }
