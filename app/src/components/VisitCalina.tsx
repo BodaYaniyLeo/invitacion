@@ -52,7 +52,7 @@ export const VisitCalina = ({
                         className='flex mt-4 rounded-full bg-white px-8 py-4 text-black justify-center mt-5 font-bold'
                         onClick={() => handleInfoSalon()}
                     >
-                        Descubre como llegar
+                        Descubre Calina
                     </button>
                 </div>
             </div>

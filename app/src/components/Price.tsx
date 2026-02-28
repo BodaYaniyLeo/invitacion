@@ -5,20 +5,7 @@ import logoCasamiento from '../assets/images/hero/logoCasamiento.svg'
 import { useEffect, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
 import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
-
-export type ArrayElements = {
-    id: number;
-    name: string;
-    lastname: string;
-    payment_coverage: number;
-    state: string;
-    confirm: boolean;
-}
-
-interface VideoProps {
-    id: string;
-    data: ArrayElements[];
-}
+import { ArrayElements, VideoProps } from './Invitation'
 
 export const Price = ({
     id,

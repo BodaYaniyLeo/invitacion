@@ -3,21 +3,23 @@ import Image from 'next/image';
 import '@/app/src/styles/invitation.css'
 import ingresoCalina from '../assets/images/salon/calina.webp'
 import arrowLeft from '../assets/images/salon/arrowLeft.webp'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ArrayElements } from './Invitation';
 
 interface InfoProps {
+    data: ArrayElements[]
     scrollRef: React.RefObject<HTMLDivElement | null>
     handleBackInfo: () => void
 }
 
 export const InfoSalon = ({
+    data,
     scrollRef,
     handleBackInfo
 }: InfoProps) => {
 
     const urlMaps = "https://maps.app.goo.gl/UudM3Bi5m6jQk3nW8"
     const urlIframe = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3411.4556295631846!2d-64.25989278860048!3d-31.235807887438405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432836e4d2fcdbf%3A0x309c9f5a1dd5927f!2sRinc%C3%B3n%20Calina!5e0!3m2!1ses!2ses!4v1772183044697!5m2!1ses!2ses"
-
 
     const [advance, setAdvance] = useState<number>(0)
 
@@ -85,25 +87,62 @@ export const InfoSalon = ({
                                 Ir a google maps
                             </a>
                         </div>
-                        <div className='w-[100vw] mx-[4vw] font-[family-name:var(--textDesc)] self-end'>
-                            <h4 className='text-[#fff9cb] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
-                                Hospedajes cercanos
-                            </h4>
-                            <div className='flex flex-col mb-4'>
-                                <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
-                                    Hospedaje 1
-                                </p>
-                                <a href="#">Link de sitio o maps</a>
-                                <a href="#">Teléfono</a>
+                        {data[0].slug.sleep
+                            ? <div className='w-[100vw] mx-[4vw] font-[family-name:var(--textDesc)] self-end max-h-[80lvh] flex flex-col'>
+                                <h4 className='text-[#ffc2d0] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
+                                    Hospedaje incluido
+                                </h4>
+                                <div className='flex mb-4 justify-between'>
+                                    <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                        Tanto queremos compartir este momento con vos, que te reservamos una Habitación en el salon
+                                    </p>
+                                </div>
+                                <div className='grid grid-cols-3 mb-4 w-[90%] place-self-center'>
+                                    <p className='col-span-2 text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                        Nombre
+                                    </p>
+                                    <p className='grid-column-3 text-center text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                        Habitación
+                                    </p>
+                                </div>
+                                <div className='flex flex-col flex-1 overflow-y-auto min-h-0 py-2 border-y border-white/10 custom-scrollbar w-[90%] place-self-center'>
+                                    {data?.map(g => {
+                                        return (
+                                            <div key={g.id} className='grid grid-cols-3 mb-4'>
+                                                <p className='col-span-2 text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                                    {g.name} {g.lastname}
+                                                </p>
+                                                <p className='grid-column-3 text-center text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                                    {g.room}
+                                                </p>
+                                            </div>
+                                        )
+                                    })}
+
+                                </div>
                             </div>
-                            <div className='flex flex-col mb-4'>
-                                <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
-                                    Hospedaje 2
-                                </p>
-                                <a href="#">Link de sitio o maps</a>
-                                <a href="#">Teléfono</a>
+                            : <div className='w-[100vw] mx-[4vw] font-[family-name:var(--textDesc)] self-end'>
+                                <h4 className='text-[#fff9cb] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
+                                    Hospedajes cercanos
+                                </h4>
+                                <div className='flex flex-col mb-4'>
+                                    <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                        Hospedaje 1
+                                    </p>
+                                    <a href="#">Link de sitio o maps</a>
+                                    <a href="#">Teléfono</a>
+                                </div>
+                                <div className='flex flex-col mb-4'>
+                                    <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                        Hospedaje 2
+                                    </p>
+                                    <a href="#">Link de sitio o maps</a>
+                                    <a href="#">Teléfono</a>
+                                </div>
                             </div>
-                        </div>
+                        }
+
+
                     </div>
                 </div>
             </div>
@@ -113,6 +152,6 @@ export const InfoSalon = ({
                     alt=''
                 />
             </div>
-        </div>
+        </div >
     )
 };

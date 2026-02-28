@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrayElements } from './Price'
+import { ArrayElements } from './Invitation'
 
 type statusAnswer = {
     id: number

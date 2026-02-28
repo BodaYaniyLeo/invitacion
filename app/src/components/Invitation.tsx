@@ -14,17 +14,28 @@ import { Countdown } from './Countdown'
 import { FooterConfirm } from './FooterConfirm'
 import { InfoSalon } from './InfoSalon'
 
-type arrayData = {
+export interface ArrayElements {
     id: number;
     name: string;
     lastname: string;
     payment_coverage: number;
     state: string;
     confirm: boolean;
+    room: number;
+    slug: slugObj;
+}
+
+export interface VideoProps {
+    id: string;
+    data: ArrayElements[];
+}
+
+type slugObj = {
+    sleep: boolean;
 }
 
 type dataInv = {
-    data: arrayData[]
+    data: ArrayElements[]
 }
 
 const makeFrames = (prefix: string, ext: string, count: number): string[] =>
@@ -49,7 +60,6 @@ export const Invitation = ({
     const leoSection = useRef<HTMLDivElement>(null);
     const yaniSection = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null)
-
 
     const v1Progress = useRef({ t: 0 });
     const v2Progress = useRef({ t: 0 });
@@ -202,6 +212,7 @@ export const Invitation = ({
                 </div>
             </div>
             <InfoSalon
+                data={data}
                 scrollRef={scrollRef}
                 handleBackInfo={handleBackInfo}
             />

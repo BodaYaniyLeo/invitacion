@@ -13,12 +13,15 @@ export default async function Page({
 
     const { data, error } = await supabase
         .from("guests")
-        .select("*")
+        .select(`*,
+            slug(
+            sleep)
+            `)
         .eq("slug", id)
 
     if (error || !data?.length) {
         return <div>Grupo no encontrado</div>
     }
 
-    return <Invitation data={data}/>
+    return <Invitation data={data} />
 }

@@ -201,9 +201,6 @@ export const useInvitationAnimations = ({
 
             catalinaTl
                 .to(vCalinaProgress.current, { t: VIDEO_DURATION, duration: 2 }, 0)
-                .to("#bgCalina", { autoAlpha: 1, duration: 3 }, "-=1")
-                .to("#bgCalina", { autoAlpha: 0, duration: 3 }, "-=1")
-
 
             const logoFooterTl = gsap.timeline({
                 scrollTrigger: {

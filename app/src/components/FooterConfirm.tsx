@@ -5,20 +5,7 @@ import logoCasamiento from '../assets/images/hero/logoCasamiento.svg'
 import { useEffect, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
 import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
-
-export type ArrayElements = {
-    id: number;
-    name: string;
-    lastname: string;
-    payment_coverage: number;
-    state: string;
-    confirm: boolean;
-}
-
-interface VideoProps {
-    id: string;
-    data: ArrayElements[];
-}
+import { ArrayElements, VideoProps } from './Invitation'
 
 export const FooterConfirm = ({
     id,
@@ -55,7 +42,7 @@ export const FooterConfirm = ({
 
     return (
         <div
-            
+
             className="px-6 pointer-events-auto py-2"
         >
             <div id={id} className="flex flex-col w-full max-w-md max-h-[50dvh] bg-white/5 p-4 rounded-xl backdrop-blur-sm  opacity-0 invisible">
