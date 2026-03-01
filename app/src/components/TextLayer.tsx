@@ -9,7 +9,7 @@ export const TextLayer = ({ id, title, subtitle, text }: TextLayerProps) => {
     return (
         <div
             id={id}
-            className="w-vw h-lvh content-end nameNovios"
+            className="w-vw h-lvh content-end nameNovios -scroll-mt-[50px]"
         >
             <div className="text-white drop-shadow-2xl px-8">
                 <h2 className="text-6xl md:text-8xl font-black italic uppercase mb-6 leading-none">{title}</h2>

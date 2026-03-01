@@ -26,6 +26,7 @@ export const useInvitationAnimations = ({
 
     const lastWidth = useRef(typeof window !== 'undefined' ? window.innerWidth : 0);
     const infoSalonAnimation = useRef<gsap.core.Timeline | null>(null);
+    const menuCrossAnimation = useRef<gsap.core.Timeline | null>(null);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -229,7 +230,7 @@ export const useInvitationAnimations = ({
         animationSalon.set("#infoSalon", { x: "90%", autoAlpha: 0 })
 
         animationSalon
-            .to("#lateralMaps", { zIndex: 19 })
+            .to("#lateralMaps", { zIndex: 50 })
             .to("#lateralMaps", { autoAlpha: 1, duration: 0.3 })
             .to("#infoSalon, #photoSalon", { autoAlpha: 1, duration: 0.3 }, "<")
             .to("#infoSalon", { x: 0, duration: 0.3 }, "<")
@@ -239,16 +240,31 @@ export const useInvitationAnimations = ({
 
         infoSalonAnimation.current = animationSalon;
 
+        const animationCross = gsap.timeline({ paused: true });
+
+        animationCross
+
+            .to("#panSup1", { rotateZ: 45, scaleX: 1.4 })
+            .to("#panSub1", { rotateZ: -45, scaleX: 1.4 }, "<")
+            .to("#panSup2", { rotateZ: -45, scaleX: 1.4 }, "<")
+            .to("#panSub2", { rotateZ: 45, scaleX: 1.4 }, "<")
+            .to("#lateralMenu", { x: "-100%" }, "<")
+
+        menuCrossAnimation.current = animationCross;
+
+
         return () => {
             window.removeEventListener("resize", handleResize);
             ctx.revert();
             animationSalon.revert();
+            animationCross.revert();
         };
 
     }, [VIDEO_DURATION]);
 
     return {
-        infoSalonAnimation
+        infoSalonAnimation,
+        menuCrossAnimation
     };
 
 }

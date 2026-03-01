@@ -7,7 +7,7 @@
   --ycolor: #FF01AA;
   --lcolor: #000DFF;
   --h1size: min(8.8vw, 15lvh);
-  --h2size: min(4lvh, 5.7vw);
+  --h2size: min(4.5lvh, 7vw);
   --h3size: min(3.8lvh, 5vw);
   --h4size: min(3.8lvh, 4.2vw);
   --wsizeM: min(19vw);
@@ -68,9 +68,9 @@ body {
   margin: 0;
   box-sizing: border-box;
   background: var(--background);
-  scroll-behavior: auto;
   -webkit-overflow-scrolling: auto;
   background-color: #000000;
+  scroll-behavior: smooth;
 }
 
 body {

@@ -10,6 +10,7 @@ interface VideoProps {
     duration: number;
     video: string;
     handleInfoSalon: () => void;
+    setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const VisitCalina = ({
@@ -18,7 +19,8 @@ export const VisitCalina = ({
     frames,
     duration,
     video,
-    handleInfoSalon
+    handleInfoSalon,
+    setOpenMenu
 }: VideoProps) => {
 
     return (
@@ -50,7 +52,10 @@ export const VisitCalina = ({
                     </div>
                     <button
                         className='flex mt-4 rounded-full bg-white px-8 py-4 text-black justify-center mt-5 font-bold'
-                        onClick={() => handleInfoSalon()}
+                        onClick={() => {
+                            handleInfoSalon();
+                            setOpenMenu(false);
+                        }}
                     >
                         Descubre Calina
                     </button>

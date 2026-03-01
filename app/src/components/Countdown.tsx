@@ -90,55 +90,53 @@ export const Countdown = () => {
     }, [isMounted]);
 
     return (
-        <>
-            <div className="relative h-lvh w-full overflow-hidden">
-                <div id="backgroundLoading" className="absolute bottom-0 h-lvh w-full bg-cover bg-center bg-no-repeat scale-110"></div>
-                <div id="backgroundChar" className="absolute bottom-0 h-[80lvh] w-full bg-cover bg-bottom bg-no-repeat"></div>
-                <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                        background: "radial-gradient(ellipse 80% 50% at center, rgba(0,0,0,0) 10%, rgba(0,0,0,1) 100%)"
-                    }}
-                ></div>
-                {isMounted
-                    ? <div className="absolute top-[5lvh] h-[85lvh] flex flex-col w-full items-center justify-between">
-                        <div className="flex">
-                            <div className="text-center text-white font-(family-name:--fontBold) text-[40px]">
-                                {dias === "0" ?
-                                    ""
-                                    : dias === "1" ?
-                                        <p>{dias} <span className="text-[24px]">día</span>,</p>
-                                        : <p>{dias} <span className="text-[24px]">días</span>,</p>
+        <div id="countdown" className="relative h-lvh w-full overflow-hidden">
+            <div id="backgroundLoading" className="absolute bottom-0 h-lvh w-full bg-cover bg-center bg-no-repeat scale-110"></div>
+            <div id="backgroundChar" className="absolute bottom-0 h-[80lvh] w-full bg-cover bg-bottom bg-no-repeat"></div>
+            <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    background: "radial-gradient(ellipse 80% 50% at center, rgba(0,0,0,0) 10%, rgba(0,0,0,1) 100%)"
+                }}
+            ></div>
+            {isMounted
+                ? <div className="absolute top-[5lvh] h-[85lvh] flex flex-col w-full items-center justify-between">
+                    <div className="flex">
+                        <div className="text-center text-white font-(family-name:--fontBold) text-[40px]">
+                            {dias === "0" ?
+                                ""
+                                : dias === "1" ?
+                                    <p>{dias} <span className="text-[24px]">día</span>,</p>
+                                    : <p>{dias} <span className="text-[24px]">días</span>,</p>
 
-                                }
-                                <div className="flex align-bottom">
-                                    <p>{horas}<span className="text-[24px]">hs</span>&nbsp;</p>
-                                    <p>{minutos}<span className="text-[24px]">min</span>&nbsp;</p>
-                                    <p>{segundos}<span className="text-[24px]">s</span></p>
-                                </div>
+                            }
+                            <div className="flex align-bottom">
+                                <p>{horas}<span className="text-[24px]">hs</span>&nbsp;</p>
+                                <p>{minutos}<span className="text-[24px]">min</span>&nbsp;</p>
+                                <p>{segundos}<span className="text-[24px]">s</span></p>
                             </div>
                         </div>
-                        <div>
-                            <div className="flex items-center text-white">
-                                <div id="loadingRingContainer" className="w-[24px] h-[24px] relative">
-                                    <Image
-                                        src={loadRing}
-                                        alt=""
-                                        id="loadingRing"
-                                        className="w-[24px] absolute bottom-0"
-                                    />
-                                </div>
-                                <p className="font-(family-name:--fontBold) text-[24px] ms-3">
-                                    Loading wedding
-                                </p>
-
-                            </div>
-                        </div>
-
                     </div>
-                    : <div>Calculando los dias</div>
-                }
-            </div >
-        </>
+                    <div>
+                        <div className="flex items-center text-white">
+                            <div id="loadingRingContainer" className="w-[24px] h-[24px] relative">
+                                <Image
+                                    src={loadRing}
+                                    alt=""
+                                    id="loadingRing"
+                                    className="w-[24px] absolute bottom-0"
+                                />
+                            </div>
+                            <p className="font-(family-name:--fontBold) text-[24px] ms-3">
+                                Loading wedding
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+                : <div>Calculando los dias</div>
+            }
+        </div >
     )
 }

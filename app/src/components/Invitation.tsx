@@ -1,7 +1,6 @@
 'use client'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { HeroSection } from './HeroSection';
 import { VideoSection } from './VideoSection';
@@ -13,6 +12,7 @@ import { useInvitationAnimations } from '../hooks/useInvitationAnimations'
 import { Countdown } from './Countdown'
 import { FooterConfirm } from './FooterConfirm'
 import { InfoSalon } from './InfoSalon'
+import { MenuComponent } from './MenuComponent'
 
 export interface ArrayElements {
     id: number;
@@ -65,6 +65,8 @@ export const Invitation = ({
     const v2Progress = useRef({ t: 0 });
     const vCalinaProgress = useRef({ t: 0 });
 
+    const [openMenu, setOpenMenu] = useState<boolean>(false)
+
     useEffect(() => {
         const allFrames = [...video1Frames, ...video2Frames];
 
@@ -116,7 +118,10 @@ export const Invitation = ({
         };
     }, []);
 
-    const { infoSalonAnimation } = useInvitationAnimations({
+    const {
+        infoSalonAnimation,
+        menuCrossAnimation
+    } = useInvitationAnimations({
         mainRef,
         presentation,
         leoSection,
@@ -144,8 +149,29 @@ export const Invitation = ({
         }
     }
 
+    useEffect(() => {
+        if (!menuCrossAnimation.current) return
+
+        if (openMenu) {
+            menuCrossAnimation.current.restart();
+            window.dispatchEvent(new CustomEvent('lock-scroll'));
+        } else {
+            menuCrossAnimation.current.reversed(true);
+            window.dispatchEvent(new CustomEvent('unlock-scroll'));
+        }
+    }, [openMenu])
+
+
     return (
         <div ref={mainRef} className='bg-black'>
+            <button className='fixed top-5 right-5 w-12 h-12 z-49' onClick={() => setOpenMenu(prev => !prev)}>
+                <div className='w-6 h-3 justify-self-center relative'>
+                    <span id='panSup1' className='absolute bg-white w-3 h-1 block top-[6px] -translate-y-2 origin-center left-0'></span>
+                    <span id='panSub1' className='absolute bg-white w-3 h-1 block bottom-[6px] translate-y-2 origin-center left-0'></span>
+                    <span id='panSup2' className='absolute bg-white w-3 h-1 block top-[6px] -translate-y-2 origin-center right-0'></span>
+                    <span id='panSub2' className='absolute bg-white w-3 h-1 block bottom-[6px] translate-y-2 origin-center right-0'></span>
+                </div>
+            </button>
             <div ref={presentation} className="w-full h-[300lvh]">
                 <HeroSection id="heroSection" />
             </div>
@@ -193,6 +219,7 @@ export const Invitation = ({
                     duration={VIDEO_DURATION}
                     video={'salon'}
                     handleInfoSalon={handleInfoSalon}
+                    setOpenMenu={setOpenMenu}
                 />
 
                 <Countdown />
@@ -217,6 +244,11 @@ export const Invitation = ({
                 handleBackInfo={handleBackInfo}
             />
 
-        </div>
+            <MenuComponent
+                data={data}
+                setOpenMenu={setOpenMenu}
+            />
+
+        </div >
     );
 };
