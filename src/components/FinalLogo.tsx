@@ -1,5 +1,5 @@
 'use client'
-import '@/app/src/styles/invitation.css'
+import '@/src/styles/invitation.css'
 import Image from 'next/image';
 import logoCasamiento from '../assets/images/logoCasamiento.svg'
 import { useEffect, useState } from 'react';

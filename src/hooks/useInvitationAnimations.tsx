@@ -153,7 +153,7 @@ export const useInvitationAnimations = ({
                 }, "transicionVideo+=1.5")
 
                 .to('#video1', { autoAlpha: 1, duration: 0.5 }, 'transicionVideo+=2.5')
-                .addLabel("text1Appear")
+                .addLabel("LeoAppear")
                 .to(v1Progress.current, {
                     t: VIDEO_DURATION, duration: 8, ease: "none",
                 }, 'transicionVideo')
@@ -161,8 +161,8 @@ export const useInvitationAnimations = ({
                     WebkitMaskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     duration: 4
-                }, "text1Appear")
-                .to('#video1', { autoAlpha: 0, duration: 1 }, "text1Appear+=2.8")
+                }, "LeoAppear")
+                .to('#video1', { autoAlpha: 0, duration: 1 }, "LeoAppear+=2.8")
 
             const yaniTl = gsap.timeline({
                 scrollTrigger: {
@@ -178,7 +178,7 @@ export const useInvitationAnimations = ({
 
             yaniTl
                 .to('#video2', { autoAlpha: 1, duration: 0.5 })
-                .addLabel("text2Appear")
+                .addLabel("yaniAppear")
                 .to(v2Progress.current, {
                     t: VIDEO_DURATION, duration: 4, ease: "none",
                 }, '-=0.75')
@@ -186,9 +186,9 @@ export const useInvitationAnimations = ({
                     WebkitMaskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     duration: 4
-                }, "text2Appear+=0.2")
-                .to('#video2', { autoAlpha: 0, duration: 1 }, "text2Appear+=2.2")
-                .to('#text2', { autoAlpha: 0, duration: 1 }, "text2Appear+=3")
+                }, "yaniAppear+=0.2")
+                .to('#video2', { autoAlpha: 0, duration: 1 }, "yaniAppear+=2.2")
+                .to('#Yani', { autoAlpha: 0, duration: 1 }, "yaniAppear+=3")
 
 
             const catalinaTl = gsap.timeline({

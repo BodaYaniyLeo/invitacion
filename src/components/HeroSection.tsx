@@ -3,7 +3,7 @@ import backHero from '../assets/images/hero/backHero.webp'
 import frontHero from '../assets/images/hero/frontHero.webp'
 import textHero from '../assets/images/hero/logoHero.svg'
 import logoCasamiento from '../assets/images/hero/logoCasamiento.svg'
-import '@/app/src/styles/invitation.css'
+import '@/src/styles/invitation.css'
 
 interface HeroProps {
     id: string;

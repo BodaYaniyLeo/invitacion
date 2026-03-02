@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image';
-import '@/app/src/styles/invitation.css'
+import '@/src/styles/invitation.css'
 import ingresoCalina from '../assets/images/salon/calina.webp'
 import arrowLeft from '../assets/images/salon/arrowLeft.webp'
 import { useEffect, useState } from 'react';

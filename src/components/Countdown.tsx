@@ -2,16 +2,16 @@
 
 import { useEffect, useLayoutEffect, useState } from "react"
 import { gsap } from 'gsap'
-import rings from "@/app/src/assets/images/countdown/ringsIcon1.svg"
-import loadRing from "@/app/src/assets/images/countdown/loadRing.svg"
-import auto from "@/app/src/assets/images/countdown/auto.webp"
-import bolso from "@/app/src/assets/images/countdown/bolso.webp"
-import bote from "@/app/src/assets/images/countdown/bote.webp"
-import viejo from "@/app/src/assets/images/countdown/viejo.webp"
-import bgAuto from "@/app/src/assets/images/countdown/bgAuto.webp"
-import bgBolso from "@/app/src/assets/images/countdown/bgBolso.webp"
-import bgBote from "@/app/src/assets/images/countdown/bgBote.webp"
-import bgViejo from "@/app/src/assets/images/countdown/bgViejo.webp"
+import rings from "@/src/assets/images/countdown/ringsIcon1.svg"
+import loadRing from "@/src/assets/images/countdown/loadRing.svg"
+import auto from "@/src/assets/images/countdown/auto.webp"
+import bolso from "@/src/assets/images/countdown/bolso.webp"
+import bote from "@/src/assets/images/countdown/bote.webp"
+import viejo from "@/src/assets/images/countdown/viejo.webp"
+import bgAuto from "@/src/assets/images/countdown/bgAuto.webp"
+import bgBolso from "@/src/assets/images/countdown/bgBolso.webp"
+import bgBote from "@/src/assets/images/countdown/bgBote.webp"
+import bgViejo from "@/src/assets/images/countdown/bgViejo.webp"
 import Image from "next/image"
 
 export const Countdown = () => {

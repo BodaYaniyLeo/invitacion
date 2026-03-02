@@ -1,4 +1,4 @@
-import '@/app/src/styles/invitation.css'
+import '@/src/styles/invitation.css'
 
 export const Intro = () => {
     return (

@@ -1,5 +1,5 @@
 'use client'
-import '@/app/src/styles/invitation.css'
+import '@/src/styles/invitation.css'
 import { ArrayElements } from './Invitation';
 
 interface MenuProps {
@@ -21,9 +21,10 @@ export const MenuComponent = ({
         >
             <div className='flex flex-col uppercase mt-15 self-start'>
                 <p className='text-[length:var(--h2size)] font-[family-name:var(--fontBold)]'>Acceso rápido</p>
-                <a onClick={() => setOpenMenu(false)} href='#text1' className='text-[length:var(--h3size)] mb-3'>Leo</a>
-                <a onClick={() => setOpenMenu(false)} href='#text2' className='text-[length:var(--h3size)] mb-3'>Yani</a>
-                <a onClick={() => setOpenMenu(false)} href='#' className='text-[length:var(--h3size)] mb-3'>Itinerario</a>
+                <a onClick={() => setOpenMenu(false)} href='#' className='text-[length:var(--h3size)] mb-3'>Inicio</a>
+                <a onClick={() => setOpenMenu(false)} href='#Leo' className='text-[length:var(--h3size)] mb-3'>Leo</a>
+                <a onClick={() => setOpenMenu(false)} href='#Yani' className='text-[length:var(--h3size)] mb-3'>Yani</a>
+                <a onClick={() => setOpenMenu(false)} href='#itinerary' className='text-[length:var(--h3size)] mb-3'>Itinerario</a>
                 <a onClick={() => setOpenMenu(false)} href={urlMaps} target='_blank' className='text-[length:var(--h3size)]  mb-3'>Abrir google maps</a>
                 <a onClick={() => setOpenMenu(false)} href='#' className='text-[length:var(--h3size)] mb-3'>Código de vestimenta</a>
                 <a onClick={() => setOpenMenu(false)} href='#' className='text-[length:var(--h3size)] mb-3'>Regalos</a>

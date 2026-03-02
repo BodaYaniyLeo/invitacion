@@ -1,5 +1,5 @@
 'use client'
-import '@/app/src/styles/invitation.css'
+import '@/src/styles/invitation.css'
 import { useEffect, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
 import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';

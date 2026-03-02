@@ -1,5 +1,5 @@
 import { createServerSupabaseClient } from "@/app/lib/supabase/server"
-import { Invitation } from "../src/components/Invitation"
+import { Invitation } from "@/src/components/Invitation"
 
 export default async function Page({
     params,

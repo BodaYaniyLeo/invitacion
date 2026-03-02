@@ -1,4 +1,5 @@
 'use client'
+
 import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import Lenis from 'lenis'
@@ -13,6 +14,14 @@ import { Countdown } from './Countdown'
 import { FooterConfirm } from './FooterConfirm'
 import { InfoSalon } from './InfoSalon'
 import { MenuComponent } from './MenuComponent'
+
+import dynamic from 'next/dynamic';
+import { Itinerary } from './Itinerary';
+
+const MapComponent = dynamic(() => import('./MapComponent'), {
+    ssr: false,
+    loading: () => <div className="h-[500px] bg-zinc-900 animate-pulse flex items-center justify-center text-white">Cargando mapa...</div>
+});
 
 export interface ArrayElements {
     id: number;
@@ -164,7 +173,9 @@ export const Invitation = ({
 
     return (
         <div ref={mainRef} className='bg-black'>
-            <button className='fixed top-5 right-5 w-12 h-12 z-49' onClick={() => setOpenMenu(prev => !prev)}>
+
+
+            <button className='fixed top-5 right-5 w-12 h-12 z-49 rounded-full' onClick={() => setOpenMenu(prev => !prev)}>
                 <div className='w-6 h-3 justify-self-center relative'>
                     <span id='panSup1' className='absolute bg-white w-3 h-1 block top-[6px] -translate-y-2 origin-center left-0'></span>
                     <span id='panSub1' className='absolute bg-white w-3 h-1 block bottom-[6px] translate-y-2 origin-center left-0'></span>
@@ -190,7 +201,7 @@ export const Invitation = ({
                 </div>
 
                 <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center pointer-events-none">
-                    <TextLayer id="text1" title="Leo" subtitle="Historia" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
+                    <TextLayer id="Leo" title="Leo" subtitle="Historia" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
                 </div>
             </div>
 
@@ -207,7 +218,7 @@ export const Invitation = ({
                 </div>
 
                 <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center pointer-events-none">
-                    <TextLayer id="text2" title="Yani" subtitle="Sueño" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
+                    <TextLayer id="Yani" title="Yani" subtitle="Sueño" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
                 </div>
             </div>
 
@@ -221,6 +232,8 @@ export const Invitation = ({
                     handleInfoSalon={handleInfoSalon}
                     setOpenMenu={setOpenMenu}
                 />
+                
+                <Itinerary />
 
                 <Countdown />
 

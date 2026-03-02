@@ -183,11 +183,17 @@ a {
     width: 100%;
 }
 
-#text1,
-#text2,
+#Leo,
+#Yani,
 #containerTextOrg,
 #finalAnimation {
     will-change: transform, opacity;
     backface-visibility: hidden;
     transform: translateZ(0);
+}
+
+.imageBg {
+
+    border-radius: 12px;
+    transition: none;
 }
