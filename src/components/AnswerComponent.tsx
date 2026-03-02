@@ -22,6 +22,7 @@ export const AnswerComponent = ({
                 ...copy[index],
                 confirm: newValue
             }
+            
             return copy
         })
     }
