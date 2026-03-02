@@ -193,7 +193,7 @@ a {
 }
 
 .imageBg {
-
+    --mask-size: 0vh;
     border-radius: 12px;
     transition: none;
 }

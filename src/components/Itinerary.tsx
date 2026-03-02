@@ -101,7 +101,6 @@ export const Itinerary = () => {
                             height="70"
                             className="scale-125 imageBg"
                             style={{
-                                "--mask-size": `0vh`,
                                 backgroundImage: `radial-gradient(at 100% 0%,rgba(0, 0, 0, 0) 0vh, rgba(255, 255, 255, 0.1) var(--mask-size))`
                             }}
                         />
