@@ -197,3 +197,17 @@ a {
     border-radius: 12px;
     transition: none;
 }
+
+.dressSelector {
+    background-image: url('../assets/images/dress/bgSelector.svg');
+}
+
+.minus {
+    rotate: -90deg;
+    transition: all 0.5s ease;
+}
+
+.minus.active {
+    rotate: 0deg;
+    transition: all 0.5s ease;
+}

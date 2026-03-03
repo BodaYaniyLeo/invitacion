@@ -17,6 +17,7 @@ import { MenuComponent } from './MenuComponent'
 
 import dynamic from 'next/dynamic';
 import { Itinerary } from './Itinerary';
+import { DressCode } from './DressCode';
 
 const MapComponent = dynamic(() => import('./MapComponent'), {
     ssr: false,
@@ -41,6 +42,7 @@ export interface VideoProps {
 
 type slugObj = {
     sleep: boolean;
+    church: boolean;
 }
 
 type dataInv = {
@@ -174,7 +176,7 @@ export const Invitation = ({
     return (
         <div ref={mainRef} className='bg-black'>
 
-
+            {/* <DressCode /> */}
             <button className='fixed top-5 right-5 w-12 h-12 z-49 rounded-full' onClick={() => setOpenMenu(prev => !prev)}>
                 <div className='w-6 h-3 justify-self-center relative'>
                     <span id='panSup1' className='absolute bg-white w-3 h-1 block top-[6px] -translate-y-2 origin-center left-0'></span>
@@ -232,8 +234,12 @@ export const Invitation = ({
                     handleInfoSalon={handleInfoSalon}
                     setOpenMenu={setOpenMenu}
                 />
-                
-                <Itinerary />
+
+                <Itinerary
+                    data={data}
+                />
+
+                <DressCode />
 
                 <Countdown />
 

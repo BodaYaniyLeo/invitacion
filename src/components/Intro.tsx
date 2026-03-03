@@ -6,7 +6,7 @@ export const Intro = () => {
             id='containerTextOrg'
             className="absolute h-lvh inset-0 z-10 opacity-0 flex flex-col items-center justify-center overflow-hidden"
         >
-            <div id='textOrg' className='flex flex-col h-full justify-center px-[10vw] scale-125'>
+            <div id='textOrg' className='flex flex-col h-[110lvh] justify-center scale-115'>
                 <div id='textOrgInner'>
                     <h2>Córdoba,<br />Argentina</h2>
                     <p className='w-full text-base/8 mt-6'>

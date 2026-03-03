@@ -15,7 +15,8 @@ export default async function Page({
         .from("guests")
         .select(`*,
             slug(
-            sleep)
+            sleep,
+            church)
             `)
         .eq("slug", id)
 
