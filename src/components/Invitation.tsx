@@ -15,39 +15,18 @@ import { FooterConfirm } from './FooterConfirm'
 import { InfoSalon } from './InfoSalon'
 import { MenuComponent } from './MenuComponent'
 
-import dynamic from 'next/dynamic';
+import { ArrayElements } from '@/app/page'
+import { dataInv } from '@/app/page'
+
 import { Itinerary } from './Itinerary';
 import { DressCode } from './DressCode';
-
-const MapComponent = dynamic(() => import('./MapComponent'), {
-    ssr: false,
-    loading: () => <div className="h-[500px] bg-zinc-900 animate-pulse flex items-center justify-center text-white">Cargando mapa...</div>
-});
-
-export interface ArrayElements {
-    id: number;
-    name: string;
-    lastname: string;
-    payment_coverage: number;
-    state: string;
-    confirm: boolean;
-    room: number;
-    slug: slugObj;
-}
 
 export interface VideoProps {
     id: string;
     data: ArrayElements[];
 }
 
-type slugObj = {
-    sleep: boolean;
-    church: boolean;
-}
 
-type dataInv = {
-    data: ArrayElements[]
-}
 
 const makeFrames = (prefix: string, ext: string, count: number): string[] =>
     Array.from({ length: count }, (_, i) =>
@@ -175,9 +154,7 @@ export const Invitation = ({
 
     return (
         <div ref={mainRef} className='bg-black'>
-
-            {/* <DressCode /> */}
-            <button className='fixed top-5 right-5 w-12 h-12 z-49 rounded-full' onClick={() => setOpenMenu(prev => !prev)}>
+            <button className='fixed top-5 right-5 w-12 h-12 z-70 rounded-full' onClick={() => setOpenMenu(prev => !prev)}>
                 <div className='w-6 h-3 justify-self-center relative'>
                     <span id='panSup1' className='absolute bg-white w-3 h-1 block top-[6px] -translate-y-2 origin-center left-0'></span>
                     <span id='panSub1' className='absolute bg-white w-3 h-1 block bottom-[6px] translate-y-2 origin-center left-0'></span>
@@ -267,7 +244,6 @@ export const Invitation = ({
                 data={data}
                 setOpenMenu={setOpenMenu}
             />
-
         </div >
     );
 };

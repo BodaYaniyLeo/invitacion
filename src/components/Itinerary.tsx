@@ -10,7 +10,8 @@ import coffe from "@/src/assets/images/itinerary/coffe.svg"
 import Image, { StaticImageData } from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
-import { ArrayElements } from './Invitation';
+import { ArrayElements } from '@/app/page'
+
 
 interface MenuProps {
     data: ArrayElements[];
@@ -87,12 +88,15 @@ export const Itinerary = ({
     }, [data])
 
     useLayoutEffect(() => {
+
+        if (!idSelected.length) return
+
         gsap.registerPlugin(ScrollTrigger);
 
         const ctx = gsap.context(() => {
 
 
-            ids.forEach(id => {
+            idSelected.forEach(id => {
                 const tl = gsap.timeline({
                     paused: true,
                     scrollTrigger: {

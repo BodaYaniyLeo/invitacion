@@ -3,7 +3,8 @@ import '@/src/styles/invitation.css'
 import Image from 'next/image';
 import logoCasamiento from '../assets/images/logoCasamiento.svg'
 import { useEffect, useState } from 'react';
-import { ArrayElements, VideoProps } from './Invitation'
+import { VideoProps } from '@/src/components/Invitation';
+import { ArrayElements } from '@/app/page'
 
 export const FinalLogo = ({
     data,

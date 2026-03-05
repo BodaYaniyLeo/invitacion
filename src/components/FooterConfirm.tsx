@@ -3,7 +3,8 @@ import '@/src/styles/invitation.css'
 import { useEffect, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
 import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
-import { ArrayElements, VideoProps } from './Invitation'
+import { VideoProps } from '@/src/components/Invitation';
+import { ArrayElements } from '@/app/page'
 
 export const FooterConfirm = ({
     id,

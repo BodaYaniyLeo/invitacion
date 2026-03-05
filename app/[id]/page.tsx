@@ -1,5 +1,5 @@
 import { createServerSupabaseClient } from "@/app/lib/supabase/server"
-import { Invitation } from "@/src/components/Invitation"
+import Home from "../page"
 
 export default async function Page({
     params,
@@ -24,5 +24,5 @@ export default async function Page({
         return <div>Grupo no encontrado</div>
     }
 
-    return <Invitation data={data} />
+    return <Home data={data} />
 }

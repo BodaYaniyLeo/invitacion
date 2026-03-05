@@ -116,7 +116,7 @@ export const useInvitationAnimations = ({
                 }
             });
 
-            leoTl.set('#containerTextOrg', { backdropFilter: "blur(15px)", webkitBackdropFilter: "blur(15px)" });
+            leoTl.set('#containerTextOrg', { backdropFilter: "blur(15px)" });
 
             leoTl
                 .fromTo('#containerTextOrg',
@@ -146,7 +146,6 @@ export const useInvitationAnimations = ({
                     duration: 0.6
                 }, "transicionVideo+=3")
                 .to('#containerTextOrg', {
-                    webkitBackdropFilter: "blur(0px)",
                     backdropFilter: "blur(0px)",
                     duration: 3,
                     ease: "power1.inOut",
@@ -230,7 +229,7 @@ export const useInvitationAnimations = ({
         animationSalon.set("#infoSalon", { x: "90%", autoAlpha: 0 })
 
         animationSalon
-            .to("#lateralMaps", { zIndex: 50 })
+            .to("#lateralMaps", { zIndex: 80 })
             .to("#lateralMaps", { autoAlpha: 1, duration: 0.3 })
             .to("#infoSalon, #photoSalon", { autoAlpha: 1, duration: 0.3 }, "<")
             .to("#infoSalon", { x: 0, duration: 0.3 }, "<")

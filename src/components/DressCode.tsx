@@ -3,28 +3,14 @@
 import { useEffect, useState } from "react"
 import { gsap } from 'gsap'
 import Image, { StaticImageData } from "next/image"
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import model from "@/src/assets/images/dress/model.png"
-import camisa1 from "@/src/assets/images/dress/camisa.png"
-import camisa2 from "@/src/assets/images/dress/camisa2.png"
-import panuelo from "@/src/assets/images/dress/panuelo.png"
-import corbata from "@/src/assets/images/dress/corbata.png"
-import mono from "@/src/assets/images/dress/mono.png"
-import pantalon1 from "@/src/assets/images/dress/pantalon.png"
-import pantalon2 from "@/src/assets/images/dress/pantalon2.png"
-import saco1 from "@/src/assets/images/dress/saco.png"
-import saco2 from "@/src/assets/images/dress/saco2.png"
 import minus from "@/src/assets/images/dress/minus.png"
+
+import iconManiqui from "@/src/assets/images/dress/iconManiqui.svg"
+import fondo from "@/src/assets/images/dress/fondoSalon.png"
+
 import '@/src/styles/invitation.css'
-
-interface timeline {
-    [key: string]: gsap.core.Timeline | null,
-    church: gsap.core.Timeline | null,
-    martini: gsap.core.Timeline | null,
-    ring: gsap.core.Timeline | null,
-    music: gsap.core.Timeline | null
-}
-
+import { DressCodeHe } from "./DressCodeHe"
+import { DressCodeShe } from "./DressCodeShe"
 
 interface Option {
     name: string,
@@ -35,185 +21,144 @@ interface Category {
     [key: string]: Option[];
 }
 
+interface VestimentaF {
+    Vestido: StaticImageData | null | string;
+    Blusa: StaticImageData | string;
+    Pantalón: StaticImageData | string;
+}
+
+interface VestimentaM {
+    Camisa: StaticImageData | string;
+    Saco: StaticImageData | string;
+    Pantalón: StaticImageData | string;
+    Accesorios: StaticImageData | string | null;
+}
+
+interface selectedOrNot {
+    [key: string]: string | null;
+}
+
 export const DressCode = () => {
 
-    const modelArray1: Category[] = [
-        {
-            Camisa: [
-                { name: "Camisa lisa", img: camisa1 },
-                { name: "Camisa cuadros", img: camisa2 }
-            ]
-        },
-        {
-            Saco:
-                [
-                    { name: "Saco gris", img: saco1 },
-                    { name: "Saco negro", img: saco2 }
-                ],
-        },
-        {
-            Pantalón: [
-                { name: "Pantalón gris", img: pantalon1 },
-                { name: "Pantalón negro", img: pantalon2 }
-            ]
-        },
-        {
-            Accesorios: [
-                { name: "Corbata", img: corbata },
-                { name: "Moño", img: mono }
-            ]
-        },
-        {
-            Extras: [
-                { name: "Pañuelo", img: panuelo },
-                { name: "Sin pañuelo", img: null }
-            ]
-        },
-    ];
+    const [maniquiSelect, setManiquiSelect] = useState<selectedOrNot>({ selected: null, noSelected: null })
 
-    const [vestimenta, setVestimenta] = useState({
-        Camisa: camisa1,
-        Pantalón: pantalon1,
-        Extras: null,
-        Accesorios: mono,
-        Saco: saco1
-    })
+    const widthOpposite = (idSelected: string, idNoSelected: string) => {
 
-    const [section, setSection] = useState<string | null>()
+        const mask = `linear-gradient(to right, black 20%, transparent 75%), linear-gradient(to bottom, transparent, black 70%, black 0%, transparent 100%)`
+        const tl = gsap.timeline({ ease: "power2.out" })
 
-    useEffect(() => {
-        modelArray1.forEach(e => {
-            const id = Object.keys(e)[0]
+        tl
+            .to(`#maniqui${idNoSelected}`, {
+                autoAlpha: 0,
+                duration: 0.2,
+            })
+            .to(`#maniquiHe`, {
+                x: "-100%",
+                duration: 0.3,
+            })
+            .to(`#maniqui${idNoSelected}`, {
+                display: "none"
+            }, "<")
+            .to("#iconChange", {
+                autoAlpha: 1
+            }, "<")
+            .to("#salonBack", {
+                maskImage: mask,
+                WebkitMaskImage: mask,
+                WebkitMaskComposite: 'source-in',
+                autoAlpha: 1,
+                duration: 1,
+            }, "<")
+            .to(`#selector${idSelected}`, {
+                autoAlpha: 1,
+                duration: 3,
+            }, "-=0.3")
 
-            if (section === id) {
-                gsap.to(`#${id}`, {
-                    height: "auto",
-                    duration: 0.5,
-                    ease: "power2.out",
-                    opacity: 1
-                })
-            } else {
-                gsap.to(`#${id}`, {
-                    height: 0,
-                    duration: 0.5,
-                    ease: "power2.out",
-                    opacity: 1
-                })
-            }
-
+        setManiquiSelect({
+            selected: idSelected,
+            noSelected: idNoSelected
         })
 
-    }, [section])
-
-    const changeClothes = (key: string, value: StaticImageData | null | string) => {
-        setVestimenta(prev => ({
-            ...prev, [key]: value
-        }))
     }
 
+    const changeManiqui = (hiManiqui: string | null, byeManiqui: string | null) => {
+
+        const tl = gsap.timeline({ ease: "power2.out" })
+
+        tl
+            .to(`#maniqui${byeManiqui}`, {
+                autoAlpha: 0,
+                duration: 0.5,
+            })
+            .to(`#maniqui${byeManiqui}`, {
+                display: "none",
+            })
+            .to(`#maniqui${hiManiqui}`, {
+                display: "block"
+            }, "<")
+            .to(`#maniqui${hiManiqui}`, {
+                autoAlpha: 1,
+                duration: 0.5,
+            }, "<")
+
+        setManiquiSelect({
+            selected: hiManiqui,
+            noSelected: byeManiqui
+        })
+    }
+
+
     return (
-        <div id="dresscode" className='h-lvh content-center'>
-            <div className="relative h-full">
-                <h2 className='text-center text-white font-(family-name:--fontBold) text-[40px] mb-4'>Código de vestimenta</h2>
-                <div className="w-[40vw] ms-4 border">
-                    <div className="text-center dressSelector px-1 py-2">
-                        <h3 className="font-bold">Formal sport</h3>
-                    </div>
-                    <div className="flex justify-between px-1 border-y py-[2px]">
-                        <h4 className="text-[#79b0cc]">Elige tu estilo</h4>
-                    </div>
-                    <div className="px-1">
-
-                        {modelArray1.map((category, i) => {
-                            const categoryName = Object.keys(category)[0];
-
-                            const options = category[categoryName];
-
-                            return (
-                                <div key={i}>
-                                    <button
-                                        onClick={() => setSection(prev => prev === categoryName ? null : categoryName)}
-                                        className="flex justify-between w-full"
-                                    >
-                                        <h3 className="font-bold">{categoryName}</h3>
-                                        <div className="relative w-[4vw] self-center">
-                                            <span className="block">
-                                                <Image
-                                                    src={minus}
-                                                    alt=""
-                                                />
-                                            </span>
-                                            <span className={`absolute top-0 left-0 w-[4vw] minus ${section === categoryName && "active"}`}>
-                                                <Image
-                                                    src={minus}
-                                                    alt=""
-                                                />
-                                            </span>
-                                        </div>
-                                    </button>
-                                    <div id={categoryName} className="h-0 overflow-hidden">
-                                        {options.map((option) => (
-                                            <button
-                                                className="w-full text-left my-[2px]"
-                                                onClick={() => changeClothes(categoryName, option.img)}
-                                                key={option.name}
-                                            >
-                                                {option.name}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                            );
-                        })}
+        <div id="dresscode" className='overflow-hidden h-lvh w-vw flex flex-col relative'>
+            <h2 className='text-center text-white font-(family-name:--fontBold) text-[40px] tracking-[-.04em]'>
+                Código de vestimenta
+            </h2>
+            <h4 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size)'>
+                Formal sport
+            </h4>
+            <div className="w-[100vw] relative h-full flex content-center overflow-hidden">
+                < div id="iconChange" className="absolute bottom-10 right-[4vw] text-center z-39 opacity-0 invisible">
+                    <div onClick={() => changeManiqui(maniquiSelect.noSelected, maniquiSelect.selected)}
+                    >
+                        <Image
+                            src={iconManiqui}
+                            alt=""
+                            className="w-[15vw]"
+                        />
 
                     </div>
                 </div>
+                <div
+                    id="salonBack"
+                    className="w-[100vw] absolute bottom-0 -z-1 opaciti-0 invisible"
+                >
+                    <Image
+                        src={fondo}
+                        alt=""
+                        className="inset-0 z-30"
+                        loading="eager"
 
-                <div className="absolute left-[50vw] bottom-[0lvh] h-[75lvh]">
-                    <div className="relative">
-                        <Image
-                            src={model}
-                            alt=""
-                            className="h-[75lvh] w-auto top-0 left-0"
-                            loading="eager"
-                        />
-                        <Image
-                            src={vestimenta.Camisa}
-                            alt=""
-                            className="h-[75lvh] w-auto absolute top-0 left-0  z-41"
-                            loading="eager"
-                        />
-                        <Image
-                            src={vestimenta.Accesorios}
-                            alt=""
-                            className="h-[75lvh] w-auto absolute top-0 left-0 z-42"
-                            loading="eager"
-                        />
-                        <Image
-                            src={vestimenta.Pantalón}
-                            alt=""
-                            className="h-[75lvh] w-auto absolute top-0 left-0 z-43"
-                            loading="eager"
-                        />
-                        <Image
-                            src={vestimenta.Saco}
-                            alt=""
-                            className="h-[75lvh] w-auto absolute top-0 left-0 z-44"
-                            loading="eager"
-                        />
-                        {vestimenta.Extras &&
-                            <Image
-                                src={vestimenta.Extras}
-                                alt=""
-                                className="h-[75lvh] w-auto absolute top-0 left-0 z-45"
-                                loading="eager"
-                            />
-                        }
-                    </div>
+                    />
                 </div>
+                <DressCodeShe
+                    widthOpposite={widthOpposite}
+                />
+                <DressCodeHe
+                    widthOpposite={widthOpposite}
+                />
+                <div
+                    id="salonBack"
+                    className="w-[100vw] absolute bottom-0 -z-1 opacity-0 invisible"
+                >
+                    <Image
+                        src={fondo}
+                        alt=""
+                        className="inset-0 z-30"
+                        loading="eager"
 
-
+                    />
+                </div>
             </div>
-        </div>
+        </div >
     )
 }

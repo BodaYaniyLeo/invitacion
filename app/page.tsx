@@ -1,20 +1,59 @@
-"use client"
+'use client'
 
-import { useRouter } from 'next/navigation';
-import { useFetch } from '@/src/hooks/useFetch';
+import { useRef, useEffect, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { Invitation } from '@/src/components/Invitation';
 
-export default function Home() {
+export interface ArrayElements {
+  id: number;
+  name: string;
+  lastname: string;
+  payment_coverage: number;
+  state: string;
+  confirm: boolean;
+  room: number;
+  slug: slugObj;
+}
 
-  const router = useRouter();
+export type slugObj = {
+  sleep: boolean;
+  church: boolean;
+}
 
+export type dataInv = {
+  data: ArrayElements[]
+}
 
-  const { resBase } = useFetch()
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollToPlugin);
+}
+
+export default function Home({
+  data
+}: dataInv) {
+
+  const [preLoad, setPreLoad] = useState<boolean>(true)
+
+  useEffect(() => {
+
+    gsap.to(window, {
+      scrollTo: 0,
+      duration: 0.5,
+      onComplete: () => setPreLoad(false)
+    });
+  }, []);
 
   return (
-    <div className="h-lvh content-center justify-items-center">
-      
-    </div >
+    <>
+      {
+        preLoad
+          ? <div className='fixed inset-0'>Cargando</div>
+          : <Invitation
+            data={data}
+          />
+      }
+    </>
 
-  );
+  )
 }

@@ -39,7 +39,6 @@
     font-style: normal;
     font-size: var(--h1size);
     line-height: 86%;
-    letter-spacing: -.04em;
 }
 
 #priceData h4 {
@@ -51,7 +50,6 @@
     font-style: normal;
     font-size: var(--h3size);
     line-height: 86%;
-    letter-spacing: -.04em;
 }
 
 
@@ -64,7 +62,6 @@
     font-style: normal;
     font-size: var(--h4size);
     line-height: 86%;
-    letter-spacing: -.04em;
 }
 
 .choose.buttonConfirm {
@@ -138,7 +135,6 @@
     font-family: 'fontBold';
     font-style: normal;
     font-size: var(--h1size);
-    letter-spacing: -.04em;
 }
 
 .nameNovios h2 {
@@ -146,7 +142,6 @@
     font-size: min(var(--wsizeM), 110px);
     color: #fff9cb;
     font-style: normal;
-    letter-spacing: 0;
     line-height: .9;
     text-transform: uppercase;
 }

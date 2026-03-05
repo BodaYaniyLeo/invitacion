@@ -12,8 +12,11 @@
   --h4size: min(3.8lvh, 4.2vw);
   --wsizeM: min(19vw);
   --wsizeL: min(22vw);
+  --fontNormal: "fontNormal";
   --fontBold: "fontBold";
+  --fontSemiBold: "fontSemiBold";
   --textDesc: "textDesc";
+  --cursiveDress: "cursiveDress";
 }
 
 @theme inline {
@@ -63,6 +66,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'cursiveDress';
+  src: url('@/src/assets/fonts/cursiveDress.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 html,
 body {
   margin: 0;
@@ -76,4 +87,14 @@ body {
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+h2 {
+  letter-spacing: 0;
+}
+
+h3,
+h4,
+p {
+  letter-spacing: -.04em;
 }
