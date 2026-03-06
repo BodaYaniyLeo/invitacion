@@ -169,16 +169,16 @@ export const DressCodeShe = ({
                 </div>
             </div>
 
-            <div id="showcase" className="w-[50vw]"
+            <div id="showcase" className="w-[50vw] h-full"
 
             >
-                <div id="maniquiShe" className="h-full relative"
+                <div id="maniquiShe" className="h-full w-full relative content-center"
                     onClick={() => widthOpposite("She", "He")}
                 >
                     <Image
                         src={maniqui}
                         alt=""
-                        className="w-full z-30"
+                        className="w-full h-auto lg:w-auto lg:h-full z-30"
                         loading="eager"
                     />
 
@@ -187,13 +187,13 @@ export const DressCodeShe = ({
                             <Image
                                 src={vestimentaF.Blusa}
                                 alt=""
-                                className="w-full absolute top-0 left-0 z-41"
+                                className="w-full h-auto lg:w-auto lg:h-full absolute top-1/2 -translate-y-1/2 left-0 z-41"
                                 loading="eager"
                             />
                             <Image
                                 src={vestimentaF.Pantalón}
                                 alt=""
-                                className="w-full w-auto absolute top-0 left-0 z-43"
+                                className="w-full h-auto lg:w-auto lg:h-full absolute  top-1/2 -translate-y-1/2 left-0 z-43"
                                 loading="eager"
                             />
                         </>
@@ -202,7 +202,7 @@ export const DressCodeShe = ({
                         <Image
                             src={vestimentaF.Vestido}
                             alt=""
-                            className="w-full w-auto absolute top-0 left-0 z-42"
+                            className="w-full h-auto lg:w-auto lg:h-full absolute  top-1/2 -translate-y-1/2 left-0 z-42"
                             loading="eager"
                         />
                     }

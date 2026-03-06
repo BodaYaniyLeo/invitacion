@@ -26,10 +26,12 @@ export const HeroSection = ({ id }: HeroProps) => {
                     id='dateLogo'
                     className="absolute inset-0 z-20 opacity-0 flex flex-col items-center justify-center text-white"
                 >
-                    <Image id='logoDate' src={logoCasamiento} alt="Logo" className="z-22 w-[60vw]" />
-                    <h3 className='uppercase absolute z-2 text-center font-bold w-full text-base/8 mt-10 bottom-1/5'>
-                        Disponible<br />el 9 de enero<br />de 2027
-                    </h3>
+                    <div className='relative w-full'>
+                        <Image id='logoDate' src={logoCasamiento} alt="Logo" className="z-22 w-[60vw] max-w-[700px] justify-self-center" />
+                        <h3 className='uppercase absolute z-2 text-center font-bold w-full top-[110%]'>
+                            Disponible<br />el 9 de enero<br />de 2027
+                        </h3>
+                    </div>
                 </div>
 
             </div>

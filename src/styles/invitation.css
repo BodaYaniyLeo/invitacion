@@ -3,9 +3,9 @@
     -webkit-mask-image: url('../assets/images/hero/textHero.svg');
     mask-image: url('../assets/images/hero/textHero.svg');
     mask-repeat: no-repeat;
-    mask-position: center 40%;
-    -webkit-mask-position: center 40%;
-    mask-size: clamp(3500vh, 1500%, 0vh);
+    mask-position: center center;
+    -webkit-mask-position: center center;
+    mask-size: clamp(4500vh, 1500%, 0vh);
     transform-origin: center 50%;
     z-index: 30;
 }
@@ -21,7 +21,6 @@
     height: 100lvh;
     transform-origin: 50% 50%;
     z-index: 20;
-    padding-bottom: 15lvh;
     -webkit-mask-image: radial-gradient(circle at bottom center,
             rgba(0, 0, 0, 1) 0%,
             rgba(0, 0, 0, 0) 30%);
@@ -98,17 +97,13 @@
 }
 
 #textOrgInner h2 {
-    font-size: calc(var(--h2size) * 1.8);
     font-family: 'fontBold';
-    font-style: normal;
     letter-spacing: -.0125em;
     line-height: 100%;
 }
 
 #textOrgInner p {
     font-family: 'fontSemiBold';
-    font-size: var(--h2size);
-    font-style: normal;
     text-wrap: pretty;
     letter-spacing: -.03em;
     line-height: 120%;
@@ -139,20 +134,20 @@
 
 .nameNovios h2 {
     font-family: 'textDesc';
-    font-size: min(var(--wsizeM), 110px);
+    /* font-size: min(var(--wsizeM), 110px); */
     color: #fff9cb;
     font-style: normal;
     line-height: .9;
     text-transform: uppercase;
 }
 
-.nameNovios h4 {
+/* .nameNovios h4 {
     font-size: 8vw;
 }
 
 .nameNovios p {
     font-size: 4.5vw;
-}
+} */
 
 .section-text {
     background: linear-gradient(180deg,

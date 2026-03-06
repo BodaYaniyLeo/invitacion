@@ -6,6 +6,7 @@ import Image, { StaticImageData } from "next/image"
 
 import iconManiqui from "@/src/assets/images/dress/iconManiqui.svg"
 import fondo from "@/src/assets/images/dress/fondoSalon.png"
+import fondoComp from "@/src/assets/images/dress/fondoCompleto.png"
 
 import '@/src/styles/invitation.css'
 import { DressCodeHe } from "./DressCodeHe"
@@ -87,10 +88,10 @@ export const DressCode = () => {
 
     return (
         <div id="dresscode" className='overflow-hidden h-lvh w-vw flex flex-col relative'>
-            <h2 className='text-center text-white font-(family-name:--fontBold) text-[40px] tracking-[-.04em]'>
+            <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size) tracking-[-.04em]'>
                 Código de vestimenta
             </h2>
-            <h4 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size)'>
+            <h4 className='text-center text-white font-(family-name:--fontBold) text-(length:--h2size)'>
                 Formal sport
             </h4>
             <div className="w-[100vw] relative h-full flex content-center overflow-hidden">
@@ -100,19 +101,31 @@ export const DressCode = () => {
                         <Image
                             src={iconManiqui}
                             alt=""
-                            className="w-[15vw]"
+                            className="w-[clamp(40px,15vw,120px)]"
                         />
 
                     </div>
                 </div>
                 <div
                     id="salonBack"
-                    className="w-[100vw] absolute bottom-0 -z-1 opaciti-0 invisible"
+                    className="w-[100vw] lg:hidden absolute bottom-1/2 translate-y-1/3 left-0 lg:h-full w-full -z-1 opacity-0 invisible"
                 >
                     <Image
                         src={fondo}
                         alt=""
-                        className="inset-0 z-30"
+                        className="inset-0 z-30 h-full lg:w-auto"
+                        loading="eager"
+
+                    />
+                </div>
+                <div
+                    id="salonBack"
+                    className="w-[100vw] hidden lg:block absolute bottom-0 left-0 lg:h-full w-full -z-1 opacity-0 invisible"
+                >
+                    <Image
+                        src={fondoComp}
+                        alt=""
+                        className="inset-0 z-30 h-full lg:w-auto"
                         loading="eager"
 
                     />
@@ -123,18 +136,6 @@ export const DressCode = () => {
                 <DressCodeHe
                     widthOpposite={widthOpposite}
                 />
-                <div
-                    id="salonBack"
-                    className="w-[100vw] absolute bottom-0 -z-1 opacity-0 invisible"
-                >
-                    <Image
-                        src={fondo}
-                        alt=""
-                        className="inset-0 z-30"
-                        loading="eager"
-
-                    />
-                </div>
             </div>
         </div >
     )

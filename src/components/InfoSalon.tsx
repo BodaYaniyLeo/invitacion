@@ -47,18 +47,18 @@ export const InfoSalon = ({
             ref={scrollRef}
             className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-green-800 overflow-x-scroll overflow-y-hidden shrink-0 p-[5lvh] opacity-0 invisible pointer-events-auto z-80"
         >
-            <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[5lvh] z-81'>
-                <button className='flex rounded-full bg-white px-4 text-black items-center size-fit h-9'
+            <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[5lvh] z-81 text-(length:--h5size)'>
+                <button className='flex rounded-full bg-white p-4 text-black items-center size-fit h-9 lg:h-12'
                     onClick={() => { handleBackInfo(); console.log('click') }}
                 >
                     <Image
                         src={arrowLeft}
                         alt=''
-                        className='h-[18px] w-auto self-center me-1'
+                        className='h-[18px] lg:h-[36px] w-auto self-center me-1'
                     />
                     Atrás
                 </button>
-                <div className='rounded-full bg-[#ffffff15] px-6 text-black justify-center content-center size-fit w-[45vw] h-9'>
+                <div className='rounded-full bg-[#ffffff15] px-6 text-black justify-center content-center size-fit w-[45vw] h-9 lg:hidden'>
                     <span className='bg-[#00000090] rounded-full h-[4px] block w-full'>
                         <span className='bg-white rounded-full h-[4px] block will-change-[width]'
                             style={{ width: `${advance}%` }}
@@ -68,12 +68,12 @@ export const InfoSalon = ({
                 </div>
             </div>
             <div id='infoSalon' className='flex flex-col w-[180vw] shrink-0 h-full'>
-                <div className="pointer-events-auto flex flex-col justify-center h-lvh ">
-                    <div id='mapsSalon' className='bg-white w-[80vw] aspect-4/3 p-2 mt-5 rotate-4'>
+                <div className="pointer-events-auto flex flex-col lg:flex-row justify-center h-lvh lg:items-center">
+                    <div id='mapsSalon' className='bg-white w-[clamp(50vw,80vw,500px)] h-fit aspect-4/3 p-2 mt-5 rotate-4'>
                         <iframe src={urlIframe} style={{ border: 0, aspectRatio: "4/3" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div className='flex h-[40%] items-center'>
-                        <div className='max-w-[80vw] font-[family-name:var(--textDesc)]'>
+                        <div className='max-w-[80vw] font-[family-name:var(--textDesc)] lg:px-[4vw]'>
                             <h2 className='text-[#ffc2d0] text-[length:var(--h1size)] uppercase font-bold'>
                                 Como llegar al salon
                             </h2>
@@ -82,19 +82,19 @@ export const InfoSalon = ({
                             </p>
                             <a
                                 href={urlMaps} target='_blank'
-                                className='flex rounded-full bg-white px-4 py-2 text-black justify-center mt-5 size-fit'
+                                className='flex rounded-full bg-white px-4 py-2 text-black justify-center mt-5 size-fit text-(length:--h5size)'
                             >
                                 Ir a google maps
                             </a>
                         </div>
                         {data[0].slug.sleep
-                            ? <div className='w-[100vw] mx-[4vw] font-[family-name:var(--textDesc)] self-end max-h-[80lvh] flex flex-col'>
+                            ? <div className='w-[100vw] mx-[4vw] font-[family-name:var(--textDesc)] self-end max-h-[80lvh] flex flex-col lg:self-center'>
                                 <h4 className='text-[#ffc2d0] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
                                     Hospedaje incluido
                                 </h4>
                                 <div className='flex mb-4 justify-between'>
                                     <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
-                                        Tanto queremos compartir este momento con vos, que te reservamos una Habitación en el salon
+                                        Tanto queremos compartir este momento con vos, que te reservamos una habitación en el salon
                                     </p>
                                 </div>
                                 <div className='grid grid-cols-3 mb-4 w-[90%] place-self-center'>

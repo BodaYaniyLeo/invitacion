@@ -65,8 +65,8 @@ export const useInvitationAnimations = ({
                 .to('#imgTextHero', { opacity: 0, duration: 0.4 }, "heroAnimation")
                 .to('#heroComplete', { opacity: 0, duration: 0.4 }, "heroAnimation+=0.3")
                 .to('#heroMask', {
-                    maskSize: "60vw",
-                    webkitMaskSize: "60vw",
+                    maskSize: "min(60vw, 700px)",
+                    webkitMaskSize: "min(60vw, 700px)",
                     duration: 0.7
                 }, "heroAnimation")
 

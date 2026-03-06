@@ -122,7 +122,7 @@ export const Itinerary = ({
 
     return (
         <div id="itinerary" className='h-lvh content-center'>
-            <h2 className='text-center text-white font-(family-name:--fontBold) text-[40px]'>Itinerario</h2>
+            <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size)'>Itinerario</h2>
             <div className="flex flex-1 flex-col justify-self-center self-center">
 
                 {idSelected.map(e =>
@@ -130,9 +130,7 @@ export const Itinerary = ({
                         <Image
                             src={e.image}
                             alt=""
-                            width="70"
-                            height="70"
-                            className="imageBg"
+                            className="imageBg h-[70px] lg:h-[140px] w-auto"
                             style={{
                                 backgroundImage: `radial-gradient(at 100% 0%,rgba(0, 0, 0, 0) 0vh, rgba(255, 255, 255, 0.1) var(--mask-size))`
                             }}

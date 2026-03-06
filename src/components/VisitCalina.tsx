@@ -29,16 +29,18 @@ export const VisitCalina = ({
             className="flex flex-col justify-center items-center h-lvh relative"
         >
             <div className='z-11'>
-                <div className='px-[10vw]'>
-                    <Image
-                        src={logoCalina}
-                        alt=""
-                        className='logoCalina'
-                    />
+                <div className='flex flex-col lg:flex-row items-center justify-around'>
+                    <div className='px-[10vw] justify-self-center'>
+                        <Image
+                            src={logoCalina}
+                            alt=""
+                            className='logoCalina'
+                        />
+                    </div>
+                    <p className='font-bold text-(length:--h4size) text-center text-white'>Ven a vivir este momento <br />especial.</p>
                 </div>
-                <p className='font-bold text-[20px] text-center text-white'>Ven a vivir este momento <br />especial.</p>
                 <div id='photoSalon' className="pointer-events-auto flex flex-col items-center">
-                    <div className='bg-white w-[90vw] ratio-4/3 p-2 mt-5'>
+                    <div className='bg-white w-[clamp(50vw,90vw,500px)] ratio-4/3 p-2 mt-5'>
 
                         <VideoSection
                             {...{
@@ -51,7 +53,7 @@ export const VisitCalina = ({
                         />
                     </div>
                     <button
-                        className='flex mt-4 rounded-full bg-white px-8 py-4 text-black justify-center mt-5 font-bold'
+                        className='flex mt-4 rounded-full bg-white px-8 py-4 text-black justify-center mt-5 font-bold text-(length:--h5size)'
                         onClick={() => {
                             handleInfoSalon();
                             setOpenMenu(false);

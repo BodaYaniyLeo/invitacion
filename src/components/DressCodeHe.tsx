@@ -186,41 +186,41 @@ export const DressCodeHe = ({
                 </div>
             </div>
 
-            <div id="showcase" className="w-[50vw]"
+            <div id="showcase" className="w-[50vw] h-full"
             >
-                <div id="maniquiHe" className="relative w-full"
+                <div id="maniquiHe" className="h-full w-full relative content-center"
                     onClick={() => widthOpposite("He", "She")}
                 >
                     <Image
                         src={maniqui}
                         alt=""
-                        className="w-full z-30"
+                        className="w-full h-auto lg:w-auto lg:h-full z-30"
                         loading="eager"
                     />
 
                     <Image
                         src={vestimentaM.Saco}
                         alt=""
-                        className="w-full absolute top-0 left-0 z-47"
+                        className="w-full h-auto lg:w-auto lg:h-full absolute top-1/2 -translate-y-1/2 left-0 z-47"
                         loading="eager"
                     />
                     <Image
                         src={vestimentaM.Camisa}
                         alt=""
-                        className="w-full absolute top-0 left-0 z-44"
+                        className="w-full h-auto lg:w-auto lg:h-full absolute top-1/2 -translate-y-1/2 left-0 z-44"
                         loading="eager"
                     />
                     <Image
                         src={vestimentaM.Pantalón}
                         alt=""
-                        className="w-full absolute top-0 left-0 z-45"
+                        className="w-full h-auto lg:w-auto lg:h-full absolute top-1/2 -translate-y-1/2 left-0 z-45"
                         loading="eager"
                     />
                     {vestimentaM.Accesorios &&
                         <Image
                             src={vestimentaM.Accesorios}
                             alt=""
-                            className="w-full absolute top-0 left-0 z-46"
+                            className="w-full h-auto lg:w-auto lg:h-full absolute top-1/2 -translate-y-1/2 left-0 z-46"
                             loading="eager"
                         />
                     }

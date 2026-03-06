@@ -11,10 +11,10 @@ export const TextLayer = ({ id, title, subtitle, text }: TextLayerProps) => {
             id={id}
             className="w-vw h-lvh content-end nameNovios -scroll-mt-[50px]"
         >
-            <div className="text-white drop-shadow-2xl px-8">
-                <h2 className="text-6xl md:text-8xl font-black italic uppercase mb-6 leading-none">{title}</h2>
-                <h4 className="text-blue-400 tracking-[0.4em] uppercase mb-4 text-sm md:text-lg">{subtitle}</h4>
-                <p className="text-lg md:text-2xl text-gray-200 font-light max-w-lg leading-relaxed">{text}</p>
+            <div className="drop-shadow-2xl px-8">
+                <h2 className="font-black italic uppercase leading-none text-(length:--h1size)">{title}</h2>
+                <h4 className="text-blue-400 tracking-[0.4em] uppercase text-(length:--h2size)">{subtitle}</h4>
+                <p className="text-gray-200 font-light leading-relaxed text-(length:--h4size)">{text}</p>
             </div>
         </div>
     );

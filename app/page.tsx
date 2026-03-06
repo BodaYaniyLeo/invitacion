@@ -33,26 +33,29 @@ export default function Home({
   data
 }: dataInv) {
 
-  const [preLoad, setPreLoad] = useState<boolean>(true)
+  // const [preLoad, setPreLoad] = useState<boolean>(true)
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    gsap.to(window, {
-      scrollTo: 0,
-      duration: 0.5,
-      onComplete: () => setPreLoad(false)
-    });
-  }, []);
+  //   gsap.to(window, {
+  //     scrollTo: 0,
+  //     duration: 0.5,
+  //     onComplete: () => setPreLoad(false)
+  //   });
+  // }, []);
 
   return (
     <>
-      {
+      {/* {
         preLoad
           ? <div className='fixed inset-0'>Cargando</div>
           : <Invitation
             data={data}
           />
-      }
+      } */}
+      <Invitation
+        data={data}
+      />
     </>
 
   )
