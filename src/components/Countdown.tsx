@@ -12,6 +12,8 @@ import bgAuto from "@/src/assets/images/countdown/bgAuto.webp"
 import bgBolso from "@/src/assets/images/countdown/bgBolso.webp"
 import bgBote from "@/src/assets/images/countdown/bgBote.webp"
 import bgViejo from "@/src/assets/images/countdown/bgViejo.webp"
+import appleLogo from "@/src/assets/images/countdown/appleLogo.png"
+import googleLogo from "@/src/assets/images/countdown/googleLogo.png"
 import Image from "next/image"
 
 export const Countdown = () => {
@@ -117,7 +119,7 @@ export const Countdown = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="relative">
                         <div className="flex items-center text-white">
                             <div id="loadingRingContainer" className="w-[24px] h-[24px] relative">
                                 <Image
@@ -132,8 +134,25 @@ export const Countdown = () => {
                             </p>
 
                         </div>
+                        <div className="flex justify-between absolute top-[130%] left-0 w-full">
+                            <a href="https://calendar.app.google/YWCwpzWNMJrucNB1A" target="_blank" className="flex items-center">
+                                <span className="me-1">Agendar</span>
+                                <Image
+                                    src={googleLogo}
+                                    alt=""
+                                    className="h-6 w-auto"
+                                />
+                            </a>
+                            <a href="/appointment/iosAppointment.ics" download="iosAppointment" className="flex items-center">
+                                <span className="me-1">Agendar</span>
+                                <Image
+                                    src={appleLogo}
+                                    alt=""
+                                    className="h-6 w-auto"
+                                />
+                            </a>
+                        </div>
                     </div>
-
                 </div>
                 : <div>Calculando los dias</div>
             }

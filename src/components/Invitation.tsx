@@ -26,8 +26,6 @@ export interface VideoProps {
     data: ArrayElements[];
 }
 
-
-
 const makeFrames = (prefix: string, ext: string, count: number): string[] =>
     Array.from({ length: count }, (_, i) =>
         `${prefix}${String(i + 1).padStart(4, '0')}${ext}`

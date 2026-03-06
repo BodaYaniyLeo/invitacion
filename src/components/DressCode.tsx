@@ -1,9 +1,8 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { gsap } from 'gsap'
 import Image, { StaticImageData } from "next/image"
-import minus from "@/src/assets/images/dress/minus.png"
 
 import iconManiqui from "@/src/assets/images/dress/iconManiqui.svg"
 import fondo from "@/src/assets/images/dress/fondoSalon.png"
@@ -11,28 +10,6 @@ import fondo from "@/src/assets/images/dress/fondoSalon.png"
 import '@/src/styles/invitation.css'
 import { DressCodeHe } from "./DressCodeHe"
 import { DressCodeShe } from "./DressCodeShe"
-
-interface Option {
-    name: string,
-    img: StaticImageData | string | null
-}
-
-interface Category {
-    [key: string]: Option[];
-}
-
-interface VestimentaF {
-    Vestido: StaticImageData | null | string;
-    Blusa: StaticImageData | string;
-    Pantalón: StaticImageData | string;
-}
-
-interface VestimentaM {
-    Camisa: StaticImageData | string;
-    Saco: StaticImageData | string;
-    Pantalón: StaticImageData | string;
-    Accesorios: StaticImageData | string | null;
-}
 
 interface selectedOrNot {
     [key: string]: string | null;
@@ -48,7 +25,7 @@ export const DressCode = () => {
         const tl = gsap.timeline({ ease: "power2.out" })
 
         tl
-            .to(`#maniqui${idNoSelected}`, {
+            .to(`#maniqui${idNoSelected}, #selector${idNoSelected}`, {
                 autoAlpha: 0,
                 duration: 0.2,
             })
@@ -58,9 +35,6 @@ export const DressCode = () => {
             })
             .to(`#maniqui${idNoSelected}`, {
                 display: "none"
-            }, "<")
-            .to("#iconChange", {
-                autoAlpha: 1
             }, "<")
             .to("#salonBack", {
                 maskImage: mask,
@@ -73,6 +47,9 @@ export const DressCode = () => {
                 autoAlpha: 1,
                 duration: 3,
             }, "-=0.3")
+            .to("#iconChange", {
+                autoAlpha: 1
+            })
 
         setManiquiSelect({
             selected: idSelected,
@@ -86,17 +63,17 @@ export const DressCode = () => {
         const tl = gsap.timeline({ ease: "power2.out" })
 
         tl
-            .to(`#maniqui${byeManiqui}`, {
+            .to(`#maniqui${byeManiqui}, #selector${byeManiqui}`, {
                 autoAlpha: 0,
                 duration: 0.5,
             })
-            .to(`#maniqui${byeManiqui}`, {
+            .to(`#maniqui${byeManiqui}, #selector${byeManiqui}`, {
                 display: "none",
             })
-            .to(`#maniqui${hiManiqui}`, {
+            .to(`#maniqui${hiManiqui}, #selector${hiManiqui}`, {
                 display: "block"
             }, "<")
-            .to(`#maniqui${hiManiqui}`, {
+            .to(`#maniqui${hiManiqui}, #selector${hiManiqui}`, {
                 autoAlpha: 1,
                 duration: 0.5,
             }, "<")

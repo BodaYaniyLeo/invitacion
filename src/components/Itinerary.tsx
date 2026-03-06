@@ -17,15 +17,6 @@ interface MenuProps {
     data: ArrayElements[];
 }
 
-interface timeline {
-    [key: string]: gsap.core.Timeline | null,
-    church: gsap.core.Timeline | null,
-    martini: gsap.core.Timeline | null,
-    ring: gsap.core.Timeline | null,
-    music: gsap.core.Timeline | null
-    coffe: gsap.core.Timeline | null
-}
-
 interface itineraryObj {
     id: string,
     image: StaticImageData | string,
