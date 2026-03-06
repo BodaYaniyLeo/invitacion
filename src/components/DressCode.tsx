@@ -108,12 +108,12 @@ export const DressCode = () => {
                 </div>
                 <div
                     id="salonBack"
-                    className="w-[100vw] lg:hidden absolute bottom-1/2 translate-y-1/3 left-0 lg:h-full w-full -z-1 opacity-0 invisible"
+                    className="w-[100vw] lg:hidden absolute bottom-1/2 translate-y-2/5 left-0 lg:h-full w-full -z-1 opacity-0 invisible"
                 >
                     <Image
                         src={fondo}
                         alt=""
-                        className="inset-0 z-30 h-full lg:w-auto"
+                        className="inset-0 h-full z-30"
                         loading="eager"
 
                     />
