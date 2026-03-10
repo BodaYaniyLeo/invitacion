@@ -42,7 +42,7 @@ export const FooterConfirm = ({
     return (
         <div
 
-            className="px-6 pointer-events-auto py-2"
+            className="px-6 pointer-events-auto py-2 justify-items-center"
         >
             <div id={id} className="flex flex-col w-full max-w-md max-h-[50dvh] bg-white/5 p-4 rounded-xl backdrop-blur-sm  opacity-0 invisible">
                 <p className="flex-none pb-4 font-bold text-center uppercase tracking-wider text-sm">
