@@ -36,6 +36,7 @@ const FRAME_COUNT = 120;
 
 const video1Frames = makeFrames('/videos/frames/video1/firstVideoMobile_', '.webp', FRAME_COUNT);
 const video2Frames = makeFrames('/videos/frames/video2/secondVideoMobile_', '.webp', 180);
+const videoFinalFrames = makeFrames('/videos/frames/videoFinal/finalVideoMobile_', '.webp', 110);
 const videoCalinaFrames = makeFrames('/videos/frames/calinaVideo/calinaVideo_', '.webp', FRAME_COUNT);
 
 const cacheEstatica: HTMLImageElement[] = [];
@@ -47,16 +48,18 @@ export const Invitation = ({
     const presentation = useRef<HTMLDivElement>(null);
     const leoSection = useRef<HTMLDivElement>(null);
     const yaniSection = useRef<HTMLDivElement>(null);
+    const finalSection = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null)
 
     const v1Progress = useRef({ t: 0 });
     const v2Progress = useRef({ t: 0 });
+    const vFinalProgress = useRef({ t: 0 });
     const vCalinaProgress = useRef({ t: 0 });
 
     const [openMenu, setOpenMenu] = useState<boolean>(false)
 
     useEffect(() => {
-        const allFrames = [...video1Frames, ...video2Frames];
+        const allFrames = [...video1Frames, ...video2Frames, ...videoFinalFrames];
 
         allFrames.forEach((src) => {
             const img = new Image();
@@ -66,7 +69,7 @@ export const Invitation = ({
     }, []);
 
     useEffect(() => {
-        const priorityFrames = [video1Frames[0], video2Frames[0], videoCalinaFrames[0]];
+        const priorityFrames = [video1Frames[0], video2Frames[0], videoCalinaFrames[0], videoFinalFrames[0]];
 
         const loadSequentially = async (array: string[]) => {
             for (const src of array) {
@@ -82,7 +85,7 @@ export const Invitation = ({
         loadSequentially(priorityFrames).then(() => {
             loadSequentially(video1Frames);
             setTimeout(() => {
-                loadSequentially([...video2Frames, ...videoCalinaFrames]);
+                loadSequentially([...video2Frames, ...videoCalinaFrames, ...videoFinalFrames]);
             }, 2000);
         });
     }, []);
@@ -114,8 +117,10 @@ export const Invitation = ({
         presentation,
         leoSection,
         yaniSection,
+        finalSection,
         v1Progress,
         v2Progress,
+        vFinalProgress,
         vCalinaProgress,
         VIDEO_DURATION
     });
@@ -217,6 +222,23 @@ export const Invitation = ({
                 <DressCode />
 
                 <Countdown />
+
+                <div className="w-full h-[200lvh] relative" id="finalContainer">
+
+                    <div ref={finalSection} className="w-full h-lvh">
+                        <VideoSection
+                            id="videoFinal"
+                            progressRef={vFinalProgress}
+                            frames={videoFinalFrames}
+                            duration={VIDEO_DURATION}
+                            video={'full'}
+                        />
+                    </div>
+
+                    <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center pointer-events-none">
+                        <TextLayer id="Yani" title="Yani" subtitle="Sueño" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
+                    </div>
+                </div>
 
                 <div id="footerPrice" className="relative h-[100lvh] content-center">
                     <Price

@@ -7,8 +7,10 @@ interface HookProps {
     presentation: React.RefObject<HTMLDivElement | null>
     leoSection: React.RefObject<HTMLDivElement | null>
     yaniSection: React.RefObject<HTMLDivElement | null>
+    finalSection: React.RefObject<HTMLDivElement | null>
     v1Progress: React.MutableRefObject<{ t: number }>
     v2Progress: React.MutableRefObject<{ t: number }>
+    vFinalProgress: React.MutableRefObject<{ t: number }>
     vCalinaProgress: React.MutableRefObject<{ t: number }>
     VIDEO_DURATION: number
 }
@@ -18,8 +20,10 @@ export const useInvitationAnimations = ({
     presentation,
     leoSection,
     yaniSection,
+    finalSection,
     v1Progress,
     v2Progress,
+    vFinalProgress,
     vCalinaProgress,
     VIDEO_DURATION
 }: HookProps) => {
@@ -213,8 +217,28 @@ export const useInvitationAnimations = ({
                 }
             });
 
+            const finalTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#finalContainer",
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 0.3,
+                    pin: finalSection.current,
+                    pinSpacing: false,
+                    anticipatePin: 1,
+                }
+            });
+
+            finalTl
+                .to('#videoFinal', { autoAlpha: 1, duration: 0.5 })
+                .addLabel("finalAppear")
+                .to(vFinalProgress.current, {
+                    t: VIDEO_DURATION, duration: 4, ease: "none",
+                }, '-=0.75')
+                .to('#videoFinal', { autoAlpha: 0, duration: 1 }, "finalAppear+=2.2")
+
             logoFooterTl
-                .to("#finalAnimation", { display: "flex" }, 0.2)
+                .to("#finalAnimation", { display: "flex" }, 0.1)
                 .to('#textFinal', {
                     backgroundImage: 'radial-gradient(circle at 50% 47.9747vh, rgb(255, 212, 128) 0vh, rgb(236, 69, 111) 50vh, rgb(122, 33, 102) 90vh, rgba(32, 31, 66, 0) 122.785vh)',
                     duration: 4
