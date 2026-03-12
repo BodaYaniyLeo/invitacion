@@ -112,7 +112,7 @@ export const useInvitationAnimations = ({
                 scrollTrigger: {
                     trigger: "#leoContainer",
                     start: 'top top',
-                    end: '+=150%',
+                    end: '+=180%',
                     scrub: 0.3,
                     pin: leoSection.current,
                     pinSpacing: false,
@@ -230,7 +230,7 @@ export const useInvitationAnimations = ({
             });
 
             finalTl
-                .to('#videoFinal', { autoAlpha: 1, duration: 0.5 })
+                .to('#videoFinal', { autoAlpha: 1, duration: 0.05 })
                 .addLabel("finalAppear")
                 .to(vFinalProgress.current, {
                     t: VIDEO_DURATION, duration: 4, ease: "none",

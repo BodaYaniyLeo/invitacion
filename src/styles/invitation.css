@@ -3,8 +3,8 @@
     -webkit-mask-image: url('../assets/images/hero/textHero.svg');
     mask-image: url('../assets/images/hero/textHero.svg');
     mask-repeat: no-repeat;
-    mask-position: center center;
-    -webkit-mask-position: center center;
+    mask-position: center 50%;
+    -webkit-mask-position: center 50%;
     mask-size: clamp(4500vh, 1500%, 0vh);
     transform-origin: center 50%;
     z-index: 30;
@@ -134,20 +134,11 @@
 
 .nameNovios h2 {
     font-family: 'textDesc';
-    /* font-size: min(var(--wsizeM), 110px); */
     color: #fff9cb;
     font-style: normal;
     line-height: .9;
     text-transform: uppercase;
 }
-
-/* .nameNovios h4 {
-    font-size: 8vw;
-}
-
-.nameNovios p {
-    font-size: 4.5vw;
-} */
 
 .section-text {
     background: linear-gradient(180deg,
