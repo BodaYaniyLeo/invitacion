@@ -6,21 +6,23 @@ import { useEffect, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
 import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
 import { VideoProps } from './Invitation'
-import { ArrayElements } from '@/app/page'
+import { guestsObj } from '@/app/page'
 
 export const Price = ({
     id,
     data,
 }: VideoProps) => {
 
-    const [dataGuest, setDataGuest] = useState<ArrayElements[]>([])
+    const [dataGuest, setDataGuest] = useState<guestsObj[]>([])
+    const [discount, setDiscount] = useState<number>(0)
 
     useEffect(() => {
-        const guest = data
+        const guest = data[0].guests
         setDataGuest(guest)
+        if (guest[0].payment_coverage) {
+            setDiscount(guest[0].payment_coverage)
+        }
     }, [data])
-
-    const discount = dataGuest[0]?.payment_coverage
 
     return (
         <div
@@ -30,7 +32,7 @@ export const Price = ({
             <div id='finalAnimation' className="flex flex-col items-center justify-center hidden">
                 <Image src={logoCasamiento} alt="Logo" className="max-w-[50vw] mb-4" />
 
-                <div id='textFinalContainer' className='flex flex-col h-full justify-center px-[10vw]'>
+                <div id='textFinalContainer' className='flex flex-col h-full justify-center'>
                     <div id='textFinal'>
                         <div id='textFinalInner'>
                             {discount < 1 ? (

@@ -66,11 +66,11 @@ export const Itinerary = ({
     useEffect(() => {
         if (!data) return
 
-        if (data[0].slug.church && data[0].slug.sleep) {
+        if (data[0].church && data[0].sleep) {
             setIdSelected(ids)
-        } else if (data[0].slug.church) {
+        } else if (data[0].church) {
             setIdSelected(ids.slice(0, 4))
-        } else if (data[0].slug.sleep) {
+        } else if (data[0].sleep) {
             setIdSelected(ids.slice(1, 5))
         } else {
             setIdSelected(ids.slice(1, 4))
@@ -122,15 +122,15 @@ export const Itinerary = ({
 
     return (
         <div id="itinerary" className='h-lvh content-center'>
-            <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size)'>Itinerario</h2>
-            <div className="flex flex-1 flex-col justify-self-center self-center">
+            <h2 className='text-center content-center text-white font-(family-name:--fontBold) text-(length:--h1size) h-[20lvh]'>Itinerario</h2>
+            <div className="flex flex-1 flex-col justify-self-center self-center  h-[80lvh]">
 
                 {idSelected.map(e =>
-                    <div key={e.id} id={e.id} className="flex flex-around opacity-0 invisible my-[1lvh] scale-125">
+                    <div key={e.id} id={e.id} className="flex flex-around opacity-0 invisible my-[3lvh] scale-125">
                         <Image
                             src={e.image}
                             alt=""
-                            className="imageBg h-[70px] lg:h-[140px] w-auto"
+                            className="imageBg h-[8lvh] lg:h-[140px] w-auto"
                             style={{
                                 backgroundImage: `radial-gradient(at 100% 0%,rgba(0, 0, 0, 0) 0vh, rgba(255, 255, 255, 0.1) var(--mask-size))`
                             }}

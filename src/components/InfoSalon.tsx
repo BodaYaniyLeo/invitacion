@@ -4,7 +4,7 @@ import '@/src/styles/invitation.css'
 import ingresoCalina from '../assets/images/salon/calina.webp'
 import arrowLeft from '../assets/images/salon/arrowLeft.webp'
 import { useEffect, useState } from 'react';
-import { ArrayElements } from '@/app/page'
+import { ArrayElements, guestsObj } from '@/app/page'
 
 interface InfoProps {
     data: ArrayElements[]
@@ -22,6 +22,12 @@ export const InfoSalon = ({
     const urlIframe = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3411.4556295631846!2d-64.25989278860048!3d-31.235807887438405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432836e4d2fcdbf%3A0x309c9f5a1dd5927f!2sRinc%C3%B3n%20Calina!5e0!3m2!1ses!2ses!4v1772183044697!5m2!1ses!2ses"
 
     const [advance, setAdvance] = useState<number>(0)
+    const [guests, setGuests] = useState<guestsObj[]>([])
+
+    useEffect(() => {
+        const guests = data[0].guests
+        setGuests(guests)
+    }, [data])
 
     useEffect(() => {
         const scrollSection = scrollRef.current
@@ -87,7 +93,7 @@ export const InfoSalon = ({
                                 Ir a google maps
                             </a>
                         </div>
-                        {data[0].slug.sleep
+                        {data[0].sleep
                             ? <div className='w-[100vw] mx-[4vw] font-[family-name:var(--textDesc)] self-end max-h-[80lvh] flex flex-col lg:self-center'>
                                 <h4 className='text-[#ffc2d0] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
                                     Hospedaje incluido
@@ -106,7 +112,7 @@ export const InfoSalon = ({
                                     </p>
                                 </div>
                                 <div className='flex flex-col flex-1 overflow-y-auto min-h-0 py-2 border-y border-white/10 custom-scrollbar w-[90%] place-self-center'>
-                                    {data?.map(g => {
+                                    {guests?.map(g => {
                                         return (
                                             <div key={g.id} className='grid grid-cols-3 mb-4'>
                                                 <p className='col-span-2 text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>

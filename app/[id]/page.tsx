@@ -9,20 +9,27 @@ export default async function Page({
 
     const { id } = await params
 
+    console.log(id)
+
     const supabase = createServerSupabaseClient()
 
     const { data, error } = await supabase
-        .from("guests")
+        .from("slug")
         .select(`*,
-            slug(
-            sleep,
-            church)
+            guests(*),
+            comments(*)
             `)
-        .eq("slug", id)
+        .eq("name", id)
 
-    if (error || !data?.length) {
+    const { data: commentsData, error: commentsError } = await supabase
+        .from("comments")
+        .select("*")
+        .eq("public", true)
+        .eq("approbed", true)
+
+    if (error || !data?.length || !commentsData?.length) {
         return <div>Grupo no encontrado</div>
     }
 
-    return <Home data={data} />
+    return <Home data={data} commentsData={commentsData} />
 }

@@ -15,15 +15,16 @@ import { FooterConfirm } from './FooterConfirm'
 import { InfoSalon } from './InfoSalon'
 import { MenuComponent } from './MenuComponent'
 
-import { ArrayElements } from '@/app/page'
-import { dataInv } from '@/app/page'
+import { ArrayElements, userCommentsType, dataInv } from '@/app/page'
 
 import { Itinerary } from './Itinerary';
 import { DressCode } from './DressCode';
+import { Carousel } from './Carousel';
 
 export interface VideoProps {
     id: string;
     data: ArrayElements[];
+    commentsData?: userCommentsType[];
 }
 
 const makeFrames = (prefix: string, ext: string, count: number): string[] =>
@@ -42,7 +43,8 @@ const videoCalinaFrames = makeFrames('/videos/frames/calinaVideo/calinaVideo_', 
 const cacheEstatica: HTMLImageElement[] = [];
 
 export const Invitation = ({
-    data
+    data,
+    commentsData
 }: dataInv) => {
     const mainRef = useRef<HTMLDivElement>(null);
     const presentation = useRef<HTMLDivElement>(null);
@@ -154,7 +156,6 @@ export const Invitation = ({
         }
     }, [openMenu])
 
-
     return (
         <div ref={mainRef} className='bg-black'>
             <button className='fixed top-5 right-5 w-12 h-12 z-70 rounded-full' onClick={() => setOpenMenu(prev => !prev)}>
@@ -221,6 +222,11 @@ export const Invitation = ({
 
                 <DressCode />
 
+                <Carousel
+                    data={data}
+                    commentsData={commentsData}
+                />
+
                 <Countdown />
 
                 <div className="w-full h-[200lvh] relative" id="finalContainer">
@@ -233,10 +239,6 @@ export const Invitation = ({
                             duration={VIDEO_DURATION}
                             video={'full'}
                         />
-                    </div>
-
-                    <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center pointer-events-none">
-                        <TextLayer id="Yani" title="Yani" subtitle="Sueño" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
                     </div>
                 </div>
 

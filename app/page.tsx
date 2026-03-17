@@ -6,23 +6,36 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { Invitation } from '@/src/components/Invitation';
 
 export interface ArrayElements {
+  sleep: boolean;
+  church: boolean;
+  guests: guestsObj[];
+  comment: string;
+
+}
+
+export type guestsObj = {
   id: number;
   name: string;
   lastname: string;
   payment_coverage: number;
   state: string;
-  confirm: boolean;
   room: number;
-  slug: slugObj;
+  confirm: boolean;
 }
 
-export type slugObj = {
-  sleep: boolean;
-  church: boolean;
+export interface userCommentsType {
+  approbed: boolean,
+  comment: string,
+  created_at: Date,
+  id: number,
+  public: boolean,
+  slug: string,
+  user: string,
 }
 
 export type dataInv = {
-  data: ArrayElements[]
+  data: ArrayElements[],
+  commentsData: userCommentsType[],
 }
 
 if (typeof window !== "undefined") {
@@ -30,7 +43,8 @@ if (typeof window !== "undefined") {
 }
 
 export default function Home({
-  data
+  data,
+  commentsData
 }: dataInv) {
 
   const [preLoad, setPreLoad] = useState<boolean>(true)
@@ -51,6 +65,7 @@ export default function Home({
           ? <div className='fixed inset-0'>Cargando</div>
           : <Invitation
             data={data}
+            commentsData={commentsData}
           />
       }
     </>

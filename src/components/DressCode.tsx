@@ -88,14 +88,14 @@ export const DressCode = () => {
 
     return (
         <div id="dresscode" className='overflow-hidden h-lvh w-vw flex flex-col relative'>
-            <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size) tracking-[-.04em]'>
+            <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size) tracking-[-.04em] px-8'>
                 Código de vestimenta
             </h2>
             <h4 className='text-center text-white font-(family-name:--fontBold) text-(length:--h2size)'>
                 Formal sport
             </h4>
             <div className="w-[100vw] relative h-full flex content-center overflow-hidden">
-                < div id="iconChange" className="absolute bottom-10 right-[4vw] text-center z-39 opacity-0 invisible">
+                < div id="iconChange" className="absolute bottom-10 right-[32px] text-center z-39 opacity-0 invisible">
                     <div onClick={() => changeManiqui(maniquiSelect.noSelected, maniquiSelect.selected)}
                     >
                         <Image

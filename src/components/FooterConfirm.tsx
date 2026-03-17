@@ -4,23 +4,26 @@ import { useEffect, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
 import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
 import { VideoProps } from '@/src/components/Invitation';
-import { ArrayElements } from '@/app/page'
+import { guestsObj } from '@/app/page'
 
 export const FooterConfirm = ({
     id,
     data,
 }: VideoProps) => {
 
-    const [dataGuest, setDataGuest] = useState<ArrayElements[]>([])
+    const [dataGuest, setDataGuest] = useState<guestsObj[]>([])
+    const [discount, setDiscount] = useState<number>(0)
+
 
     const priceTarj = 160000
 
     useEffect(() => {
-        const guest = data
+        const guest = data[0].guests
         setDataGuest(guest)
+        if (guest[0].payment_coverage) {
+            setDiscount(guest[0].payment_coverage)
+        }
     }, [data])
-
-    const discount = dataGuest[0]?.payment_coverage
 
     const supabase = createBrowserSupabaseClient();
 
@@ -45,7 +48,7 @@ export const FooterConfirm = ({
             className="px-6 pointer-events-auto py-2 justify-items-center"
         >
             <div id={id} className="flex flex-col w-full max-w-md max-h-[50dvh] bg-white/5 p-4 rounded-xl backdrop-blur-sm  opacity-0 invisible">
-                <p className="flex-none pb-4 font-bold text-center uppercase tracking-wider text-sm">
+                <p className="flex-none pb-4 font-bold text-center uppercase tracking-wider text-(length:--h5size)">
                     Confirmar asistencia
                 </p>
 
@@ -54,8 +57,8 @@ export const FooterConfirm = ({
                     data-lenis-prevent
                 >
                     {dataGuest?.map(g => (
-                        <div key={g.id} className="mb-6 last:mb-0 px-2">
-                            <h4 className="mb-2 text-sm ">{g.name} {g.lastname}</h4>
+                        <div key={g.id} className="mb-5 last:mb-0 px-2 flex justify-between">
+                            <h4 className="mb-2 text-(length:--h4size)">{g.name} {g.lastname}</h4>
                             <AnswerComponent
                                 id={g.id}
                                 setDataGuest={setDataGuest}
@@ -65,20 +68,23 @@ export const FooterConfirm = ({
                     ))}
                 </div>
 
-                <div className="flex-none pt-4">
+                <div className="flex-none py-4">
                     {discount < 1 &&
-                        <p className="text-xs text-center mb-4 opacity-70">
-                            Precio sugerido al público: ${priceTarj - priceTarj * (dataGuest[0]?.payment_coverage || 0)}
+                        <p className="text-center mb-4 opacity-70">
+                            Precio por tarjeta: ${priceTarj - priceTarj * (discount || 0)} *
                         </p>
                     }
 
                     <button
-                        className="w-full py-3 bg-[#960696] text-black font-bold rounded-lg uppercase text-xs tracking-widest hover:bg-gray-200 transition-colors"
+                        className="w-full py-3 bg-[#960696] text-black font-bold rounded-lg uppercase tracking-widest hover:bg-gray-200 transition-colors"
                         onClick={() => sendChanges()}
                     >
                         Enviar respuesta
                     </button>
                 </div>
+                <p>
+                    * Invitación sin obligación de compra, <b className='text-red-300'>pero considere que su presencia es el mejor regalo</b>. Las tarifas están sujetas a ajustes según la fecha de pago.
+                </p>
             </div>
         </div>
     );

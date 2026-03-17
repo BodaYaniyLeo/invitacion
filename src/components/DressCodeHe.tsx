@@ -133,12 +133,12 @@ export const DressCodeHe = ({
 
     return (
         <div id="dresscodeHe" className='content-center w-full'>
-            <div id="selectorHe" className="absolute w-[50vw] right-[4vw] top-1/4 border z-50 bg-[#00000090] opacity-0 invisible">
+            <div id="selectorHe" className="absolute w-[50vw] right-[32px] top-1/4 border z-50 bg-[#00000090] opacity-0 invisible">
                 <div className="text-center dressSelector px-1 py-2">
-                    <h3 className="font-bold font-(family-name:--fontBold) text-[28px]">Formal sport</h3>
+                    <h3 className="font-bold font-(family-name:--fontBold) text-(length:--h4size)">Formal sport</h3>
                 </div>
                 <div className="flex justify-between px-1 py-[2px] bg-black">
-                    <h4 className="text-[#79b0cc] font-(family-name:--fontSemiBold)">Sugerencias</h4>
+                    <h4 className="text-[#79b0cc] font-(family-name:--fontSemiBold) text-(length:--h5size)">Sugerencias</h4>
                 </div>
                 <div>
                     {modelArrayM.map((category, i) => {
@@ -152,7 +152,7 @@ export const DressCodeHe = ({
                                     onClick={() => setSectionM(prev => prev === categoryName ? null : categoryName)}
                                     className="flex justify-between w-full px-1"
                                 >
-                                    <h3 className="font-bold font-(family-name:--fontSemiBold)">{categoryName}</h3>
+                                    <h3 className="font-bold font-(family-name:--fontSemiBold) text-(length:--h4size)">{categoryName}</h3>
                                     <div className="relative w-[4vw] self-center">
                                         <span className="block">
                                             <Image
@@ -171,7 +171,7 @@ export const DressCodeHe = ({
                                 <div id={categoryName} className="h-0 overflow-hidden">
                                     {options.map((option) => (
                                         <button
-                                            className="w-full text-left my-[2px] font-(family-name:--fontNormal) text-[14px] px-2"
+                                            className="w-full text-left my-[2px] font-(family-name:--fontNormal) text-(length:--h5size) px-2"
                                             onClick={() => changeClothesM(categoryName, option.img)}
                                             key={option.name}
                                         >

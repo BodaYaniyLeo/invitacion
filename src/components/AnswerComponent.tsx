@@ -1,9 +1,9 @@
 import React from 'react'
-import { ArrayElements } from '@/app/page'
+import { guestsObj } from '@/app/page'
 
 type statusAnswer = {
     id: number
-    setDataGuest: React.Dispatch<React.SetStateAction<ArrayElements[]>>
+    setDataGuest: React.Dispatch<React.SetStateAction<guestsObj[]>>
     confirm: boolean
 }
 
@@ -28,8 +28,8 @@ export const AnswerComponent = ({
     }
 
     return (
-        <div className='flex justify-around my-4'>
-            <button onClick={() => myAnwer(true)} className={`buttonConfirm ${confirm ? 'choose' : ''}`}>Voy</button>
+        <div className='flex justify-around items-center'>
+            <button onClick={() => myAnwer(true)} className={`buttonConfirm ${confirm ? 'choose' : ''} me-4`}>Voy</button>
             <button onClick={() => myAnwer(false)} className={`buttonConfirm ${!confirm ? 'choose' : ''}`}>No voy</button>
         </div>
     )
