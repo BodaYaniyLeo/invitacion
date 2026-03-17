@@ -161,7 +161,7 @@ export const Carousel = ({
             </div>
             <div id="run" className="relative self-end w-6 h-6">
                 <button
-                    className={`${paused ? "z-1" : "paused z-0"} relative right-[4vw]`}
+                    className={`${paused ? "z-1" : "paused z-0"} relative right-[4vw] bottom-[4vw] w-6 h-6`}
                     onClick={() => setPaused(false)}
                 >
                     <Image
@@ -170,7 +170,7 @@ export const Carousel = ({
                     />
                 </button>
                 <button
-                    className={`${paused ? "paused z-0" : " z-1"} absolute right-[4vw]`}
+                    className={`${paused ? "paused z-0" : " z-1"} absolute right-[4vw] bottom-[4vw] w-6 h-6`}
                     onClick={() => setPaused(true)}
                 >
                     <Image
