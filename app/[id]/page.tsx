@@ -9,8 +9,6 @@ export default async function Page({
 
     const { id } = await params
 
-    console.log(id)
-
     const supabase = createServerSupabaseClient()
 
     const { data, error } = await supabase

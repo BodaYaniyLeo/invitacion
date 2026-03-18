@@ -31,6 +31,8 @@ export const useInvitationAnimations = ({
     const lastWidth = useRef(typeof window !== 'undefined' ? window.innerWidth : 0);
     const infoSalonAnimation = useRef<gsap.core.Timeline | null>(null);
     const menuCrossAnimation = useRef<gsap.core.Timeline | null>(null);
+    const newCommentAnimation = useRef<gsap.core.Timeline | null>(null);
+    const pauseAnimation = useRef<gsap.core.Timeline | null>(null);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -274,7 +276,6 @@ export const useInvitationAnimations = ({
             .to("#lateralMenu", { x: "-100%" }, "<")
 
         menuCrossAnimation.current = animationCross;
-
 
         return () => {
             window.removeEventListener("resize", handleResize);

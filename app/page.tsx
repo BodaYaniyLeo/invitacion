@@ -26,7 +26,7 @@ export type guestsObj = {
 export interface userCommentsType {
   approbed: boolean,
   comment: string,
-  created_at: Date,
+  created_at?: Date,
   id: number,
   public: boolean,
   slug: string,

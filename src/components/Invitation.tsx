@@ -266,6 +266,7 @@ export const Invitation = ({
                 data={data}
                 setOpenMenu={setOpenMenu}
             />
+
         </div >
     );
 };
