@@ -103,7 +103,7 @@ export const Carousel = ({
         cards.forEach((card, idx) => {
             const isNextCenter = idx === nextCenterIdx;
             tl.to(card, {
-                scale: isNextCenter ? 1.2 : 0.7,
+                scale: isNextCenter ? 1 : 0.7,
                 opacity: isNextCenter ? 1 : 0.5,
                 zIndex: isNextCenter ? 10 : 1,
                 duration: 1.5,
@@ -180,7 +180,6 @@ export const Carousel = ({
         return () => clearTimeout(timer);
     }, [paused]);
 
-
     return (
         <div id="carousel" className="relative min-h-[50lvh] flex flex-col justify-around scroll-mt-[25lvh]">
             <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h2size) tracking-[-.04em] px-8'>
@@ -204,7 +203,7 @@ export const Carousel = ({
                                         key={c.virtualId}
                                         className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black"
                                         style={{
-                                            transform: i === 2 ? 'scale(1.2)' : 'scale(0.7)',
+                                            transform: i === 2 ? 'scale(1)' : 'scale(0.7)',
                                             opacity: i === 2 ? 1 : 0.5,
                                             zIndex: i === 2 ? 10 : 1,
                                             willChange: "transform, opacity"
@@ -217,7 +216,7 @@ export const Carousel = ({
                                             }
                                         }}
                                     >
-                                        <p className="text-white text-center italic border-y w-full text-[16px] py-4">"{c.comment}"</p>
+                                        <p className="text-white text-center italic border-y w-full text-[16px] py-4 px-2">"{c.comment}"</p>
                                         <div className="self-end w-1/2">
                                             <p
                                                 className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
@@ -230,31 +229,56 @@ export const Carousel = ({
                             )}
                         </div>
                     </div>
-                    <div id="newCommentContainer" className="h-[30lvh] absolute inset-0 -z-1 opacity-0 invisible">
-                        <div className="h-full content-center justify-items-center">
-                            <div className="w-1/2">
-                                <div className="relative">
-                                    <textarea
-                                        id="userComment"
-                                        maxLength={130}
-                                        ref={textAreaRef}
-                                        onInput={() => {
-                                            handleHeight()
+                    <div id="newCommentContainer" className="h-[30lvh] overflow-hidden absolute w-[150vw] -left-[25vw] inset-0 -z-1 opacity-0 invisible flex">
+                        <div
+                            className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black scale-70 opacity-50"
+                        >
+                            <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"Lorem Ipsum, Lipsum, Lorem, Ipsum, Text, Generate, Generator"</p>
+                            <div className="self-end w-1/2 boxExample">
+                                <p
+                                    className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
+                                >
+                                    Pepe
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black"
+                        >
+                            <div className="relative w-full">
+                                <textarea
+                                    id="userComment"
+                                    maxLength={130}
+                                    ref={textAreaRef}
+                                    onInput={() => {
+                                        handleHeight()
 
-                                        }}
-                                        placeholder="Escribe tu mensaje"
-                                        className='resize-none overflow-hidden text-white text-center italic border-y w-full text-[16px] py-4 focus-visible:outline-0 h-15'
-                                    />
-                                    <p className="absolute right-0 bottom-[4px] z-9 text-white/70">{qChar}/130</p>
-                                </div>
-                                <div className="justify-self-end">
-                                    <input
-                                        id="userName"
-                                        maxLength={20}
-                                        placeholder="Nombre"
-                                        className="resize-none overflow-hidden font-(family-name:--textDesc) text-right text-white/70 font-bold capitalize tracking-[0.2em] py-1 whitespace-nowrap text-white italic min-w-3/4 focus-visible:outline-0 px-1"
-                                    />
-                                </div>
+                                    }}
+                                    placeholder="Escribe tu mensaje"
+                                    className='resize-none overflow-hidden text-white text-center italic border-y w-full text-[16px] py-4 px-2 focus-visible:outline-0 h-15'
+                                />
+                                <p className="absolute right-0 bottom-[5px] z-9 text-white/70 text-[12px]">{qChar}/130</p>
+                            </div>
+                            <div className="self-end">
+                                <input
+                                    id="userName"
+                                    maxLength={20}
+                                    placeholder="Nombre"
+                                    // className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
+                                    className="resize-none overflow-hidden font-(family-name:--textDesc) text-center text-white/70 font-bold capitalize tracking-[0.2em] py-1 whitespace-nowrap text-white italic min-w-3/4 focus-visible:outline-0 px-1"
+                                />
+                            </div>
+                        </div>
+                        <div
+                            className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black scale-70 opacity-50"
+                        >
+                            <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"Lorem Ipsum, Lipsum, Lorem, Ipsum, Text, Generate, Generator"</p>
+                            <div className="self-end w-1/2 boxExample">
+                                <p
+                                    className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
+                                >
+                                    Pepe
+                                </p>
                             </div>
                         </div>
                     </div>
