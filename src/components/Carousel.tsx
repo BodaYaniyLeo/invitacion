@@ -31,6 +31,7 @@ export const Carousel = ({
     const [userName, setUserName] = useState<boolean>(false)
     const [textButton, setTextButton] = useState<string>("Deja tu comentario")
     const [playButton, setPlayButton] = useState<StaticImageData>(play)
+    const [myComments, setMyComments] = useState<userCommentsType[]>([])
 
     const containerRef = useRef<HTMLDivElement>(null)
     const isAnimating = useRef(false)
@@ -49,18 +50,16 @@ export const Carousel = ({
         }
     }
 
-    const handlePause = () => {
-        if (pauseAnimation.current) {
-            pauseAnimation.current.restart();
-        }
-    }
-
     useEffect(() => {
         const ordenComments = [...commentsData].sort((a, b) => {
             return a.id - b.id
         })
 
+        const myComments = data[0].comments
+
         setComments(ordenComments)
+        setMyComments(myComments.filter(f => f.public))
+
     }, [data])
 
     const total = comments.length;
@@ -181,7 +180,7 @@ export const Carousel = ({
     }, [paused]);
 
     return (
-        <div id="carousel" className="relative min-h-[50lvh] flex flex-col justify-around scroll-mt-[25lvh]">
+        <div id="carousel" className="fixed top-0 right-full min-h-[50lvh] flex flex-col justify-around scroll-mt-[25lvh]">
             <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h2size) tracking-[-.04em] px-8'>
                 Dejales tu mensaje a los novios...
             </h2>
@@ -233,7 +232,7 @@ export const Carousel = ({
                         <div
                             className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black scale-70 opacity-50"
                         >
-                            <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"Lorem Ipsum, Lipsum, Lorem, Ipsum, Text, Generate, Generator"</p>
+                            <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"{comments[comments.length - 1]?.comment}"</p>
                             <div className="self-end w-1/2 boxExample">
                                 <p
                                     className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
@@ -264,7 +263,6 @@ export const Carousel = ({
                                     id="userName"
                                     maxLength={20}
                                     placeholder="Nombre"
-                                    // className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
                                     className="resize-none overflow-hidden font-(family-name:--textDesc) text-center text-white/70 font-bold capitalize tracking-[0.2em] py-1 whitespace-nowrap text-white italic min-w-3/4 focus-visible:outline-0 px-1"
                                 />
                             </div>
@@ -272,7 +270,7 @@ export const Carousel = ({
                         <div
                             className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black scale-70 opacity-50"
                         >
-                            <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"Lorem Ipsum, Lipsum, Lorem, Ipsum, Text, Generate, Generator"</p>
+                            <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"{comments[0]?.comment}"</p>
                             <div className="self-end w-1/2 boxExample">
                                 <p
                                     className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
@@ -287,6 +285,7 @@ export const Carousel = ({
             <div className="flex justify-between w-[90vw] self-center">
                 <div id="buttonComments" className="w-[45vw] text-center">
                     <button
+                        className='rounded-full bg-white px-8 py-4 text-black justify-center font-bold'
                         onClick={() => {
                             handleComments()
                         }
@@ -296,9 +295,10 @@ export const Carousel = ({
 
                     </button>
                 </div>
-                <div className="min-h-6 w-[45vw] text-center relative">
+                <div className="min-h-6 w-[45vw] text-center relative content-center">
                     <div id="buttonSendComments" className="absolute inset-0 text-center opacity-0 invisible z-1">
                         <button
+                            className='rounded-full bg-white px-8 py-4 text-black justify-center font-bold'
                             onClick={() => console.log('click')}
                         >
                             Enviar comentario
@@ -306,7 +306,13 @@ export const Carousel = ({
                     </div>
                     <div id="run">
                         <button
-                            className="paused w-6 h-6"
+                            className='rounded-full bg-white px-8 py-4 text-black justify-center font-bold'
+                            onClick={() => console.log('click')}
+                        >
+                            Mis comentarios <span>{data[0].comments.length}</span>
+                        </button>
+                        <button
+                            className="paused w-6"
                             onClick={() => {
                                 setPaused(prev => !prev);
                             }}

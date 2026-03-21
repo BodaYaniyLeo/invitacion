@@ -12,7 +12,6 @@ interface HookProps {
     v2Progress: React.MutableRefObject<{ t: number }>
     vFinalProgress: React.MutableRefObject<{ t: number }>
     vCalinaProgress: React.MutableRefObject<{ t: number }>
-    VIDEO_DURATION: number
 }
 
 export const useInvitationAnimations = ({
@@ -25,14 +24,12 @@ export const useInvitationAnimations = ({
     v2Progress,
     vFinalProgress,
     vCalinaProgress,
-    VIDEO_DURATION
 }: HookProps) => {
 
     const lastWidth = useRef(typeof window !== 'undefined' ? window.innerWidth : 0);
     const infoSalonAnimation = useRef<gsap.core.Timeline | null>(null);
     const menuCrossAnimation = useRef<gsap.core.Timeline | null>(null);
-    const newCommentAnimation = useRef<gsap.core.Timeline | null>(null);
-    const pauseAnimation = useRef<gsap.core.Timeline | null>(null);
+    const commentsAnimation = useRef<gsap.core.Timeline | null>(null);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -58,7 +55,7 @@ export const useInvitationAnimations = ({
                     trigger: presentation.current,
                     start: 'top top',
                     end: '+=300%',
-                    scrub: 0.3,
+                    scrub: 0.5,
                     pin: true,
                     pinSpacing: false,
                     anticipatePin: 1,
@@ -115,7 +112,7 @@ export const useInvitationAnimations = ({
                     trigger: "#leoContainer",
                     start: 'top top',
                     end: '+=180%',
-                    scrub: 0.3,
+                    scrub: 0.5,
                     pin: leoSection.current,
                     pinSpacing: false,
                     anticipatePin: 1,
@@ -157,24 +154,24 @@ export const useInvitationAnimations = ({
                     ease: "power1.inOut",
                 }, "transicionVideo+=1.5")
 
-                .to('#video1', { autoAlpha: 1, duration: 0.5 }, 'transicionVideo+=2.5')
+                .to('#videoLeo', { autoAlpha: 1, duration: 0.5 }, 'transicionVideo+=2.5')
                 .addLabel("LeoAppear")
                 .to(v1Progress.current, {
-                    t: VIDEO_DURATION, duration: 8, ease: "none",
+                    t: 2, duration: 8, ease: "none",
                 }, 'transicionVideo')
-                .to("#video1 canvas", {
+                .to("#videoLeo canvas", {
                     WebkitMaskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     duration: 4
                 }, "LeoAppear")
-                .to('#video1', { autoAlpha: 0, duration: 1 }, "LeoAppear+=2.8")
+                .to('#videoLeo', { autoAlpha: 0, duration: 3 }, "LeoAppear")
 
             const yaniTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#yaniContainer",
                     start: 'top top',
                     end: 'bottom top',
-                    scrub: 0.3,
+                    scrub: 0.5,
                     pin: yaniSection.current,
                     pinSpacing: false,
                     anticipatePin: 1,
@@ -182,18 +179,18 @@ export const useInvitationAnimations = ({
             });
 
             yaniTl
-                .to('#video2', { autoAlpha: 1, duration: 0.5 })
+                .to('#videoYani', { autoAlpha: 1, duration: 0.5 })
                 .addLabel("yaniAppear")
                 .to(v2Progress.current, {
-                    t: VIDEO_DURATION, duration: 4, ease: "none",
+                    t: 3, duration: 8, ease: "none",
                 }, '-=0.75')
-                .to("#video2 canvas", {
+                .to("#videoYani canvas", {
                     WebkitMaskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     duration: 4
-                }, "yaniAppear+=0.2")
-                .to('#video2', { autoAlpha: 0, duration: 1 }, "yaniAppear+=2.2")
-                .to('#Yani', { autoAlpha: 0, duration: 1 }, "yaniAppear+=3")
+                }, "yaniAppear+=2.5")
+                .to('#videoYani', { autoAlpha: 0, duration: 3 }, "yaniAppear+=2.5")
+                .to('#Yani', { autoAlpha: 0, duration: 1 }, "yaniAppear+=6.5")
 
 
             const catalinaTl = gsap.timeline({
@@ -201,30 +198,19 @@ export const useInvitationAnimations = ({
                     trigger: "#triggerCalina",
                     start: "top bottom",
                     end: "bottom top",
-                    scrub: 0.3,
+                    scrub: 0.5,
                 }
             });
 
             catalinaTl
-                .to(vCalinaProgress.current, { t: VIDEO_DURATION, duration: 2 }, 0)
-
-            const logoFooterTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#footerPrice",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: 0.3,
-                    pin: true,
-                    anticipatePin: 1,
-                }
-            });
+                .to(vCalinaProgress.current, { t: 2, duration: 2 }, 0)
 
             const finalTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#finalContainer",
                     start: 'top top',
                     end: 'bottom top',
-                    scrub: 0.3,
+                    scrub: 0.5,
                     pin: finalSection.current,
                     pinSpacing: false,
                     anticipatePin: 1,
@@ -232,21 +218,30 @@ export const useInvitationAnimations = ({
             });
 
             finalTl
-                .to('#videoFinal', { autoAlpha: 1, duration: 0.05 })
-                .addLabel("finalAppear")
+                .to('#videoFinal', { autoAlpha: 1, duration: 1 })
                 .to(vFinalProgress.current, {
-                    t: VIDEO_DURATION, duration: 4, ease: "none",
-                }, '-=0.75')
-                .to('#videoFinal', { autoAlpha: 0, duration: 1 }, "finalAppear+=2.2")
-
-            logoFooterTl
-                .to("#finalAnimation", { display: "flex" }, 0.1)
+                    t: 2, duration: 4, ease: "none",
+                }, "<")
+                .to('#videoFinal', { autoAlpha: 0, duration: 0.05 }, "-=0.5")
+                .to("#finalAnimation", { visibility: "visible", duration: 0.1 }, "-=0.3")
+                .to("#finalAnimation", { scale: 0.8, duration: 2 }, "<")
                 .to('#textFinal', {
                     backgroundImage: 'radial-gradient(circle at 50% 47.9747vh, rgb(255, 212, 128) 0vh, rgb(236, 69, 111) 50vh, rgb(122, 33, 102) 90vh, rgba(32, 31, 66, 0) 122.785vh)',
                     duration: 4
                 }, '<')
-                .to("#finalAnimation", { scale: 0.8, duration: 4 }, "<")
-                .to("#confirmData", { autoAlpha: 1 })
+
+            const logoFooterTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#footerConfirm",
+                    start: "top top",
+                    end: "+=5",
+                    scrub: 0.5,
+                    toggleActions: "play none none none"
+                }
+            });
+
+            logoFooterTl
+                .to("#confirmData", { autoAlpha: 1, duration: 0.1, scale: 0.95 })
 
         }, mainRef);
 
@@ -264,6 +259,21 @@ export const useInvitationAnimations = ({
             .to("#header", { opacity: 1, duration: 0.3 })
 
         infoSalonAnimation.current = animationSalon;
+
+        const animationComments = gsap.timeline({ paused: true });
+
+        animationComments.set("#infoSalon", { x: "90%", autoAlpha: 0 })
+
+        animationComments
+            .to("#lateralMaps", { zIndex: 80 })
+            .to("#lateralMaps", { autoAlpha: 1, duration: 0.3 })
+            .to("#infoSalon, #photoSalon", { autoAlpha: 1, duration: 0.3 }, "<")
+            .to("#infoSalon", { x: 0, duration: 0.3 }, "<")
+            .to("#photoSalon", { x: "-90%", duration: 0.3 }, "<")
+            .to("#mapsSalon, #photoSalon", { rotateZ: -4, duration: 0.3 }, "<")
+            .to("#header", { opacity: 1, duration: 0.3 })
+
+        commentsAnimation.current = animationComments;
 
         const animationCross = gsap.timeline({ paused: true });
 
@@ -284,11 +294,12 @@ export const useInvitationAnimations = ({
             animationCross.revert();
         };
 
-    }, [VIDEO_DURATION]);
+    }, []);
 
     return {
         infoSalonAnimation,
-        menuCrossAnimation
+        menuCrossAnimation,
+        commentsAnimation
     };
 
 }

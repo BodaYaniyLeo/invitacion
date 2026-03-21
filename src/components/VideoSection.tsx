@@ -4,56 +4,45 @@ import { useEffect, useRef, useState } from 'react'
 interface VideoProps {
     id: string;
     progressRef: React.MutableRefObject<{ t: number }>;
-    frames: string[];
+    videoUrl: string;
     duration: number;
-    video: string;
+    mode: 'full' | 'inline';
 }
 
 export const VideoSection = ({
     id,
     progressRef,
-    frames,
+    videoUrl,
     duration,
-    video
+    mode
 }: VideoProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isReady, setIsReady] = useState(false);
     const lastWidth = useRef(typeof window !== 'undefined' ? window.innerWidth : 0);
 
+    console.log(window.innerHeight)
+
     useEffect(() => {
-
         const canvas = canvasRef.current;
-        if (!canvas || frames.length === 0) return;
+        const video = videoRef.current;
+        if (!canvas || !video) return;
 
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: false });
         if (!ctx) return;
 
         const setCanvasDimensions = () => {
-            if (video === 'full') {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            } else {
-                const containerWidth = canvas.parentElement?.offsetWidth || window.innerWidth;
-                canvas.width = containerWidth;
-                canvas.height = containerWidth * 0.75;
-            }
+            const width = mode === 'full' ? window.innerWidth : (canvas.parentElement?.offsetWidth || window.innerWidth);
+            const height = mode === 'full' ? window.innerHeight : width * 0.75;
+            canvas.width = width;
+            canvas.height = height;
         };
 
         setCanvasDimensions();
 
-        const images: HTMLImageElement[] = frames.map((src) => {
-            const img = new Image();
-            img.src = src;
-            return img;
-        });
-
-        images[0].onload = () => setIsReady(true);
-
-        let rafId: number;
-        let lastIndex = -1;
-
-        const drawCover = (img: HTMLImageElement) => {
-            const imgRatio = img.naturalWidth / img.naturalHeight;
+        const drawFrame = () => {
+            if (video.readyState < 2) return;
+            const imgRatio = video.videoWidth / video.videoHeight;
             const canvasRatio = canvas.width / canvas.height;
             let dw, dh, ox, oy;
 
@@ -64,18 +53,29 @@ export const VideoSection = ({
                 dw = canvas.width; dh = dw / imgRatio;
                 ox = 0; oy = (canvas.height - dh) / 2;
             }
-            ctx.drawImage(img, ox, oy, dw, dh);
+            ctx.drawImage(video, ox, oy, dw, dh);
         };
 
-        const renderLoop = () => {
-            const progress = Math.min(Math.max(progressRef.current.t / duration, 0), 1);
-            const frameIndex = Math.floor(progress * (images.length - 1));
+        const handleSeeked = () => drawFrame();
+        video.addEventListener('seeked', handleSeeked);
 
-            if (frameIndex !== lastIndex) {
-                const img = images[frameIndex];
-                if (img && img.complete) {
-                    drawCover(img);
-                    lastIndex = frameIndex;
+        video.load();
+        video.onloadeddata = () => {
+            setIsReady(true);
+            video.currentTime = 0.001;
+            drawFrame();
+        };
+
+        let rafId: number;
+        let lastVideoTime = -1;
+
+        const renderLoop = () => {
+            const targetTime = Math.max(0, Math.min(progressRef.current.t, duration - 0.01));
+
+            if (Math.abs(targetTime - lastVideoTime) > 0.016) {
+                if (video.readyState >= 2) {
+                    video.currentTime = targetTime;
+                    lastVideoTime = targetTime;
                 }
             }
             rafId = requestAnimationFrame(renderLoop);
@@ -83,59 +83,52 @@ export const VideoSection = ({
 
         rafId = requestAnimationFrame(renderLoop);
 
-
         const handleResize = () => {
-            const currentWidth = window.innerWidth;
-            const currentHeight = window.innerHeight;
-
-            if (currentWidth !== lastWidth.current || video === 'full') {
-
-                if (video === 'full') {
-                    canvas.width = currentWidth;
-                    canvas.height = currentHeight;
-                } else {
-                    const containerWidth = canvas.parentElement?.offsetWidth || currentWidth;
-                    canvas.width = containerWidth;
-                    canvas.height = containerWidth * 0.75;
-                }
-
-                lastWidth.current = currentWidth;
-                lastIndex = -1;
+            if (window.innerWidth !== lastWidth.current || mode === 'full') {
+                setCanvasDimensions();
+                lastWidth.current = window.innerWidth;
+                drawFrame();
             }
         };
 
         window.addEventListener('resize', handleResize);
         return () => {
             cancelAnimationFrame(rafId);
+            video.removeEventListener('seeked', handleSeeked);
             window.removeEventListener('resize', handleResize);
         };
-    }, [frames, duration, progressRef]);
+    }, [videoUrl, duration, mode]);
 
     return (
+
         <div
-            id={id}
-            className={`inset-0 transition-opacity overflow-hidden ${video === 'full'
-                ? 'pointer-events-none'
-                : 'pointer-events-auto'
-                }`}
+            id={id} className={`inset-0 transition-opacity lg:w-auto overflow-hidden lg:justify-self-end ${mode === 'full' ? 'pointer-events-none' : 'pointer-events-auto'}`}
             style={{
-                opacity: video === 'full' ? 0 : 1,
-                visibility: video === 'full' ? 'hidden' : 'visible'
+                position: mode === 'full' ? 'fixed' : 'static',
+                opacity: isReady && mode === 'full' ? 0 : 1,
+                visibility: isReady && mode === 'full' ? 'hidden' : 'visible'
             }}
         >
+            <video
+                ref={videoRef}
+                src={videoUrl}
+                preload="auto"
+                muted
+                playsInline
+                disableRemotePlayback
+                style={{ display: 'none' }}
+            />
+
             <canvas
                 ref={canvasRef}
-                className={`${video === 'full'
-                    ? 'h-lvh pointer-events-none'
-                    : 'pointer-events-auto'
-                    }`}
+                className={`${mode === 'full' ? 'w-full lg:w-auto h-lvh object-cover' : 'w-full h-auto'}`}
                 style={{
                     display: isReady ? 'block' : 'none',
                     WebkitMaskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
                     maskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
                     WebkitMaskRepeat: "no-repeat",
                     maskRepeat: "no-repeat",
-                    ...(video !== 'full' && { aspectRatio: "4/3" })
+                    ...(mode !== 'full' && { aspectRatio: "4/3" })
                 }}
             />
         </div>

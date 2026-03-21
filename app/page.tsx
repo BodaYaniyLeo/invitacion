@@ -9,8 +9,7 @@ export interface ArrayElements {
   sleep: boolean;
   church: boolean;
   guests: guestsObj[];
-  comment: string;
-
+  comments: userCommentsType[],
 }
 
 export type guestsObj = {
@@ -36,6 +35,7 @@ export interface userCommentsType {
 export type dataInv = {
   data: ArrayElements[],
   commentsData: userCommentsType[],
+  isDesktop?: boolean | null,
 }
 
 if (typeof window !== "undefined") {
@@ -47,25 +47,57 @@ export default function Home({
   commentsData
 }: dataInv) {
 
-  const [preLoad, setPreLoad] = useState<boolean>(true)
+  const [isSiteReady, setIsSiteReady] = useState(false)
+  const [isDesktop, setIsDesktop] = useState<boolean | null>(null)
 
   useEffect(() => {
+    const checkDimension = () => setIsDesktop(window.innerWidth >= 992)
 
-    gsap.to(window, {
-      scrollTo: 0,
-      duration: 0.5,
-      onComplete: () => setPreLoad(false)
-    });
+    const handleLoad = () => {
+      const timer = setTimeout(() => {
+        setIsSiteReady(true);
+      }, 2000);
+      return timer;
+    };
+
+    let loadTimer: NodeJS.Timeout;
+
+    checkDimension();
+    window.addEventListener('resize', checkDimension);
+
+    if (document.readyState === 'complete') {
+      gsap.to(window, {
+        scrollTo: 0,
+        duration: 0.5,
+        onComplete: () => {
+          loadTimer = handleLoad();
+        }
+      });
+    } else {
+      const onWindowLoad = () => {
+        loadTimer = handleLoad();
+      };
+      window.addEventListener('load', onWindowLoad);
+    }
+
+    return () => {
+      window.removeEventListener('resize', checkDimension);
+      window.removeEventListener('load', () => { });
+      if (loadTimer) clearTimeout(loadTimer);
+    };
   }, []);
+
+  console.log(isSiteReady)
 
   return (
     <>
       {
-        preLoad
+        !isSiteReady
           ? <div className='fixed inset-0'>Cargando</div>
           : <Invitation
             data={data}
             commentsData={commentsData}
+            isDesktop={isDesktop}
           />
       }
     </>

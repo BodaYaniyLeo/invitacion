@@ -121,9 +121,9 @@ export const Itinerary = ({
     }, [idSelected]);
 
     return (
-        <div id="itinerary" className='h-lvh content-center'>
-            <h2 className='text-center content-center text-white font-(family-name:--fontBold) text-(length:--h1size) h-[20lvh]'>Itinerario</h2>
-            <div className="flex flex-1 flex-col justify-self-center self-center  h-[80lvh]">
+        <div id="itinerary" className='h-lvh content-center lg:content-end'>
+            <h2 className='text-center content-center text-white font-(family-name:--fontBold) text-(length:--h1size) h-[20lvh] lg:hidden'>Itinerario</h2>
+            <div className="flex flex-1 flex-col justify-self-center self-center h-[80lvh] lg:h-auto">
 
                 {idSelected.map(e =>
                     <div key={e.id} id={e.id} className="flex flex-around opacity-0 invisible my-[3lvh] scale-125">

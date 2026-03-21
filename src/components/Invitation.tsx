@@ -27,24 +27,10 @@ export interface VideoProps {
     commentsData?: userCommentsType[];
 }
 
-const makeFrames = (prefix: string, ext: string, count: number): string[] =>
-    Array.from({ length: count }, (_, i) =>
-        `${prefix}${String(i + 1).padStart(4, '0')}${ext}`
-    );
-
-const VIDEO_DURATION = 2;
-const FRAME_COUNT = 120;
-
-const video1Frames = makeFrames('/videos/frames/video1/firstVideoMobile_', '.webp', FRAME_COUNT);
-const video2Frames = makeFrames('/videos/frames/video2/secondVideoMobile_', '.webp', 180);
-const videoFinalFrames = makeFrames('/videos/frames/videoFinal/finalVideoMobile_', '.webp', 110);
-const videoCalinaFrames = makeFrames('/videos/frames/calinaVideo/calinaVideo_', '.webp', FRAME_COUNT);
-
-const cacheEstatica: HTMLImageElement[] = [];
-
 export const Invitation = ({
     data,
-    commentsData
+    commentsData,
+    isDesktop
 }: dataInv) => {
     const mainRef = useRef<HTMLDivElement>(null);
     const presentation = useRef<HTMLDivElement>(null);
@@ -59,38 +45,6 @@ export const Invitation = ({
     const vCalinaProgress = useRef({ t: 0 });
 
     const [openMenu, setOpenMenu] = useState<boolean>(false)
-
-    useEffect(() => {
-        const allFrames = [...video1Frames, ...video2Frames, ...videoFinalFrames];
-
-        allFrames.forEach((src) => {
-            const img = new Image();
-            img.src = src;
-            cacheEstatica.push(img);
-        });
-    }, []);
-
-    useEffect(() => {
-        const priorityFrames = [video1Frames[0], video2Frames[0], videoCalinaFrames[0], videoFinalFrames[0]];
-
-        const loadSequentially = async (array: string[]) => {
-            for (const src of array) {
-                await new Promise((resolve) => {
-                    const img = new Image();
-                    img.src = src;
-                    img.onload = resolve;
-                    img.onerror = resolve;
-                });
-            }
-        };
-
-        loadSequentially(priorityFrames).then(() => {
-            loadSequentially(video1Frames);
-            setTimeout(() => {
-                loadSequentially([...video2Frames, ...videoCalinaFrames, ...videoFinalFrames]);
-            }, 2000);
-        });
-    }, []);
 
     useEffect(() => {
         const lenis = new Lenis({
@@ -123,8 +77,7 @@ export const Invitation = ({
         v1Progress,
         v2Progress,
         vFinalProgress,
-        vCalinaProgress,
-        VIDEO_DURATION
+        vCalinaProgress
     });
 
     const handleInfoSalon = () => {
@@ -136,6 +89,15 @@ export const Invitation = ({
     }
 
     const handleBackInfo = () => {
+        if (infoSalonAnimation.current) {
+            infoSalonAnimation.current.reversed(true);
+
+            document.body.style.overflow = '';
+            window.dispatchEvent(new CustomEvent('unlock-scroll'));
+        }
+    }
+
+    const handleComments = () => {
         if (infoSalonAnimation.current) {
             infoSalonAnimation.current.reversed(true);
 
@@ -172,60 +134,57 @@ export const Invitation = ({
 
             <div className="w-full h-[200lvh] relative" id="leoContainer">
 
-                <div ref={leoSection} className="w-full h-lvh">
+                <div ref={leoSection} className="w-full lg:w-auto h-lvh">
                     <Intro />
                     <VideoSection
-                        id="video1"
+                        id="videoLeo"
                         progressRef={v1Progress}
-                        frames={video1Frames}
-                        duration={VIDEO_DURATION}
-                        video={'full'}
+                        videoUrl={`/videos/${isDesktop ? "desktop" : "mobile"}/videoLeo.mp4`}
+                        duration={2}
+                        mode="full"
                     />
                 </div>
 
-                <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center pointer-events-none">
+                <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
                     <TextLayer id="Leo" title="Leo" subtitle="Historia" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
                 </div>
             </div>
 
-            <div className="w-full h-[200lvh] relative" id="yaniContainer">
+            <div className="w-full h-[220lvh] relative" id="yaniContainer">
 
                 <div ref={yaniSection} className="w-full h-lvh">
                     <VideoSection
-                        id="video2"
+                        id="videoYani"
                         progressRef={v2Progress}
-                        frames={video2Frames}
-                        duration={VIDEO_DURATION}
-                        video={'full'}
+                        videoUrl={`/videos/${isDesktop ? "desktop" : "mobile"}/videoYani.mp4`}
+                        duration={2}
+                        mode="full"
                     />
                 </div>
 
-                <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center pointer-events-none">
+                <div className="absolute bottom-0 left-0 w-full h-lvh lg:top-1/5 lg:h-full lg:left-1/2 z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
                     <TextLayer id="Yani" title="Yani" subtitle="Sueño" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
                 </div>
             </div>
 
             <div id="triggerCalina" className="w-full h-[100lvh] content-center relative">
-                <VisitCalina
-                    id="videoCalina"
-                    progressRef={vCalinaProgress}
-                    frames={videoCalinaFrames}
-                    duration={VIDEO_DURATION}
-                    video={'salon'}
-                    handleInfoSalon={handleInfoSalon}
-                    setOpenMenu={setOpenMenu}
-                />
+                <div className='lg:flex lg:justify-center'>
+                    <VisitCalina
+                        id="videoCalina"
+                        progressRef={vCalinaProgress}
+                        duration={2}
+                        video={'salon'}
+                        handleInfoSalon={handleInfoSalon}
+                        setOpenMenu={setOpenMenu}
+                        isDesktop={isDesktop}
+                    />
 
-                <Itinerary
-                    data={data}
-                />
+                    <Itinerary
+                        data={data}
+                    />
+                </div>
 
                 <DressCode />
-
-                <Carousel
-                    data={data}
-                    commentsData={commentsData}
-                />
 
                 <Countdown />
 
@@ -235,21 +194,18 @@ export const Invitation = ({
                         <VideoSection
                             id="videoFinal"
                             progressRef={vFinalProgress}
-                            frames={videoFinalFrames}
-                            duration={VIDEO_DURATION}
-                            video={'full'}
+                            videoUrl={`/videos/${isDesktop ? "desktop" : "mobile"}/videoFinal.mp4`}
+                            duration={2}
+                            mode="full"
+                        />
+                        <Price
+                            id="priceData"
+                            data={data}
                         />
                     </div>
                 </div>
 
-                <div id="footerPrice" className="relative h-[100lvh] content-center">
-                    <Price
-                        id="priceData"
-                        data={data}
-                    />
-                </div>
-
-                <div id="footerConfirm" className="relative -mt-[30lvh]">
+                <div id="footerConfirm" className="w-full h-[130dvh] relative">
                     <FooterConfirm
                         id="confirmData"
                         data={data}
@@ -265,6 +221,11 @@ export const Invitation = ({
             <MenuComponent
                 data={data}
                 setOpenMenu={setOpenMenu}
+            />
+
+            <Carousel
+                data={data}
+                commentsData={commentsData}
             />
 
         </div >

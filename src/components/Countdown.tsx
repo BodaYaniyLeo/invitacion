@@ -94,7 +94,7 @@ export const Countdown = () => {
     return (
         <div id="countdown" className="relative h-lvh w-full overflow-hidden">
             <div id="backgroundLoading" className="absolute bottom-0 h-lvh w-full bg-cover bg-center bg-no-repeat scale-110"></div>
-            <div id="backgroundChar" className="absolute bottom-0 h-[80lvh] w-full bg-cover bg-bottom bg-no-repeat"></div>
+            <div id="backgroundChar" className="absolute bottom-0 h-[80lvh] w-full lg:w-auto lg:aspect-1/1 lg:right-0 bg-cover bg-bottom bg-no-repeat"></div>
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
@@ -102,14 +102,14 @@ export const Countdown = () => {
                 }}
             ></div>
             {isMounted
-                ? <div className="absolute top-[5lvh] h-[85lvh] flex flex-col w-full items-center justify-between">
+                ? <div className="absolute top-[5lvh] h-[85lvh] lg:left-0 flex flex-col w-full items-center lg:w-1/2 justify-between lg:justify-around">
                     <div className="flex">
-                        <div className="text-center text-white font-(family-name:--fontBold) text-[40px]">
+                        <div className="text-center text-white font-(family-name:--fontBold) text-[40px] lg:text-(length:--h1size)">
                             {dias === "0" ?
                                 ""
                                 : dias === "1" ?
-                                    <p>{dias} <span className="text-[24px]">día</span>,</p>
-                                    : <p>{dias} <span className="text-[24px]">días</span>,</p>
+                                    <p>{dias} <span className="text-[24px]">día,</span></p>
+                                    : <p>{dias} <span className="text-[24px]">días,</span></p>
 
                             }
                             <div className="flex align-bottom">
@@ -121,22 +121,22 @@ export const Countdown = () => {
                     </div>
                     <div className="relative">
                         <div className="flex items-center text-white">
-                            <div id="loadingRingContainer" className="w-[24px] h-[24px] relative">
+                            <div id="loadingRingContainer" className="w-[24px] h-[24px] lg:h-(--h2size) lg:w-(--h2size) relative">
                                 <Image
                                     src={loadRing}
                                     alt=""
                                     id="loadingRing"
-                                    className="w-[24px] absolute bottom-0"
+                                    className="w-[24px] absolute bottom-0 lg:inset-0 lg:w-(--h2size) aspect-[12/10]"
                                 />
                             </div>
-                            <p className="font-(family-name:--fontBold) text-[24px] ms-3">
+                            <p className="font-(family-name:--fontBold) text-[24px] lg:text-(length:--h1size) ms-3">
                                 Loading wedding
                             </p>
 
                         </div>
                         <div className="flex justify-between absolute top-[130%] left-0 w-full">
                             <a href="https://calendar.app.google/YWCwpzWNMJrucNB1A" target="_blank" className="flex items-center">
-                                <span className="me-1">Agendar</span>
+                                <span className="me-1 lg:text-(length:--h5size)">Agendar</span>
                                 <Image
                                     src={googleLogo}
                                     alt=""
@@ -144,7 +144,7 @@ export const Countdown = () => {
                                 />
                             </a>
                             <a href="/appointment/iosAppointment.ics" download="iosAppointment" className="flex items-center">
-                                <span className="me-1">Agendar</span>
+                                <span className="me-1 lg:text-(length:--h5size)">Agendar</span>
                                 <Image
                                     src={appleLogo}
                                     alt=""

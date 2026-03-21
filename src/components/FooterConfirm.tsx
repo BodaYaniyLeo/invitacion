@@ -45,15 +45,15 @@ export const FooterConfirm = ({
     return (
         <div
 
-            className="px-6 pointer-events-auto py-2 justify-items-center"
+            className="px-6 pointer-events-auto py-2 justify-items-center absolute bottom-0 w-full"
         >
-            <div id={id} className="flex flex-col w-full max-w-md max-h-[50dvh] bg-white/5 p-4 rounded-xl backdrop-blur-sm  opacity-0 invisible">
+            <div id={id} className="flex flex-col w-full max-w-200 max-h-[50dvh] bg-white/5 p-4 rounded-xl backdrop-blur-sm  opacity-0 invisible">
                 <p className="flex-none pb-4 font-bold text-center uppercase tracking-wider text-(length:--h5size)">
                     Confirmar asistencia
                 </p>
 
                 <div
-                    className="flex-1 overflow-y-auto min-h-0 py-2 border-y border-white/10 custom-scrollbar"
+                    className="flex-1 overflow-y-auto min-h-0 py-2 border-y border-white/10 custom-scrollbar lg:px-4"
                     data-lenis-prevent
                 >
                     {dataGuest?.map(g => (
@@ -82,7 +82,7 @@ export const FooterConfirm = ({
                         Enviar respuesta
                     </button>
                 </div>
-                <p>
+                <p className='text-[length:12px]'>
                     * Invitación sin obligación de compra, <b className='text-red-300'>pero considere que su presencia es el mejor regalo</b>. Las tarifas están sujetas a ajustes según la fecha de pago.
                 </p>
             </div>

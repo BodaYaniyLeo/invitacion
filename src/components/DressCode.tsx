@@ -87,7 +87,7 @@ export const DressCode = () => {
 
 
     return (
-        <div id="dresscode" className='overflow-hidden h-lvh w-vw flex flex-col relative'>
+        <div id="dresscode" className='overflow-hidden h-lvh w-vw flex flex-col relative lg:mt-[10lvh]'>
             <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size) tracking-[-.04em] px-8'>
                 Código de vestimenta
             </h2>
