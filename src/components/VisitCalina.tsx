@@ -33,7 +33,7 @@ export const VisitCalina = ({
             className="flex flex-col justify-center items-center relative -scroll-mt-[5lvh]"
         >
             <div className='z-11'>
-                <div className='flex flex-col items-center justify-end h-[80lvh]'>
+                <div className='flex flex-col items-center justify-end h-[80lvh] lg:h-[100lvh]'>
                     <div className='px-[10vw] justify-self-center'>
                         <Image
                             src={logoCalina}

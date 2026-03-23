@@ -53,7 +53,7 @@ export const VideoSection = ({
                 if (align === 'right') {
                     ox = (canvas.width * 0.5) - (dw * 0.5);
                 } else if (align === 'left') {
-                    ox = window.innerWidth < 992 ? 0 : (canvas.width * 0.7) - (dw * 0.5);
+                    ox = 0;
                 } else {
                     ox = (canvas.width - dw) / 2;
                 }
