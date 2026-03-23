@@ -119,7 +119,7 @@ export const Countdown = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="relative">
+                    <div className="relative lg:absolute lg:bottom-0">
                         <div className="flex items-center text-white">
                             <div id="loadingRingContainer" className="w-[24px] h-[24px] lg:h-(--h2size) lg:w-(--h2size) relative">
                                 <Image

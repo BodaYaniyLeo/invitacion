@@ -126,7 +126,7 @@ export const Itinerary = ({
             <div className="flex flex-1 flex-col lg:flex-row justify-self-center self-center lg:h-auto lg:w-full lg:justify-around">
 
                 {idSelected.map(e =>
-                    <div key={e.id} id={e.id} className="flex flex-around lg:flex-col opacity-0 invisible lg:opacity-100 lg:visible my-[3lvh] scale-125">
+                    <div key={e.id} id={e.id} className="flex flex-around lg:flex-col opacity-0 invisible lg:opacity-100 lg:visible my-[3lvh] scale-125 lg:scale-100">
                         <Image
                             src={e.image}
                             alt=""

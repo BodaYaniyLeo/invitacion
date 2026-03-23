@@ -17,7 +17,6 @@ import { MenuComponent } from './MenuComponent'
 
 import { ArrayElements, userCommentsType, dataInv } from '@/app/page'
 
-import { Itinerary } from './Itinerary';
 import { DressCode } from './DressCode';
 import { Carousel } from './Carousel';
 

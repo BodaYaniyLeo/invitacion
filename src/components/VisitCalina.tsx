@@ -30,7 +30,7 @@ export const VisitCalina = ({
     return (
         <div
             id={id}
-            className="flex flex-col justify-center items-center relative"
+            className="flex flex-col justify-center items-center relative -scroll-mt-[5lvh]"
         >
             <div className='z-11'>
                 <div className='flex flex-col items-center justify-end h-[80lvh]'>
@@ -42,7 +42,7 @@ export const VisitCalina = ({
                         />
                     </div>
                     <p className='font-bold text-(length:--h4size) text-center text-white'>Ven a vivir este momento <br />especial.</p>
-                    <div className='bg-white w-[clamp(50vw,90vw,500px)] ratio-4/3 p-2 mt-5 relative'>
+                    <div className='bg-white w-[clamp(50vw,90vw,800px)] ratio-4/3 p-2 mt-5 relative]'>
 
                         <VideoSection
                             id="videoCalina"
