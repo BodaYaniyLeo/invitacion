@@ -21,8 +21,6 @@ export const VideoSection = ({
     const [isReady, setIsReady] = useState(false);
     const lastWidth = useRef(typeof window !== 'undefined' ? window.innerWidth : 0);
 
-    console.log(window.innerHeight)
-
     useEffect(() => {
         const canvas = canvasRef.current;
         const video = videoRef.current;
@@ -124,8 +122,6 @@ export const VideoSection = ({
                 className={`${mode === 'full' ? 'w-full lg:w-auto h-lvh object-cover' : 'w-full h-auto'}`}
                 style={{
                     display: isReady ? 'block' : 'none',
-                    WebkitMaskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
-                    maskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
                     WebkitMaskRepeat: "no-repeat",
                     maskRepeat: "no-repeat",
                     ...(mode !== 'full' && { aspectRatio: "4/3" })

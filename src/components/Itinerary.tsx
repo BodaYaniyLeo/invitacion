@@ -80,7 +80,7 @@ export const Itinerary = ({
 
     useLayoutEffect(() => {
 
-        if (!idSelected.length) return
+        if (!idSelected.length || !idSelected.length && window.innerWidth > 991) return
 
         gsap.registerPlugin(ScrollTrigger);
 
@@ -121,12 +121,12 @@ export const Itinerary = ({
     }, [idSelected]);
 
     return (
-        <div id="itinerary" className='h-lvh content-center lg:content-end'>
+        <div id="itinerary" className='content-center lg:content-end h-lvh lg:h-auto lg:w-full'>
             <h2 className='text-center content-center text-white font-(family-name:--fontBold) text-(length:--h1size) h-[20lvh] lg:hidden'>Itinerario</h2>
-            <div className="flex flex-1 flex-col justify-self-center self-center h-[80lvh] lg:h-auto">
+            <div className="flex flex-1 flex-col lg:flex-row justify-self-center self-center lg:h-auto lg:w-full lg:justify-around">
 
                 {idSelected.map(e =>
-                    <div key={e.id} id={e.id} className="flex flex-around opacity-0 invisible my-[3lvh] scale-125">
+                    <div key={e.id} id={e.id} className="flex flex-around lg:flex-col opacity-0 invisible lg:opacity-100 lg:visible my-[3lvh] scale-125">
                         <Image
                             src={e.image}
                             alt=""
@@ -136,11 +136,11 @@ export const Itinerary = ({
                             }}
                         />
                         <div className="ms-4 content-center">
-                            <p className="text-[30px]">
+                            <p className="text-[30px] text-center">
                                 {e.horario}
                                 {e.id === "coffe" && <span className="text-[16px] ms-1">+1</span>}
                             </p>
-                            <p>{e.text}</p>
+                            <p className="lg:hidden">{e.text}</p>
                         </div>
                     </div>
                 )

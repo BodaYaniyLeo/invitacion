@@ -103,7 +103,7 @@ export const Countdown = () => {
             ></div>
             {isMounted
                 ? <div className="absolute top-[5lvh] h-[85lvh] lg:left-0 flex flex-col w-full items-center lg:w-1/2 justify-between lg:justify-around">
-                    <div className="flex">
+                    <div className="flex lg:h-full lg:items-center">
                         <div className="text-center text-white font-(family-name:--fontBold) text-[40px] lg:text-(length:--h1size)">
                             {dias === "0" ?
                                 ""
@@ -126,7 +126,7 @@ export const Countdown = () => {
                                     src={loadRing}
                                     alt=""
                                     id="loadingRing"
-                                    className="w-[24px] absolute bottom-0 lg:inset-0 lg:w-(--h2size) aspect-[12/10]"
+                                    className="w-[24px] absolute bottom-0 lg:inset-0 lg:w-(--h2size) lg:aspect-[12/10]"
                                 />
                             </div>
                             <p className="font-(family-name:--fontBold) text-[24px] lg:text-(length:--h1size) ms-3">

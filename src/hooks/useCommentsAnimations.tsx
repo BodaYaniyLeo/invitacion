@@ -45,8 +45,13 @@ export const useCommentsAnimations = () => {
 
         pauseAnimation.current = pausedComments;
 
+        const timer = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 100);
+
         return () => {
             window.removeEventListener("resize", handleResize);
+            clearTimeout(timer);
             animationNewComment.revert();
             pausedComments.revert();
         };

@@ -87,8 +87,6 @@ export default function Home({
     };
   }, []);
 
-  console.log(isSiteReady)
-
   return (
     <>
       {

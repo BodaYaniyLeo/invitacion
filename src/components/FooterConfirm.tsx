@@ -82,7 +82,7 @@ export const FooterConfirm = ({
                         Enviar respuesta
                     </button>
                 </div>
-                <p className='text-[length:12px]'>
+                <p className='text-[length:12px] lg:text-[length:16px]'>
                     * Invitación sin obligación de compra, <b className='text-red-300'>pero considere que su presencia es el mejor regalo</b>. Las tarifas están sujetas a ajustes según la fecha de pago.
                 </p>
             </div>

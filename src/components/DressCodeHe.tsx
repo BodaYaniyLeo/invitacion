@@ -160,7 +160,7 @@ export const DressCodeHe = ({
                                                 alt=""
                                             />
                                         </span>
-                                        <span className={`absolute top-0 left-0 w-[4vw] minus ${sectionM === categoryName && "active"}`}>
+                                        <span className={`absolute top-0 left-0 w-[4vw] lg:w-auto minus ${sectionM === categoryName && "active"}`}>
                                             <Image
                                                 src={minus}
                                                 alt=""

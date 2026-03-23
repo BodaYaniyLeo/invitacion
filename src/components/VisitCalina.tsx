@@ -2,6 +2,8 @@ import Image from 'next/image';
 import logoCalina from '../assets/images/salon/visitCalina.svg'
 import '@/src/styles/invitation.css'
 import { VideoSection } from './VideoSection';
+import { Itinerary } from './Itinerary';
+import { ArrayElements } from '@/app/page'
 
 interface VideoProps {
     id: string;
@@ -11,6 +13,7 @@ interface VideoProps {
     handleInfoSalon: () => void;
     setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
     isDesktop?: boolean | null;
+    data: ArrayElements[];
 }
 
 export const VisitCalina = ({
@@ -20,16 +23,17 @@ export const VisitCalina = ({
     video,
     handleInfoSalon,
     setOpenMenu,
-    isDesktop
+    isDesktop,
+    data
 }: VideoProps) => {
 
     return (
         <div
             id={id}
-            className="flex flex-col justify-center items-center h-lvh relative"
+            className="flex flex-col justify-center items-center relative"
         >
             <div className='z-11'>
-                <div className='flex flex-col lg:flex-row items-center justify-around'>
+                <div className='flex flex-col items-center justify-end h-[80lvh]'>
                     <div className='px-[10vw] justify-self-center'>
                         <Image
                             src={logoCalina}
@@ -38,19 +42,7 @@ export const VisitCalina = ({
                         />
                     </div>
                     <p className='font-bold text-(length:--h4size) text-center text-white'>Ven a vivir este momento <br />especial.</p>
-                </div>
-                <div id='photoSalon' className="pointer-events-auto flex flex-col items-center">
                     <div className='bg-white w-[clamp(50vw,90vw,500px)] ratio-4/3 p-2 mt-5 relative'>
-
-                        {/* <VideoSection
-                            {...{
-                                id: `${id}-internal-video`,
-                                progressRef,
-                                frames,
-                                duration,
-                                video
-                            }}
-                        /> */}
 
                         <VideoSection
                             id="videoCalina"
@@ -61,6 +53,8 @@ export const VisitCalina = ({
                         />
 
                     </div>
+                </div>
+                <div id='photoSalon' className="pointer-events-auto flex flex-col lg:flex-col-reverse items-center justify-between h-[120lvh] lg:h-auto">
                     <button
                         className='flex mt-4 rounded-full bg-white px-8 py-4 text-black justify-center mt-5 font-bold text-(length:--h5size)'
                         onClick={() => {
@@ -70,6 +64,9 @@ export const VisitCalina = ({
                     >
                         Descubre Calina
                     </button>
+                    <Itinerary
+                        data={data}
+                    />
                 </div>
             </div>
         </div>

@@ -167,21 +167,21 @@ export const Invitation = ({
                 </div>
             </div>
 
-            <div id="triggerCalina" className="w-full h-[100lvh] content-center relative">
-                <div className='lg:flex lg:justify-center'>
-                    <VisitCalina
-                        id="videoCalina"
-                        progressRef={vCalinaProgress}
-                        duration={2}
-                        video={'salon'}
-                        handleInfoSalon={handleInfoSalon}
-                        setOpenMenu={setOpenMenu}
-                        isDesktop={isDesktop}
-                    />
+            <div className="w-full h-[200lvh] lg:h-[100lvh] content-center relative">
+                <div id="triggerCalina">
+                    <div className='lg:flex lg:justify-center'>
+                        <VisitCalina
+                            id="containerCalina"
+                            progressRef={vCalinaProgress}
+                            duration={2}
+                            video={'salon'}
+                            handleInfoSalon={handleInfoSalon}
+                            setOpenMenu={setOpenMenu}
+                            isDesktop={isDesktop}
+                            data={data}
+                        />
+                    </div>
 
-                    <Itinerary
-                        data={data}
-                    />
                 </div>
 
                 <DressCode />
@@ -212,6 +212,7 @@ export const Invitation = ({
                     />
                 </div>
             </div>
+
             <InfoSalon
                 data={data}
                 scrollRef={scrollRef}

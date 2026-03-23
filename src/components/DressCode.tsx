@@ -101,7 +101,7 @@ export const DressCode = () => {
                         <Image
                             src={iconManiqui}
                             alt=""
-                            className="w-[clamp(40px,15vw,120px)]"
+                            className="w-[clamp(40px,15vw,100px)]"
                         />
 
                     </div>

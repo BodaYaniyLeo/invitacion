@@ -120,6 +120,10 @@ export const useInvitationAnimations = ({
             });
 
             leoTl.set('#containerTextOrg', { backdropFilter: "blur(15px)" });
+            leoTl.set("#videoLeo canvas", {
+                WebkitMaskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
+                maskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
+            })
 
             leoTl
                 .fromTo('#containerTextOrg',
@@ -164,7 +168,7 @@ export const useInvitationAnimations = ({
                     maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     duration: 4
                 }, "LeoAppear")
-                .to('#videoLeo', { autoAlpha: 0, duration: 3 }, "LeoAppear")
+                .to('#videoLeo', { autoAlpha: 0, duration: 3.5 }, "LeoAppear")
 
             const yaniTl = gsap.timeline({
                 scrollTrigger: {
@@ -178,19 +182,33 @@ export const useInvitationAnimations = ({
                 }
             });
 
+            yaniTl.set("#videoYani canvas", {
+                WebkitMaskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
+                maskImage: "radial-gradient(circle at 105vw 50vh, rgb(0, 0, 0) 100vw, rgb(0, 0, 0) 150vw)",
+            })
+
             yaniTl
                 .to('#videoYani', { autoAlpha: 1, duration: 0.5 })
                 .addLabel("yaniAppear")
                 .to(v2Progress.current, {
                     t: 3, duration: 8, ease: "none",
                 }, '-=0.75')
-                .to("#videoYani canvas", {
+            if (window.innerWidth < 992) {
+                yaniTl.to("#videoYani canvas", {
                     WebkitMaskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
                     duration: 4
                 }, "yaniAppear+=2.5")
-                .to('#videoYani', { autoAlpha: 0, duration: 3 }, "yaniAppear+=2.5")
-                .to('#Yani', { autoAlpha: 0, duration: 1 }, "yaniAppear+=6.5")
+            } else {
+
+                yaniTl.to("#videoYani canvas", {
+                    WebkitMaskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
+                    maskImage: "radial-gradient(circle at 95vw 0vh, rgb(0, 0, 0) 30vw, rgba(0, 0, 0, 0.15) 60vw)",
+                    duration: 4
+                }, "yaniAppear+=2.5")
+            }
+            yaniTl.to('#videoYani', { autoAlpha: 0, duration: 3 }, "yaniAppear+=2.5")
+                .to('#Yani', { autoAlpha: 0, duration: 1 }, "yaniAppear+=5.5")
 
 
             const catalinaTl = gsap.timeline({
@@ -203,7 +221,7 @@ export const useInvitationAnimations = ({
             });
 
             catalinaTl
-                .to(vCalinaProgress.current, { t: 2, duration: 2 }, 0)
+                .to(vCalinaProgress.current, { t: 2, duration: 1 }, 0)
 
             const finalTl = gsap.timeline({
                 scrollTrigger: {
@@ -252,28 +270,28 @@ export const useInvitationAnimations = ({
         animationSalon
             .to("#lateralMaps", { zIndex: 80 })
             .to("#lateralMaps", { autoAlpha: 1, duration: 0.3 })
-            .to("#infoSalon, #photoSalon", { autoAlpha: 1, duration: 0.3 }, "<")
+            .to("#infoSalon, #containerCalina", { autoAlpha: 1, duration: 0.3 }, "<")
             .to("#infoSalon", { x: 0, duration: 0.3 }, "<")
-            .to("#photoSalon", { x: "-90%", duration: 0.3 }, "<")
-            .to("#mapsSalon, #photoSalon", { rotateZ: -4, duration: 0.3 }, "<")
+            .to("#containerCalina", { x: "-90%", duration: 0.3 }, "<")
+            .to("#mapsSalon, #containerCalina", { rotateZ: -4, duration: 0.3 }, "<")
             .to("#header", { opacity: 1, duration: 0.3 })
 
         infoSalonAnimation.current = animationSalon;
 
-        const animationComments = gsap.timeline({ paused: true });
+        // const animationComments = gsap.timeline({ paused: true });
 
-        animationComments.set("#infoSalon", { x: "90%", autoAlpha: 0 })
+        // animationComments.set("#infoSalon", { x: "90%", autoAlpha: 0 })
 
-        animationComments
-            .to("#lateralMaps", { zIndex: 80 })
-            .to("#lateralMaps", { autoAlpha: 1, duration: 0.3 })
-            .to("#infoSalon, #photoSalon", { autoAlpha: 1, duration: 0.3 }, "<")
-            .to("#infoSalon", { x: 0, duration: 0.3 }, "<")
-            .to("#photoSalon", { x: "-90%", duration: 0.3 }, "<")
-            .to("#mapsSalon, #photoSalon", { rotateZ: -4, duration: 0.3 }, "<")
-            .to("#header", { opacity: 1, duration: 0.3 })
+        // animationComments
+        //     .to("#lateralMaps", { zIndex: 80 })
+        //     .to("#lateralMaps", { autoAlpha: 1, duration: 0.3 })
+        //     .to("#infoSalon, #photoSalon", { autoAlpha: 1, duration: 0.3 }, "<")
+        //     .to("#infoSalon", { x: 0, duration: 0.3 }, "<")
+        //     .to("#photoSalon", { x: "-90%", duration: 0.3 }, "<")
+        //     .to("#mapsSalon, #photoSalon", { rotateZ: -4, duration: 0.3 }, "<")
+        //     .to("#header", { opacity: 1, duration: 0.3 })
 
-        commentsAnimation.current = animationComments;
+        // commentsAnimation.current = animationComments;
 
         const animationCross = gsap.timeline({ paused: true });
 
