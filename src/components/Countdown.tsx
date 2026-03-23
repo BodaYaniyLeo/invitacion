@@ -77,16 +77,16 @@ export const Countdown = () => {
                     .to("#backgroundChar", { autoAlpha: 0, duration: 0.75 }, "-=0.6")
             });
 
-            gsap.to("#loadingRingContainer", {
-                rotation: 360,
-                repeat: -1,
-                duration: 2,
-                ease: "none",
-                transformOrigin: "50% 50%",
-                force3D: true
-            });
-
         })
+
+        gsap.to("#loadingRing", {
+            rotation: 360,
+            repeat: -1,
+            duration: 3,
+            ease: "none",
+            transformOrigin: "50% 58.33%",
+            force3D: true
+        });
 
         return () => ctx.revert();
     }, [isMounted]);
@@ -102,8 +102,8 @@ export const Countdown = () => {
                 }}
             ></div>
             {isMounted
-                ? <div className="absolute top-[5lvh] h-[85lvh] lg:left-0 flex flex-col w-full items-center lg:w-1/2 justify-between lg:justify-around">
-                    <div className="flex lg:h-full lg:items-center">
+                ? <div className="absolute top-[5lvh] h-[85lvh] flex flex-col w-full items-center justify-between">
+                    <div className="flex">
                         <div className="text-center text-white font-(family-name:--fontBold) text-[40px] lg:text-(length:--h1size)">
                             {dias === "0" ?
                                 ""
@@ -120,19 +120,18 @@ export const Countdown = () => {
                         </div>
                     </div>
                     <div className="relative lg:absolute lg:bottom-0">
-                        <div className="flex items-center text-white">
-                            <div id="loadingRingContainer" className="w-[24px] h-[24px] lg:h-(--h2size) lg:w-(--h2size) relative">
+                        <div className="flex items-center text-white h-auto">
+                            <div id="loadingRingContainer" className="flex items-center">
                                 <Image
                                     src={loadRing}
                                     alt=""
                                     id="loadingRing"
-                                    className="w-[24px] absolute bottom-0 lg:inset-0 lg:w-(--h2size) lg:aspect-[12/10]"
+                                    className="h-[20px] w-auto lg:h-(--h3size)"
                                 />
                             </div>
-                            <p className="font-(family-name:--fontBold) text-[24px] lg:text-(length:--h1size) ms-3">
+                            <p className="font-(family-name:--fontBold) text-[24px] lg:text-(length:--h1size) ms-1 lg:ms-3">
                                 Loading wedding
                             </p>
-
                         </div>
                         <div className="flex justify-between absolute top-[130%] left-0 w-full">
                             <a href="https://calendar.app.google/YWCwpzWNMJrucNB1A" target="_blank" className="flex items-center">

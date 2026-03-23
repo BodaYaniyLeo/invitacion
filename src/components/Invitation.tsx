@@ -141,6 +141,7 @@ export const Invitation = ({
                         videoUrl={`/videos/${isDesktop ? "desktop" : "mobile"}/videoLeo.mp4`}
                         duration={2}
                         mode="full"
+                        align="right"
                     />
                 </div>
 
@@ -158,6 +159,7 @@ export const Invitation = ({
                         videoUrl={`/videos/${isDesktop ? "desktop" : "mobile"}/videoYani.mp4`}
                         duration={2}
                         mode="full"
+                        align="left"
                     />
                 </div>
 

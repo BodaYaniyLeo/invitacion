@@ -56,7 +56,7 @@ export default function Home({
     const handleLoad = () => {
       const timer = setTimeout(() => {
         setIsSiteReady(true);
-      }, 2000);
+      }, 1000);
       return timer;
     };
 
@@ -89,15 +89,12 @@ export default function Home({
 
   return (
     <>
-      {
-        !isSiteReady
-          ? <div className='fixed inset-0'>Cargando</div>
-          : <Invitation
-            data={data}
-            commentsData={commentsData}
-            isDesktop={isDesktop}
-          />
-      }
+      <div className={`fixed inset-0 bg-black z-99 ${isSiteReady && "hidden"}`}>Cargando</div>
+      <Invitation
+        data={data}
+        commentsData={commentsData}
+        isDesktop={isDesktop}
+      />
     </>
 
   )

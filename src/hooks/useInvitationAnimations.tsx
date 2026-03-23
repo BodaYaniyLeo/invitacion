@@ -221,7 +221,7 @@ export const useInvitationAnimations = ({
             });
 
             catalinaTl
-                .to(vCalinaProgress.current, { t: 2, duration: 1 }, 0)
+                .to(vCalinaProgress.current, { t: 2, duration: 2 }, 0)
 
             const finalTl = gsap.timeline({
                 scrollTrigger: {

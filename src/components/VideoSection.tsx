@@ -7,6 +7,7 @@ interface VideoProps {
     videoUrl: string;
     duration: number;
     mode: 'full' | 'inline';
+    align?: 'left' | 'center' | 'right';
 }
 
 export const VideoSection = ({
@@ -14,7 +15,8 @@ export const VideoSection = ({
     progressRef,
     videoUrl,
     duration,
-    mode
+    mode,
+    align
 }: VideoProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -45,12 +47,24 @@ export const VideoSection = ({
             let dw, dh, ox, oy;
 
             if (imgRatio > canvasRatio) {
-                dh = canvas.height; dw = dh * imgRatio;
-                ox = (canvas.width - dw) / 2; oy = 0;
+                dh = canvas.height;
+                dw = dh * imgRatio;
+
+                if (align === 'right') {
+                    ox = (canvas.width * 0.5) - (dw * 0.5);
+                } else if (align === 'left') {
+                    ox = window.innerWidth < 992 ? 0 : (canvas.width * 0.7) - (dw * 0.5);
+                } else {
+                    ox = (canvas.width - dw) / 2;
+                }
+                oy = 0;
             } else {
-                dw = canvas.width; dh = dw / imgRatio;
-                ox = 0; oy = (canvas.height - dh) / 2;
+                dw = canvas.width;
+                dh = dw / imgRatio;
+                ox = 0;
+                oy = (canvas.height - dh) / 2;
             }
+
             ctx.drawImage(video, ox, oy, dw, dh);
         };
 
@@ -95,12 +109,12 @@ export const VideoSection = ({
             video.removeEventListener('seeked', handleSeeked);
             window.removeEventListener('resize', handleResize);
         };
-    }, [videoUrl, duration, mode]);
+    }, [videoUrl, duration, mode, align]);
 
     return (
-
         <div
-            id={id} className={`inset-0 transition-opacity lg:w-auto overflow-hidden lg:justify-self-end ${mode === 'full' ? 'pointer-events-none' : 'pointer-events-auto'}`}
+            id={id}
+            className={`transition-opacity lg:w-auto overflow-hidden lg:justify-self-end ${mode === 'full' ? 'pointer-events-none' : 'pointer-events-auto'}`}
             style={{
                 position: mode === 'full' ? 'fixed' : 'static',
                 opacity: isReady && mode === 'full' ? 0 : 1,
