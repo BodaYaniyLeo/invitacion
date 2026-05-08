@@ -87,6 +87,10 @@ export default function Home({
     };
   }, []);
 
+  if (!data || data.length === 0) {
+    return <div className="fixed inset-0 bg-black z-99 flex items-center justify-center text-white">Cargando...</div>;
+  }
+
   return (
     <>
       <div className={`fixed inset-0 bg-black z-99 ${isSiteReady && "hidden"}`}>Cargando</div>
