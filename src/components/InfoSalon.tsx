@@ -51,7 +51,7 @@ export const InfoSalon = ({
         <div
             id="lateralMaps"
             ref={scrollRef}
-            className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-green-800 overflow-x-scroll overflow-y-hidden shrink-0 p-[5lvh] opacity-0 invisible pointer-events-auto z-80"
+            className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-green-800 overflow-x-scroll overflow-y-hidden shrink-0 py-[5lvh] opacity-0 invisible pointer-events-auto z-80"
         >
             <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[5lvh] z-81 text-(length:--h5size)'>
                 <button className='flex rounded-full bg-white p-4 text-black items-center size-fit h-9 lg:h-12'
@@ -73,28 +73,30 @@ export const InfoSalon = ({
                     </span>
                 </div>
             </div>
-            <div id='infoSalon' className='flex flex-col w-[180vw] shrink-0 h-full'>
-                <div className="pointer-events-auto flex flex-col lg:flex-row justify-center h-lvh lg:items-center">
-                    <div id='mapsSalon' className='bg-white w-[clamp(50vw,80vw,500px)] h-fit aspect-4/3 p-2 mt-5 rotate-4'>
-                        <iframe src={urlIframe} style={{ border: 0, aspectRatio: "4/3" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <div className='flex h-[40%] items-center'>
-                        <div className='max-w-[80vw] font-[family-name:var(--textDesc)] lg:px-[4vw]'>
-                            <h2 className='text-[#ffc2d0] text-[length:var(--h1size)] uppercase font-bold'>
-                                Como llegar al salon
-                            </h2>
-                            <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] uppercase font-bold'>
-                                Dirección: Ruta E-53 km 15, jurisdicción Unquillo
-                            </p>
-                            <a
-                                href={urlMaps} target='_blank'
-                                className='flex rounded-full bg-white px-4 py-2 text-black justify-center mt-5 size-fit text-(length:--h5size)'
-                            >
-                                Ir a google maps
-                            </a>
+            <div id='infoSalon' className='flex flex-col shrink-0 h-full'>
+                <div className="pointer-events-auto flex flex-col lg:flex-row justify-center h-lvh lg:items-center ps-[5vw]">
+                    <div className='flex items-center'>
+                        <div className='w-[87vw] font-[family-name:var(--fontNormal)] px-[3vw] h-full flex flex-col justify-around'>
+                            <div id='mapsSalon' className='w-[90vw] bg-white w-[clamp(50vw,80vw,500px)] h-fit aspect-4/3 p-2 mt-5 rotate-4'>
+                                <iframe src={urlIframe} style={{ border: 0, aspectRatio: "4/3" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                            <div>
+                                <h2 className='text-[#ffc2d0] text-[length:var(--h1size)] uppercase font-bold'>
+                                    Como llegar al salon
+                                </h2>
+                                <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] uppercase font-bold'>
+                                    Dirección: Ruta E-53 km 15, jurisdicción Unquillo
+                                </p>
+                                <a
+                                    href={urlMaps} target='_blank'
+                                    className='flex rounded-full bg-white px-4 py-2 text-black justify-center mt-5 size-fit text-(length:--h5size)'
+                                >
+                                    Ir a google maps
+                                </a>
+                            </div>
                         </div>
                         {data[0].sleep
-                            ? <div className='w-[100vw] mx-[4vw] font-[family-name:var(--textDesc)] self-end max-h-[80lvh] flex flex-col lg:self-center'>
+                            ? <div className='w-[90vw] mx-[4vw] font-[family-name:var(--fontNormal)] self-end max-h-[80lvh] flex flex-col lg:self-center'>
                                 <h4 className='text-[#ffc2d0] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
                                     Hospedaje incluido
                                 </h4>
@@ -104,14 +106,14 @@ export const InfoSalon = ({
                                     </p>
                                 </div>
                                 <div className='grid grid-cols-3 mb-4 w-[90%] place-self-center'>
-                                    <p className='col-span-2 text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                    <p className='col-span-2 text-[#fff9cb] text-[length:var(--h3size)] leading-[1.2] font-bold'>
                                         Nombre
                                     </p>
-                                    <p className='grid-column-3 text-center text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                    <p className='grid-column-3 text-center text-[#fff9cb] text-[length:var(--h3size)] leading-[1.2] font-bold'>
                                         Habitación
                                     </p>
                                 </div>
-                                <div className='flex flex-col flex-1 overflow-y-auto min-h-0 py-2 border-y border-white/10 custom-scrollbar w-[90%] place-self-center'>
+                                <div className='flex flex-col flex-1 overflow-y-auto min-h-0 py-2 border-y border-white/10 custom-scrollbar w-[100%] place-self-center'>
                                     {guests?.map(g => {
                                         return (
                                             <div key={g.id} className='grid grid-cols-3 mb-4'>
@@ -127,7 +129,7 @@ export const InfoSalon = ({
 
                                 </div>
                             </div>
-                            : <div className='w-[100vw] mx-[4vw] font-[family-name:var(--textDesc)] self-end'>
+                            : <div className='w-[90vw] mx-[4vw] font-[family-name:var(--fontNormal)] self-end max-h-[80lvh] h-full flex flex-col lg:self-center'>
                                 <h4 className='text-[#fff9cb] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
                                     Hospedajes cercanos
                                 </h4>
@@ -152,12 +154,12 @@ export const InfoSalon = ({
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col w-[180vw] shrink-0 bg-black'>
+            {/* <div className='flex flex-col w-[180vw] shrink-0 bg-black'>
                 <Image
                     src={ingresoCalina}
                     alt=''
                 />
-            </div>
+            </div> */}
         </div >
     )
 };

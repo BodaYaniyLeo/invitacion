@@ -13,6 +13,7 @@ export const FooterConfirm = ({
 
     const [dataGuest, setDataGuest] = useState<guestsObj[]>([])
     const [discount, setDiscount] = useState<number>(0)
+    const [price, setPrice] = useState<string | null>(null)
 
 
     const priceTarj = 160000
@@ -42,13 +43,19 @@ export const FooterConfirm = ({
 
     }
 
+    useEffect(() => {
+        const priceSet = new Intl.NumberFormat('es-ES').format(priceTarj - priceTarj * (discount || 0))
+        setPrice(priceSet)
+    }, [priceTarj])
+
+
     return (
         <div
 
             className="px-6 pointer-events-auto py-2 justify-items-center absolute bottom-0 w-full"
         >
             <div id={id} className="flex flex-col w-full max-w-200 max-h-[50dvh] bg-white/5 p-4 rounded-xl backdrop-blur-sm  opacity-0 invisible">
-                <p className="flex-none pb-4 font-bold text-center uppercase tracking-wider text-(length:--h5size)">
+                <p className="flex-none text-white pb-4 font-bold text-center uppercase tracking-wider text-(length:--h5size)">
                     Confirmar asistencia
                 </p>
 
@@ -58,7 +65,7 @@ export const FooterConfirm = ({
                 >
                     {dataGuest?.map(g => (
                         <div key={g.id} className="mb-5 last:mb-0 px-2 flex justify-between">
-                            <h4 className="mb-2 text-(length:--h4size)">{g.name} {g.lastname}</h4>
+                            <h4 className="py-2 text-white text-(length:--h4size)">{g.name} {g.lastname}</h4>
                             <AnswerComponent
                                 id={g.id}
                                 setDataGuest={setDataGuest}
@@ -68,21 +75,21 @@ export const FooterConfirm = ({
                     ))}
                 </div>
 
-                <div className="flex-none py-4">
+                <div className="flex-none py-4 text-white">
                     {discount < 1 &&
                         <p className="text-center mb-4 opacity-70">
-                            Precio por tarjeta: ${priceTarj - priceTarj * (discount || 0)} *
+                            Precio por tarjeta: ${price} *
                         </p>
                     }
 
                     <button
-                        className="w-full py-3 bg-[#960696] text-black font-bold rounded-lg uppercase tracking-widest hover:bg-gray-200 transition-colors"
+                        className="w-full py-3 bg-[#960696] text-white font-bold rounded-lg uppercase hover:bg-gray-200 transition-colors"
                         onClick={() => sendChanges()}
                     >
                         Enviar respuesta
                     </button>
                 </div>
-                <p className='text-[length:12px] lg:text-[length:16px]'>
+                <p className='text-[length:12px] lg:text-[length:16px] text-white'>
                     * Invitación sin obligación de compra, <b className='text-red-300'>pero considere que su presencia es el mejor regalo</b>. Las tarifas están sujetas a ajustes según la fecha de pago.
                 </p>
             </div>

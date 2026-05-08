@@ -133,7 +133,7 @@ export const DressCodeShe = ({
                             <div key={i}>
                                 <button
                                     onClick={() => setSectionF(prev => prev === categoryName ? null : categoryName)}
-                                    className="flex justify-between w-full px-1"
+                                    className="flex justify-between w-full px-1 text-white"
                                 >
                                     <h3 className="font-bold font-(family-name:--fontSemiBold) text-(length:--h4size)">{categoryName}</h3>
                                     <div className="relative w-[4vw] self-center">
@@ -154,7 +154,7 @@ export const DressCodeShe = ({
                                 <div id={categoryName} className="h-0 overflow-hidden">
                                     {options.map((option) => (
                                         <button
-                                            className="w-full text-left my-[2px] font-(family-name:--fontNormal) text-(length:--h5size) px-2"
+                                            className="w-full text-left my-[2px] text-white font-(family-name:--fontNormal) text-(length:--h5size) px-2"
                                             onClick={() => changeClothesF(categoryName, option.img)}
                                             key={option.name}
                                         >

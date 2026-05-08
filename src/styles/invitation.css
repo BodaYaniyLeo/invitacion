@@ -3,8 +3,8 @@
     -webkit-mask-image: url('../assets/images/hero/textHero.svg');
     mask-image: url('../assets/images/hero/textHero.svg');
     mask-repeat: no-repeat;
-    mask-position: center 50%;
-    -webkit-mask-position: center 50%;
+    mask-position: 50% 50%;
+    -webkit-mask-position: 50% 50%;
     mask-size: clamp(4500vh, 1500%, 0vh);
     transform-origin: center 50%;
     z-index: 30;
@@ -29,14 +29,24 @@
             rgba(0, 0, 0, 0) 30%);
 }
 
-#dateLogo h3 {
+#dateLogo h3,
+#dateLogo h4 {
     font-family: 'fontBold';
     background-image: radial-gradient(circle at 50% 200vh, rgb(255, 210, 123) 0%, rgb(223, 58, 147) 15%, rgb(92, 22, 99) 30%, rgba(32, 31, 66, 0) 50%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+#dateLogo h3 {
     font-style: normal;
     font-size: var(--h1size);
+    line-height: 86%;
+}
+
+#dateLogo h4 {
+    font-style: normal;
+    font-size: var(--h3size);
     line-height: 86%;
 }
 
@@ -61,24 +71,6 @@
     font-style: normal;
     font-size: var(--h4size);
     line-height: 86%;
-}
-
-.choose.buttonConfirm {
-    padding: 12px 16px;
-    background-color: #960696;
-    color: #ffffff;
-    font-weight: bold;
-    transition: all 1s;
-}
-
-.buttonConfirm {
-    border-radius: 40px;
-    font-weight: bold;
-    padding: 12px 16px;
-    color: #ffffff33;
-    min-width: 86px;
-    height: fit-content;
-    vertical-align: center;
 }
 
 #textOrg {

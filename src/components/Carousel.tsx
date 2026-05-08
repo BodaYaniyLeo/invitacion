@@ -218,7 +218,7 @@ export const Carousel = ({
                                         <p className="text-white text-center italic border-y w-full text-[16px] py-4 px-2">"{c.comment}"</p>
                                         <div className="self-end w-1/2">
                                             <p
-                                                className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
+                                                className="font-(family-name:--fontNormal) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
                                             >{c.user}
                                             </p>
                                         </div>
@@ -235,7 +235,7 @@ export const Carousel = ({
                             <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"{comments[comments.length - 1]?.comment}"</p>
                             <div className="self-end w-1/2 boxExample">
                                 <p
-                                    className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
+                                    className="font-(family-name:--fontNormal) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
                                 >
                                     Pepe
                                 </p>
@@ -263,7 +263,7 @@ export const Carousel = ({
                                     id="userName"
                                     maxLength={20}
                                     placeholder="Nombre"
-                                    className="resize-none overflow-hidden font-(family-name:--textDesc) text-center text-white/70 font-bold capitalize tracking-[0.2em] py-1 whitespace-nowrap text-white italic min-w-3/4 focus-visible:outline-0 px-1"
+                                    className="resize-none overflow-hidden font-(family-name:--fontNormal) text-center text-white/70 font-bold capitalize tracking-[0.2em] py-1 whitespace-nowrap text-white italic min-w-3/4 focus-visible:outline-0 px-1"
                                 />
                             </div>
                         </div>
@@ -273,7 +273,7 @@ export const Carousel = ({
                             <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"{comments[0]?.comment}"</p>
                             <div className="self-end w-1/2 boxExample">
                                 <p
-                                    className="font-(family-name:--textDesc) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
+                                    className="font-(family-name:--fontNormal) text-white/70 font-bold capitalize tracking-[0.2em] text-center py-1"
                                 >
                                     Pepe
                                 </p>

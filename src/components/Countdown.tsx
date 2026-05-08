@@ -135,7 +135,7 @@ export const Countdown = () => {
                         </div>
                         <div className="flex justify-between absolute top-[130%] left-0 w-full">
                             <a href="https://calendar.app.google/YWCwpzWNMJrucNB1A" target="_blank" className="flex items-center">
-                                <span className="me-1 lg:text-(length:--h5size)">Agendar</span>
+                                <span className="me-1 text-white lg:text-(length:--h5size)">Agendar</span>
                                 <Image
                                     src={googleLogo}
                                     alt=""
@@ -143,7 +143,7 @@ export const Countdown = () => {
                                 />
                             </a>
                             <a href="/appointment/iosAppointment.ics" download="iosAppointment" className="flex items-center">
-                                <span className="me-1 lg:text-(length:--h5size)">Agendar</span>
+                                <span className="me-1 text-white lg:text-(length:--h5size)">Agendar</span>
                                 <Image
                                     src={appleLogo}
                                     alt=""

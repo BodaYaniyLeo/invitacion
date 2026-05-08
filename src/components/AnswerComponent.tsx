@@ -29,8 +29,8 @@ export const AnswerComponent = ({
 
     return (
         <div className='flex justify-around items-center'>
-            <button onClick={() => myAnwer(true)} className={`buttonConfirm ${confirm ? 'choose' : ''} me-4`}>Voy</button>
-            <button onClick={() => myAnwer(false)} className={`buttonConfirm ${!confirm ? 'choose' : ''}`}>No voy</button>
+            <button onClick={() => myAnwer(true)} className={`px-3 py-2 lg:px-4 lg:py-3 text-[#ffffff66] min-w-[86px] rounded-full transition-all duration-1000 ${confirm ? 'choose bg-[#960696] text-white font-bold' : ''} me-4`}>Voy</button>
+            <button onClick={() => myAnwer(false)} className={`px-3 py-2 lg:px-4 lg:py-3 text-[#ffffff66] min-w-[86px] rounded-full transition-all duration-1000 ${!confirm ? 'choose bg-[#960696] text-white font-bold' : ''}`}>No voy</button>
         </div>
     )
 }

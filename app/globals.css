@@ -11,7 +11,7 @@
   --h3size: clamp(3.2lvh, 4.5vw, 40px);
   --h4size: clamp(2.8lvh, 4vw, 32px);
   --h5size: clamp(2lvh, 3vw, 24px);
-  --menusize: clamp(3lvw, 5vw, 24px);
+  --menusize: clamp(20px, 5vw, 32px);
   --psize: 16px;
   --wsizeM: min(19vw);
   --wsizeL: min(22vw);

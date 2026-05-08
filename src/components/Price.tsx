@@ -3,8 +3,6 @@ import '@/src/styles/invitation.css'
 import Image from 'next/image';
 import logoCasamiento from '../assets/images/hero/logoCasamiento.svg'
 import { useEffect, useState } from 'react';
-import { AnswerComponent } from './AnswerComponent';
-import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
 import { VideoProps } from './Invitation'
 import { guestsObj } from '@/app/page'
 

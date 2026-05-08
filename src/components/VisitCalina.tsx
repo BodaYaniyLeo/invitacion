@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logoCalina from '../assets/images/salon/visitCalina.svg'
+import logoCalina from '../assets/images/salon/salonCalina.svg'
 import '@/src/styles/invitation.css'
 import { VideoSection } from './VideoSection';
 import { Itinerary } from './Itinerary';
@@ -38,12 +38,10 @@ export const VisitCalina = ({
                         <Image
                             src={logoCalina}
                             alt=""
-                            className='logoCalina'
+                            className='logoCalina h-fit'
                         />
                     </div>
-                    <p className='font-bold text-(length:--h4size) text-center text-white'>Ven a vivir este momento <br />especial.</p>
                     <div className='bg-white w-[clamp(50vw,90vw,800px)] ratio-4/3 p-2 mt-5 relative]'>
-
                         <VideoSection
                             id="videoCalina"
                             progressRef={progressRef}

@@ -136,11 +136,11 @@ export const Itinerary = ({
                             }}
                         />
                         <div className="ms-4 content-center">
-                            <p className="text-[30px] text-center">
+                            <p className="text-[30px] text-white text-center">
                                 {e.horario}
                                 {e.id === "coffe" && <span className="text-[16px] ms-1">+1</span>}
                             </p>
-                            <p className="lg:hidden">{e.text}</p>
+                            <p className="lg:hidden text-white">{e.text}</p>
                         </div>
                     </div>
                 )
