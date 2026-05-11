@@ -38,8 +38,8 @@ export const MenuComponent = ({
                     <a onClick={() => setOpenMenu(false)} href='#containerCalina' className='text-[length:var(--menusize)] mb-3'>Salón</a>
                     <a onClick={() => setOpenMenu(false)} href={windowWidth ? '#itinerary' : '#containerCalina'} className='text-[length:var(--menusize)] mb-3'>Itinerario</a>
                     <a onClick={() => setOpenMenu(false)} href='#dresscode' className='text-[length:var(--menusize)] mb-3'>Código de vestimenta</a>
-                    <a onClick={() => setOpenMenu(false)} href='#' className='text-[length:var(--menusize)] mb-3'>Regalos</a>
-                    <a onClick={() => setOpenMenu(false)} href='#carousel' className='text-[length:var(--menusize)] mb-3'>Reseñas</a>
+                    <a onClick={() => setOpenMenu(false)} href='#gifts' className='text-[length:var(--menusize)] mb-3'>Regalos</a>
+                    {/* <a onClick={() => setOpenMenu(false)} href='#carousel' className='text-[length:var(--menusize)] mb-3'>Reseñas</a> */}
                     <a onClick={() => setOpenMenu(false)} href='#countdown' className='text-[length:var(--menusize)] mb-3'>Cuanto falta?</a>
                     <a onClick={() => setOpenMenu(false)} href='#confirmData' className='text-[length:var(--menusize)] mb-3'>Confirmar asistencia</a>
                 </div>

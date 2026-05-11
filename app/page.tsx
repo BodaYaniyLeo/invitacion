@@ -4,6 +4,9 @@ import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { Invitation } from '@/src/components/Invitation';
+import Image from 'next/image';
+import logo from '@/src/assets/images/logo.svg'
+import { AnimatedLogo } from '@/src/components/AnimatedLogo';
 
 export interface ArrayElements {
   sleep: boolean;
@@ -88,12 +91,14 @@ export default function Home({
   }, []);
 
   if (!data || data.length === 0) {
-    return <div className="fixed inset-0 bg-black z-99 flex items-center justify-center text-white">Cargando...</div>;
+    return <div className="fixed inset-0 bg-[#111117] z-99 flex items-center justify-center text-white">Cargando...</div>;
   }
 
   return (
     <>
-      <div className={`fixed inset-0 bg-black z-99 ${isSiteReady && "hidden"}`}>Cargando</div>
+      <div className={`fixed inset-0 bg-[#111117] z-99 justify-items-center content-center ${isSiteReady && "hidden"}`}>
+        <div className='logo'></div>
+      </div>
       <Invitation
         data={data}
         commentsData={commentsData}

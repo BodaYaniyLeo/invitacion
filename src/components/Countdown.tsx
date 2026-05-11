@@ -98,7 +98,7 @@ export const Countdown = () => {
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                    background: "radial-gradient(ellipse 80% 50% at center, rgba(0,0,0,0) 10%, rgba(0,0,0,1) 100%)"
+                    background: "radial-gradient(ellipse 80% 50% at center, rgba(17,17,23,0) 10%, rgba(17,17,23,1) 100%)"
                 }}
             ></div>
             {isMounted

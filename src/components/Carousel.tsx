@@ -200,7 +200,7 @@ export const Carousel = ({
                                 return (
                                     <div
                                         key={c.virtualId}
-                                        className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black"
+                                        className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-[#111117]"
                                         style={{
                                             transform: i === 2 ? 'scale(1)' : 'scale(0.7)',
                                             opacity: i === 2 ? 1 : 0.5,
@@ -230,7 +230,7 @@ export const Carousel = ({
                     </div>
                     <div id="newCommentContainer" className="h-[30lvh] overflow-hidden absolute w-[150vw] -left-[25vw] inset-0 -z-1 opacity-0 invisible flex">
                         <div
-                            className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black scale-70 opacity-50"
+                            className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-[#111117] scale-70 opacity-50"
                         >
                             <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"{comments[comments.length - 1]?.comment}"</p>
                             <div className="self-end w-1/2 boxExample">
@@ -242,7 +242,7 @@ export const Carousel = ({
                             </div>
                         </div>
                         <div
-                            className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black"
+                            className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-[#111117]"
                         >
                             <div className="relative w-full">
                                 <textarea
@@ -268,7 +268,7 @@ export const Carousel = ({
                             </div>
                         </div>
                         <div
-                            className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-black scale-70 opacity-50"
+                            className="w-[50vw] flex-shrink-0 flex flex-col justify-center items-center bg-[#111117] scale-70 opacity-50"
                         >
                             <p className="text-white text-center italic border-y w-full text-[16px] py-4 boxExample">"{comments[0]?.comment}"</p>
                             <div className="self-end w-1/2 boxExample">

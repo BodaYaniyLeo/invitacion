@@ -80,7 +80,15 @@
     opacity: 1;
 }
 
-#textOrgInner {
+#giftsText {
+    transform: translate3d(0px, 0px, 0px) scale(0.8541, 0.8541);
+    mask-image: radial-gradient(at 50% 120vh, rgb(0, 0, 0) 0vh, rgba(0, 0, 0, 0) 10vh);
+    -webkit-mask-image: radial-gradient(at 50% 120vh, rgb(0, 0, 0) 0vh, rgba(0, 0, 0, 0) 10vh);
+    opacity: 1;
+}
+
+#textOrgInner,
+#giftsTextInner {
     background-image: radial-gradient(circle at 50% 200vh,
             rgb(255, 210, 123) 0%,
             rgb(223, 58, 147) 15%,
@@ -91,13 +99,15 @@
     -webkit-text-fill-color: transparent;
 }
 
-#textOrgInner h2 {
+#textOrgInner h2,
+#giftsTextInner h2 {
     font-family: 'fontBold';
     letter-spacing: -.0125em;
     line-height: 100%;
 }
 
-#textOrgInner p {
+#textOrgInner p,
+#giftsTextInner p {
     font-family: 'fontSemiBold';
     text-wrap: pretty;
     letter-spacing: -.03em;
@@ -195,4 +205,57 @@ a {
 
 .boxExample {
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.logo {
+    width: 20%;
+    aspect-ratio: 90/235;
+    z-index: 999;
+    -webkit-mask-image: url("../assets/images/logo2.svg");
+    mask-image: url("../assets/images/logo2.svg");
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    position: relative;
+    background: #232323;
+    animation-name: _2qmne31;
+    animation-duration: 2.15s;
+    animation-timing-function: cubic-bezier(.455, .03, .515, .955);
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+}
+
+.logo::after {
+    content: "";
+    background: linear-gradient(232deg, #3012b8 20%, #f30bd4 70%);
+    filter: blur(5px);
+    transform: skew(-45deg, 45deg);
+    position: absolute;
+    top: -40%;
+    left: -40%;
+    width: 25%;
+    height: 60%;
+    z-index: -1;
+    animation-name: logoAnimated;
+    animation-duration: 2.15s;
+    animation-timing-function: cubic-bezier(.77, 0, .175, 1);
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+}
+
+@keyframes logoAnimated {
+    0% {
+        top: -40%;
+        left: -40%;
+    }
+
+    92% {
+        top: 75%;
+        left: 100%;
+    }
+
+    100% {
+        top: 75%;
+        left: 100%;
+    }
 }

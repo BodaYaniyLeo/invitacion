@@ -80,11 +80,11 @@ export const InfoSalon = ({
                             <div id='mapsSalon' className='w-[90vw] bg-white w-[clamp(50vw,80vw,500px)] h-fit aspect-4/3 p-2 mt-5 rotate-4'>
                                 <iframe src={urlIframe} style={{ border: 0, aspectRatio: "4/3" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
-                            <div>
-                                <h2 className='text-[#ffc2d0] text-[length:var(--h1size)] uppercase font-bold'>
+                            <div className='mt-4'>
+                                <h2 className='text-[#ffc2d0] text-[length:var(--h2size)] uppercase font-bold'>
                                     Como llegar al salon
                                 </h2>
-                                <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] uppercase font-bold'>
+                                <p className='text-[#fff9cb] text-[length:var(--h3size)] leading-[1.2] uppercase font-bold'>
                                     Dirección: Ruta E-53 km 15, jurisdicción Unquillo
                                 </p>
                                 <a
@@ -154,7 +154,7 @@ export const InfoSalon = ({
                     </div>
                 </div>
             </div>
-            {/* <div className='flex flex-col w-[180vw] shrink-0 bg-black'>
+            {/* <div className='flex flex-col w-[180vw] shrink-0 bg-[#111117]'>
                 <Image
                     src={ingresoCalina}
                     alt=''

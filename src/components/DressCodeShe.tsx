@@ -120,7 +120,7 @@ export const DressCodeShe = ({
                 <div className="text-center dressSelector px-1 py-2">
                     <h3 className="font-bold font-(family-name:--fontBold) text-(length:--h4size)">Formal sport</h3>
                 </div>
-                <div className="flex justify-between px-1 py-[2px] bg-black">
+                <div className="flex justify-between px-1 py-[2px] bg-[#111117]">
                     <h4 className="text-[#79b0cc] font-(family-name:--fontSemiBold) text-(length:--h5size)">Sugerencias</h4>
                 </div>
                 <div>

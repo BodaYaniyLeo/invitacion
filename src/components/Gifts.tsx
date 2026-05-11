@@ -2,11 +2,6 @@
 
 import { useEffect, useLayoutEffect, useState } from "react"
 import { gsap } from 'gsap'
-import church from "@/src/assets/images/itinerary/church.svg"
-import martini from "@/src/assets/images/itinerary/martini.svg"
-import music from "@/src/assets/images/itinerary/music.svg"
-import ring from "@/src/assets/images/itinerary/ring.svg"
-import coffe from "@/src/assets/images/itinerary/coffe.svg"
 import Image, { StaticImageData } from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
@@ -28,11 +23,83 @@ export const Gifts = ({
     data
 }: MenuProps) => {
 
-    return (
-        <div id="itinerary" className='h-lvh content-center'>
-            <h2 className='text-center text-white font-(family-name:--fontBold) text-[40px]'>Itinerario</h2>
-            <div className="flex flex-1 flex-col justify-self-center self-center">
+    const [discount, setDiscount] = useState<number>(0)
 
+    useEffect(() => {
+        const guest = data[0].guests
+        if (guest[0].payment_coverage) {
+            setDiscount(guest[0].payment_coverage)
+        }
+    }, [data])
+
+    useLayoutEffect(() => {
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const giftsTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#gifts",
+                start: 'top 33%',
+                end: '+=80%',
+                scrub: 0.5,
+            }
+        });
+
+        giftsTl
+            .addLabel("giftsInit")
+            .to('#giftsText', {
+                maskImage: "radial-gradient(at 20% -120vh, rgb(254,254,254) 0vh, rgba(0,0,0,0) 200vh)",
+                webkitMaskImage: "radial-gradient(at 20% -120vh, rgb(254,254,254) 0vh, rgba(0,0,0,0) 200vh)",
+                duration: 2.5
+            }, 'giftsInit')
+            .to('#giftsTextInner', {
+                backgroundImage: 'radial-gradient(circle at 40.0899% 1.7982vh, rgb(255,179,135) 0%, rgb(252,82,68) 69.5%, rgb(156,47,106) 99.4%, rgba(32,31,66,0) 149.1%)',
+                duration: 2.5
+            }, 'giftsInit')
+            .to('#giftsText', {
+                autoAlpha: 0,
+                duration: 0.6
+            }, "giftsInit+=3")
+
+    }, [])
+
+    if (discount === 1) {
+        return (
+            <div
+                id='gifts'
+                className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
+            >
+                <div id='giftsText' className='flex flex-col h-[110lvh] justify-center mx-4'>
+                    <div id='giftsTextInner'>
+                        <h2 className='text-(length:--h1size)'>Regalos</h2>
+                        <p className='w-full mt-6 text-(length:--h3size)'>
+                            Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    return (
+        <div
+            id='gifts'
+            className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
+        >
+            <div id='giftsText' className='flex flex-col h-[110lvh] justify-center mx-4'>
+                <div id='giftsTextInner'>
+                    <h2 className='text-(length:--h1size)'>Regalos</h2>
+                    <p className='w-full mt-6 text-(length:--h3size)'>
+                        Tu presencia y plata!
+                        Tu presencia y plata!
+                        Tu presencia y plata!
+                        Tu presencia y plata!
+                        Tu presencia y plata!
+                        Tu presencia y plata!
+                        Tu presencia y plata!
+                        Tu presencia y plata!
+                    </p>
+                </div>
             </div>
         </div>
     )

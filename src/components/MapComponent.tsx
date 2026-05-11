@@ -38,7 +38,7 @@ export default function MapComponent() {
   return (
     <div className="w-full h-[500px] relative">
       {!userLocation && (
-        <div className="absolute inset-0 z-10 flex items-end justify-center bg-black/20 text-green-500 font-bold text-[24px]">
+        <div className="absolute inset-0 z-10 flex items-end justify-center bg-[#111117]/20 text-green-500 font-bold text-[24px]">
           Localizando tu invitación...
         </div>
       )}

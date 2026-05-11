@@ -64,7 +64,7 @@ export const FooterConfirm = ({
                     data-lenis-prevent
                 >
                     {dataGuest?.map(g => (
-                        <div key={g.id} className="mb-5 last:mb-0 px-2 flex justify-between">
+                        <div key={g.id} className="mb-5 last:mb-0 flex justify-between">
                             <h4 className="py-2 text-white text-(length:--h4size)">{g.name} {g.lastname}</h4>
                             <AnswerComponent
                                 id={g.id}
@@ -89,9 +89,9 @@ export const FooterConfirm = ({
                         Enviar respuesta
                     </button>
                 </div>
-                <p className='text-[length:12px] lg:text-[length:16px] text-white'>
+                {/* <p className='text-[length:12px] lg:text-[length:16px] text-white'>
                     * Invitación sin obligación de compra, <b className='text-red-300'>pero considere que su presencia es el mejor regalo</b>. Las tarifas están sujetas a ajustes según la fecha de pago.
-                </p>
+                </p> */}
             </div>
         </div>
     );

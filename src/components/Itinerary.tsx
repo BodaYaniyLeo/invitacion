@@ -122,7 +122,7 @@ export const Itinerary = ({
 
     return (
         <div id="itinerary" className='content-center lg:content-end h-lvh lg:h-auto lg:w-full'>
-            <h2 className='text-center content-center text-white font-(family-name:--fontBold) text-(length:--h1size) h-[20lvh] lg:hidden'>Itinerario</h2>
+            <h2 className='text-center content-center text-white font-(family-name:--fontBold) text-(length:--h1size) max-h-[20lvh] lg:hidden'>Itinerario</h2>
             <div className="flex flex-1 flex-col lg:flex-row justify-self-center self-center lg:h-auto lg:w-full lg:justify-around">
 
                 {idSelected.map(e =>

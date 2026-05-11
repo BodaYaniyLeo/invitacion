@@ -19,6 +19,8 @@ import { ArrayElements, userCommentsType, dataInv } from '@/app/page'
 
 import { DressCode } from './DressCode';
 import { Carousel } from './Carousel';
+import { Itinerary } from './Itinerary';
+import { Gifts } from './Gifts';
 
 export interface VideoProps {
     id: string;
@@ -118,7 +120,7 @@ export const Invitation = ({
     }, [openMenu])
 
     return (
-        <div ref={mainRef} className='bg-black'>
+        <div ref={mainRef} className='bg-[#111117]'>
             <button className='fixed top-5 right-5 w-12 h-12 z-70 rounded-full' onClick={() => setOpenMenu(prev => !prev)}>
                 <div className='w-6 h-3 justify-self-center relative'>
                     <span id='panSup1' className='absolute bg-white w-3 h-1 block top-[6px] -translate-y-2 origin-center left-0'></span>
@@ -182,10 +184,15 @@ export const Invitation = ({
                             data={data}
                         />
                     </div>
-
                 </div>
 
                 <DressCode />
+
+                <div className='h-[80hv]'>
+                    <Gifts
+                        data={data}
+                    />
+                </div>
 
                 <Countdown />
 

@@ -32,7 +32,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #111117;
     --foreground: #ededed;
   }
 }
@@ -83,7 +83,7 @@ body {
   box-sizing: border-box;
   background: var(--background);
   -webkit-overflow-scrolling: auto;
-  background-color: #000000;
+  background-color: var(--background);
   scroll-behavior: smooth;
 }
 
