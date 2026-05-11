@@ -4,9 +4,6 @@ import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { Invitation } from '@/src/components/Invitation';
-import Image from 'next/image';
-import logo from '@/src/assets/images/logo.svg'
-import { AnimatedLogo } from '@/src/components/AnimatedLogo';
 
 export interface ArrayElements {
   sleep: boolean;
