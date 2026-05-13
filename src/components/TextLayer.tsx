@@ -14,16 +14,13 @@ export const TextLayer = ({ id, data }: Props) => {
     useEffect(() => {
         if (!data) return
 
-        if (id === "Yani") {
+        if (id === "Yani" && data[0].yani) {
             setSubText(data[0].yani)
-        } else if (id === "Leo") {
+        } else if (id === "Leo" && data[0].leo) {
             setSubText(data[0].leo)
         }
 
     }, [data])
-
-    console.log(subText)
-
 
     return (
         <div
@@ -31,9 +28,11 @@ export const TextLayer = ({ id, data }: Props) => {
             className="w-full h-lvh content-end nameNovios -scroll-mt-[50px]"
         >
             <div className="drop-shadow-2xl px-8">
-                <h4 className="text-blue-400 tracking-[0.4em] text-(length:--h3size) capitalize">{subText.sub}</h4>
+                <h4 className="text-blue-400 tracking-[0.4em] text-(length:--h3size)">
+                    {subText.sub ? subText.sub : id === "Yani" ? "La novia" : "El novio"}
+                </h4>
                 <h2 className="font-black italic uppercase leading-none text-[length:clamp(10lvh,7vw,80px)]">{id}</h2>
-                <p className="text-gray-200 font-light leading-relaxed text-(length:--h4size) capitalize">{subText.text}</p>
+                <p className="text-gray-200 font-light leading-relaxed text-(length:--h4size)">{subText.text ? subText.text : id === "Yani" ? "El carisma en persona. Siempre disponible para lo que necesites." : "Un loco lindo que siempre se prende a todas."}</p>
             </div>
         </div>
     );

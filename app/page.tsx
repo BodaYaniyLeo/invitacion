@@ -6,8 +6,8 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { Invitation } from '@/src/components/Invitation';
 
 export type ObjText = {
-  sub: string;
-  text: string;
+  sub: string | null;
+  text: string | null;
 }
 
 

@@ -15,7 +15,7 @@ import { FooterConfirm } from './FooterConfirm'
 import { InfoSalon } from './InfoSalon'
 import { MenuComponent } from './MenuComponent'
 
-import { ArrayElements, userCommentsType, dataInv } from '@/app/page'
+import { ArrayElements, userCommentsType, dataInv, ObjText } from '@/app/page'
 
 import { DressCode } from './DressCode';
 import { Carousel } from './Carousel';
