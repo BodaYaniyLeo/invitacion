@@ -39,8 +39,8 @@ export const Gifts = ({
         const giftsTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#gifts",
-                start: 'top 33%',
-                end: '+=80%',
+                start: 'top 50%',
+                end: '+=90%',
                 scrub: 0.5,
             }
         });
