@@ -29,7 +29,8 @@ export const MenuComponent = ({
             id="lateralMenu"
             className="fixed top-0 -right-full overflow-x-scroll overflow-y-hidden shrink-0 pointer-events-auto z-60 w-full"
         >
-            <div className='bg-green-800 flex flex-col items-center h-lvh p-[3lvh] w-fit justify-self-end justify-between'>
+            <div className='bg-[#111117FC] flex flex-col items-center h-lvh p-[3lvh] w-fit justify-self-end justify-between relative'>
+                <div className='absolute left-0 top-0 borderAnimated h-[100vh] w-[2px]'></div>
                 <div className='flex flex-col uppercase mt-12 self-start w-full'>
                     <p className='text-[length:var(--h3size)] font-[family-name:var(--fontBold)] mb-4'>Acceso rápido</p>
                     <a onClick={() => setOpenMenu(false)} href='#' className='text-[length:var(--menusize)] mb-3'>Inicio</a>
@@ -44,23 +45,27 @@ export const MenuComponent = ({
                     <a onClick={() => setOpenMenu(false)} href='#confirmData' className='text-[length:var(--menusize)] mb-3'>Confirmar asistencia</a>
                 </div>
                 <div className='flex uppercase justify-between w-full'>
-                    <a onClick={() => setOpenMenu(false)} href={urlMaps} target='_blank' className='flex items-center text-[length:var(--menusize)] mb-3'>
-                        <Image
-                            src={menu}
-                            alt=""
-                            className='h-8 w-auto'
-                        />
-                        Salón
-                    </a>
-                    {data[0].church &&
-                        <a onClick={() => setOpenMenu(false)} href={urlChurch} target='_blank' className='flex items-center text-[16px] mb-3'>
+                    <div>
+                        <a onClick={() => setOpenMenu(false)} href={urlMaps} target='_blank' className='flex items-center text-[length:var(--menusize)] mb-3'>
                             <Image
                                 src={menu}
                                 alt=""
                                 className='h-8 w-auto'
                             />
-                            Iglesia
+                            Salón
                         </a>
+                    </div>
+                    {data[0].church &&
+                        <div>
+                            <a onClick={() => setOpenMenu(false)} href={urlChurch} target='_blank' className='flex items-center text-[16px] mb-3'>
+                                <Image
+                                    src={menu}
+                                    alt=""
+                                    className='h-8 w-auto'
+                                />
+                                Iglesia
+                            </a>
+                        </div>
                     }
 
                 </div>

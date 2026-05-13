@@ -5,11 +5,19 @@ import { gsap } from 'gsap'
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { Invitation } from '@/src/components/Invitation';
 
+export type ObjText = {
+  sub: string;
+  text: string;
+}
+
+
 export interface ArrayElements {
   sleep: boolean;
   church: boolean;
   guests: guestsObj[];
-  comments: userCommentsType[],
+  comments: userCommentsType[];
+  yani: ObjText;
+  leo: ObjText;
 }
 
 export type guestsObj = {
@@ -88,7 +96,7 @@ export default function Home({
   }, []);
 
   if (!data || data.length === 0) {
-    return <div className="fixed inset-0 bg-[#111117] z-99 flex items-center justify-center text-white">Cargando...</div>;
+    return <div className='logo'></div>;
   }
 
   return (

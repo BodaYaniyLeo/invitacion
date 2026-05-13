@@ -243,6 +243,8 @@ a {
     animation-iteration-count: infinite;
 }
 
+
+
 @keyframes logoAnimated {
     0% {
         top: -40%;
@@ -258,4 +260,26 @@ a {
         top: 75%;
         left: 100%;
     }
+}
+
+.borderAnimated {
+    background: radial-gradient(circle at 0% 0%,
+            transparent 10%,
+            rgb(255, 210, 123) 40%,
+            rgb(223, 58, 147) 60%,
+            rgb(92, 22, 99) 80%,
+            transparent 90%);
+    background-size: 100% 200%;
+    animation: sweep 5s linear infinite;
+}
+
+@keyframes sweep {
+    0% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% -100%;
+    }
+
 }

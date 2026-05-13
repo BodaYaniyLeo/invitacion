@@ -33,6 +33,7 @@ export const Carousel = ({
     const [playButton, setPlayButton] = useState<StaticImageData>(play)
     const [myComments, setMyComments] = useState<userCommentsType[]>([])
 
+
     const containerRef = useRef<HTMLDivElement>(null)
     const isAnimating = useRef(false)
 
@@ -299,7 +300,6 @@ export const Carousel = ({
                     <div id="buttonSendComments" className="absolute inset-0 text-center opacity-0 invisible z-1">
                         <button
                             className='rounded-full bg-white px-8 py-4 text-black justify-center font-bold'
-                            onClick={() => console.log('click')}
                         >
                             Enviar comentario
                         </button>
@@ -307,7 +307,6 @@ export const Carousel = ({
                     <div id="run">
                         <button
                             className='rounded-full bg-white px-8 py-4 text-black justify-center font-bold'
-                            onClick={() => console.log('click')}
                         >
                             Mis comentarios <span>{data[0].comments.length}</span>
                         </button>

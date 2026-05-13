@@ -22,7 +22,6 @@ export default function MapComponent() {
   }, []);
 
   useEffect(() => {
-    console.log(userLocation)
     if (userLocation && mapRef.current) {
       mapRef.current.flyTo({
         center: [userLocation.lng, userLocation.lat],

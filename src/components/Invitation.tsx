@@ -148,7 +148,7 @@ export const Invitation = ({
                 </div>
 
                 <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
-                    <TextLayer id="Leo" title="Leo" subtitle="Historia" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
+                    <TextLayer id="Leo" data={data} />
                 </div>
             </div>
 
@@ -166,7 +166,7 @@ export const Invitation = ({
                 </div>
 
                 <div className="absolute bottom-0 left-0 w-full h-lvh lg:top-1/5 lg:h-full lg:left-1/2 z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
-                    <TextLayer id="Yani" title="Yani" subtitle="Sueño" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
+                    <TextLayer id="Yani" data={data} />
                 </div>
             </div>
 

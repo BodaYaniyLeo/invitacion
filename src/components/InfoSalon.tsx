@@ -51,11 +51,11 @@ export const InfoSalon = ({
         <div
             id="lateralMaps"
             ref={scrollRef}
-            className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-green-800 overflow-x-scroll overflow-y-hidden shrink-0 py-[5lvh] opacity-0 invisible pointer-events-auto z-80"
+            className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-[#111117] overflow-x-scroll overflow-y-hidden shrink-0 py-[5lvh] opacity-0 invisible pointer-events-auto z-80"
         >
             <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[5lvh] z-81 text-(length:--h5size)'>
                 <button className='flex rounded-full bg-white p-4 text-black items-center size-fit h-9 lg:h-12'
-                    onClick={() => { handleBackInfo(); console.log('click') }}
+                    onClick={() => { handleBackInfo(); }}
                 >
                     <Image
                         src={arrowLeft}
@@ -76,11 +76,11 @@ export const InfoSalon = ({
             <div id='infoSalon' className='flex flex-col shrink-0 h-full'>
                 <div className="pointer-events-auto flex flex-col lg:flex-row justify-center h-lvh lg:items-center ps-[5vw]">
                     <div className='flex items-center'>
-                        <div className='w-[87vw] font-[family-name:var(--fontNormal)] px-[3vw] h-full flex flex-col justify-around'>
+                        <div className='w-[87vw] font-[family-name:var(--fontNormal)] px-[3vw] h-full flex flex-col justify-center'>
                             <div id='mapsSalon' className='w-[90vw] bg-white w-[clamp(50vw,80vw,500px)] h-fit aspect-4/3 p-2 mt-5 rotate-4'>
                                 <iframe src={urlIframe} style={{ border: 0, aspectRatio: "4/3" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
-                            <div className='mt-4'>
+                            <div className='mt-[5vh]'>
                                 <h2 className='text-[#ffc2d0] text-[length:var(--h2size)] uppercase font-bold'>
                                     Como llegar al salon
                                 </h2>
