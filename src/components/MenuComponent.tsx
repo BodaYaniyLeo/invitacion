@@ -16,6 +16,7 @@ export const MenuComponent = ({
 }: MenuProps) => {
 
     const [windowWidth, setWindowWidth] = useState<boolean>(false)
+    const [discount, setDiscount] = useState<Number>()
 
     const urlMaps = "https://maps.app.goo.gl/UudM3Bi5m6jQk3nW8"
     const urlChurch = "https://maps.app.goo.gl/UudM3Bi5m6jQk3nW8"
@@ -23,6 +24,16 @@ export const MenuComponent = ({
     useEffect(() => {
         setWindowWidth(window.innerWidth < 992)
     }, [])
+
+    useEffect(() => {
+        if (data[0].guests[0].payment_coverage) {
+            setDiscount(data[0].guests[0].payment_coverage)
+        } else {
+            setDiscount(0)
+        }
+    }, [data])
+
+    console.log(data[0].guests[0].payment_coverage)
 
     return (
         <div
@@ -39,7 +50,7 @@ export const MenuComponent = ({
                     <a onClick={() => setOpenMenu(false)} href='#containerCalina' className='text-[length:var(--menusize)] mb-3'>Salón</a>
                     <a onClick={() => setOpenMenu(false)} href={windowWidth ? '#itinerary' : '#containerCalina'} className='text-[length:var(--menusize)] mb-3'>Itinerario</a>
                     <a onClick={() => setOpenMenu(false)} href='#dresscode' className='text-[length:var(--menusize)] mb-3'>Código de vestimenta</a>
-                    <a onClick={() => setOpenMenu(false)} href='#gifts' className='text-[length:var(--menusize)] mb-3'>Regalos</a>
+                    <a onClick={() => setOpenMenu(false)} href='#gifts' className='text-[length:var(--menusize)] mb-3'>{discount == 1 ? "Regalo" : "Tarjeta"}</a>
                     {/* <a onClick={() => setOpenMenu(false)} href='#carousel' className='text-[length:var(--menusize)] mb-3'>Reseñas</a> */}
                     <a onClick={() => setOpenMenu(false)} href='#countdown' className='text-[length:var(--menusize)] mb-3'>Cuanto falta?</a>
                     <a onClick={() => setOpenMenu(false)} href='#confirmData' className='text-[length:var(--menusize)] mb-3'>Confirmar asistencia</a>
