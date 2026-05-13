@@ -33,8 +33,6 @@ export const MenuComponent = ({
         }
     }, [data])
 
-    console.log(data[0].guests[0].payment_coverage)
-
     return (
         <div
             id="lateralMenu"
