@@ -3,7 +3,7 @@ import '@/src/styles/invitation.css'
 import menu from "@/src/assets/images/menu/maps.png"
 import { ArrayElements } from '@/app/page'
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface MenuProps {
     data: ArrayElements;
@@ -33,10 +33,26 @@ export const MenuComponent = ({
         }
     }, [data])
 
+    const menuContainer = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const clickOut = (e: MouseEvent) => {
+            if (menuContainer.current && !menuContainer.current.contains(e.target as Node)) {
+                setOpenMenu(false)
+            }
+        }
+
+        document.addEventListener("mousedown", clickOut)
+        return () => {
+            document.removeEventListener("mousedown", clickOut)
+        }
+    }, [])
+
     return (
         <div
             id="lateralMenu"
-            className="fixed top-0 -right-full overflow-x-scroll overflow-y-hidden shrink-0 pointer-events-auto z-60 w-full"
+            ref={menuContainer}
+            className="fixed top-0 left-full overflow-x-scroll overflow-y-hidden shrink-0 pointer-events-auto z-60 w-[80vw]"
         >
             <div className='bg-[#111117FC] flex flex-col items-center h-lvh p-[3lvh] w-fit justify-self-end justify-between relative'>
                 <div className='absolute left-0 top-0 borderAnimated h-[100vh] w-[2px]'></div>
@@ -49,7 +65,6 @@ export const MenuComponent = ({
                     <a onClick={() => setOpenMenu(false)} href={windowWidth ? '#itinerary' : '#containerCalina'} className='text-[length:var(--menusize)] mb-3'>Itinerario</a>
                     <a onClick={() => setOpenMenu(false)} href='#dresscode' className='text-[length:var(--menusize)] mb-3'>Código de vestimenta</a>
                     <a onClick={() => setOpenMenu(false)} href='#gifts' className='text-[length:var(--menusize)] mb-3'>{discount == 1 ? "Regalo" : "Tarjeta"}</a>
-                    {/* <a onClick={() => setOpenMenu(false)} href='#carousel' className='text-[length:var(--menusize)] mb-3'>Reseñas</a> */}
                     <a onClick={() => setOpenMenu(false)} href='#countdown' className='text-[length:var(--menusize)] mb-3'>Cuanto falta?</a>
                     <a onClick={() => setOpenMenu(false)} href='#confirmData' className='text-[length:var(--menusize)] mb-3'>Confirmar asistencia</a>
                 </div>

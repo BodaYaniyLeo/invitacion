@@ -17,8 +17,6 @@ export const AnswerComponent = ({
     status
 }: statusAnswer) => {
 
-    console.log(confirm)
-
     const handleAnswer = (newValue: boolean | null) => {
         setDataGuest(prev => myAnswer(newValue, prev, id, status))
     }

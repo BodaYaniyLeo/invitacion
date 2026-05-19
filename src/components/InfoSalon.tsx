@@ -55,7 +55,7 @@ export const InfoSalon = ({
             ref={scrollRef}
             className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-[#111117] overflow-x-scroll overflow-y-hidden shrink-0 py-[5lvh] opacity-0 invisible pointer-events-auto z-80"
         >
-            <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[5lvh] z-81 text-(length:--h5size)'>
+            <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[3lvh] z-81 text-(length:--h5size)'>
                 <button className='flex rounded-full bg-white p-4 text-black items-center size-fit h-9 lg:h-12'
                     onClick={() => { handleBackInfo(); }}
                 >
@@ -76,7 +76,7 @@ export const InfoSalon = ({
                 </div>
             </div>
             <div id='infoSalon' className='flex flex-col shrink-0 h-full'>
-                <div className="pointer-events-auto flex flex-col lg:flex-row justify-center h-lvh lg:items-center ps-[5vw]">
+                <div className="pointer-events-auto flex flex-col lg:flex-row justify-center h-lvh lg:items-center ps-[5vw] mt-[3lvh]">
                     <div className='flex items-center'>
                         <div className='w-[87vw] font-[family-name:var(--fontNormal)] px-[3vw] h-full flex flex-col justify-center'>
                             <div id='mapsSalon' className='w-[90vw] bg-white w-[clamp(50vw,80vw,500px)] h-fit aspect-4/3 p-2 mt-5 rotate-4'>
@@ -114,16 +114,14 @@ export const InfoSalon = ({
                                 <br />
                                 Cualquier consulta, no dudes en escribirnos.
                             </p>
-                            <div>
-
-                            </div>
-                            {/* <p className='text-end mb-3'>Solicitar servicio</p> */}
-                            <div className='text-white text-[length:var(--h5size)] leading-[1.2] overflow-auto h-full pe-1'>
+                            <div className='text-white text-[length:var(--h5size)] leading-[1.2] overflow-auto h-full pe-1 border-y border-[#3a3a3a] mb-4'>
                                 {
                                     guests?.map(g => {
+                                        const isLast = guests.length - 1 === g.id
+
                                         return (
-                                            <div key={g.id} className='flex justify-between mb-2'>
-                                                <p>{g.name} {g.lastname}</p>
+                                            <div key={g.id} className='flex justify-between mx-1 my-3'>
+                                                <p className='self-center'>{g.name} {g.lastname}</p>
                                                 <AnswerComponent
                                                     id={g.id}
                                                     setDataGuest={setGuests}
