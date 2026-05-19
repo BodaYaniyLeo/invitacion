@@ -5,6 +5,7 @@ import { AnswerComponent } from './AnswerComponent';
 import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
 import { VideoProps } from '@/src/components/Invitation';
 import { guestsObj } from '@/app/page'
+import { sendChanges } from '../helpers/sendAnswer';
 
 export const FooterConfirm = ({
     id,
@@ -15,46 +16,26 @@ export const FooterConfirm = ({
     const [discount, setDiscount] = useState<number>(0)
     const [price, setPrice] = useState<string | null>(null)
 
-
     const priceTarj = 160000
 
     useEffect(() => {
-        const guest = data[0].guests
-        setDataGuest(guest)
-        if (guest[0].payment_coverage) {
-            setDiscount(guest[0].payment_coverage)
+        const guest = data.payment_coverage
+        setDataGuest(data.guests)
+        if (guest) {
+            setDiscount(guest)
         }
     }, [data])
-
-    const supabase = createBrowserSupabaseClient();
-
-    const sendChanges = async () => {
-
-        const { data, error } = await supabase
-            .from('guests')
-            .upsert(dataGuest)
-            .select()
-
-        if (error) {
-            console.log(error.message)
-        } else {
-            alert("¡Gracias por confirmar!");
-        }
-
-    }
 
     useEffect(() => {
         const priceSet = new Intl.NumberFormat('es-ES').format(priceTarj - priceTarj * (discount || 0))
         setPrice(priceSet)
     }, [priceTarj])
 
-
     return (
         <div
-
-            className="px-6 pointer-events-auto py-2 justify-items-center absolute bottom-0 w-full"
+            className="px-6 pointer-events-auto py-2 justify-items-center absolute bottom-0 w-full bg-[#111117] h-[45dvh] content-center"
         >
-            <div id={id} className="flex flex-col w-full max-w-200 max-h-[50dvh] bg-white/5 p-4 rounded-xl backdrop-blur-sm  opacity-0 invisible">
+            <div id={id} className="flex flex-col w-full max-w-200 max-h-[45dvh] bg-white/5 p-4 rounded-xl backdrop-blur-sm opacity-0 invisible">
                 <p className="flex-none text-white pb-4 font-bold text-center uppercase tracking-wider text-(length:--h5size)">
                     Confirmar asistencia
                 </p>
@@ -70,28 +51,21 @@ export const FooterConfirm = ({
                                 id={g.id}
                                 setDataGuest={setDataGuest}
                                 confirm={g.confirm}
+                                status={"confirm"}
                             />
                         </div>
                     ))}
                 </div>
 
                 <div className="flex-none py-4 text-white">
-                    {discount < 1 &&
-                        <p className="text-center mb-4 opacity-70">
-                            Precio por tarjeta: ${price} *
-                        </p>
-                    }
 
                     <button
                         className="w-full py-3 bg-[#960696] text-white font-bold rounded-lg uppercase hover:bg-gray-200 transition-colors"
-                        onClick={() => sendChanges()}
+                        onClick={() => sendChanges(dataGuest)}
                     >
                         Enviar respuesta
                     </button>
                 </div>
-                {/* <p className='text-[length:12px] lg:text-[length:16px] text-white'>
-                    * Invitación sin obligación de compra, <b className='text-red-300'>pero considere que su presencia es el mejor regalo</b>. Las tarifas están sujetas a ajustes según la fecha de pago.
-                </p> */}
             </div>
         </div>
     );

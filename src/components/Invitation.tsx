@@ -24,7 +24,7 @@ import { Gifts } from './Gifts';
 
 export interface VideoProps {
     id: string;
-    data: ArrayElements[];
+    data: ArrayElements;
     commentsData?: userCommentsType[];
 }
 
@@ -119,6 +119,7 @@ export const Invitation = ({
         }
     }, [openMenu])
 
+
     return (
         <div ref={mainRef} className='bg-[#111117]'>
             <button className='fixed top-5 right-5 w-12 h-12 z-70 rounded-full' onClick={() => setOpenMenu(prev => !prev)}>
@@ -170,7 +171,7 @@ export const Invitation = ({
                 </div>
             </div>
 
-            <div className="w-full h-[200lvh] lg:h-[100lvh] content-center relative">
+            <div className="w-full h-[200lvh] lg:h-[100lvh] content-center relative bg-[#111117]">
                 <div id="triggerCalina">
                     <div className='lg:flex lg:justify-center'>
                         <VisitCalina
@@ -188,7 +189,7 @@ export const Invitation = ({
 
                 <DressCode />
 
-                <div className='h-[80hv]'>
+                <div className='h-[80hv] bg-[#111117]'>
                     <Gifts
                         data={data}
                     />
@@ -196,9 +197,9 @@ export const Invitation = ({
 
                 <Countdown />
 
-                <div className="w-full h-[200lvh] relative" id="finalContainer">
+                <div className="w-full h-[200lvh] relative bg-[#111117]" id="finalContainer">
 
-                    <div ref={finalSection} className="w-full h-lvh">
+                    <div ref={finalSection} className="w-full h-lvh bg-[#111117]">
                         <VideoSection
                             id="videoFinal"
                             progressRef={vFinalProgress}
@@ -213,7 +214,7 @@ export const Invitation = ({
                     </div>
                 </div>
 
-                <div id="footerConfirm" className="w-full h-[130dvh] relative">
+                <div id="footerConfirm" className="w-full h-[118dvh] relative">
                     <FooterConfirm
                         id="confirmData"
                         data={data}
@@ -232,10 +233,10 @@ export const Invitation = ({
                 setOpenMenu={setOpenMenu}
             />
 
-            <Carousel
+            {/* <Carousel
                 data={data}
                 commentsData={commentsData}
-            />
+            /> */}
 
         </div >
     );

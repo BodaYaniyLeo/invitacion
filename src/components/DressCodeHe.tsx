@@ -150,9 +150,9 @@ export const DressCodeHe = ({
                             <div key={i}>
                                 <button
                                     onClick={() => setSectionM(prev => prev === categoryName ? null : categoryName)}
-                                    className="flex justify-between w-full px-1"
+                                    className="flex justify-between w-full px-1 text-white"
                                 >
-                                    <h3 className="font-bold font-(family-name:--fontSemiBold) text-(length:--h4size)">{categoryName}</h3>
+                                    <h3 className="font-bold font-(family-name:--fontSemiBold) text-(length:--h4size) text-white">{categoryName}</h3>
                                     <div className="relative w-[4vw] self-center">
                                         <span className="block">
                                             <Image
@@ -168,10 +168,10 @@ export const DressCodeHe = ({
                                         </span>
                                     </div>
                                 </button>
-                                <div id={categoryName} className="h-0 overflow-hidden">
+                                <div id={categoryName} className="h-0 overflow-hidden text-white">
                                     {options.map((option) => (
                                         <button
-                                            className="w-full text-left my-[2px] font-(family-name:--fontNormal) text-(length:--h5size) px-2"
+                                            className="w-full text-left my-[2px] font-(family-name:--fontNormal) text-(length:--h5size) px-2 text-white"
                                             onClick={() => changeClothesM(categoryName, option.img)}
                                             key={option.name}
                                         >

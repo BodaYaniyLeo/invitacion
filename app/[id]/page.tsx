@@ -29,5 +29,5 @@ export default async function Page({
         return <div>Grupo no encontrado</div>
     }
 
-    return <Home data={data} commentsData={commentsData} />
+    return <Home data={data[0]} commentsData={commentsData} />
 }

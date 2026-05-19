@@ -10,7 +10,6 @@ export type ObjText = {
   text: string | null;
 }
 
-
 export interface ArrayElements {
   sleep: boolean;
   church: boolean;
@@ -18,16 +17,17 @@ export interface ArrayElements {
   comments: userCommentsType[];
   yani: ObjText;
   leo: ObjText;
+  payment_coverage: number;
 }
 
 export type guestsObj = {
   id: number;
   name: string;
   lastname: string;
-  payment_coverage: number;
   state: string;
   room: number;
   confirm: boolean;
+  transfer: boolean;
 }
 
 export interface userCommentsType {
@@ -41,7 +41,7 @@ export interface userCommentsType {
 }
 
 export type dataInv = {
-  data: ArrayElements[],
+  data: ArrayElements,
   commentsData: userCommentsType[],
   isDesktop?: boolean | null,
 }
@@ -64,7 +64,7 @@ export default function Home({
     const handleLoad = () => {
       const timer = setTimeout(() => {
         setIsSiteReady(true);
-      }, 1000);
+      }, 3000);
       return timer;
     };
 
@@ -95,13 +95,17 @@ export default function Home({
     };
   }, []);
 
-  if (!data || data.length === 0) {
-    return <div className='logo'></div>;
+  if (!data) {
+    return (
+      <div className='flex justify-items-center content-center items-center bg-[#111117]'>
+        <div className='logo'></div>
+      </div>
+    )
   }
 
   return (
     <>
-      <div className={`fixed inset-0 bg-[#111117] z-99 justify-items-center content-center ${isSiteReady && "hidden"}`}>
+      <div className={`fixed inset-0 bg-[#111117] flex w-screen z-99 justify-center items-center ${isSiteReady && "hidden"}`}>
         <div className='logo'></div>
       </div>
       <Invitation

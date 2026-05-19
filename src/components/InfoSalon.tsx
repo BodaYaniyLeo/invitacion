@@ -5,9 +5,11 @@ import ingresoCalina from '../assets/images/salon/calina.webp'
 import arrowLeft from '../assets/images/salon/arrowLeft.webp'
 import { useEffect, useState } from 'react';
 import { ArrayElements, guestsObj } from '@/app/page'
+import { AnswerComponent } from './AnswerComponent';
+import { sendChanges } from '../helpers/sendAnswer';
 
 interface InfoProps {
-    data: ArrayElements[]
+    data: ArrayElements
     scrollRef: React.RefObject<HTMLDivElement | null>
     handleBackInfo: () => void
 }
@@ -25,8 +27,8 @@ export const InfoSalon = ({
     const [guests, setGuests] = useState<guestsObj[]>([])
 
     useEffect(() => {
-        const guests = data[0].guests
-        setGuests(guests)
+        const guests = data
+        setGuests(guests.guests)
     }, [data])
 
     useEffect(() => {
@@ -95,71 +97,54 @@ export const InfoSalon = ({
                                 </a>
                             </div>
                         </div>
-                        {data[0].sleep
-                            ? <div className='w-[90vw] mx-[4vw] font-[family-name:var(--fontNormal)] self-end max-h-[80lvh] flex flex-col lg:self-center'>
-                                <h4 className='text-[#ffc2d0] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
-                                    Hospedaje incluido
-                                </h4>
-                                <div className='flex mb-4 justify-between'>
-                                    <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
-                                        Tanto queremos compartir este momento con vos, que te reservamos una habitación en el salon
-                                    </p>
-                                </div>
-                                <div className='grid grid-cols-3 mb-4 w-[90%] place-self-center'>
-                                    <p className='col-span-2 text-[#fff9cb] text-[length:var(--h3size)] leading-[1.2] font-bold'>
-                                        Nombre
-                                    </p>
-                                    <p className='grid-column-3 text-center text-[#fff9cb] text-[length:var(--h3size)] leading-[1.2] font-bold'>
-                                        Habitación
-                                    </p>
-                                </div>
-                                <div className='flex flex-col flex-1 overflow-y-auto min-h-0 py-2 border-y border-white/10 custom-scrollbar w-[100%] place-self-center'>
-                                    {guests?.map(g => {
+                        <div className='w-[90vw] mx-[4vw] font-[family-name:var(--fontNormal)] self-end max-h-[80lvh] h-full flex flex-col lg:self-center'>
+                            <h4 className='text-[#ffc2d0] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold mb-2'>
+                                Servicio de traslado
+                            </h4>
+                            <div className='flex flex-col mb-4'>
+                                <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
+                                    Esta noche solo pensá en divertirte.
+                                </p>
+                            </div>
+                            <p className='text-white text-[length:var(--h5size)] leading-[1.2] mb-4'>
+                                {guests.length > 1
+                                    ? "Confirma si quieres contatar este servicio." : "Confirma a quienes quieran contatar este servicio."}
+                                <br />
+                                Un mes antes del evento podras ver el estado de tu traslado aquí. No te olvides de verificarlo!
+                                <br />
+                                Cualquier consulta, no dudes en escribirnos.
+                            </p>
+                            <div>
+
+                            </div>
+                            {/* <p className='text-end mb-3'>Solicitar servicio</p> */}
+                            <div className='text-white text-[length:var(--h5size)] leading-[1.2] overflow-auto h-full pe-1'>
+                                {
+                                    guests?.map(g => {
                                         return (
-                                            <div key={g.id} className='grid grid-cols-3 mb-4'>
-                                                <p className='col-span-2 text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
-                                                    {g.name} {g.lastname}
-                                                </p>
-                                                <p className='grid-column-3 text-center text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
-                                                    {g.room}
-                                                </p>
+                                            <div key={g.id} className='flex justify-between mb-2'>
+                                                <p>{g.name} {g.lastname}</p>
+                                                <AnswerComponent
+                                                    id={g.id}
+                                                    setDataGuest={setGuests}
+                                                    confirm={g.transfer}
+                                                    status={"transfer"}
+                                                />
                                             </div>
                                         )
-                                    })}
-
-                                </div>
+                                    })
+                                }
                             </div>
-                            : <div className='w-[90vw] mx-[4vw] font-[family-name:var(--fontNormal)] self-end max-h-[80lvh] h-full flex flex-col lg:self-center'>
-                                <h4 className='text-[#fff9cb] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold'>
-                                    Hospedajes cercanos
-                                </h4>
-                                <div className='flex flex-col mb-4'>
-                                    <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
-                                        Hospedaje 1
-                                    </p>
-                                    <a href="#">Link de sitio o maps</a>
-                                    <a href="#">Teléfono</a>
-                                </div>
-                                <div className='flex flex-col mb-4'>
-                                    <p className='text-[#fff9cb] text-[length:var(--h2size)] leading-[1.2] font-bold'>
-                                        Hospedaje 2
-                                    </p>
-                                    <a href="#">Link de sitio o maps</a>
-                                    <a href="#">Teléfono</a>
-                                </div>
-                            </div>
-                        }
-
-
+                            <button
+                                className="w-full py-3 bg-[#960696] text-white font-bold rounded-lg uppercase hover:bg-gray-200 transition-colors"
+                                onClick={() => sendChanges(guests)}
+                            >
+                                Enviar respuesta
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-            {/* <div className='flex flex-col w-[180vw] shrink-0 bg-[#111117]'>
-                <Image
-                    src={ingresoCalina}
-                    alt=''
-                />
-            </div> */}
         </div >
     )
 };

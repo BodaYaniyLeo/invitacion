@@ -15,9 +15,9 @@ export const HeroSection = ({ id }: HeroProps) => {
         <div id={id} className="fixed top-0 left-0 w-full h-lvh z-30 pointer-events-none">
             <div className="relative w-full h-lvh overflow-hidden">
                 <div id="heroMask" className="absolute inset-0 z-30 pointer-events-none h-lvh">
-                    <picture id='heroComplete' className='flex h-lvh w-vw scale-125 object-cover justify-center relative'>
-                        <Image src={backHero} alt="" className='h-lvh w-auto object-cover z-21' />
-                        <Image src={frontHero} alt="" className='h-lvh w-auto absolute top-0 left-0 object-cover z-23 top-1/2 left-1/2 -translate-1/2' />
+                    <picture id='heroComplete' className='flex h-dvh w-vw object-cover justify-center relative'>
+                        <Image id='backHero' src={backHero} alt="" className='h-dvh w-auto object-cover z-21 scale-140 ' />
+                        <Image id='frontHero' src={frontHero} alt="" className='h-dvh w-auto absolute bottom-0 left-0 object-cover z-23 origin-bottom scale-120' />
                         <Image src={textHero} alt="" className='absolute z-22 top-1/3 -translate-y-1/2 -translate-1/10 w-[80vw] max-h-1/4' loading='eager' id='imgTextHero' />
                     </picture>
                 </div>

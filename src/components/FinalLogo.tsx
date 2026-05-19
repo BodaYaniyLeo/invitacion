@@ -13,9 +13,9 @@ export const FinalLogo = ({
     const [discount, setDiscount] = useState<number>(0)
 
     useEffect(() => {
-        const guest = data[0].guests
-        if (guest[0].payment_coverage) {
-            setDiscount(guest[0].payment_coverage)
+        const guest = data.payment_coverage
+        if (guest) {
+            setDiscount(guest)
         }
     }, [data])
 

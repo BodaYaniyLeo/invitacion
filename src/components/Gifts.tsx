@@ -9,7 +9,7 @@ import { ArrayElements } from '@/app/page'
 
 
 interface MenuProps {
-    data: ArrayElements[];
+    data: ArrayElements;
 }
 
 interface itineraryObj {
@@ -26,9 +26,9 @@ export const Gifts = ({
     const [discount, setDiscount] = useState<number>(0)
 
     useEffect(() => {
-        const guest = data[0].guests
-        if (guest[0].payment_coverage) {
-            setDiscount(guest[0].payment_coverage)
+        const guest = data.payment_coverage
+        if (guest) {
+            setDiscount(guest)
         }
     }, [data])
 
@@ -73,34 +73,43 @@ export const Gifts = ({
                     <div id='giftsTextInner'>
                         <h2 className='text-(length:--h1size)'>Regalos</h2>
                         <p className='w-full mt-6 text-(length:--h3size)'>
-                            Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa! Dame plataaaa!
+                            Invitado 100%
+                        </p>
+                    </div>
+                </div>
+            </div>
+        )
+    } else if (discount === 0) {
+        return (
+            <div
+                id='gifts'
+                className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
+            >
+                <div id='giftsText' className='flex flex-col h-[110lvh] justify-center mx-4'>
+                    <div id='giftsTextInner'>
+                        <h2 className='text-(length:--h1size)'>Tarjetas</h2>
+                        <p className='w-full mt-6 text-(length:--h3size)'>
+                           Invitado 0%
+                        </p>
+                    </div>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div
+                id='gifts'
+                className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
+            >
+                <div id='giftsText' className='flex flex-col h-[110lvh] justify-center mx-4'>
+                    <div id='giftsTextInner'>
+                        <h2 className='text-(length:--h1size)'>Tarjetas</h2>
+                        <p className='w-full mt-6 text-(length:--h3size)'>
+                            Invitado 50%
                         </p>
                     </div>
                 </div>
             </div>
         )
     }
-
-    return (
-        <div
-            id='gifts'
-            className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
-        >
-            <div id='giftsText' className='flex flex-col h-[110lvh] justify-center mx-4'>
-                <div id='giftsTextInner'>
-                    <h2 className='text-(length:--h1size)'>Regalos</h2>
-                    <p className='w-full mt-6 text-(length:--h3size)'>
-                        Tu presencia y plata!
-                        Tu presencia y plata!
-                        Tu presencia y plata!
-                        Tu presencia y plata!
-                        Tu presencia y plata!
-                        Tu presencia y plata!
-                        Tu presencia y plata!
-                        Tu presencia y plata!
-                    </p>
-                </div>
-            </div>
-        </div>
-    )
 }

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface MenuProps {
-    data: ArrayElements[];
+    data: ArrayElements;
     setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -26,8 +26,8 @@ export const MenuComponent = ({
     }, [])
 
     useEffect(() => {
-        if (data[0].guests[0].payment_coverage) {
-            setDiscount(data[0].guests[0].payment_coverage)
+        if (data.payment_coverage) {
+            setDiscount(data.payment_coverage)
         } else {
             setDiscount(0)
         }
@@ -40,7 +40,7 @@ export const MenuComponent = ({
         >
             <div className='bg-[#111117FC] flex flex-col items-center h-lvh p-[3lvh] w-fit justify-self-end justify-between relative'>
                 <div className='absolute left-0 top-0 borderAnimated h-[100vh] w-[2px]'></div>
-                <div className='flex flex-col uppercase mt-12 self-start w-full'>
+                <div className='flex flex-col uppercase mt-12 self-start w-full text-white'>
                     <p className='text-[length:var(--h3size)] font-[family-name:var(--fontBold)] mb-4'>Acceso rápido</p>
                     <a onClick={() => setOpenMenu(false)} href='#' className='text-[length:var(--menusize)] mb-3'>Inicio</a>
                     <a onClick={() => setOpenMenu(false)} href='#Leo' className='text-[length:var(--menusize)] mb-3'>Leo</a>
@@ -64,7 +64,7 @@ export const MenuComponent = ({
                             Salón
                         </a>
                     </div>
-                    {data[0].church &&
+                    {data.church &&
                         <div>
                             <a onClick={() => setOpenMenu(false)} href={urlChurch} target='_blank' className='flex items-center text-[length:var(--menusize)] mb-3'>
                                 <Image

@@ -6,7 +6,6 @@ import church from "@/src/assets/images/itinerary/church.svg"
 import martini from "@/src/assets/images/itinerary/martini.svg"
 import music from "@/src/assets/images/itinerary/music.svg"
 import ring from "@/src/assets/images/itinerary/ring.svg"
-import coffe from "@/src/assets/images/itinerary/coffe.svg"
 import Image, { StaticImageData } from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
@@ -14,7 +13,7 @@ import { ArrayElements } from '@/app/page'
 
 
 interface MenuProps {
-    data: ArrayElements[];
+    data: ArrayElements;
 }
 
 interface itineraryObj {
@@ -52,13 +51,7 @@ export const Itinerary = ({
             image: music,
             text: "Salón Rincón Calina",
             horario: "21hs"
-        },
-        {
-            id: "coffe",
-            image: coffe,
-            text: "Salón Rincón Calina",
-            horario: "10hs"
-        },
+        }
     ];
 
     const [idSelected, setIdSelected] = useState<itineraryObj[]>([])
@@ -66,11 +59,11 @@ export const Itinerary = ({
     useEffect(() => {
         if (!data) return
 
-        if (data[0].church && data[0].sleep) {
+        if (data.church && data.sleep) {
             setIdSelected(ids)
-        } else if (data[0].church) {
+        } else if (data.church) {
             setIdSelected(ids.slice(0, 4))
-        } else if (data[0].sleep) {
+        } else if (data.sleep) {
             setIdSelected(ids.slice(1, 5))
         } else {
             setIdSelected(ids.slice(1, 4))
@@ -87,7 +80,7 @@ export const Itinerary = ({
         const ctx = gsap.context(() => {
 
 
-            idSelected.forEach(id => {
+            ids.forEach(id => {
                 const tl = gsap.timeline({
                     paused: true,
                     scrollTrigger: {
@@ -118,27 +111,26 @@ export const Itinerary = ({
         });
 
         return () => ctx.revert();
-    }, [idSelected]);
+    }, [ids]);
 
     return (
         <div id="itinerary" className='content-center lg:content-end h-lvh lg:h-auto lg:w-full'>
             <h2 className='text-center content-center text-white font-(family-name:--fontBold) text-(length:--h1size) max-h-[20lvh] lg:hidden'>Itinerario</h2>
             <div className="flex flex-1 flex-col lg:flex-row justify-self-center self-center lg:h-auto lg:w-full lg:justify-around">
 
-                {idSelected.map(e =>
+                {ids.map(e =>
                     <div key={e.id} id={e.id} className="flex flex-around lg:flex-col opacity-0 invisible lg:opacity-100 lg:visible my-[3lvh] scale-125 lg:scale-100">
                         <Image
                             src={e.image}
                             alt=""
-                            className="imageBg h-[8lvh] lg:h-[140px] w-auto"
+                            className="imageBg h-[8lvh] lg:h-[140px] w-auto self-center"
                             style={{
                                 backgroundImage: `radial-gradient(at 100% 0%,rgba(0, 0, 0, 0) 0vh, rgba(255, 255, 255, 0.1) var(--mask-size))`
                             }}
                         />
                         <div className="ms-4 content-center">
-                            <p className="text-[30px] text-white text-center">
+                            <p className="text-[30px] text-white">
                                 {e.horario}
-                                {e.id === "coffe" && <span className="text-[16px] ms-1">+1</span>}
                             </p>
                             <p className="lg:hidden text-white">{e.text}</p>
                         </div>

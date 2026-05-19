@@ -64,7 +64,8 @@ export const useInvitationAnimations = ({
 
             presentationTl
                 .addLabel("heroAnimation")
-                .to('#heroComplete', { scale: 1, ease: "none", duration: 0.7 }, "heroAnimation")
+                .to('#backHero', { scale: 1, ease: "none", duration: 0.7 }, "heroAnimation")
+                .to('#frontHero', { scale: 1.15, ease: "none", duration: 0.7 }, "heroAnimation")
                 .to('#imgTextHero', { opacity: 0, duration: 0.4 }, "heroAnimation")
                 .to('#heroComplete', { opacity: 0, duration: 0.4 }, "heroAnimation+=0.3")
                 .to('#heroMask', {

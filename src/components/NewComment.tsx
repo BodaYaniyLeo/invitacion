@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { RefObject, useEffect, useRef, useState } from 'react';
 
 interface MenuProps {
-    data: ArrayElements[];
+    data: ArrayElements;
     handleCloseComment: () => void;
 }
 

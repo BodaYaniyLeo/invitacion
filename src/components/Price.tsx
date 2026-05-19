@@ -4,21 +4,18 @@ import Image from 'next/image';
 import logoCasamiento from '../assets/images/hero/logoCasamiento.svg'
 import { useEffect, useState } from 'react';
 import { VideoProps } from './Invitation'
-import { guestsObj } from '@/app/page'
 
 export const Price = ({
     id,
     data,
 }: VideoProps) => {
 
-    const [dataGuest, setDataGuest] = useState<guestsObj[]>([])
     const [discount, setDiscount] = useState<number>(0)
 
     useEffect(() => {
-        const guest = data[0].guests
-        setDataGuest(guest)
-        if (guest[0].payment_coverage) {
-            setDiscount(guest[0].payment_coverage)
+        const guest = data.payment_coverage
+        if (guest) {
+            setDiscount(guest)
         }
     }, [data])
 
@@ -27,10 +24,10 @@ export const Price = ({
             id={id}
             className="absolute top-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center text-white px-6 pointer-events-auto py-2 invisible"
         >
-            <div id='finalAnimation' className="flex flex-col items-center justify-center">
+            <div id='finalAnimation' className="flex flex-col items-center justify-center bg-[#111117]">
                 <Image src={logoCasamiento} alt="Logo" className="max-w-[50vw] mb-4" />
 
-                <div id='textFinalContainer' className='flex flex-col h-full justify-center'>
+                <div id='textFinalContainer' className='flex flex-col h-full justify-center bg-[#111117]'>
                     <div id='textFinal'>
                         <div id='textFinalInner'>
                             {discount < 1 ? (

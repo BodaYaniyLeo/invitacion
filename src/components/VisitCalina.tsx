@@ -13,7 +13,7 @@ interface VideoProps {
     handleInfoSalon: () => void;
     setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
     isDesktop?: boolean | null;
-    data: ArrayElements[];
+    data: ArrayElements;
 }
 
 export const VisitCalina = ({

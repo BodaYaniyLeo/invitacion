@@ -13,7 +13,7 @@ import { useCommentsAnimations } from "../hooks/useCommentsAnimations"
 gsap.registerPlugin(Observer)
 
 interface MenuProps {
-    data: ArrayElements[];
+    data: ArrayElements;
     commentsData: userCommentsType[];
 }
 
@@ -56,7 +56,7 @@ export const Carousel = ({
             return a.id - b.id
         })
 
-        const myComments = data[0].comments
+        const myComments = data.comments
 
         setComments(ordenComments)
         setMyComments(myComments.filter(f => f.public))
@@ -308,7 +308,7 @@ export const Carousel = ({
                         <button
                             className='rounded-full bg-white px-8 py-4 text-black justify-center font-bold'
                         >
-                            Mis comentarios <span>{data[0].comments.length}</span>
+                            Mis comentarios <span>{data.comments.length}</span>
                         </button>
                         <button
                             className="paused w-6"

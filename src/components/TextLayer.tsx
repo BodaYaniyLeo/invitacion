@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 interface Props {
     id: string,
-    data: ArrayElements[]
+    data: ArrayElements
 
 }
 
@@ -14,10 +14,10 @@ export const TextLayer = ({ id, data }: Props) => {
     useEffect(() => {
         if (!data) return
 
-        if (id === "Yani" && data[0].yani) {
-            setSubText(data[0].yani)
-        } else if (id === "Leo" && data[0].leo) {
-            setSubText(data[0].leo)
+        if (id === "Yani" && data.yani) {
+            setSubText(data.yani)
+        } else if (id === "Leo" && data.leo) {
+            setSubText(data.leo)
         }
 
     }, [data])
