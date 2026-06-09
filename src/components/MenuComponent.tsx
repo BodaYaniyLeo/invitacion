@@ -37,16 +37,23 @@ export const MenuComponent = ({
 
     useEffect(() => {
         const clickOut = (e: MouseEvent) => {
-            if (menuContainer.current && !menuContainer.current.contains(e.target as Node)) {
-                setOpenMenu(false)
-            }
-        }
+            const target = e.target as HTMLElement;
+            const clickEnBotonMenu = target.closest('button') && target.closest('button')?.className.includes('z-70');
 
-        document.addEventListener("mousedown", clickOut)
+            if (
+                menuContainer.current &&
+                !menuContainer.current.contains(target) &&
+                !clickEnBotonMenu
+            ) {
+                setOpenMenu(false);
+            }
+        };
+
+        document.addEventListener("mousedown", clickOut);
         return () => {
-            document.removeEventListener("mousedown", clickOut)
-        }
-    }, [])
+            document.removeEventListener("mousedown", clickOut);
+        };
+    }, [setOpenMenu]);
 
     return (
         <div

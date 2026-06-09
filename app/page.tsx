@@ -42,7 +42,6 @@ export interface userCommentsType {
 
 export type dataInv = {
   data: ArrayElements,
-  commentsData: userCommentsType[],
   isDesktop?: boolean | null,
 }
 
@@ -52,7 +51,6 @@ if (typeof window !== "undefined") {
 
 export default function Home({
   data,
-  commentsData
 }: dataInv) {
 
   const [isSiteReady, setIsSiteReady] = useState(false)
@@ -110,7 +108,6 @@ export default function Home({
       </div>
       <Invitation
         data={data}
-        commentsData={commentsData}
         isDesktop={isDesktop}
       />
     </>

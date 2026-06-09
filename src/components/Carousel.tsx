@@ -14,12 +14,10 @@ gsap.registerPlugin(Observer)
 
 interface MenuProps {
     data: ArrayElements;
-    commentsData: userCommentsType[];
 }
 
 export const Carousel = ({
-    data,
-    commentsData
+    data
 }: MenuProps) => {
 
     const { newCommentAnimation, pauseAnimation } = useCommentsAnimations()
@@ -50,18 +48,6 @@ export const Carousel = ({
             }
         }
     }
-
-    useEffect(() => {
-        const ordenComments = [...commentsData].sort((a, b) => {
-            return a.id - b.id
-        })
-
-        const myComments = data.comments
-
-        setComments(ordenComments)
-        setMyComments(myComments.filter(f => f.public))
-
-    }, [data])
 
     const total = comments.length;
 
