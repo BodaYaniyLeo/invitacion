@@ -19,6 +19,7 @@ interface selectedOrNot {
 export const DressCode = () => {
 
     const [maniquiSelect, setManiquiSelect] = useState<selectedOrNot>({ selected: null, noSelected: null })
+    const [select, setSelect] = useState<boolean>(true)
 
     const widthOpposite = (idSelected: string, idNoSelected: string) => {
 
@@ -132,9 +133,13 @@ export const DressCode = () => {
                 </div>
                 <DressCodeShe
                     widthOpposite={widthOpposite}
+                    select={select}
+                    setSelect={setSelect}
                 />
                 <DressCodeHe
                     widthOpposite={widthOpposite}
+                    select={select}
+                    setSelect={setSelect}
                 />
             </div>
         </div >

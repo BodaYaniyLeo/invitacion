@@ -135,7 +135,7 @@ export const Invitation = ({
                 <HeroSection id="heroSection" />
             </div>
 
-            <div className="w-full h-[200lvh] relative" id="leoContainer">
+            <div className="w-full h-[250lvh] relative" id="leoContainer">
 
                 <div ref={leoSection} className="w-full lg:w-auto h-lvh">
                     <Intro />
@@ -154,7 +154,7 @@ export const Invitation = ({
                 </div>
             </div>
 
-            <div className="w-full h-[220lvh] relative" id="yaniContainer">
+            <div className="w-full h-[250lvh] relative" id="yaniContainer">
 
                 <div ref={yaniSection} className="w-full h-lvh">
                     <VideoSection

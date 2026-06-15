@@ -23,7 +23,5 @@ export default async function Page({
         return <div>Grupo no encontrado</div>
     }
 
-    console.log(data)
-
     return <Home data={data[0]} />
 }

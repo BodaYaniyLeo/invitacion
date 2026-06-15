@@ -112,7 +112,7 @@ export const useInvitationAnimations = ({
                 scrollTrigger: {
                     trigger: "#leoContainer",
                     start: 'top top',
-                    end: '+=180%',
+                    end: '+=210%',
                     scrub: 0.5,
                     pin: leoSection.current,
                     pinSpacing: false,

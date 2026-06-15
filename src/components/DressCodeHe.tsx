@@ -50,11 +50,15 @@ interface VestimentaM {
 
 
 interface DressProps {
-    widthOpposite: (idSelected: string, idNoSelected: string) => void
+    widthOpposite: (idSelected: string, idNoSelected: string) => void;
+    select: boolean,
+    setSelect: (value:boolean) => void
 }
 
 export const DressCodeHe = ({
-    widthOpposite
+    widthOpposite,
+    select,
+    setSelect
 }: DressProps) => {
 
     const modelArrayM: Category[] = [
@@ -140,7 +144,7 @@ export const DressCodeHe = ({
                 <div className="flex justify-between px-1 py-[2px]">
                     <h4 className="text-[#79b0cc] font-(family-name:--fontSemiBold) text-(length:--psize)">Sugerencias</h4>
                 </div>
-                <div>
+                <div className="my-1">
                     {modelArrayM.map((category, i) => {
                         const categoryName = Object.keys(category)[0];
 
@@ -186,10 +190,19 @@ export const DressCodeHe = ({
                 </div>
             </div>
 
-            <div id="showcase" className="w-full h-full flex justify-start md:aspect-7/5"
+            <div id="showcase" className="w-full h-full flex justify-start md:aspect-7/5 relative"
             >
-                <div id="maniquiHe" className="h-full w-full md:w-1/2 relative content-center max-w-125 justify-items-center"
-                    onClick={() => widthOpposite("He", "She")}
+                {select &&
+                    <div className="absolute left-0 w-full md:w-1/2 text-center my-2 animate-[bounce_2s_infinite]">
+                        <p>Selecciona tu estilo</p>
+                        <p>▼</p>
+                    </div>
+                }
+                <div id="maniquiHe" className="h-full w-full md:w-1/2 relative content-center max-w-125 justify-items-center md:mt-8"
+                    onClick={() => {
+                        widthOpposite("He", "She");
+                        setSelect(false);
+                    }}
                 >
                     <Image
                         src={maniqui}
