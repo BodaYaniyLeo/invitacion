@@ -22,7 +22,7 @@ export const DressCode = () => {
 
     const widthOpposite = (idSelected: string, idNoSelected: string) => {
 
-        const mask = `linear-gradient(to right, black 20%, transparent 75%), linear-gradient(to bottom, transparent, black 70%, black 0%, transparent 100%)`
+        const mask = `linear-gradient(to right, black 20%, transparent 50%), linear-gradient(to bottom, transparent, black 70%, black 0%, transparent 100%)`
         const tl = gsap.timeline({ ease: "power2.out" })
 
         tl
@@ -87,40 +87,40 @@ export const DressCode = () => {
 
 
     return (
-        <div id="dresscode" className='overflow-hidden h-lvh w-vw flex flex-col relative lg:mt-[10lvh] bg-[#111117]'>
+        <div id="dresscode" className='overflow-hidden h-lvh lg:h-auto w-vw flex flex-col relative lg:mt-[10lvh]'>
             <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size) tracking-[-.04em] px-8'>
                 Código de vestimenta
             </h2>
             <h4 className='text-center text-white font-(family-name:--fontBold) text-(length:--h2size)'>
                 Formal sport
             </h4>
-            <div className="w-[100vw] relative h-full flex content-center overflow-hidden">
+            <div className="w-full relative h-full flex content-center overflow-hidden">
                 < div id="iconChange" className="absolute bottom-10 right-[32px] lg:right-1/4 text-center z-39 opacity-0 invisible">
                     <div onClick={() => changeManiqui(maniquiSelect.noSelected, maniquiSelect.selected)}
                     >
                         <Image
                             src={iconManiqui}
                             alt=""
-                            className="w-[clamp(40px,15vw,100px)]"
+                            className="w-[clamp(30px,15vw,60px)]"
                         />
 
                     </div>
                 </div>
                 <div
                     id="salonBack"
-                    className="w-[100vw] lg:hidden absolute bottom-1/2 translate-y-2/5 left-0 lg:h-full w-full -z-1 opacity-0 invisible"
+                    className="w-[100vw] lg:hidden absolute bottom-1/2 translate-y-2/5 left-0 lg:h-full w-full -z-1 opacity-0 invisible aspect-2/1"
                 >
                     <Image
                         src={fondo}
                         alt=""
-                        className="inset-0 h-full z-30"
+                        className="inset-0 h-auto w-full z-30 object-contain"
                         loading="eager"
 
                     />
                 </div>
                 <div
                     id="salonBack"
-                    className="w-[80vw] hidden lg:block absolute bottom-0 left-0 lg:h-auto w-full -z-1 opacity-0 invisible"
+                    className="w-[80vw] hidden lg:block absolute bottom-0 left-0 lg:h-auto w-full -z-1 opacity-0 invisible aspect-2/1"
                 >
                     <Image
                         src={fondoComp}

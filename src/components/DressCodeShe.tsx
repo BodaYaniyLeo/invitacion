@@ -169,10 +169,10 @@ export const DressCodeShe = ({
                 </div>
             </div>
 
-            <div id="showcase" className="w-full h-full flex justify-end"
+            <div id="showcase" className="w-full h-full flex justify-end md:aspect-7/5"
 
             >
-                <div id="maniquiShe" className="h-full w-full lg:w-1/2 relative content-center max-w-500 justify-items-center"
+                <div id="maniquiShe" className="h-full w-full md:w-1/2 relative content-center max-w-125 justify-items-center"
                     onClick={() => widthOpposite("She", "He")}
                 >
                     <Image
