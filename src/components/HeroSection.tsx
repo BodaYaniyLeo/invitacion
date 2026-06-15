@@ -29,7 +29,7 @@ export const HeroSection = ({ id }: HeroProps) => {
                             id='logoDate'
                             src={logoCasamiento}
                             alt="Logo"
-                            className="w-[60vw] max-w-[700px] block mx-auto"
+                            className="w-[60vw] max-w-[300px] block mx-auto"
                         />
                         <h3 className='uppercase absolute z-2 text-center font-bold w-full top-[110%]'>
                             Disponible<br />el 9 de enero<br />de 2027

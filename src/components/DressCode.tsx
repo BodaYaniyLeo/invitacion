@@ -95,7 +95,7 @@ export const DressCode = () => {
                 Formal sport
             </h4>
             <div className="w-[100vw] relative h-full flex content-center overflow-hidden">
-                < div id="iconChange" className="absolute bottom-10 right-[32px] text-center z-39 opacity-0 invisible">
+                < div id="iconChange" className="absolute bottom-10 right-[32px] lg:right-1/4 text-center z-39 opacity-0 invisible">
                     <div onClick={() => changeManiqui(maniquiSelect.noSelected, maniquiSelect.selected)}
                     >
                         <Image
@@ -120,12 +120,12 @@ export const DressCode = () => {
                 </div>
                 <div
                     id="salonBack"
-                    className="w-[100vw] hidden lg:block absolute bottom-0 left-0 lg:h-full w-full -z-1 opacity-0 invisible"
+                    className="w-[80vw] hidden lg:block absolute bottom-0 left-0 lg:h-auto w-full -z-1 opacity-0 invisible"
                 >
                     <Image
                         src={fondoComp}
                         alt=""
-                        className="inset-0 z-30 h-full lg:w-auto"
+                        className="inset-0 z-30 h-auto w-full object-contain"
                         loading="eager"
 
                     />
