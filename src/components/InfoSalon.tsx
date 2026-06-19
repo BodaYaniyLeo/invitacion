@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { ArrayElements, guestsObj } from '@/app/page'
 import { AnswerComponent } from './AnswerComponent';
 import { sendChanges } from '../helpers/sendAnswer';
+import chevronR from '@/public/chevronR.svg'
 
 interface InfoProps {
     data: ArrayElements
@@ -24,6 +25,7 @@ export const InfoSalon = ({
     const urlIframe = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3411.4556295631846!2d-64.25989278860048!3d-31.235807887438405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432836e4d2fcdbf%3A0x309c9f5a1dd5927f!2sRinc%C3%B3n%20Calina!5e0!3m2!1ses!2ses!4v1772183044697!5m2!1ses!2ses"
 
     const [advance, setAdvance] = useState<number>(0)
+    const [isVisible, setIsVisible] = useState<boolean>(true)
     const [guests, setGuests] = useState<guestsObj[]>([])
 
     useEffect(() => {
@@ -41,6 +43,10 @@ export const InfoSalon = ({
             const percentage = (scrollLeft / scrollMax) * 100
 
             setAdvance(percentage)
+
+            if (percentage > 10) {
+                setIsVisible(false)
+            }
         }
 
         scrollSection.addEventListener('scroll', handleScroll)
@@ -77,10 +83,10 @@ export const InfoSalon = ({
             </div>
             <div id='infoSalon' className='flex flex-col shrink-0 h-full'>
                 <div className="pointer-events-auto flex flex-col lg:flex-row justify-center h-lvh lg:items-center ps-[5vw] mt-[3lvh]">
-                    <div className='flex items-center'>
-                        <div className='w-[87vw] font-[family-name:var(--fontNormal)] px-[3vw] h-full flex flex-col justify-center'>
-                            <div id='mapsSalon' className='w-[90vw] bg-white w-[clamp(50vw,80vw,500px)] h-fit aspect-4/3 p-2 mt-5 rotate-4'>
-                                <iframe src={urlIframe} style={{ border: 0, aspectRatio: "4/3" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                    <div className='flex items-center lg:justify-between'>
+                        <div className='w-[87vw] lg:w-[45vw] font-[family-name:var(--fontNormal)] px-[3vw] h-full flex flex-col justify-center'>
+                            <div id='mapsSalon' className='bg-white w-[clamp(50vw,80vw,500px)] lg:w-[100%] h-fit max-h-[50dvh] aspect-4/3 p-2 mt-5 rotate-4'>
+                                <iframe src={urlIframe} style={{ border: 0, aspectRatio: "4/3", height: "100%", width: "100%" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             <div className='mt-[5vh]'>
                                 <h2 className='text-[#ffc2d0] text-[length:var(--h2size)] uppercase font-bold'>
@@ -91,13 +97,22 @@ export const InfoSalon = ({
                                 </p>
                                 <a
                                     href={urlMaps} target='_blank'
-                                    className='flex rounded-full bg-white px-4 py-2 text-black justify-center mt-5 size-fit text-(length:--h5size)'
+                                    className='flex rounded-full bg-white px-4 py-2 text-black justify-center mt-5 size-fit text-(length:--h5size) lg:text-(length:--psize)'
                                 >
                                     Ir a google maps
                                 </a>
                             </div>
+                            <div className={`absolute bottom-0 right-[50%] flex ${isVisible ? 'opacity-100' : "opacity-0"} duration-500`}>
+                                <p>Servicio de traslado</p>
+                                <Image
+                                    id='chevronR'
+                                    src={chevronR}
+                                    alt="Logo"
+                                    className={`w-[24px] mx-auto z-999 text-white `}
+                                />
+                            </div>
                         </div>
-                        <div className='w-[90vw] mx-[4vw] font-[family-name:var(--fontNormal)] self-end max-h-[80lvh] h-full flex flex-col lg:self-center'>
+                        <div className='w-[90vw] lg:w-[45vw] mx-[4vw] lg:mx-0 lg:px-[4vw] font-[family-name:var(--fontNormal)] self-end max-h-[80lvh] h-full flex flex-col lg:self-center'>
                             <h4 className='text-[#ffc2d0] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold mb-2'>
                                 Servicio de traslado
                             </h4>
@@ -114,7 +129,7 @@ export const InfoSalon = ({
                                 <br />
                                 Cualquier consulta, no dudes en escribirnos.
                             </p>
-                            <div className='text-white text-[length:var(--h5size)] leading-[1.2] overflow-auto h-full pe-1 border-y border-[#3a3a3a] mb-4'>
+                            <div className='text-white text-[length:var(--h5size)] leading-[1.2] overflow-auto h-full max-h-fit pe-1 border-y border-[#3a3a3a] mb-4'>
                                 {
                                     guests?.map(g => {
                                         const isLast = guests.length - 1 === g.id

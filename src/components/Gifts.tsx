@@ -25,6 +25,8 @@ export const Gifts = ({
 
     const [discount, setDiscount] = useState<number>(0)
 
+    const invitationPrice = 160000
+
     useEffect(() => {
         const guest = data.payment_coverage
         if (guest) {
@@ -73,7 +75,11 @@ export const Gifts = ({
                     <div id='giftsTextInner'>
                         <h2 className='text-(length:--h1size)'>Regalos</h2>
                         <p className='w-full mt-6 text-(length:--h3size)'>
-                            Invitado 100%
+                            "Nos miramos, dijimos '¿por qué no?' y... ¡acá estamos! Nos casamos y se viene un fiestón."
+                            <br />
+                            <br />
+                            El mejor regalo es tu presencia en nuestro gran día. Queremos compartir y celebrar junto a las personas que más amamos.<br />
+                            Si de todas formas querés darnos un empujón para arrancar esta nueva aventura, nos ayudás un montón colaborando con nuestra luna de miel.
                         </p>
                     </div>
                 </div>
@@ -89,7 +95,16 @@ export const Gifts = ({
                     <div id='giftsTextInner'>
                         <h2 className='text-(length:--h1size)'>Tarjetas</h2>
                         <p className='w-full mt-6 text-(length:--h3size)'>
-                            Invitado 0%
+                            "Nos miramos, dijimos '¿por qué no?' y... ¡acá estamos! Nos casamos y se viene un fiestón."
+                            <br />
+                            <br />
+                            El mejor regalo es tu presencia en nuestro gran día. Queremos compartir y celebrar junto a las personas que más amamos.
+                            <br />
+                            <br />
+                            Para confirmar tu asistencia, te solicitamos realizar la reserva de tu lugar. El valor de la tarjeta es de ${invitationPrice} por persona.
+                            <br />
+                            <br />
+                            Por favor, confirmar asistencia antes del 11 de noviembre de 2026.
                         </p>
                     </div>
                 </div>
@@ -105,7 +120,16 @@ export const Gifts = ({
                     <div id='giftsTextInner'>
                         <h2 className='text-(length:--h1size)'>Tarjetas</h2>
                         <p className='w-full mt-6 text-(length:--h3size)'>
-                            Invitado 50%
+                            "Nos miramos, dijimos '¿por qué no?' y... ¡acá estamos! Nos casamos y se viene un fiestón."
+                            <br />
+                            <br />
+                            El mejor regalo es tu presencia en nuestro gran día. Queremos compartir y celebrar junto a las personas que más amamos.
+                            <br />
+                            <br />
+                            Para confirmar tu asistencia, te solicitamos realizar la reserva de tu lugar. El valor de la tarjeta es de ${invitationPrice / 2} por persona.
+                            <br />
+                            <br />
+                            Por favor, confirmar asistencia antes del 11 de noviembre de 2026.
                         </p>
                     </div>
                 </div>
