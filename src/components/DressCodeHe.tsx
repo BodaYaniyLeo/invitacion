@@ -5,7 +5,6 @@ import { gsap } from 'gsap'
 import Image, { StaticImageData } from "next/image"
 import minus from "@/src/assets/images/dress/minus.png"
 
-import maniquiEl from "@/src/assets/images/dress/he/maniquiEl.png"
 import maniqui from "@/src/assets/images/dress/el.png"
 
 import camCl from "@/src/assets/images/dress/he/camCl.png"

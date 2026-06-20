@@ -190,36 +190,37 @@ export const Invitation = ({
 
                 <DressCode />
 
-                <div className='h-[80hv] bg-[#111117]'>
+                <div className='bg-[#111117]'>
                     <Gifts
                         data={data}
                     />
-                </div>
 
-                <Countdown />
-
-                <div className="w-full h-[200lvh] relative bg-[#111117]" id="finalContainer">
-
-                    <div ref={finalSection} className="w-full h-lvh bg-[#111117]">
-                        <VideoSection
-                            id="videoFinal"
-                            progressRef={vFinalProgress}
-                            videoUrl={`/videos/${isDesktop ? "desktop" : "mobile"}/videoFinal.mp4`}
-                            duration={2}
-                            mode="full"
-                        />
-                        <Price
-                            id="priceData"
+                    <div id="footerConfirm" className="w-full relative">
+                        <FooterConfirm
+                            id="confirmData"
                             data={data}
                         />
                     </div>
-                </div>
 
-                <div id="footerConfirm" className="w-full h-[118dvh] relative">
-                    <FooterConfirm
-                        id="confirmData"
-                        data={data}
-                    />
+                    <Countdown />
+
+                    <div className="w-full h-[250lvh] relative bg-[#111117]" id="finalContainer">
+
+                        <div ref={finalSection} className="w-full h-lvh bg-[#111117]">
+                            <VideoSection
+                                id="videoFinal"
+                                progressRef={vFinalProgress}
+                                videoUrl={`/videos/${isDesktop ? "desktop" : "mobile"}/videoFinal.mp4`}
+                                duration={2}
+                                mode="full"
+                            />
+                            <Price
+                                id="priceData"
+                                data={data}
+                            />
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

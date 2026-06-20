@@ -108,7 +108,7 @@ export const InfoSalon = ({
                                     id='chevronR'
                                     src={chevronR}
                                     alt="Logo"
-                                    className={`w-[24px] mx-auto z-999 text-white `}
+                                    className={`w-[24px] mx-auto z-999 text-white`}
                                 />
                             </div>
                         </div>

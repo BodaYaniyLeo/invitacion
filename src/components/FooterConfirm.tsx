@@ -1,11 +1,12 @@
 'use client'
 import '@/src/styles/invitation.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
-import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
 import { VideoProps } from '@/src/components/Invitation';
 import { guestsObj } from '@/app/page'
 import { sendChanges } from '../helpers/sendAnswer';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export const FooterConfirm = ({
     id,
@@ -31,22 +32,37 @@ export const FooterConfirm = ({
         setPrice(priceSet)
     }, [priceTarj])
 
+    useLayoutEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const logoFooterTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#footerConfirm",
+                start: "top 75%",
+                end: "+=95%",
+                scrub: 0.5,
+            }
+        });
+
+        logoFooterTl
+            .to("#confirmData", { autoAlpha: 1, y: 0, duration: 0.3 })
+
+    }, [])
+
     return (
-        <div
-            className="px-6 pointer-events-auto py-2 justify-items-center absolute bottom-0 w-full bg-[#111117] h-[45dvh] content-center"
-        >
-            <div id={id} className="flex flex-col w-full max-w-120 max-h-[45dvh] bg-white/5 px-4 pt-4 rounded-xl backdrop-blur-sm opacity-0 invisible">
-                <p className="flex-none text-white pb-4 font-bold text-center uppercase tracking-wider text-(length:--h5size)">
+        <div className="px-6 pointer-events-auto py-2 justify-items-center w-full bg-[#111117] content-center mb-10 min-h-[45dvh]">
+            <div id={id} className="flex flex-col w-full max-w-120 px-4 pt-4 pb-2 rounded-xl backdrop-blur-md opacity-0 invisible translate-y-4">
+                <p className="title-confirm flex-none pb-4 font-bold text-center uppercase tracking-wider text-(length:--h4size)">
                     Confirmar asistencia
                 </p>
 
                 <div
-                    className="flex-1 overflow-y-auto min-h-0 py-2 border-y border-white/10 custom-scrollbar lg:px-4"
+                    className="flex-1 min-h-0 py-2 border-y border-white/10 custom-scrollbar lg:px-4"
                     data-lenis-prevent
                 >
                     {dataGuest?.map(g => (
-                        <div key={g.id} className="mb-5 last:mb-0 flex justify-between">
-                            <h4 className="py-2 text-white text-(length:--h5size)">{g.name} {g.lastname}</h4>
+                        <div key={g.id} className="mb-5 last:mb-0 flex justify-between items-center gap-4">
+                            <h2 className="guest-name py-2 text-(length:--h5size)">{g.name} {g.lastname}</h2>
                             <AnswerComponent
                                 id={g.id}
                                 setDataGuest={setDataGuest}
@@ -57,10 +73,9 @@ export const FooterConfirm = ({
                     ))}
                 </div>
 
-                <div className="flex-none py-4 text-white">
-
+                <div className="flex-none pt-4 self-end">
                     <button
-                        className="w-full py-3 bg-[#960696] text-white font-bold rounded-lg uppercase hover:bg-[#570457] transition-colors"
+                        className="btn-send px-3 py-2 font-bold rounded-lg uppercase transition-all active:scale-[0.98]"
                         onClick={() => sendChanges(dataGuest)}
                     >
                         Enviar respuesta

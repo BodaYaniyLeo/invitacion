@@ -82,8 +82,8 @@ export const useInvitationAnimations = ({
                         y: "-5%",
                         scale: 0.8,
                         duration: 2,
-                        webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-                        maskImage: 'radial-gradient(circle at bottom center, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+                        webkitMaskImage: 'radial-gradient(circle at bottom center, rgba(17,17,23,1) 70%, rgba(17,17,23,0) 100%)',
+                        maskImage: 'radial-gradient(circle at bottom center, rgba(17,17,23,1) 70%, rgba(17,17,23,0) 100%)',
                     },
                     "coordinationItems"
                 )
@@ -101,8 +101,8 @@ export const useInvitationAnimations = ({
                 }, "coordinationItems-=1")
 
                 .to('#dateLogo', {
-                    webkitMaskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
-                    maskImage: 'radial-gradient(circle at top center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%)',
+                    webkitMaskImage: 'radial-gradient(circle at top center, rgba(17,17,23,1) 0%, rgba(17,17,23,0) 0%)',
+                    maskImage: 'radial-gradient(circle at top center, rgba(17,17,23,1) 0%, rgba(17,17,23,0) 0%)',
                     autoAlpha: 0,
                     duration: 0.8,
                 }, "+=0.2");
@@ -243,24 +243,11 @@ export const useInvitationAnimations = ({
                 }, "<")
                 .to('#videoFinal', { autoAlpha: 0, duration: 0.05 }, "-=0.5")
                 .to("#finalAnimation", { visibility: "visible", duration: 0.1 }, "-=0.3")
-                .to("#finalAnimation", { scale: 0.8, duration: 2 }, "<")
+                .to("#finalAnimation", { scale: 1.2, duration: 2 }, "<")
                 .to('#textFinal', {
                     backgroundImage: 'radial-gradient(circle at 50% 47.9747vh, rgb(255, 212, 128) 0vh, rgb(236, 69, 111) 50vh, rgb(122, 33, 102) 90vh, rgba(32, 31, 66, 0) 122.785vh)',
                     duration: 4
                 }, '<')
-
-            const logoFooterTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#footerConfirm",
-                    start: "top top",
-                    end: "+=5",
-                    scrub: 0.5,
-                    toggleActions: "play none none none"
-                }
-            });
-
-            logoFooterTl
-                .to("#confirmData", { autoAlpha: 1, duration: 0.1, scale: 0.95 })
 
         }, mainRef);
 

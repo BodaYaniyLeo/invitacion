@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import backHero from '../assets/images/hero/backHero.webp'
 import frontHero from '../assets/images/hero/frontHero.webp'
-import textHero from '../assets/images/hero/logoHero.svg'
+import textHero from '../assets/images/hero/logoHero1.svg'
 import logoCasamiento from '../assets/images/hero/logoCasamiento.svg'
 import chevron from '@/public/chevron.svg'
 import '@/src/styles/invitation.css'
@@ -43,7 +43,7 @@ export const HeroSection = ({ id }: HeroProps) => {
                     <picture id='heroComplete' className='flex h-dvh w-vw object-cover justify-center relative'>
                         <Image id='backHero' src={backHero} alt="" className='h-dvh w-auto object-cover z-21 scale-140 ' />
                         <Image id='frontHero' src={frontHero} alt="" className='h-dvh w-auto absolute bottom-0 left-0 object-cover z-23 origin-bottom scale-120' />
-                        <Image src={textHero} alt="" className='absolute z-22 top-1/3 -translate-y-1/2 -translate-1/10 w-[80vw] max-h-1/4' loading='eager' id='imgTextHero' />
+                        <Image src={textHero} alt="" className='absolute z-22 top-1/3 -translate-y-11/20 w-[80vw] max-h-1/4' loading='eager' id='imgTextHero' />
                     </picture>
                 </div>
                 <Image

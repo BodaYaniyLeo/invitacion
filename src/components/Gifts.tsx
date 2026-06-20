@@ -6,6 +6,7 @@ import Image, { StaticImageData } from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
 import { ArrayElements } from '@/app/page'
+import { FooterConfirm } from "./FooterConfirm";
 
 
 interface MenuProps {
@@ -41,8 +42,8 @@ export const Gifts = ({
         const giftsTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#gifts",
-                start: 'top 50%',
-                end: '+=90%',
+                start: 'top 66%',
+                end: '+=133%',
                 scrub: 0.5,
             }
         });
@@ -56,12 +57,12 @@ export const Gifts = ({
             }, 'giftsInit')
             .to('#giftsTextInner', {
                 backgroundImage: 'radial-gradient(circle at 40.0899% 1.7982vh, rgb(255,179,135) 0%, rgb(252,82,68) 69.5%, rgb(156,47,106) 99.4%, rgba(32,31,66,0) 149.1%)',
-                duration: 2.5
+                duration: 5
             }, 'giftsInit')
             .to('#giftsText', {
                 autoAlpha: 0,
                 duration: 0.6
-            }, "giftsInit+=3")
+            }, "giftsInit+=5")
 
     }, [])
 
@@ -69,9 +70,9 @@ export const Gifts = ({
         return (
             <div
                 id='gifts'
-                className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
+                className="z-10 flex flex-col items-center justify-center overflow-hidden"
             >
-                <div id='giftsText' className='flex flex-col h-[110lvh] lg:max-w-[80%] justify-center mx-4'>
+                <div id='giftsText' className='flex flex-col lg:max-w-[80%] justify-center mx-4'>
                     <div id='giftsTextInner'>
                         <h2 className='text-(length:--h1size)'>Regalos</h2>
                         <p className='w-full mt-6 text-(length:--h3size)'>
@@ -83,6 +84,8 @@ export const Gifts = ({
                         </p>
                     </div>
                 </div>
+              
+
             </div>
         )
     } else if (discount === 0) {
@@ -91,23 +94,22 @@ export const Gifts = ({
                 id='gifts'
                 className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
             >
-                <div id='giftsText' className='flex flex-col h-[110lvh] lg:max-w-[80%] justify-center mx-4'>
+                <div id='giftsText' className='flex flex-col lg:max-w-[80%] justify-center mx-4'>
                     <div id='giftsTextInner'>
                         <h2 className='text-(length:--h1size)'>Tarjetas</h2>
                         <p className='w-full mt-6 text-(length:--h3size)'>
                             "Nos miramos, dijimos '¿por qué no?' y... ¡acá estamos! Nos casamos y se viene un fiestón."
-                            <br />
                             <br />
                             El mejor regalo es tu presencia en nuestro gran día. Queremos compartir y celebrar junto a las personas que más amamos.
                             <br />
                             <br />
                             Para confirmar tu asistencia, te solicitamos realizar la reserva de tu lugar. El valor de la tarjeta es de ${invitationPrice} por persona.
                             <br />
-                            <br />
                             Por favor, confirmar asistencia antes del 11 de noviembre de 2026.
                         </p>
                     </div>
                 </div>
+
             </div>
         )
     } else {
@@ -116,18 +118,16 @@ export const Gifts = ({
                 id='gifts'
                 className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
             >
-                <div id='giftsText' className='flex flex-col h-[110lvh] lg:max-w-[80%] justify-center mx-4'>
+                <div id='giftsText' className='flex flex-col lg:max-w-[80%] justify-center mx-4'>
                     <div id='giftsTextInner'>
                         <h2 className='text-(length:--h1size)'>Tarjetas</h2>
                         <p className='w-full mt-6 text-(length:--h3size)'>
                             "Nos miramos, dijimos '¿por qué no?' y... ¡acá estamos! Nos casamos y se viene un fiestón."
                             <br />
-                            <br />
                             El mejor regalo es tu presencia en nuestro gran día. Queremos compartir y celebrar junto a las personas que más amamos.
                             <br />
                             <br />
                             Para confirmar tu asistencia, te solicitamos realizar la reserva de tu lugar. El valor de la tarjeta es de ${invitationPrice / 2} por persona.
-                            <br />
                             <br />
                             Por favor, confirmar asistencia antes del 11 de noviembre de 2026.
                         </p>

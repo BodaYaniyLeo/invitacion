@@ -22,17 +22,46 @@ export const AnswerComponent = ({
 
     if (status === "confirm") {
         return (
-            <div className='flex justify-around items-center'>
-                <button onClick={() => handleAnswer(true)} className={`p-1 lg:px-4 lg:py-3 text-[#ffffff66] min-w-[80px] rounded-full transition-all duration-1000 ${confirm ? 'choose bg-[#960696] text-white font-bold' : ''} mx-2`}>Voy</button>
-                <button onClick={() => handleAnswer(false)} className={`p-1 lg:px-4 lg:py-3 text-[#ffffff66] min-w-[80px] rounded-full transition-all duration-1000 ${!confirm && confirm != null ? 'choose bg-[#960696] text-white font-bold' : ''}`}>No voy</button>
+            <div className='flex justify-around items-center gap-2'>
+                <button 
+                    onClick={() => handleAnswer(true)} 
+                    className={`px-4 py-1.5 text-xs lg:text-sm min-w-[75px] rounded-full transition-all duration-300 ${
+                        confirm 
+                        ? 'btn-gradient-active' 
+                        : 'btn-gradient-inactive'
+                    }`}
+                >
+                    Voy
+                </button>
+                <button 
+                    onClick={() => handleAnswer(false)} 
+                    className={`px-4 py-1.5 text-xs lg:text-sm min-w-[75px] rounded-full transition-all duration-300 ${
+                        (!confirm && confirm != null) 
+                        ? 'btn-gradient-active' 
+                        : 'btn-gradient-inactive'
+                    }`}
+                >
+                    No voy
+                </button>
             </div>
         )
     }
+    
     if (status === "transfer") {
         return (
             <div className='flex justify-around items-center'>
-                <button onClick={() => handleAnswer(!confirm)} className={`py-1 px-2 lg:px-4 lg:py-3 text-[#ffffff66] min-w-[80px] rounded-full transition-all duration-1000 ${confirm ? 'choose bg-[#960696] text-white font-bold' : ''}`}>{confirm ? "Solicitado" : "No solicitado"}</button>
+                <button 
+                    onClick={() => handleAnswer(!confirm)} 
+                    className={`py-1.5 px-4 text-xs lg:text-sm min-w-[100px] rounded-full transition-all duration-300 ${
+                        confirm 
+                        ? 'btn-gradient-active' 
+                        : 'btn-gradient-inactive'
+                    }`}
+                >
+                    {confirm ? "Solicitado" : "No solicitado"}
+                </button>
             </div>
         )
     }
+    return null;
 }

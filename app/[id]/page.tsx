@@ -19,8 +19,12 @@ export default async function Page({
         .eq("name", id)
 
 
-    if (error || !data?.length ) {
-        return <div>Grupo no encontrado</div>
+    if (!data) {
+        return (
+            <div className='flex justify-center items-center bg-[#111117] h-dvh'>
+                <div className='logo'></div>
+            </div>
+        )
     }
 
     return <Home data={data[0]} />
