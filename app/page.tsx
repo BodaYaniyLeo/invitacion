@@ -62,7 +62,7 @@ export default function Home({
     const handleLoad = () => {
       const timer = setTimeout(() => {
         setIsSiteReady(true);
-      }, 300);
+      }, 3000);
       return timer;
     };
 
