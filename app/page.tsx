@@ -11,10 +11,8 @@ export type ObjText = {
 }
 
 export interface ArrayElements {
-  sleep: boolean;
   church: boolean;
   guests: guestsObj[];
-  comments: userCommentsType[];
   yani: ObjText;
   leo: ObjText;
   payment_coverage: number;
@@ -37,26 +35,23 @@ export type buttonConfirm = {
 
 }
 
-export interface userCommentsType {
-  approbed: boolean,
-  comment: string,
-  created_at?: Date,
-  id: number,
-  public: boolean,
-  slug: string,
-  user: string,
-}
-
 export interface typeInfo {
   id: string;
   time: string;
   place: string;
 }
 
+export interface typePay {
+  id: string;
+  data: Record<string, string>;
+  value: number;
+}
+
 export type dataInv = {
   data: ArrayElements,
   infoDate: typeInfo[],
   isDesktop?: boolean | null,
+  infoPay: typePay[];
 }
 
 if (typeof window !== "undefined") {
@@ -65,7 +60,8 @@ if (typeof window !== "undefined") {
 
 export default function Home({
   data,
-  infoDate
+  infoDate,
+  infoPay
 }: dataInv) {
 
   const [isSiteReady, setIsSiteReady] = useState(false)
@@ -125,6 +121,7 @@ export default function Home({
         data={data}
         isDesktop={isDesktop}
         infoDate={infoDate}
+        infoPay={infoPay}
       />
     </>
 

@@ -28,7 +28,8 @@ export interface VideoProps {
 export const Invitation = ({
     data,
     isDesktop,
-    infoDate
+    infoDate,
+    infoPay
 }: dataInv) => {
     const mainRef = useRef<HTMLDivElement>(null);
     const presentation = useRef<HTMLDivElement>(null);
@@ -87,15 +88,6 @@ export const Invitation = ({
     }
 
     const handleBackInfo = () => {
-        if (infoSalonAnimation.current) {
-            infoSalonAnimation.current.reversed(true);
-
-            document.body.style.overflow = '';
-            window.dispatchEvent(new CustomEvent('unlock-scroll'));
-        }
-    }
-
-    const handleComments = () => {
         if (infoSalonAnimation.current) {
             infoSalonAnimation.current.reversed(true);
 
@@ -193,6 +185,7 @@ export const Invitation = ({
                 <div className='bg-[#111117]'>
                     <Gifts
                         data={data}
+                        infoPay={infoPay}
                     />
 
                     <div id="footerConfirm" className="w-full relative">

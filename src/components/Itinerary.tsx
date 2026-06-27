@@ -45,26 +45,7 @@ export const Itinerary = ({
         }
     });
 
-    const [idSelected, setIdSelected] = useState<itineraryObj[]>([])
-
-    useEffect(() => {
-        if (!data) return
-
-        if (data.church && data.sleep) {
-            setIdSelected(ids)
-        } else if (data.church) {
-            setIdSelected(ids.slice(0, 4))
-        } else if (data.sleep) {
-            setIdSelected(ids.slice(1, 5))
-        } else {
-            setIdSelected(ids.slice(1, 4))
-        }
-
-    }, [data])
-
     useLayoutEffect(() => {
-
-        if (!idSelected.length || !idSelected.length && window.innerWidth > 991) return
 
         gsap.registerPlugin(ScrollTrigger);
 

@@ -5,11 +5,12 @@ import { gsap } from 'gsap'
 import Image, { StaticImageData } from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
-import { ArrayElements } from '@/app/page'
+import { ArrayElements, typePay } from '@/app/page'
 
 
 interface MenuProps {
     data: ArrayElements;
+    infoPay: typePay[];
 }
 
 interface itineraryObj {
@@ -20,12 +21,14 @@ interface itineraryObj {
 }
 
 export const Gifts = ({
-    data
+    data,
+    infoPay
 }: MenuProps) => {
 
     const [discount, setDiscount] = useState<number>(0)
-
-    const invitationPrice = 160000
+    const [price, setPrice] = useState<number>(0)
+    const [textoCopiado, setTextoCopiado] = useState<string>('Texto a copiar');
+    const [estadoBoton, setEstadoBoton] = useState<string>('Copiar');
 
     useEffect(() => {
         const guest = data.payment_coverage
@@ -33,6 +36,13 @@ export const Gifts = ({
             setDiscount(guest)
         }
     }, [data])
+
+    useEffect(() => {
+        const priceData = infoPay.find(s => s.id === "value")
+        if (priceData) {
+            setPrice(priceData.value)
+        }
+    }, [infoPay])
 
     useLayoutEffect(() => {
 
@@ -65,49 +75,52 @@ export const Gifts = ({
 
     }, [])
 
+    const copyInfo = async (copyText: string | undefined) => {
+        if (!copyText) return
+        try {
+            await navigator.clipboard.writeText(copyText);
+            setEstadoBoton('¡Copiado!');
+            setTimeout(() => setEstadoBoton('Copiar'), 2000); // Vuelve al estado original
+        } catch (err) {
+            console.error('Error al copiar el texto: ', err);
+        }
+    };
+
     if (discount === 1) {
         return (
             <div
                 id='gifts'
-                className="z-10 flex flex-col items-center justify-center overflow-hidden"
+                className="z-10 flex flex-col items-center justify-center overflow-hidden -scroll-m-[50dvh]"
             >
                 <div id='giftsText' className='flex flex-col lg:max-w-[80%] justify-center mx-4'>
                     <div id='giftsTextInner'>
                         <h2 className='text-(length:--h1size)'>Regalos</h2>
                         <p className='w-full mt-6 text-(length:--h3size)'>
-                            "Nos miramos, dijimos '¿por qué no?' y... ¡acá estamos! Nos casamos y se viene un fiestón."
+                            El mejor regalo es tu presencia en nuestro gran día.
                             <br />
+                            Queremos compartir y celebrar junto a las personas que más amamos.
                             <br />
-                            El mejor regalo es tu presencia en nuestro gran día. Queremos compartir y celebrar junto a las personas que más amamos.<br />
                             Si de todas formas querés darnos un empujón para arrancar esta nueva aventura, nos ayudás un montón colaborando con nuestra luna de miel.
+                            <br />
+                            <div className="flex justify-between my-8">
+                                <button className="
+                                btn-send px-3 py-2 rounded-lg transition-all 
+                                active:scale-[0.98] w-fit min-w-40" onClick={() => copyInfo(infoPay.find(s => s.id === "regalo")?.data.alias)}>
+                                    Copiar alias
+                                </button>
+                                <br />
+                                <br />
+                                <button className="
+                                btn-send px-3 py-2 rounded-lg transition-all 
+                                active:scale-[0.98] w-fit min-w-40" onClick={() => copyInfo(infoPay.find(s => s.id === "regalo")?.data.cbu)}>
+                                    Copiar CBU
+                                </button>
+                            </div>
+                            Por favor, confirmar asistencia antes del 15 de noviembre de 2026.
                         </p>
                     </div>
                 </div>
-              
 
-            </div>
-        )
-    } else if (discount === 0) {
-        return (
-            <div
-                id='gifts'
-                className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
-            >
-                <div id='giftsText' className='flex flex-col lg:max-w-[80%] justify-center mx-4'>
-                    <div id='giftsTextInner'>
-                        <h2 className='text-(length:--h1size)'>Tarjetas</h2>
-                        <p className='w-full mt-6 text-(length:--h3size)'>
-                            "Nos miramos, dijimos '¿por qué no?' y... ¡acá estamos! Nos casamos y se viene un fiestón."
-                            <br />
-                            El mejor regalo es tu presencia en nuestro gran día. Queremos compartir y celebrar junto a las personas que más amamos.
-                            <br />
-                            <br />
-                            Para confirmar tu asistencia, te solicitamos realizar la reserva de tu lugar. El valor de la tarjeta es de ${invitationPrice} por persona.
-                            <br />
-                            Por favor, confirmar asistencia antes del 11 de noviembre de 2026.
-                        </p>
-                    </div>
-                </div>
 
             </div>
         )
@@ -115,20 +128,34 @@ export const Gifts = ({
         return (
             <div
                 id='gifts'
-                className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
+                className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden "
             >
                 <div id='giftsText' className='flex flex-col lg:max-w-[80%] justify-center mx-4'>
                     <div id='giftsTextInner'>
-                        <h2 className='text-(length:--h1size)'>Tarjetas</h2>
+                        <h2 className='text-(length:--h1size)'>Info!</h2>
                         <p className='w-full mt-6 text-(length:--h3size)'>
-                            "Nos miramos, dijimos '¿por qué no?' y... ¡acá estamos! Nos casamos y se viene un fiestón."
+                            El mejor regalo es tu presencia en nuestro gran día.
                             <br />
-                            El mejor regalo es tu presencia en nuestro gran día. Queremos compartir y celebrar junto a las personas que más amamos.
+                            Queremos compartir y celebrar junto a las personas que más amamos.
+                            <br />
+                            Para confirmar tu asistencia, te solicitamos realizar la reserva de tu lugar. El valor de la tarjeta es de ${price - (price * discount)} por persona.
                             <br />
                             <br />
-                            Para confirmar tu asistencia, te solicitamos realizar la reserva de tu lugar. El valor de la tarjeta es de ${invitationPrice / 2} por persona.
-                            <br />
-                            Por favor, confirmar asistencia antes del 11 de noviembre de 2026.
+                            Por favor, confirmar asistencia antes del 15 de noviembre de 2026.
+                            <div className="flex justify-between my-8">
+                                <button className="
+                                btn-send px-3 py-2 rounded-lg transition-all 
+                                active:scale-[0.98] w-fit min-w-40"
+                                    onClick={() => copyInfo(infoPay.find(s => s.id === "tarjeta")?.data.alias)}>
+                                    Copiar alias
+                                </button>
+                                <button className="
+                                btn-send px-3 py-2 rounded-lg transition-all 
+                                active:scale-[0.98] w-fit min-w-40"
+                                    onClick={() => copyInfo(infoPay.find(s => s.id === "tarjeta")?.data.cbu)}>
+                                    Copiar CBU
+                                </button>
+                            </div>
                         </p>
                     </div>
                 </div>

@@ -88,7 +88,8 @@
 }
 
 #textOrgInner,
-#giftsTextInner {
+#giftsTextInner,
+#giftsTextInner button {
     background-image: radial-gradient(circle at 50% 100%,
             rgb(255, 210, 123) 0%,
             rgb(223, 58, 147) 50%,
@@ -96,6 +97,13 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+#giftsTextInner button {
+    border-image: radial-gradient(circle at 50% 100%,
+            rgb(255, 210, 123) 0%,
+            rgb(223, 58, 147) 50%,
+            rgb(92, 22, 99) 100%) 1;
 }
 
 #confirmData p.title-confirm {
@@ -285,11 +293,11 @@ a {
 
     0%,
     100% {
-        box-shadow: 0px 0px 0px 5px rgba(215,215,215,0.2), 0 0 4px 0px rgba(215, 215, 215, 0.4);
+        box-shadow: 0px 0px 0px 5px rgba(215, 215, 215, 0.2), 0 0 4px 0px rgba(215, 215, 215, 0.4);
     }
 
     50% {
-        box-shadow: 0px 0px 0px 5px rgba(215,215,215,0.2), 0 0 20px 0px rgba(215, 215, 215, 1);
+        box-shadow: 0px 0px 0px 5px rgba(215, 215, 215, 0.2), 0 0 20px 0px rgba(215, 215, 215, 1);
     }
 }
 
