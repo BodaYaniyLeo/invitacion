@@ -27,6 +27,8 @@ export const InfoSalon = ({
     const [advance, setAdvance] = useState<number>(0)
     const [isVisible, setIsVisible] = useState<boolean>(true)
     const [guests, setGuests] = useState<guestsObj[]>([])
+    const [textButton, setTextButton] = useState<string>("Enviar respuesta")
+    const [animateButton, setAnimateButton] = useState<boolean>(false)
 
     useEffect(() => {
         const guests = data
@@ -129,30 +131,34 @@ export const InfoSalon = ({
                                 <br />
                                 Cualquier consulta, no dudes en escribirnos.
                             </p>
-                            <div className='text-white text-[length:var(--h5size)] leading-[1.2] overflow-auto h-full max-h-fit pe-1 border-y border-[#3a3a3a] mb-4'>
-                                {
-                                    guests?.map(g => {
-                                        const isLast = guests.length - 1 === g.id
-
-                                        return (
-                                            <div key={g.id} className='flex justify-between mx-1 my-3'>
-                                                <p className='self-center'>{g.name} {g.lastname}</p>
-                                                <AnswerComponent
-                                                    id={g.id}
-                                                    setDataGuest={setGuests}
-                                                    confirm={g.transfer}
-                                                    status={"transfer"}
-                                                />
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
+                            {
+                                guests?.map(g => {
+                                    return (
+                                        <div key={g.id} className='flex justify-between mx-1 my-3'>
+                                            <p className='self-center text-white'>{g.name} {g.lastname}</p>
+                                            <AnswerComponent
+                                                id={g.id}
+                                                setDataGuest={setGuests}
+                                                confirm={g.transfer}
+                                                status={"transfer"}
+                                            />
+                                        </div>
+                                    )
+                                })
+                            }
                             <button
-                                className="w-full py-3 bg-[#960696] text-white font-bold rounded-lg uppercase hover:bg-gray-200 transition-colors"
-                                onClick={() => sendChanges(guests)}
+                                className="btn-send px-3 py-2 font-bold rounded-lg uppercase 
+                                transition-all active:scale-[0.98] w-fit self-end mt-4 min-w-40"
+
+                                onClick={() => sendChanges({ guests, setTextButton, setAnimateButton })}
                             >
-                                Enviar respuesta
+                                <span
+                                    className={`${animateButton ? "opacity-0" : "opacity-100"} duration-500
+                                    font-[family-name:var(--fontNormal)] 
+                                    `}
+                                >
+                                    {textButton}
+                                </span>
                             </button>
                         </div>
                     </div>

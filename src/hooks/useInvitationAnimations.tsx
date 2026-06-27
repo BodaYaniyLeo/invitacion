@@ -243,11 +243,7 @@ export const useInvitationAnimations = ({
                 }, "<")
                 .to('#videoFinal', { autoAlpha: 0, duration: 0.05 }, "-=0.5")
                 .to("#finalAnimation", { visibility: "visible", duration: 0.1 }, "-=0.3")
-                .to("#finalAnimation", { scale: 1.2, duration: 2 }, "<")
-                .to('#textFinal', {
-                    backgroundImage: 'radial-gradient(circle at 50% 47.9747vh, rgb(255, 212, 128) 0vh, rgb(236, 69, 111) 50vh, rgb(122, 33, 102) 90vh, rgba(32, 31, 66, 0) 122.785vh)',
-                    duration: 4
-                }, '<')
+                .to("#finalAnimation", { scale: 1.2, duration: 4 }, "<")
 
         }, mainRef);
 

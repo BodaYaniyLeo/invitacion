@@ -177,7 +177,7 @@ export const DressCodeShe = ({
 
             >
                 {select &&
-                    <div className={`absolute left-0 w-full md:w-1/2 md:left-auto md:right-0 text-center my-2 animate-[bounce_2s_infinite]`}>
+                    <div className={`absolute left-0 w-full md:w-1/2 md:left-auto md:right-0 text-center my-2 animate-[bounce_2s_infinite] text-white`}>
                         <p>Selecciona tu estilo</p>
                         <p>▼</p>
                     </div>

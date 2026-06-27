@@ -20,8 +20,6 @@ export const Price = ({
         }
     }, [data])
 
-    console.log(data.guests.length)
-
     return (
         <div
             id={id}

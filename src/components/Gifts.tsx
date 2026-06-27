@@ -6,7 +6,6 @@ import Image, { StaticImageData } from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
 import { ArrayElements } from '@/app/page'
-import { FooterConfirm } from "./FooterConfirm";
 
 
 interface MenuProps {

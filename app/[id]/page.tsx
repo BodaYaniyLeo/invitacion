@@ -18,8 +18,11 @@ export default async function Page({
             `)
         .eq("name", id)
 
+    const { data: infoDate, error: errorDate } = await supabase
+        .from("info")
+        .select("*")
 
-    if (!data) {
+    if (!data || !infoDate) {
         return (
             <div className='flex justify-center items-center bg-[#111117] h-dvh'>
                 <div className='logo'></div>
@@ -27,5 +30,5 @@ export default async function Page({
         )
     }
 
-    return <Home data={data[0]} />
+    return <Home data={data[0]} infoDate={infoDate} />
 }

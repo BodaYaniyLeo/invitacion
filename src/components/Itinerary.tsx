@@ -2,18 +2,19 @@
 
 import { useEffect, useLayoutEffect, useState } from "react"
 import { gsap } from 'gsap'
-import church from "@/src/assets/images/itinerary/church.svg"
-import martini from "@/src/assets/images/itinerary/martini.svg"
-import music from "@/src/assets/images/itinerary/music.svg"
-import ring from "@/src/assets/images/itinerary/ring.svg"
+import iglesia from "@/src/assets/images/itinerary/church.svg"
+import recepcion from "@/src/assets/images/itinerary/martini.svg"
+import salon from "@/src/assets/images/itinerary/music.svg"
+import civil from "@/src/assets/images/itinerary/ring.svg"
 import Image, { StaticImageData } from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
-import { ArrayElements } from '@/app/page'
+import { ArrayElements, typeInfo } from '@/app/page'
 
 
 interface MenuProps {
     data: ArrayElements;
+    infoDate: Array<typeInfo>;
 }
 
 interface itineraryObj {
@@ -24,35 +25,25 @@ interface itineraryObj {
 }
 
 export const Itinerary = ({
-    data
+    data,
+    infoDate
 }: MenuProps) => {
 
-    const ids = [
-        {
-            id: "church",
-            image: church,
-            text: "Ceremonia en parroquia",
-            horario: "19hs"
-        },
-        {
-            id: "martini",
-            image: martini,
-            text: "Salón Rincón Calina",
-            horario: "20hs"
-        },
-        {
-            id: "ring",
-            image: ring,
-            text: "Salón Rincón Calina",
-            horario: "20:30hs"
-        },
-        {
-            id: "music",
-            image: music,
-            text: "Salón Rincón Calina",
-            horario: "21hs"
+    const imageMap: Record<string, any> = {
+        iglesia: iglesia,
+        recepcion: recepcion,
+        salon: salon,
+        civil: civil,
+    };
+
+    const ids = infoDate.map(info => {
+        return {
+            id: info.id,
+            image: imageMap[info.id],
+            text: info.place,
+            horario: info.time + "hs"
         }
-    ];
+    });
 
     const [idSelected, setIdSelected] = useState<itineraryObj[]>([])
 

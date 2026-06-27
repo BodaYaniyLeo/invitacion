@@ -1,44 +1,29 @@
 'use client'
 import '@/src/styles/invitation.css'
 import Image from 'next/image';
-import logoCasamiento from '../assets/images/logoCasamiento.svg'
-import { useEffect, useState } from 'react';
-import { VideoProps } from '@/src/components/Invitation';
-import { guestsObj } from '@/app/page'
+import footerLogoP from '../assets/images/footer/footerLogoP.svg'
+import footerLogoS from '../assets/images/footer/footerLogoS.svg'
+import { ArrayElements } from '@/app/page'
+
+interface finalType {
+    data: ArrayElements
+}
 
 export const FinalLogo = ({
     data,
-}: VideoProps) => {
-
-    const [discount, setDiscount] = useState<number>(0)
-
-    useEffect(() => {
-        const guest = data.payment_coverage
-        if (guest) {
-            setDiscount(guest)
-        }
-    }, [data])
+}: finalType) => {
 
     return (
         <div
-            id='finalLogo'
-            className="w-full flex flex-col justify-center items-center opacity-0 invisible"
+            id="finalLogo"
+            className="absolute top-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center text-white px-6 pointer-events-auto py-2 invisible"
         >
-            <div id='finalAnimation' className="flex flex-col items-center justify-center text-white p-6">
-                <Image src={logoCasamiento} alt="Logo" className="w-50" />
-                {discount < 1 ?
-                    <>
-                        <h3 className='uppercase text-center font-bold text-base/8 mt-10'>
-                            Confirmar<br /> antes del 9 de noviembre<br />de 2026
-                        </h3>
-                    </>
-                    : <>
-                        <h3 className='uppercase text-center font-bold text-base/8 mt-10'>
-                            Te esperamos!
-                        </h3>
-                    </>
+            <div id='finalAnimation' className="flex flex-col items-center justify-center bg-[#111117]">
+                {data.guests.length > 1
+                    ? <Image src={footerLogoP} alt="Logo" className="w-[50vw] max-w-80 mb-4 scale-120" />
+                    : <Image src={footerLogoS} alt="Logo" className="w-[50vw] max-w-80 mb-4 scale-120" />
                 }
             </div>
         </div>
-    )
+    );
 };

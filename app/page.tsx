@@ -30,6 +30,13 @@ export type guestsObj = {
   transfer: boolean;
 }
 
+export type buttonConfirm = {
+  guests: guestsObj[];
+  setTextButton: (text: string) => void;
+  setAnimateButton: (value: boolean) => void;
+
+}
+
 export interface userCommentsType {
   approbed: boolean,
   comment: string,
@@ -40,8 +47,15 @@ export interface userCommentsType {
   user: string,
 }
 
+export interface typeInfo {
+  id: string;
+  time: string;
+  place: string;
+}
+
 export type dataInv = {
   data: ArrayElements,
+  infoDate: typeInfo[],
   isDesktop?: boolean | null,
 }
 
@@ -51,6 +65,7 @@ if (typeof window !== "undefined") {
 
 export default function Home({
   data,
+  infoDate
 }: dataInv) {
 
   const [isSiteReady, setIsSiteReady] = useState(false)
@@ -109,6 +124,7 @@ export default function Home({
       <Invitation
         data={data}
         isDesktop={isDesktop}
+        infoDate={infoDate}
       />
     </>
 

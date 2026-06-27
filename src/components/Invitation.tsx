@@ -7,7 +7,6 @@ import { HeroSection } from './HeroSection';
 import { VideoSection } from './VideoSection';
 import { TextLayer } from './TextLayer';
 import { VisitCalina } from './VisitCalina';
-import { Price } from './Price';
 import { Intro } from './Intro'
 import { useInvitationAnimations } from '../hooks/useInvitationAnimations'
 import { Countdown } from './Countdown'
@@ -15,12 +14,11 @@ import { FooterConfirm } from './FooterConfirm'
 import { InfoSalon } from './InfoSalon'
 import { MenuComponent } from './MenuComponent'
 
-import { ArrayElements, userCommentsType, dataInv, ObjText } from '@/app/page'
+import { ArrayElements, dataInv } from '@/app/page'
 
 import { DressCode } from './DressCode';
-import { Carousel } from './Carousel';
-import { Itinerary } from './Itinerary';
 import { Gifts } from './Gifts';
+import { FinalLogo } from './FinalLogo';
 
 export interface VideoProps {
     id: string;
@@ -29,7 +27,8 @@ export interface VideoProps {
 
 export const Invitation = ({
     data,
-    isDesktop
+    isDesktop,
+    infoDate
 }: dataInv) => {
     const mainRef = useRef<HTMLDivElement>(null);
     const presentation = useRef<HTMLDivElement>(null);
@@ -184,6 +183,7 @@ export const Invitation = ({
                             setOpenMenu={setOpenMenu}
                             isDesktop={isDesktop}
                             data={data}
+                            infoDate={infoDate}
                         />
                     </div>
                 </div>
@@ -214,8 +214,7 @@ export const Invitation = ({
                                 duration={2}
                                 mode="full"
                             />
-                            <Price
-                                id="priceData"
+                            <FinalLogo
                                 data={data}
                             />
                         </div>

@@ -3,7 +3,7 @@ import logoCalina from '../assets/images/salon/salonCalina.svg'
 import '@/src/styles/invitation.css'
 import { VideoSection } from './VideoSection';
 import { Itinerary } from './Itinerary';
-import { ArrayElements } from '@/app/page'
+import { ArrayElements, typeInfo } from '@/app/page'
 
 interface VideoProps {
     id: string;
@@ -14,6 +14,7 @@ interface VideoProps {
     setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
     isDesktop?: boolean | null;
     data: ArrayElements;
+    infoDate: typeInfo[];
 }
 
 export const VisitCalina = ({
@@ -24,7 +25,8 @@ export const VisitCalina = ({
     handleInfoSalon,
     setOpenMenu,
     isDesktop,
-    data
+    data,
+    infoDate
 }: VideoProps) => {
 
     return (
@@ -38,7 +40,7 @@ export const VisitCalina = ({
                         <Image
                             src={logoCalina}
                             alt=""
-                            className='logoCalina h-fit'
+                            className='logoCalina h-fit max-h-[200px] w-auto'
                         />
                     </div>
                     <div className='bg-white w-[clamp(300px,90vw,600px)] ratio-4/3 p-2 mt-5 relative]'>
@@ -60,10 +62,11 @@ export const VisitCalina = ({
                             setOpenMenu(false);
                         }}
                     >
-                        Descubre Calina
+                        Descubre Salón Calina
                     </button>
                     <Itinerary
                         data={data}
+                        infoDate={infoDate}
                     />
                 </div>
             </div>

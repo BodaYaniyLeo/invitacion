@@ -115,7 +115,7 @@
     color: rgb(255, 230, 240);
 }
 
-#confirmData button.btn-send {
+button.btn-send {
     text-wrap: pretty;
     letter-spacing: -.03em;
     line-height: 120%;
@@ -136,29 +136,6 @@
     background: rgb(223, 58, 147);
     box-shadow: 0 0 15px rgba(223, 58, 147, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-#textFinalContainer {
-    transform: translate3d(0px, 0px, 0px) scale(0.8541, 0.8541);
-    opacity: 1;
-}
-
-#textFinal {
-    background-image: radial-gradient(circle at 50% 90vh, rgb(255, 210, 123) 0vh, rgb(223, 58, 147) 50vh, rgb(92, 22, 99) 100vh);
-    -webkit-text-fill-color: transparent;
-}
-
-#textFinal {
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#textFinal h3 {
-    line-height: 120%;
-    font-family: 'fontBold';
-    font-style: normal;
-    font-size: var(--h1size);
 }
 
 .nameNovios h2 {
@@ -308,11 +285,11 @@ a {
 
     0%,
     100% {
-        box-shadow: 0 0 4px 0px rgba(215, 215, 215, 0.4);
+        box-shadow: 0px 0px 0px 5px rgba(215,215,215,0.2), 0 0 4px 0px rgba(215, 215, 215, 0.4);
     }
 
     50% {
-        box-shadow: 0 0 20px 4px rgba(215, 215, 215, 1);
+        box-shadow: 0px 0px 0px 5px rgba(215,215,215,0.2), 0 0 20px 0px rgba(215, 215, 215, 1);
     }
 }
 

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import backHero from '../assets/images/hero/backHero.webp'
 import frontHero from '../assets/images/hero/frontHero.webp'
-import textHero from '../assets/images/hero/logoHero1.svg'
+import textHero from '../assets/images/hero/logoHero.svg'
 import logoCasamiento from '../assets/images/hero/logoCasamiento.svg'
 import chevron from '@/public/chevron.svg'
 import '@/src/styles/invitation.css'
@@ -16,30 +16,25 @@ export const HeroSection = ({ id }: HeroProps) => {
     const [visible, setVisible] = useState(true)
 
     useEffect(() => {
-
-        window.addEventListener('scroll', () => {
+        const handleScroll = () => {
             if (window.scrollY > 200) {
                 setVisible(false)
             } else {
                 setVisible(true)
             }
-        });
+        };
+
+        window.addEventListener('scroll', handleScroll);
 
         return () => {
-            window.removeEventListener('scroll', () => {
-                if (window.scrollY > 200) {
-                    setVisible(false)
-                } else {
-                    setVisible(true)
-                }
-            });
+            window.removeEventListener('scroll', handleScroll);
         }
     }, []);
 
     return (
         <div id={id} className="fixed top-0 left-0 w-full h-lvh z-30 pointer-events-none">
-            <div className="relative w-full h-lvh overflow-hidden">
-                <div id="heroMask" className="absolute inset-0 z-30 pointer-events-none h-lvh bg-[#111117]">
+            <div className="relative w-full h-dvh overflow-hidden">
+                <div id="heroMask" className="absolute inset-0 z-30 pointer-events-none h-dvh bg-[#111117]">
                     <picture id='heroComplete' className='flex h-dvh w-vw object-cover justify-center relative'>
                         <Image id='backHero' src={backHero} alt="" className='h-dvh w-auto object-cover z-21 scale-140 ' />
                         <Image id='frontHero' src={frontHero} alt="" className='h-dvh w-auto absolute bottom-0 left-0 object-cover z-23 origin-bottom scale-120' />

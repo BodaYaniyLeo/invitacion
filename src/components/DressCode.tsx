@@ -23,7 +23,7 @@ export const DressCode = () => {
 
     const widthOpposite = (idSelected: string, idNoSelected: string) => {
 
-        const mask = `linear-gradient(to right, black 20%, transparent 50%), linear-gradient(to bottom, transparent, black 70%, black 0%, transparent 100%)`
+        const mask = `linear-gradient(to right, #111117 20%, transparent 50%), linear-gradient(to bottom, transparent, #111117 70%, #111117 0%, transparent 100%)`
         const tl = gsap.timeline({ ease: "power2.out" })
 
         tl
@@ -88,7 +88,7 @@ export const DressCode = () => {
 
 
     return (
-        <div id="dresscode" className='overflow-hidden h-lvh lg:h-auto w-vw flex flex-col relative lg:mt-[10lvh]'>
+        <div id="dresscode" className='overflow-hidden h-lvh lg:h-auto w-vw flex flex-col relative lg:mt-[10lvh] bg-[#111117]'>
             <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size) tracking-[-.04em] px-8'>
                 Código de vestimenta
             </h2>
@@ -109,7 +109,7 @@ export const DressCode = () => {
                 </div>
                 <div
                     id="salonBack"
-                    className="w-[100vw] lg:hidden absolute bottom-1/2 translate-y-2/5 left-0 lg:h-full w-full -z-1 opacity-0 invisible aspect-2/1"
+                    className="w-[100vw] lg:hidden absolute bottom-1/2 translate-y-2/5 left-0 lg:h-full w-full z-0 opacity-0 invisible aspect-2/1  bg-red-500"
                 >
                     <Image
                         src={fondo}
@@ -119,18 +119,7 @@ export const DressCode = () => {
 
                     />
                 </div>
-                <div
-                    id="salonBack"
-                    className="w-[80vw] hidden lg:block absolute bottom-0 left-0 lg:h-auto w-full -z-1 opacity-0 invisible aspect-2/1"
-                >
-                    <Image
-                        src={fondoComp}
-                        alt=""
-                        className="inset-0 z-30 h-auto w-full object-contain"
-                        loading="eager"
 
-                    />
-                </div>
                 <DressCodeShe
                     widthOpposite={widthOpposite}
                     select={select}

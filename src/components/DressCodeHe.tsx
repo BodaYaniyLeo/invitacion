@@ -192,7 +192,7 @@ export const DressCodeHe = ({
             <div id="showcase" className="w-full h-full flex justify-start md:aspect-7/5 relative"
             >
                 {select &&
-                    <div className="absolute left-0 w-full md:w-1/2 text-center my-2 animate-[bounce_2s_infinite]">
+                    <div className="absolute left-0 w-full md:w-1/2 text-center my-2 animate-[bounce_2s_infinite] text-white">
                         <p>Selecciona tu estilo</p>
                         <p>▼</p>
                     </div>

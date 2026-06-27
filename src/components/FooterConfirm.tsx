@@ -16,6 +16,8 @@ export const FooterConfirm = ({
     const [dataGuest, setDataGuest] = useState<guestsObj[]>([])
     const [discount, setDiscount] = useState<number>(0)
     const [price, setPrice] = useState<string | null>(null)
+    const [textButton, setTextButton] = useState<string>("Enviar respuesta")
+    const [animateButton, setAnimateButton] = useState<boolean>(false)
 
     const priceTarj = 160000
 
@@ -38,8 +40,8 @@ export const FooterConfirm = ({
         const logoFooterTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#footerConfirm",
-                start: "top 75%",
-                end: "+=95%",
+                start: "top 66%",
+                end: "+=34%",
                 scrub: 0.5,
             }
         });
@@ -51,7 +53,7 @@ export const FooterConfirm = ({
 
     return (
         <div className="px-6 pointer-events-auto py-2 justify-items-center w-full bg-[#111117] content-center mb-10 min-h-[45dvh]">
-            <div id={id} className="flex flex-col w-full max-w-120 px-4 pt-4 pb-2 rounded-xl backdrop-blur-md opacity-0 invisible translate-y-4">
+            <div id={id} className="flex flex-col w-full max-w-120 rounded-xl backdrop-blur-md opacity-0 invisible translate-y-4">
                 <p className="title-confirm flex-none pb-4 font-bold text-center uppercase tracking-wider text-(length:--h4size)">
                     Confirmar asistencia
                 </p>
@@ -73,14 +75,19 @@ export const FooterConfirm = ({
                     ))}
                 </div>
 
-                <div className="flex-none pt-4 self-end">
-                    <button
-                        className="btn-send px-3 py-2 font-bold rounded-lg uppercase transition-all active:scale-[0.98]"
-                        onClick={() => sendChanges(dataGuest)}
+                <button
+                    className="btn-send px-3 py-2 font-bold rounded-lg uppercase 
+                    transition-all active:scale-[0.98] w-fit self-end mt-4 min-w-40"
+                    onClick={() => sendChanges({ guests: dataGuest, setTextButton, setAnimateButton })}
+                >
+                    <span
+                        className={`${animateButton ? "opacity-0" : "opacity-100"} duration-500
+                                    font-[family-name:var(--fontNormal)] 
+                                    `}
                     >
-                        Enviar respuesta
-                    </button>
-                </div>
+                        {textButton}
+                    </span>
+                </button>
             </div>
         </div>
     );
