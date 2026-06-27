@@ -90,7 +90,7 @@ export const Gifts = ({
         return (
             <div
                 id='gifts'
-                className="z-10 flex flex-col items-center justify-center overflow-hidden -scroll-m-[50dvh]"
+                className="z-10 flex flex-col items-center justify-center overflow-hidden"
             >
                 <div id='giftsText' className='flex flex-col lg:max-w-[80%] justify-center mx-4'>
                     <div id='giftsTextInner'>
@@ -128,7 +128,7 @@ export const Gifts = ({
         return (
             <div
                 id='gifts'
-                className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden "
+                className="h-[100hv] z-10 flex flex-col items-center justify-center overflow-hidden"
             >
                 <div id='giftsText' className='flex flex-col lg:max-w-[80%] justify-center mx-4'>
                     <div id='giftsTextInner'>
