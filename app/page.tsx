@@ -43,7 +43,7 @@ export interface typeInfo {
 
 export interface typePay {
   id: string;
-  data: Record<string, string>;
+  data: Record<string, string>[];
   value: number;
 }
 

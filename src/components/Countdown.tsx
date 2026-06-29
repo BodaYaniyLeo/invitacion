@@ -4,16 +4,19 @@ import { useEffect, useLayoutEffect, useState } from "react"
 import { gsap } from 'gsap'
 import rings from "@/src/assets/images/countdown/ringsIcon1.svg"
 import loadRing from "@/src/assets/images/countdown/loadRing.svg"
-import auto from "@/src/assets/images/countdown/auto.webp"
-import bolso from "@/src/assets/images/countdown/bolso.webp"
-import bote from "@/src/assets/images/countdown/bote.webp"
-import viejo from "@/src/assets/images/countdown/viejo.webp"
-import bgAuto from "@/src/assets/images/countdown/bgAuto.webp"
-import bgBolso from "@/src/assets/images/countdown/bgBolso.webp"
-import bgBote from "@/src/assets/images/countdown/bgBote.webp"
-import bgViejo from "@/src/assets/images/countdown/bgViejo.webp"
 import appleLogo from "@/src/assets/images/countdown/appleLogo.png"
 import googleLogo from "@/src/assets/images/countdown/googleLogo.png"
+
+import yani from "@/src/assets/images/countdown/yani.webp"
+import yaniBg from "@/src/assets/images/countdown/yaniBg.webp"
+import leo from "@/src/assets/images/countdown/leo.webp"
+import leoBg from "@/src/assets/images/countdown/leoBg.webp"
+import married from "@/src/assets/images/countdown/married.webp"
+import marriedBg from "@/src/assets/images/countdown/marriedBg.webp"
+import massage from "@/src/assets/images/countdown/massage.webp"
+import massageBg from "@/src/assets/images/countdown/massageBg.webp"
+
+
 import Image from "next/image"
 
 export const Countdown = () => {
@@ -45,10 +48,11 @@ export const Countdown = () => {
         if (!isMounted) return;
 
         const images = [
-            { bg: bgAuto.src, char: auto.src },
-            { bg: bgBolso.src, char: bolso.src },
-            { bg: bgBote.src, char: bote.src },
-            { bg: bgViejo.src, char: viejo.src }]
+            { bg: yaniBg.src, char: yani.src },
+            { bg: leoBg.src, char: leo.src },
+            { bg: marriedBg.src, char: married.src },
+            { bg: massageBg.src, char: massage.src }
+        ]
 
         const ctx = gsap.context(() => {
             const tlTimer = gsap.timeline({
@@ -56,25 +60,24 @@ export const Countdown = () => {
                 ease: "linear",
             });
 
-            images.forEach(i => {
-
+            images.forEach((i) => {
                 tlTimer
                     .set("#backgroundLoading", {
                         backgroundImage: `url(${i.bg})`,
-                        autoAlpha: 0
+                        autoAlpha: 0,
+                        scale: 1.1
                     })
-                tlTimer
                     .set("#backgroundChar", {
                         backgroundImage: `url(${i.char})`,
-                        x: 10
+                        x: 10,
+                        autoAlpha: 0
                     })
 
-                    .to("#backgroundChar", { autoAlpha: 0, duration: 0.75 }, "-=0.6")
-                    .to("#backgroundLoading", { autoAlpha: 1, scale: 1, duration: 1.5 })
-                    .to("#backgroundChar", { autoAlpha: 1, duration: 1.5 }, "-=1.2")
-                    .to("#backgroundChar", { x: 0, duration: 3 }, "<")
-                    .to("#backgroundLoading", { autoAlpha: 0, duration: 0.75 })
-                    .to("#backgroundChar", { autoAlpha: 0, duration: 0.75 }, "-=0.6")
+                    .to("#backgroundLoading", { autoAlpha: 1, scale: 1, duration: 3 })
+                    .to("#backgroundChar", { autoAlpha: 1, duration: 3 }, "-=1.8")
+                    .to("#backgroundChar", { x: 0, duration: 6 }, "<")
+                    .to("#backgroundLoading", { autoAlpha: 0, duration: 1.5 })
+                    .to("#backgroundChar", { autoAlpha: 0, duration: 1.5 }, "-=0.9");
             });
 
         })
@@ -94,7 +97,7 @@ export const Countdown = () => {
     return (
         <div id="countdown" className="relative h-lvh w-full overflow-hidden">
             <div id="backgroundLoading" className="absolute bottom-0 h-lvh w-full bg-cover bg-center bg-no-repeat scale-110"></div>
-            <div id="backgroundChar" className="absolute bottom-0 h-[80lvh] w-full lg:w-auto lg:aspect-1/1 lg:right-0 bg-cover bg-bottom bg-no-repeat"></div>
+            <div id="backgroundChar" className="absolute bottom-0 h-[80lvh] w-full lg:w-auto lg:aspect-1/1 lg:right-0 bg-cover scale-110 bg-bottom bg-center bg-no-repeat"></div>
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{

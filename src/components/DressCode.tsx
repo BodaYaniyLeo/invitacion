@@ -4,9 +4,9 @@ import { useState } from "react"
 import { gsap } from 'gsap'
 import Image, { StaticImageData } from "next/image"
 
-import iconManiqui from "@/src/assets/images/dress/iconManiqui.svg"
-import fondo from "@/src/assets/images/dress/fondoSalon.png"
-import fondoComp from "@/src/assets/images/dress/fondoCompleto.png"
+import iconManiqui from "@/public/dress/iconManiqui.svg"
+import fondo from "@/public/dress/fondoSalon.png"
+import fondoComp from "@/public/dress/fondoCompleto.png"
 
 import '@/src/styles/invitation.css'
 import { DressCodeHe } from "./DressCodeHe"

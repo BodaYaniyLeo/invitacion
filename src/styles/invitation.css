@@ -88,8 +88,7 @@
 }
 
 #textOrgInner,
-#giftsTextInner,
-#giftsTextInner button {
+#giftsTextInner {
     background-image: radial-gradient(circle at 50% 100%,
             rgb(255, 210, 123) 0%,
             rgb(223, 58, 147) 50%,
@@ -99,11 +98,24 @@
     -webkit-text-fill-color: transparent;
 }
 
-#giftsTextInner button {
-    border-image: radial-gradient(circle at 50% 100%,
-            rgb(255, 210, 123) 0%,
-            rgb(223, 58, 147) 50%,
-            rgb(92, 22, 99) 100%) 1;
+#giftsTextInner button.btn-copy {
+    border: 1px transparent solid;
+    background-image:
+        linear-gradient(#111117, #111117),
+        radial-gradient(circle at 41.2379% 9.9613vh,
+            rgb(255, 183, 134) 0%, rgb(249, 79, 77) 67.241%, rgb(149, 44, 105) 99.4695%, rgba(28, 27, 58, 0) 131.827%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    -webkit-text-fill-color: initial;
+}
+
+#giftsTextInner button.btn-copy span {
+    background-image: radial-gradient(circle at 41.2379% 9.9613vh,
+            rgb(255, 183, 134) 0%, rgb(249, 79, 77) 67.241%, rgb(149, 44, 105) 99.4695%, rgba(28, 27, 58, 0) 131.827%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
 }
 
 #confirmData p.title-confirm {
@@ -131,6 +143,7 @@ button.btn-send {
     color: white;
     border: none;
 }
+
 
 .btn-gradient-inactive {
     color: rgba(255, 255, 255, 0.3) !important;
@@ -194,7 +207,7 @@ a {
 }
 
 .dressSelector {
-    background-image: url('../assets/images/dress/bgSelector.svg');
+    background-image: url('../../public/dress/bgSelector.svg');
 }
 
 .minus {

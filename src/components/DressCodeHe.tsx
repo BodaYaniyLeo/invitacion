@@ -3,23 +3,9 @@
 import { useEffect, useState } from "react"
 import { gsap } from 'gsap'
 import Image, { StaticImageData } from "next/image"
-import minus from "@/src/assets/images/dress/minus.png"
+import minus from "@/public/dress/minus.png"
 
-import maniqui from "@/src/assets/images/dress/el.png"
-
-import camCl from "@/src/assets/images/dress/he/camCl.png"
-import camGr from "@/src/assets/images/dress/he/camGr.png"
-import camWh from "@/src/assets/images/dress/he/camWh.png"
-import corbOt from "@/src/assets/images/dress/he/corbOt.png"
-import corbRe from "@/src/assets/images/dress/he/corbRe.png"
-import monoBl from "@/src/assets/images/dress/he/monoBl.png"
-import monoGr from "@/src/assets/images/dress/he/monoGr.png"
-import pantBl from "@/src/assets/images/dress/he/pantBl.png"
-import pantCl from "@/src/assets/images/dress/he/pantCl.png"
-import pantGr from "@/src/assets/images/dress/he/pantGr.png"
-import sacoBl from "@/src/assets/images/dress/he/sacoBl.png"
-import sacoBlF from "@/src/assets/images/dress/he/sacoBlF.png"
-import sacoCl from "@/src/assets/images/dress/he/sacoCl.png"
+import maniqui from "@/public/dress/el.png"
 
 import '@/src/styles/invitation.css'
 
@@ -33,26 +19,35 @@ interface timeline {
 
 interface Option {
     name: string,
-    img: StaticImageData | string | null
+    url: string | null
 }
 
 interface Category {
     [key: string]: Option[];
 }
 
-interface VestimentaM {
-    Camisa: StaticImageData | string;
-    Saco: StaticImageData | string;
-    Pantalón: StaticImageData | string;
-    Accesorios: StaticImageData | string | null;
+interface arrayType {
+    Camisa?: Array<Option>;
+    Corbata?: Array<Option>;
+    Mono?: Array<Option>;
+    Pantalon?: Array<Option>;
+    Saco?: Array<Option>;
 }
 
+interface VestimentaM {
+    Camisa: null | string;
+    Saco: null | string;
+    Pantalon: null | string;
+    Accesorios: null | string;
+}
 
 interface DressProps {
     widthOpposite: (idSelected: string, idNoSelected: string) => void;
     select: boolean,
-    setSelect: (value:boolean) => void
+    setSelect: (value: boolean) => void
 }
+
+const imageContext = (require as any).context('../../public/dress/he', true, /\.png$/);
 
 export const DressCodeHe = ({
     widthOpposite,
@@ -60,52 +55,62 @@ export const DressCodeHe = ({
     setSelect
 }: DressProps) => {
 
-    const modelArrayM: Category[] = [
-        {
-            Camisa: [
-                { name: "Camisa cuadros", img: camCl },
-                { name: "Camisa verde", img: camGr },
-                { name: "Camisa blanca", img: camWh }
-            ]
-        },
-        {
-            Saco:
-                [
-                    { name: "Saco negro", img: sacoBl },
-                    { name: "Saco negro elegante", img: sacoBlF },
-                    { name: "Saco claro", img: sacoCl }
-                ],
-        },
-        {
-            Pantalón: [
-                { name: "Pantalón negro", img: pantBl },
-                { name: "Pantalón claro", img: pantCl },
-                { name: "Pantalón gris", img: pantGr }
-            ]
-        },
-        {
-            Accesorios: [
-                { name: "Corbata", img: corbOt },
-                { name: "Corbata roja", img: corbRe },
-                { name: "Moño negro", img: monoBl },
-                { name: "Moño gris", img: monoGr },
-                { name: "Nada", img: null },
-            ]
-        }
-    ];
+    const imageNames = imageContext.keys();
 
+    const [modelArray, setModelArray] = useState<Array<arrayType>>([])
+    const [categories, setCategories] = useState(['camisa', 'corbata', 'mono', 'pantalon', 'saco'])
+
+    useEffect(() => {
+        let temporalEl: Array<arrayType> = [];
+
+        categories.forEach(cat => {
+            const capCat = cat.charAt(0).toUpperCase() + cat.slice(1);
+            let imgList: Array<Option> = [];
+
+            imageNames.forEach((data: string) => {
+                if (data.includes(cat)) {
+                    const route = data.slice(2)
+                    const nameEl = data.slice(data.search(/[A-Z]/)).replace('.png', '');
+
+                    imgList.push({
+                        url: "/dress/he/" + route,
+                        name: capCat + " " + nameEl
+                    });
+                }
+            });
+
+            temporalEl.push({
+                [capCat]: imgList
+            });
+        });
+
+        setModelArray(temporalEl);
+    }, []);
+
+    console.log(modelArray)
 
     const [vestimentaM, setVestimentaM] = useState<VestimentaM>({
-        Camisa: camCl,
-        Pantalón: pantCl,
+        Camisa: null,
+        Pantalon: null,
         Accesorios: null,
-        Saco: sacoCl
+        Saco: null,
     })
+
+    useEffect(() => {
+        if (modelArray?.[0]?.Camisa && modelArray?.[3]?.Pantalon && modelArray?.[4]?.Saco) {
+            setVestimentaM({
+                Camisa: modelArray[0].Camisa[0].url as string,
+                Pantalon: modelArray[3].Pantalon[0].url as string,
+                Accesorios: null,
+                Saco: modelArray[4].Saco[0].url as string,
+            })
+        }
+    }, [modelArray])
 
     const [sectionM, setSectionM] = useState<string | null>()
 
     useEffect(() => {
-        modelArrayM.forEach(e => {
+        modelArray.forEach(e => {
             const id = Object.keys(e)[0]
 
             if (sectionM === id) {
@@ -124,30 +129,28 @@ export const DressCodeHe = ({
                 })
             }
         })
-
     }, [sectionM])
 
-    const changeClothesM = (key: string, value: StaticImageData | null | string) => {
+    const changeClothesM = (key: string, value: null | string) => {
+        if (key === "Mono" || key === "Corbata") {
+            key = "Accesorios"
+        }
         setVestimentaM(prev => ({
             ...prev, [key]: value
         }))
-
     }
 
     return (
         <div id="dresscodeHe" className='content-center w-full align-self-center min-h-[50dvh] content-end'>
             <div id="selectorHe" className="absolute w-1/2 lg:w-1/5 right-[32px] lg:right-1/4 top-1/6 border z-60 bg-[#00000090] opacity-0 invisible">
                 <div className="text-center dressSelector px-1 py-2">
-                    <h3 className="font-bold font-(family-name:--fontBold) text-(length:--h5size)">Formal sport</h3>
-                </div>
-                <div className="flex justify-between px-1 py-[2px]">
-                    <h4 className="text-[#79b0cc] font-(family-name:--fontSemiBold) text-(length:--psize)">Sugerencias</h4>
+                    <h3 className="font-bold font-(family-name:--fontBold) text-(length:--h5size)">Sugerencias</h3>
                 </div>
                 <div className="my-1">
-                    {modelArrayM.map((category, i) => {
+                    {modelArray.map((category, i) => {
                         const categoryName = Object.keys(category)[0];
 
-                        const options = category[categoryName];
+                        const options = category[categoryName as keyof typeof category];
 
                         return (
                             <div key={i}>
@@ -172,25 +175,24 @@ export const DressCodeHe = ({
                                     </div>
                                 </button>
                                 <div id={categoryName} className="h-0 overflow-hidden text-white">
-                                    {options.map((option) => (
-                                        <button
-                                            className="w-full text-left my-[2px] font-(family-name:--fontNormal) text-(length:--psize) px-2 text-white"
-                                            onClick={() => changeClothesM(categoryName, option.img)}
-                                            key={option.name}
-                                        >
-                                            {option.name}
-                                        </button>
-                                    ))}
+                                    {options &&
+                                        options.map((option) => (
+                                            <button
+                                                className="w-full text-left my-[2px] font-(family-name:--fontNormal) text-(length:--psize) px-2 text-white"
+                                                onClick={() => changeClothesM(categoryName, option.url)}
+                                                key={option.name}
+                                            >
+                                                {option.name}
+                                            </button>
+                                        ))}
                                 </div>
                             </div>
                         );
                     })}
-
                 </div>
             </div>
 
-            <div id="showcase" className="w-full h-full flex justify-start md:aspect-7/5 relative"
-            >
+            <div id="showcase" className="w-full h-full flex justify-start md:aspect-7/5 relative">
                 {select &&
                     <div className="absolute left-0 w-full md:w-1/2 text-center my-2 animate-[bounce_2s_infinite] text-white">
                         <p>Selecciona tu estilo</p>
@@ -209,31 +211,44 @@ export const DressCodeHe = ({
                         className="w-full h-auto md:w-auto md:h-full z-30"
                         loading="eager"
                     />
-
-                    <Image
-                        src={vestimentaM.Saco}
-                        alt=""
-                        className="w-full h-auto md:w-auto md:h-full absolute top-1/2 left-1/2 -translate-1/2 z-47"
-                        loading="eager"
-                    />
-                    <Image
-                        src={vestimentaM.Camisa}
-                        alt=""
-                        className="w-full h-auto md:w-auto md:h-full absolute top-1/2 left-1/2 -translate-1/2 z-44"
-                        loading="eager"
-                    />
-                    <Image
-                        src={vestimentaM.Pantalón}
-                        alt=""
-                        className="w-full h-auto md:w-auto md:h-full absolute top-1/2 left-1/2 -translate-1/2 z-45"
-                        loading="eager"
-                    />
+                    {vestimentaM.Saco &&
+                        vestimentaM.Camisa &&
+                        vestimentaM.Pantalon &&
+                        <>
+                            <Image
+                                src={vestimentaM.Saco}
+                                alt=""
+                                className="w-full h-auto md:w-auto md:h-full absolute top-1/2 left-1/2 -translate-1/2 z-47"
+                                loading="eager"
+                                width={80}
+                                height={80}
+                            />
+                            <Image
+                                src={vestimentaM.Camisa}
+                                alt=""
+                                className="w-full h-auto md:w-auto md:h-full absolute top-1/2 left-1/2 -translate-1/2 z-44"
+                                loading="eager"
+                                width={80}
+                                height={80}
+                            />
+                            <Image
+                                src={vestimentaM.Pantalon}
+                                alt=""
+                                className="w-full h-auto md:w-auto md:h-full absolute top-1/2 left-1/2 -translate-1/2 z-45"
+                                loading="eager"
+                                width={80}
+                                height={80}
+                            />
+                        </>
+                    }
                     {vestimentaM.Accesorios &&
                         <Image
                             src={vestimentaM.Accesorios}
                             alt=""
                             className="w-full h-auto md:w-auto md:h-full absolute top-1/2 left-1/2 -translate-1/2 z-46"
                             loading="eager"
+                            width={80}
+                            height={80}
                         />
                     }
                 </div>

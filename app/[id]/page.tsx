@@ -1,5 +1,7 @@
 import { createServerSupabaseClient } from "@/app/lib/supabase/server"
 import Home from "../page"
+import fs from 'fs';
+import path from 'path';
 
 export default async function Page({
     params,
