@@ -1,6 +1,6 @@
 'use client'
 import '@/src/styles/invitation.css'
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
 import { VideoProps } from '@/src/components/Invitation';
 import { guestsObj } from '@/app/page'
@@ -9,7 +9,6 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export const FooterConfirm = ({
-    id,
     data,
 }: VideoProps) => {
 
@@ -18,6 +17,8 @@ export const FooterConfirm = ({
     const [price, setPrice] = useState<string | null>(null)
     const [textButton, setTextButton] = useState<string>("Enviar respuesta")
     const [animateButton, setAnimateButton] = useState<boolean>(false)
+
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const priceTarj = 160000
 
@@ -41,27 +42,26 @@ export const FooterConfirm = ({
 
             const logoFooterTl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: "#footerConfirm",
+                    trigger: containerRef.current,
                     start: "top 66%",
                     end: "+=34%",
                     scrub: 0.5,
                 }
             });
 
-            logoFooterTl
-                .to("#confirmData", { autoAlpha: 1, y: 0, duration: 0.3 })
-        }, "#footerConfirm")
+            logoFooterTl.to("#confirmData", { autoAlpha: 1, y: 0, duration: 0.3 });
+
+        }, containerRef);
 
         return () => ctx.revert();
 
-    }, [])
+    }, []);
 
     return (
-        <div className="px-6 pointer-events-auto py-2 justify-items-center w-full bg-[#111117] content-center mb-10 min-h-[45dvh]">
-            <div id={id} className="flex flex-col w-full max-w-120 rounded-xl backdrop-blur-md opacity-0 invisible translate-y-4">
-                <p className="title-confirm flex-none pb-4 font-bold text-center uppercase tracking-wider text-(length:--h4size)">
-                    Confirmar asistencia
-                </p>
+        <div ref={containerRef} className="px-6 pointer-events-auto py-2 justify-items-center w-full bg-[#111117] content-center mb-10 min-h-[45dvh]">
+            <div id="confirmData" className="flex flex-col w-full max-w-120 rounded-xl backdrop-blur-md opacity-0 invisible translate-y-4"><p className="title-confirm flex-none pb-4 font-bold text-center uppercase tracking-wider text-(length:--h4size)">
+                Confirmar asistencia
+            </p>
 
                 <div
                     className="flex-1 min-h-0 py-2 border-y border-white/10 lg:px-4"

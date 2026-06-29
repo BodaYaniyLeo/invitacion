@@ -21,7 +21,7 @@ import { Gifts } from './Gifts';
 import { FinalLogo } from './FinalLogo';
 
 export interface VideoProps {
-    id: string;
+    id?: string;
     data: ArrayElements;
 }
 
@@ -188,12 +188,9 @@ export const Invitation = ({
                         infoPay={infoPay}
                     />
 
-                    <div id="footerConfirm" className="w-full relative">
                         <FooterConfirm
-                            id="confirmData"
                             data={data}
                         />
-                    </div>
 
                     <Countdown />
 
