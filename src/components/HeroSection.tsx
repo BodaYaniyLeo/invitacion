@@ -32,7 +32,7 @@ export const HeroSection = ({ id }: HeroProps) => {
     }, []);
 
     return (
-        <div id={id} className="fixed top-0 left-0 w-full h-lvh z-30 pointer-events-none">
+        <div id={id} className="fixed top-0 left-0 w-full h-dvh z-30 pointer-events-none">
             <div className="relative w-full h-dvh overflow-hidden">
                 <div id="heroMask" className="absolute inset-0 z-30 pointer-events-none h-dvh bg-[#111117]">
                     <picture id='heroComplete' className='flex h-dvh w-vw object-cover justify-center relative'>

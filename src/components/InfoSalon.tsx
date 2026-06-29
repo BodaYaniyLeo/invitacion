@@ -61,9 +61,9 @@ export const InfoSalon = ({
         <div
             id="lateralMaps"
             ref={scrollRef}
-            className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-[#111117] overflow-x-scroll overflow-y-hidden shrink-0 py-[5lvh] opacity-0 invisible pointer-events-auto z-80"
+            className="fixed top-0 left-0 flex flex-row w-full items-center h-dvh bg-[#111117] overflow-x-scroll overflow-y-hidden shrink-0 py-[5dvh] opacity-0 invisible pointer-events-auto z-80"
         >
-            <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5lvh] pt-[3lvh] z-81 text-(length:--h5size)'>
+            <div id="header" className='fixed w-full top-0 left-0 flex justify-between px-[5dvh] pt-[3dvh] z-81 text-(length:--h5size)'>
                 <button className='flex rounded-full bg-white p-4 text-black items-center size-fit h-9 lg:h-12'
                     onClick={() => { handleBackInfo(); }}
                 >
@@ -84,7 +84,7 @@ export const InfoSalon = ({
                 </div>
             </div>
             <div id='infoSalon' className='flex flex-col shrink-0 h-full'>
-                <div className="pointer-events-auto flex flex-col lg:flex-row justify-center h-lvh lg:items-center ps-[5vw] mt-[3lvh]">
+                <div className="pointer-events-auto flex flex-col lg:flex-row justify-center h-dvh lg:items-center ps-[5vw] mt-[3dvh]">
                     <div className='flex items-center lg:justify-between'>
                         <div className='w-[87vw] lg:w-[45vw] font-[family-name:var(--fontNormal)] px-[3vw] h-full flex flex-col justify-center'>
                             <div id='mapsSalon' className='bg-white w-[clamp(50vw,80vw,500px)] lg:w-[100%] h-fit max-h-[50dvh] aspect-4/3 p-2 mt-5 rotate-4'>
@@ -114,7 +114,7 @@ export const InfoSalon = ({
                                 />
                             </div>
                         </div>
-                        <div className='w-[90vw] lg:w-[45vw] mx-[4vw] lg:mx-0 lg:px-[4vw] font-[family-name:var(--fontNormal)] self-end max-h-[80lvh] h-full flex flex-col lg:self-center'>
+                        <div className='w-[90vw] lg:w-[45vw] mx-[4vw] lg:mx-0 lg:px-[4vw] font-[family-name:var(--fontNormal)] self-end max-h-[80dvh] h-full flex flex-col lg:self-center'>
                             <h4 className='text-[#ffc2d0] text-[length:var(--h1size)] leading-[1.2] uppercase font-bold mb-2'>
                                 Servicio de traslado
                             </h4>

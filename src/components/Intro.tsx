@@ -4,9 +4,9 @@ export const Intro = () => {
     return (
         <div
             id='containerTextOrg'
-            className="absolute h-lvh inset-0 z-10 opacity-0 flex flex-col items-center justify-center overflow-hidden"
+            className="absolute h-dvh inset-0 z-10 opacity-0 flex flex-col items-center justify-center overflow-hidden"
         >
-            <div id='textOrg' className='flex flex-col h-[110lvh] justify-center scale-115 mx-4'>
+            <div id='textOrg' className='flex flex-col h-[110dvh] justify-center scale-115 mx-4'>
                 <div id='textOrgInner'>
                     <h2 className='text-(length:--h1size)'>Córdoba,<br />Argentina</h2>
                     <p className='w-full mt-6 text-(length:--h3size)'>

@@ -61,7 +61,7 @@ export const MenuComponent = ({
             ref={menuContainer}
             className="fixed top-0 left-full overflow-x-scroll overflow-y-hidden shrink-0 pointer-events-auto z-60 w-[80vw]"
         >
-            <div className='bg-[#111117FC] flex flex-col items-center h-dvh p-[3lvh] w-fit justify-self-end justify-between relative'>
+            <div className='bg-[#111117FC] flex flex-col items-center h-dvh p-[3dvh] w-fit justify-self-end justify-between relative'>
                 <div className='absolute left-0 top-0 borderAnimated h-[100vh] w-[2px]'></div>
                 <div className='flex flex-col uppercase mt-12 self-start w-full text-white'>
                     <a onClick={() => setOpenMenu(false)} href='#' className='text-[length:var(--menusize)] mb-3'>Inicio</a>

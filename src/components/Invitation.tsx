@@ -122,13 +122,13 @@ export const Invitation = ({
                     <span id='panSub2' className='absolute bg-white w-3 h-1 block bottom-[6px] translate-y-2 origin-center right-0'></span>
                 </div>
             </button>
-            <div ref={presentation} className="w-full h-[300lvh]">
+            <div ref={presentation} className="w-full h-[300dvh]">
                 <HeroSection id="heroSection" />
             </div>
 
-            <div className="w-full h-[250lvh] relative" id="leoContainer">
+            <div className="w-full h-[250dvh] relative" id="leoContainer">
 
-                <div ref={leoSection} className="w-full lg:w-auto h-lvh">
+                <div ref={leoSection} className="w-full lg:w-auto h-dvh">
                     <Intro />
                     <VideoSection
                         id="videoLeo"
@@ -140,14 +140,14 @@ export const Invitation = ({
                     />
                 </div>
 
-                <div className="absolute bottom-0 left-0 w-full h-lvh z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
+                <div className="absolute bottom-0 left-0 w-full h-dvh z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
                     <TextLayer id="Leo" data={data} />
                 </div>
             </div>
 
-            <div className="w-full h-[250lvh] relative" id="yaniContainer">
+            <div className="w-full h-[250dvh] relative" id="yaniContainer">
 
-                <div ref={yaniSection} className="w-full h-lvh">
+                <div ref={yaniSection} className="w-full h-dvh">
                     <VideoSection
                         id="videoYani"
                         progressRef={v2Progress}
@@ -158,12 +158,12 @@ export const Invitation = ({
                     />
                 </div>
 
-                <div className="absolute bottom-0 left-0 w-full h-lvh lg:top-1/5 lg:h-full lg:left-1/2 z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
+                <div className="absolute bottom-0 left-0 w-full h-dvh lg:top-1/5 lg:h-full lg:left-1/2 z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
                     <TextLayer id="Yani" data={data} />
                 </div>
             </div>
 
-            <div className="w-full h-[200lvh] lg:h-[100lvh] content-center relative bg-[#111117]">
+            <div className="w-full h-[200dvh] lg:h-[100dvh] content-center relative bg-[#111117]">
                 <div id="triggerCalina">
                     <div className='lg:flex lg:justify-center'>
                         <VisitCalina
@@ -197,9 +197,9 @@ export const Invitation = ({
 
                     <Countdown />
 
-                    <div className="w-full h-[250lvh] relative bg-[#111117]" id="finalContainer">
+                    <div className="w-full h-[250dvh] relative bg-[#111117]" id="finalContainer">
 
-                        <div ref={finalSection} className="w-full h-lvh bg-[#111117]">
+                        <div ref={finalSection} className="w-full h-dvh bg-[#111117]">
                             <VideoSection
                                 id="videoFinal"
                                 progressRef={vFinalProgress}

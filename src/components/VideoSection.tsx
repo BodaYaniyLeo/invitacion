@@ -133,7 +133,7 @@ export const VideoSection = ({
 
             <canvas
                 ref={canvasRef}
-                className={`${mode === 'full' ? 'w-full h-lvh object-cover' : 'w-full h-auto'}`}
+                className={`${mode === 'full' ? 'w-full h-dvh object-cover' : 'w-full h-auto'}`}
                 style={{
                     display: isReady ? 'block' : 'none',
                     WebkitMaskRepeat: "no-repeat",

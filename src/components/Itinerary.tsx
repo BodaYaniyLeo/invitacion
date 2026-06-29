@@ -86,16 +86,16 @@ export const Itinerary = ({
     }, [ids]);
 
     return (
-        <div id="itinerary" className='content-center lg:content-end h-lvh lg:h-auto lg:w-full'>
-            <h2 className='text-center content-center text-white font-(family-name:--fontBold) text-(length:--h1size) max-h-[20lvh] lg:hidden'>Itinerario</h2>
+        <div id="itinerary" className='content-center lg:content-end h-dvh lg:h-auto lg:w-full'>
+            <h2 className='text-center content-center text-white font-(family-name:--fontBold) text-(length:--h1size) max-h-[20dvh] lg:hidden'>Itinerario</h2>
             <div className="flex flex-1 flex-col lg:flex-row justify-self-center self-center lg:h-auto lg:w-full lg:justify-around">
 
                 {ids.map(e =>
-                    <div key={e.id} id={e.id} className="flex flex-around lg:flex-col opacity-0 invisible lg:opacity-100 lg:visible my-[3lvh] scale-125 lg:scale-100">
+                    <div key={e.id} id={e.id} className="flex flex-around lg:flex-col opacity-0 invisible lg:opacity-100 lg:visible my-[3dvh] scale-125 lg:scale-100">
                         <Image
                             src={e.image}
                             alt=""
-                            className="imageBg h-[8lvh] lg:h-[100px] w-auto self-center"
+                            className="imageBg h-[8dvh] lg:h-[100px] w-auto self-center"
                             style={{
                                 backgroundImage: `radial-gradient(at 100% 0%,rgba(0, 0, 0, 0) 0vh, rgba(255, 255, 255, 0.1) var(--mask-size))`
                             }}

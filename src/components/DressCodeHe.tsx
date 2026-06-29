@@ -87,8 +87,6 @@ export const DressCodeHe = ({
         setModelArray(temporalEl);
     }, []);
 
-    console.log(modelArray)
-
     const [vestimentaM, setVestimentaM] = useState<VestimentaM>({
         Camisa: null,
         Pantalon: null,

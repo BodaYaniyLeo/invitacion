@@ -30,11 +30,11 @@ export const NewComment = ({
 
     return (
         <div
-            className="fixed top-0 left-0 flex flex-row w-full items-center h-lvh bg-green-800 overflow-x-scroll overflow-y-hidden shrink-0 p-[5lvh] opacity-0 invisible pointer-events-auto z-80"
+            className="fixed top-0 left-0 flex flex-row w-full items-center h-dvh bg-green-800 overflow-x-scroll overflow-y-hidden shrink-0 p-[5dvh] opacity-0 invisible pointer-events-auto z-80"
             id="newComment"
         >
             <div
-                className="flex flex-col w-full items-center shrink-0 px-[3lvh] mt-[5lvh] pointer-events-auto z-60 justify-between"
+                className="flex flex-col w-full items-center shrink-0 px-[3dvh] mt-[5dvh] pointer-events-auto z-60 justify-between"
             >
                 <div className="w-full relative">
                     <textarea
