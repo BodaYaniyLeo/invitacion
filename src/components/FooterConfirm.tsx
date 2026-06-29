@@ -37,17 +37,22 @@ export const FooterConfirm = ({
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        const logoFooterTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#footerConfirm",
-                start: "top 66%",
-                end: "+=34%",
-                scrub: 0.5,
-            }
-        });
+        const ctx = gsap.context(() => {
 
-        logoFooterTl
-            .to("#confirmData", { autoAlpha: 1, y: 0, duration: 0.3 })
+            const logoFooterTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#footerConfirm",
+                    start: "top 66%",
+                    end: "+=34%",
+                    scrub: 0.5,
+                }
+            });
+
+            logoFooterTl
+                .to("#confirmData", { autoAlpha: 1, y: 0, duration: 0.3 })
+        }, "#footerConfirm")
+
+        return () => ctx.revert();
 
     }, [])
 
@@ -59,8 +64,7 @@ export const FooterConfirm = ({
                 </p>
 
                 <div
-                    className="flex-1 min-h-0 py-2 border-y border-white/10 custom-scrollbar lg:px-4"
-                    data-lenis-prevent
+                    className="flex-1 min-h-0 py-2 border-y border-white/10 lg:px-4"
                 >
                     {dataGuest?.map(g => (
                         <div key={g.id} className="mb-5 last:mb-0 flex justify-between items-center gap-4">
