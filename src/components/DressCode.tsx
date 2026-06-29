@@ -5,8 +5,7 @@ import { gsap } from 'gsap'
 import Image, { StaticImageData } from "next/image"
 
 import iconManiqui from "@/public/dress/iconManiqui.svg"
-import fondo from "@/public/dress/fondoSalon.png"
-import fondoComp from "@/public/dress/fondoCompleto.png"
+import fondo from "@/public/dress/fondoSalon.webp"
 
 import '@/src/styles/invitation.css'
 import { DressCodeHe } from "./DressCodeHe"

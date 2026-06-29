@@ -3,7 +3,7 @@ import logoCalina from '../assets/images/salon/salonCalina.svg'
 import '@/src/styles/invitation.css'
 import { VideoSection } from './VideoSection';
 import { Itinerary } from './Itinerary';
-import { ArrayElements, typeInfo, typePay } from '@/app/page'
+import { ArrayElements, typeInfo } from '@/app/page'
 
 interface VideoProps {
     id: string;

@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image';
 import '@/src/styles/invitation.css'
-import ingresoCalina from '../assets/images/salon/calina.webp'
 import arrowLeft from '../assets/images/salon/arrowLeft.webp'
 import { useEffect, useState } from 'react';
 import { ArrayElements, guestsObj } from '@/app/page'
