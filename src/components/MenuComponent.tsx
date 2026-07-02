@@ -72,7 +72,7 @@ export const MenuComponent = ({
                     <a onClick={() => setOpenMenu(false)} href='#dresscode' className='text-[length:var(--menusize)] mb-3'>Código de vestimenta</a>
                     <a onClick={() => setOpenMenu(false)} href='#gifts' className='text-[length:var(--menusize)] mb-3'>{discount === 1 ? "Regalo" : "Info"}</a>
                     <a onClick={() => setOpenMenu(false)} href='#footerConfirm' className='text-[length:var(--menusize)] mb-3'>Confirmar asistencia</a>
-                    <a onClick={() => setOpenMenu(false)} href='#countdown' className='text-[length:var(--menusize)] mb-3'>Cuanto falta?</a>
+                    <a onClick={() => setOpenMenu(false)} href='#countdown' className='text-[length:var(--menusize)] mb-3'>Cúanto falta?</a>
                 </div>
                 <div className='flex uppercase justify-between w-full'>
                     <div>
