@@ -122,11 +122,11 @@ export const Invitation = ({
                     <span id='panSub2' className='absolute bg-white w-3 h-1 block bottom-[6px] translate-y-2 origin-center right-0'></span>
                 </div>
             </button>
-            <div ref={presentation} className="w-full h-[300dvh]">
+            <div ref={presentation} className="w-full h-[500dvh]">
                 <HeroSection id="heroSection" />
             </div>
 
-            <div className="w-full h-[250dvh] relative" id="leoContainer">
+            <div className="w-full h-[300dvh] relative" id="leoContainer">
 
                 <div ref={leoSection} className="w-full lg:w-auto h-dvh">
                     <Intro />
@@ -145,7 +145,7 @@ export const Invitation = ({
                 </div>
             </div>
 
-            <div className="w-full h-[250dvh] relative" id="yaniContainer">
+            <div className="w-full h-[370dvh] relative" id="yaniContainer">
 
                 <div ref={yaniSection} className="w-full h-dvh">
                     <VideoSection

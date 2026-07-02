@@ -53,7 +53,7 @@ export const useInvitationAnimations = ({
                 scrollTrigger: {
                     trigger: presentation.current,
                     start: 'top top',
-                    end: '+=300%',
+                    end: '+=500%',
                     scrub: 0.5,
                     pin: true,
                     pinSpacing: false,
@@ -111,7 +111,7 @@ export const useInvitationAnimations = ({
                 scrollTrigger: {
                     trigger: "#leoContainer",
                     start: 'top top',
-                    end: '+=210%',
+                    end: '+=300%',
                     scrub: 0.5,
                     pin: leoSection.current,
                     pinSpacing: false,
@@ -174,7 +174,7 @@ export const useInvitationAnimations = ({
                 scrollTrigger: {
                     trigger: "#yaniContainer",
                     start: 'top top',
-                    end: 'bottom top',
+                    end: '+=370%',
                     scrub: 0.5,
                     pin: yaniSection.current,
                     pinSpacing: false,
