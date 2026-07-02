@@ -56,7 +56,7 @@ export const HeroSection = ({ id }: HeroProps) => {
                             alt="Logo"
                             className="w-[60vw] max-w-[300px] block mx-auto"
                         />
-                        <h3 className='uppercase absolute z-2 text-center font-bold w-full top-[110%]'>
+                        <h3 className='uppercase absolute z-2 text-center font-bold w-full top-[110%] text-(length:--h1size)'>
                             Disponible<br />el 9 de enero<br />de 2027
                         </h3>
                     </div>

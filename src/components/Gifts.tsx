@@ -81,7 +81,7 @@ export const Gifts = ({
     return (
         <div
             id='gifts'
-            className="z-10 flex flex-col items-center justify-center"
+            className="z-10 flex flex-col items-center justify-center max-w-[1000px] lg:justify-self-center"
         >
             <div id='giftsText' className='flex flex-col lg:max-w-[80%] justify-center mx-4'>
                 <div id='giftsTextInner'>

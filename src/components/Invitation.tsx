@@ -165,7 +165,7 @@ export const Invitation = ({
 
             <div className="w-full h-[200dvh] lg:h-[100dvh] content-center relative bg-[#111117]">
                 <div id="triggerCalina">
-                    <div className='lg:flex lg:justify-center'>
+                    <div className='lg:flex lg:justify-center max-w-[1000px] lg:justify-self-center '>
                         <VisitCalina
                             id="containerCalina"
                             progressRef={vCalinaProgress}

@@ -39,10 +39,10 @@ export const VisitCalina = ({
                         <Image
                             src={logoCalina}
                             alt=""
-                            className='logoCalina h-fit max-h-[200px] w-auto'
+                            className='logoCalina h-fit max-h-[120px] w-auto'
                         />
                     </div>
-                    <div className='bg-white w-[clamp(300px,90vw,600px)] ratio-4/3 p-2 mt-5 relative]'>
+                    <div className='bg-white w-[clamp(300px,90vw,500px)] ratio-4/3 p-2 mt-5 relative]'>
                         <VideoSection
                             id="videoCalina"
                             progressRef={progressRef}

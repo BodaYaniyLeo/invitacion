@@ -40,13 +40,11 @@
 
 #dateLogo h3 {
     font-style: normal;
-    font-size: var(--h1size);
     line-height: 86%;
 }
 
 #dateLogo h4 {
     font-style: normal;
-    font-size: var(--h3size);
     line-height: 86%;
 }
 

@@ -58,7 +58,7 @@ export const FooterConfirm = ({
     }, []);
 
     return (
-        <div ref={containerRef} className="px-6 pointer-events-auto py-2 justify-items-center w-full bg-[#111117] content-center mb-10 min-h-[45dvh]">
+        <div ref={containerRef} className="px-6 pointer-events-auto py-2 justify-items-center w-full bg-[#111117] content-center mb-10 min-h-[45dvh] max-w-[1000px] lg:justify-self-center">
             <div id="confirmData" className="flex flex-col w-full max-w-120 rounded-xl backdrop-blur-md opacity-0 invisible translate-y-4"><p className="title-confirm flex-none pb-4 font-bold text-center uppercase tracking-wider text-(length:--h4size)">
                 Confirmar asistencia
             </p>
