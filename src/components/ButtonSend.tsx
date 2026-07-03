@@ -1,8 +1,7 @@
 "use client"
 import { useEffect, useState, useRef } from 'react'
 import { sendChanges } from '../helpers/sendAnswer'
-import { guestsObj } from '@/app/page';
-import { GuestData } from '../types/types';
+import { GuestData, guestsObj } from '../types/types';
 
 interface ButtonSendProps {
     dataGuest: Array<guestsObj>;

@@ -1,7 +1,7 @@
 import React from 'react'
-import { guestsObj } from '@/app/page'
 import { myAnswer } from '@/src/helpers/useAnsGuest'
 import { CarIcon } from './CarIcon';
+import { guestsObj } from '../types/types';
 
 type statusAnswer = {
     id: number;

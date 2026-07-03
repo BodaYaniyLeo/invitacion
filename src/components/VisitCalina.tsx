@@ -3,7 +3,7 @@ import logoCalina from '../assets/images/salon/salonCalina.svg'
 import '@/src/styles/invitation.css'
 import { VideoSection } from './VideoSection';
 import { Itinerary } from './Itinerary';
-import { ArrayElements, typeInfo } from '@/app/page'
+import { ArrayElements, typeInfo } from '../types/types';
 
 interface Props {
     id: string;

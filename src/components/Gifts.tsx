@@ -5,8 +5,8 @@ import { gsap } from 'gsap'
 import { StaticImageData } from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
-import { ArrayElements, typePay } from '@/app/page'
 import { CopyButtons } from "./CopyButtons";
+import { ArrayElements, typePay } from "../types/types";
 
 
 interface MenuProps {

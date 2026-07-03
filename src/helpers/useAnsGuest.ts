@@ -1,4 +1,4 @@
-import { guestsObj } from '@/app/page'
+import { guestsObj } from "../types/types";
 
 export const myAnswer = (newValue: boolean | null, prev: guestsObj[], id: number, key: string) => {
     return prev.map((guest) => {

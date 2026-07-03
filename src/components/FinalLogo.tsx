@@ -3,7 +3,7 @@ import '@/src/styles/invitation.css'
 import Image from 'next/image';
 import footerLogoP from '../assets/images/footer/footerLogoP.svg'
 import footerLogoS from '../assets/images/footer/footerLogoS.svg'
-import { ArrayElements } from '@/app/page'
+import { ArrayElements } from '../types/types';
 
 interface finalType {
     data: ArrayElements

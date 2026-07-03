@@ -9,7 +9,7 @@ import civil from "@/src/assets/images/itinerary/ring.svg"
 import Image, { StaticImageData } from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
-import { ArrayElements, typeInfo } from '@/app/page'
+import { ArrayElements, typeInfo } from "../types/types"
 
 
 interface MenuProps {
