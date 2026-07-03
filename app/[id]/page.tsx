@@ -11,6 +11,9 @@ export const metadata: Metadata = {
         images: [
             {
                 url: "/favicon.png",
+                width: 1200,
+                height: 630,
+                alt: "Te invitamos. Yani y Leo",
             }
         ],
         type: "website",
