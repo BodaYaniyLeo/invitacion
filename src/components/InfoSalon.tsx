@@ -3,36 +3,38 @@ import Image from 'next/image';
 import '@/src/styles/invitation.css'
 import arrowLeft from '../assets/images/salon/arrowLeft.webp'
 import { useEffect, useState } from 'react';
-import { ArrayElements, guestsObj } from '@/app/page'
+import { guestsObj, typeInfo } from '@/app/page'
 import { AnswerComponent } from './AnswerComponent';
-import { sendChanges } from '../helpers/sendAnswer';
 import chevronR from '@/public/chevronR.svg'
 
 interface InfoProps {
-    data: ArrayElements
     scrollRef: React.RefObject<HTMLDivElement | null>
-    handleBackInfo: () => void
+    handleBackInfo: () => void;
+    dataGuest: Array<guestsObj>;
+    setDataGuest: React.Dispatch<React.SetStateAction<guestsObj[]>>;
+    infoDate: Array<typeInfo>
 }
 
 export const InfoSalon = ({
-    data,
     scrollRef,
-    handleBackInfo
+    handleBackInfo,
+    dataGuest,
+    setDataGuest,
+    infoDate
 }: InfoProps) => {
-
-    const urlMaps = "https://maps.app.goo.gl/UudM3Bi5m6jQk3nW8"
-    const urlIframe = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3411.4556295631846!2d-64.25989278860048!3d-31.235807887438405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432836e4d2fcdbf%3A0x309c9f5a1dd5927f!2sRinc%C3%B3n%20Calina!5e0!3m2!1ses!2ses!4v1772183044697!5m2!1ses!2ses"
 
     const [advance, setAdvance] = useState<number>(0)
     const [isVisible, setIsVisible] = useState<boolean>(true)
-    const [guests, setGuests] = useState<guestsObj[]>([])
-    const [textButton, setTextButton] = useState<string>("Enviar respuesta")
-    const [animateButton, setAnimateButton] = useState<boolean>(false)
+
+    const [urlMaps, setUrlMaps] = useState<string>("")
+    const [urlIframe, setUrlIframe] = useState<string>("")
 
     useEffect(() => {
-        const guests = data
-        setGuests(guests.guests)
-    }, [data])
+        if (!infoDate || infoDate.length === 0) return;
+        setUrlMaps(infoDate.find(f => f.id === "recepcion")?.url ?? "");
+        setUrlIframe(infoDate.find(f => f.id === "civil")?.url ?? "");
+
+    }, [infoDate]);
 
     useEffect(() => {
         const scrollSection = scrollRef.current
@@ -71,7 +73,9 @@ export const InfoSalon = ({
                         alt=''
                         className='h-[18px] lg:h-[36px] w-auto self-center me-1'
                     />
-                    Atrás
+                    <p className='text-[length:var(--psize)] leading-[1.2] font-(family-name:--fontNormal)'>
+                        Atrás
+                    </p>
                 </button>
                 <div className='rounded-full bg-[#ffffff15] px-6 text-black justify-center content-center size-fit w-[45vw] h-9 lg:hidden'>
                     <span className='bg-[#00000090] rounded-full h-[4px] block w-full'>
@@ -87,17 +91,17 @@ export const InfoSalon = ({
                     <div className='flex items-center lg:justify-between'>
                         <div className='w-[87vw] lg:w-[45vw] font-[family-name:var(--fontNormal)] px-[3vw] h-full flex flex-col justify-center'>
                             <div id='mapsSalon' className='bg-white w-[clamp(50vw,80vw,500px)] lg:w-[100%] h-fit max-h-[50dvh] aspect-4/3 p-2 mt-5 rotate-4'>
-                                <iframe src={urlIframe} style={{ border: 0, aspectRatio: "4/3", height: "100%", width: "100%" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src={urlIframe || "#"} style={{ border: 0, aspectRatio: "4/3", height: "100%", width: "100%" }} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             <div className='mt-[5vh]'>
                                 <h2 className='text-[#ffc2d0] text-[length:var(--h2size)] uppercase font-bold'>
-                                    Como llegar al salon
+                                    Como llegar al salón
                                 </h2>
                                 <p className='text-[#fff9cb] text-[length:var(--h3size)] leading-[1.2] uppercase font-bold'>
                                     Dirección: Ruta E-53 km 15, jurisdicción Unquillo
                                 </p>
                                 <a
-                                    href={urlMaps} target='_blank'
+                                    href={urlMaps || "#"} target='_blank'
                                     className='flex rounded-full bg-white px-4 py-2 text-black justify-center mt-5 size-fit text-(length:--h5size) lg:text-(length:--psize)'
                                 >
                                     Ir a google maps
@@ -123,42 +127,30 @@ export const InfoSalon = ({
                                 </p>
                             </div>
                             <p className='text-white text-[length:var(--h5size)] leading-[1.2] mb-4'>
-                                {guests.length > 1
-                                    ? "Confirma si quieres contatar este servicio." : "Confirma a quienes quieran contatar este servicio."}
-                                <br />
-                                Un mes antes del evento podras ver el estado de tu traslado aquí. No te olvides de verificarlo!
+                                {dataGuest.length === 1
+                                    ? "Confirmá si querés contatar este servicio hasta un mes antes del evento. " : "Podrás confirmar quienes quieran contatar este servicio hasta un mes antes del evento. "}
+                                Verás la información actualizado en este apartado. Recordá verificarlo!
                                 <br />
                                 Cualquier consulta, no dudes en escribirnos.
                             </p>
-                            {
-                                guests?.map(g => {
-                                    return (
-                                        <div key={g.id} className='flex justify-between mx-1 my-3'>
-                                            <p className='self-center text-white'>{g.name} {g.lastname}</p>
-                                            <AnswerComponent
-                                                id={g.id}
-                                                setDataGuest={setGuests}
-                                                confirm={g.transfer}
-                                                status={"transfer"}
-                                            />
-                                        </div>
-                                    )
-                                })
-                            }
-                            <button
-                                className="btn-send px-3 py-2 font-bold rounded-lg uppercase 
-                                transition-all active:scale-[0.98] w-fit self-end mt-4 min-w-40"
-
-                                onClick={() => sendChanges({ guests, setTextButton, setAnimateButton })}
-                            >
-                                <span
-                                    className={`${animateButton ? "opacity-0" : "opacity-100"} duration-500
-                                    font-[family-name:var(--fontNormal)] 
-                                    `}
-                                >
-                                    {textButton}
-                                </span>
-                            </button>
+                            <div className='overflow-auto'>
+                                {
+                                    dataGuest?.map(g => {
+                                        return (
+                                            <div key={g.id} className='flex justify-between mx-1 my-3'>
+                                                <p className='self-center text-white'>{g.name} {g.lastname}</p>
+                                                <AnswerComponent
+                                                    id={g.id}
+                                                    setDataGuest={setDataGuest}
+                                                    dataGuest={dataGuest}
+                                                    confirm={g.transfer}
+                                                    status={"transfer"}
+                                                />
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

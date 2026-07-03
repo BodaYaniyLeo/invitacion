@@ -19,3 +19,14 @@ export interface DressProps {
     tono: Record<string, any>;
     setTono: React.Dispatch<React.SetStateAction<Record<string, any>>>;
 }
+
+export interface GuestData {
+    id: number;
+    confirm: boolean;
+    transfer: boolean;
+    group: string;
+    name: string;
+    lastname: string;
+    bond: string;
+    slug: string;
+}

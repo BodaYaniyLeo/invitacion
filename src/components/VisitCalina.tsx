@@ -5,7 +5,7 @@ import { VideoSection } from './VideoSection';
 import { Itinerary } from './Itinerary';
 import { ArrayElements, typeInfo } from '@/app/page'
 
-interface VideoProps {
+interface Props {
     id: string;
     progressRef: React.MutableRefObject<{ t: number }>;
     duration: number;
@@ -26,7 +26,7 @@ export const VisitCalina = ({
     isDesktop,
     data,
     infoDate,
-}: VideoProps) => {
+}: Props) => {
 
     return (
         <div

@@ -1,17 +1,18 @@
 import { guestsObj } from '@/app/page'
 
 export const myAnswer = (newValue: boolean | null, prev: guestsObj[], id: number, key: string) => {
+    return prev.map((guest) => {
+        if (guest.id !== id) return guest;
 
-    let copy = [...prev]
-    let index = copy.findIndex(i => i.id === id)
+        const hasTimeConfirm = guest.timeConfirm !== null;
 
-    if (index !== -1) {
-        copy[index] = {
-            ...copy[index],
-            [key]: newValue
-        }
-    }
+        const updatedGuest = {
+            ...guest,
+            [key]: newValue,
+            lastTimeConfirm: new Date(),
+            ...(!hasTimeConfirm && { timeConfirm: new Date() })
+        };
 
-    return copy
-
-}
+        return updatedGuest;
+    });
+};

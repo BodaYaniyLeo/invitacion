@@ -1,25 +1,33 @@
 'use client'
 import '@/src/styles/invitation.css'
 import menu from "@/src/assets/images/menu/maps.png"
-import { ArrayElements } from '@/app/page'
+import { ArrayElements, typeInfo } from '@/app/page'
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 interface MenuProps {
     data: ArrayElements;
     setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+    infoDate: Array<typeInfo>
 }
 
 export const MenuComponent = ({
     data,
-    setOpenMenu
+    setOpenMenu,
+    infoDate
 }: MenuProps) => {
 
     const [windowWidth, setWindowWidth] = useState<boolean>(false)
-    const [discount, setDiscount] = useState<Number>()
+    const [discount, setDiscount] = useState<number>()
+    const [urlMaps, setUrlMaps] = useState<string>("")
+    const [urlChurch, setUrlChurch] = useState<string>("")
 
-    const urlMaps = "https://maps.app.goo.gl/UudM3Bi5m6jQk3nW8"
-    const urlChurch = "https://maps.app.goo.gl/UudM3Bi5m6jQk3nW8"
+    useEffect(() => {
+        if (!infoDate || infoDate.length === 0) return;
+        setUrlMaps(infoDate.find(f => f.id === "recepcion")?.url ?? "");
+        setUrlChurch(infoDate.find(f => f.id === "iglesia")?.url ?? "");
+
+    }, [infoDate]);
 
     useEffect(() => {
         setWindowWidth(window.innerWidth < 992)
@@ -71,8 +79,8 @@ export const MenuComponent = ({
                     <a onClick={() => setOpenMenu(false)} href={windowWidth ? '#itinerary' : '#containerCalina'} className='text-[length:var(--menusize)] mb-3'>Itinerario</a>
                     <a onClick={() => setOpenMenu(false)} href='#dresscode' className='text-[length:var(--menusize)] mb-3'>Código de vestimenta</a>
                     <a onClick={() => setOpenMenu(false)} href='#gifts' className='text-[length:var(--menusize)] mb-3'>{discount === 1 ? "Regalo" : "Info"}</a>
-                    <a onClick={() => setOpenMenu(false)} href='#footerConfirm' className='text-[length:var(--menusize)] mb-3'>Confirmar asistencia</a>
-                    <a onClick={() => setOpenMenu(false)} href='#countdown' className='text-[length:var(--menusize)] mb-3'>Cúanto falta?</a>
+                    <a onClick={() => setOpenMenu(false)} href='#containerConfirm' className='text-[length:var(--menusize)] mb-3'>Confirmar asistencia</a>
+                    <a onClick={() => setOpenMenu(false)} href='#countdown' className='text-[length:var(--menusize)] mb-3'>Cuánto falta?</a>
                 </div>
                 <div className='flex uppercase justify-between w-full'>
                     <div>

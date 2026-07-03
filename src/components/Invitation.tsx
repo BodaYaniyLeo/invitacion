@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
@@ -13,16 +13,16 @@ import { Countdown } from './Countdown'
 import { FooterConfirm } from './FooterConfirm'
 import { InfoSalon } from './InfoSalon'
 import { MenuComponent } from './MenuComponent'
-
-import { ArrayElements, dataInv } from '@/app/page'
-
+import { dataInv, guestsObj } from '@/app/page'
 import { DressCode } from './DressCode';
 import { Gifts } from './Gifts';
 import { FinalLogo } from './FinalLogo';
+import { ButtonSend } from './ButtonSend';
 
 export interface VideoProps {
     id?: string;
-    data: ArrayElements;
+    dataGuest: Array<guestsObj>;
+    setDataGuest: React.Dispatch<React.SetStateAction<guestsObj[]>>;
 }
 
 export const Invitation = ({
@@ -44,6 +44,12 @@ export const Invitation = ({
     const vCalinaProgress = useRef({ t: 0 });
 
     const [openMenu, setOpenMenu] = useState<boolean>(false)
+    const [dataGuest, setDataGuest] = useState<guestsObj[]>([])
+
+    useEffect(() => {
+        const sortData = data.guests.sort((a, b) => a.id - b.id)
+        setDataGuest(sortData)
+    }, [data])
 
     useEffect(() => {
         const lenis = new Lenis({
@@ -90,7 +96,6 @@ export const Invitation = ({
     const handleBackInfo = () => {
         if (infoSalonAnimation.current) {
             infoSalonAnimation.current.reversed(true);
-
             document.body.style.overflow = '';
             window.dispatchEvent(new CustomEvent('unlock-scroll'));
         }
@@ -108,7 +113,6 @@ export const Invitation = ({
         }
     }, [openMenu])
 
-
     return (
         <div ref={mainRef} className='bg-[#111117]'>
             <button className='fixed top-5 right-5 w-12 h-12 z-70 rounded-full' onClick={(e) => {
@@ -122,12 +126,12 @@ export const Invitation = ({
                     <span id='panSub2' className='absolute bg-white w-3 h-1 block bottom-[6px] translate-y-2 origin-center right-0'></span>
                 </div>
             </button>
+
             <div ref={presentation} className="w-full h-[500dvh]">
                 <HeroSection id="heroSection" />
             </div>
 
             <div className="w-full h-[300dvh] relative" id="leoContainer">
-
                 <div ref={leoSection} className="w-full lg:w-auto h-dvh">
                     <Intro />
                     <VideoSection
@@ -139,14 +143,12 @@ export const Invitation = ({
                         align="right"
                     />
                 </div>
-
                 <div className="absolute bottom-0 left-0 w-full h-dvh z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
                     <TextLayer id="Leo" data={data} />
                 </div>
             </div>
 
             <div className="w-full h-[370dvh] relative" id="yaniContainer">
-
                 <div ref={yaniSection} className="w-full h-dvh">
                     <VideoSection
                         id="videoYani"
@@ -157,72 +159,73 @@ export const Invitation = ({
                         align="left"
                     />
                 </div>
-
                 <div className="absolute bottom-0 left-0 w-full h-dvh lg:top-1/5 lg:h-full lg:left-1/2 z-20 flex items-center justify-center lg:justify-start lg:max-w-1/2 pointer-events-none">
                     <TextLayer id="Yani" data={data} />
                 </div>
             </div>
 
-            <div className="w-full h-[200dvh] lg:h-[100dvh] content-center relative bg-[#111117]">
-                <div id="triggerCalina">
-                    <div className='lg:flex lg:justify-center max-w-[1000px] lg:justify-self-center '>
-                        <VisitCalina
-                            id="containerCalina"
-                            progressRef={vCalinaProgress}
-                            duration={2}
-                            video={'salon'}
-                            handleInfoSalon={handleInfoSalon}
-                            setOpenMenu={setOpenMenu}
-                            isDesktop={isDesktop}
-                            data={data}
-                            infoDate={infoDate}
-                        />
-                    </div>
-                </div>
-
-                <DressCode />
-
-                <div className='bg-[#111117]'>
-                    <Gifts
+            <div id="triggerCalina" className="w-full min-h-screen bg-[#111117] py-20">
+                <div className='lg:flex lg:justify-center max-w-[1000px] lg:justify-self-center '>
+                    <VisitCalina
+                        id="containerCalina"
+                        progressRef={vCalinaProgress}
+                        duration={2}
+                        video={'salon'}
+                        handleInfoSalon={handleInfoSalon}
+                        setOpenMenu={setOpenMenu}
+                        isDesktop={isDesktop}
                         data={data}
-                        infoPay={infoPay}
+                        infoDate={infoDate}
                     />
+                </div>
+            </div>
 
-                        <FooterConfirm
-                            data={data}
-                        />
+            <DressCode />
 
-                    <Countdown />
+            <Gifts
+                data={data}
+                infoPay={infoPay}
+            />
 
-                    <div className="w-full h-[250dvh] relative bg-[#111117]" id="finalContainer">
+            <FooterConfirm
+                dataGuest={dataGuest}
+                setDataGuest={setDataGuest}
+            />
 
-                        <div ref={finalSection} className="w-full h-dvh bg-[#111117]">
-                            <VideoSection
-                                id="videoFinal"
-                                progressRef={vFinalProgress}
-                                videoUrl={`/videos/${isDesktop ? "desktop" : "mobile"}/videoFinal.mp4`}
-                                duration={2}
-                                mode="full"
-                            />
-                            <FinalLogo
-                                data={data}
-                            />
-                        </div>
-                    </div>
+            <Countdown />
 
+            <div className="w-full h-[250dvh] relative bg-[#111117]" id="finalContainer">
+                <div ref={finalSection} className="w-full h-dvh bg-[#111117]">
+                    <VideoSection
+                        id="videoFinal"
+                        progressRef={vFinalProgress}
+                        videoUrl={`/videos/${isDesktop ? "desktop" : "mobile"}/videoFinal.mp4`}
+                        duration={2}
+                        mode="full"
+                    />
+                    <FinalLogo
+                        data={data}
+                    />
                 </div>
             </div>
 
             <InfoSalon
-                data={data}
                 scrollRef={scrollRef}
                 handleBackInfo={handleBackInfo}
+                dataGuest={dataGuest}
+                setDataGuest={setDataGuest}
+                infoDate={infoDate}
             />
 
             <MenuComponent
                 data={data}
                 setOpenMenu={setOpenMenu}
+                infoDate={infoDate}
             />
-        </div >
+
+            <ButtonSend
+                dataGuest={dataGuest}
+            />
+        </div>
     );
 };

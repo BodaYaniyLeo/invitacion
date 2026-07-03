@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 
-interface VideoProps {
+interface Props {
     id: string;
     progressRef: React.MutableRefObject<{ t: number }>;
     videoUrl: string;
@@ -17,7 +17,7 @@ export const VideoSection = ({
     duration,
     mode,
     align
-}: VideoProps) => {
+}: Props) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isReady, setIsReady] = useState(false);

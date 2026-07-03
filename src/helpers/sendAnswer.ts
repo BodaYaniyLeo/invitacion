@@ -5,18 +5,28 @@ import { buttonConfirm } from "@/app/page";
 export const sendChanges = async ({ guests, setTextButton, setAnimateButton }: buttonConfirm) => {
 
     const supabase = createBrowserSupabaseClient();
+    const finalList = guests.map(g => {
+        if (!g.confirm) {
+            return {
+                ...g,
+                transfer: false
+            };
+        }
+        return g;
+    });
 
     const { data, error } = await supabase
         .from('guests')
-        .upsert(guests)
+        .upsert(finalList)
         .select()
+
 
     if (error) {
         console.log(error.message)
     } else {
         setAnimateButton(true)
         setTimeout(() => {
-            setTextButton("Confirmado!");
+            setTextButton("Listo!");
             setAnimateButton(false)
         }, 500);
         setTimeout(() => {
@@ -28,7 +38,6 @@ export const sendChanges = async ({ guests, setTextButton, setAnimateButton }: b
                 setTextButton("Enviar respuesta");
             }, 1000);
         }, 5000);
-
     }
 
 

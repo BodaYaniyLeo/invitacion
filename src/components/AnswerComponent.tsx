@@ -1,17 +1,20 @@
 import React from 'react'
 import { guestsObj } from '@/app/page'
 import { myAnswer } from '@/src/helpers/useAnsGuest'
+import { CarIcon } from './CarIcon';
 
 type statusAnswer = {
-    id: number
-    setDataGuest: React.Dispatch<React.SetStateAction<guestsObj[]>>
-    confirm: boolean
-    status: string
+    id: number;
+    setDataGuest: React.Dispatch<React.SetStateAction<guestsObj[]>>;
+    dataGuest: Array<guestsObj>;
+    confirm: boolean;
+    status: string;
 }
 
 export const AnswerComponent = ({
     id,
     setDataGuest,
+    dataGuest,
     confirm,
     status
 }: statusAnswer) => {
@@ -21,42 +24,47 @@ export const AnswerComponent = ({
     }
 
     if (status === "confirm") {
+        const guest = dataGuest.find(f => f.id === id)
         return (
-            <div className='flex justify-around items-center gap-2'>
-                <button 
-                    onClick={() => handleAnswer(true)} 
-                    className={`px-4 py-1.5 text-xs lg:text-sm min-w-[75px] rounded-full transition-all duration-300 ${
-                        confirm 
-                        ? 'btn-gradient-active' 
+            <div className='relative flex justify-around items-center gap-2'>
+                {(guest) &&
+                    <CarIcon
+                        data={guest}
+                        setDataGuest={setDataGuest}
+                    />
+
+                }
+                <button
+                    onClick={() => handleAnswer(true)}
+                    className={`px-4 py-1.5 text-xs lg:text-sm min-w-[75px] rounded-full transition-all duration-300 ${confirm
+                        ? 'btn-gradient-active'
                         : 'btn-gradient-inactive'
-                    }`}
+                        }`}
                 >
                     Voy
                 </button>
-                <button 
-                    onClick={() => handleAnswer(false)} 
-                    className={`px-4 py-1.5 text-xs lg:text-sm min-w-[75px] rounded-full transition-all duration-300 ${
-                        (!confirm && confirm != null) 
-                        ? 'btn-gradient-active' 
+                <button
+                    onClick={() => handleAnswer(false)}
+                    className={`px-4 py-1.5 text-xs lg:text-sm min-w-[75px] rounded-full transition-all duration-300 ${(!confirm && confirm != null)
+                        ? 'btn-gradient-active'
                         : 'btn-gradient-inactive'
-                    }`}
+                        }`}
                 >
                     No voy
                 </button>
             </div>
         )
     }
-    
+
     if (status === "transfer") {
         return (
             <div className='flex justify-around items-center'>
-                <button 
-                    onClick={() => handleAnswer(!confirm)} 
-                    className={`py-1.5 px-4 text-xs lg:text-sm min-w-[100px] rounded-full transition-all duration-300 ${
-                        confirm 
-                        ? 'btn-gradient-active' 
+                <button
+                    onClick={() => handleAnswer(!confirm)}
+                    className={`py-1.5 px-4 text-xs lg:text-sm min-w-[100px] rounded-full transition-all duration-300 ${confirm
+                        ? 'btn-gradient-active'
                         : 'btn-gradient-inactive'
-                    }`}
+                        }`}
                 >
                     {confirm ? "Solicitado" : "No solicitado"}
                 </button>

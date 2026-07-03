@@ -136,7 +136,7 @@ export const DressCodeContainer = ({
                 <div className="text-center dressSelector px-1 py-2">
                     <h3 className="font-bold text-white">Sugerencias</h3>
                 </div>
-                <div className="my-1 bg-[#121212]">
+                <div className="my-1 bg-[#111117]">
                     {modelArray.map((category, i) => {
                         const categoryName = Object.keys(category)[0]
                         const options = category[categoryName]

@@ -22,23 +22,23 @@ export type guestsObj = {
   id: number;
   name: string;
   lastname: string;
-  state: string;
-  room: number;
   confirm: boolean;
   transfer: boolean;
+  timeConfirm: Date;
+  lastTimeConfirm: Date;
 }
 
 export type buttonConfirm = {
   guests: guestsObj[];
   setTextButton: (text: string) => void;
   setAnimateButton: (value: boolean) => void;
-
 }
 
 export interface typeInfo {
   id: string;
   time: string;
   place: string;
+  url: string;
 }
 
 export interface typePay {
