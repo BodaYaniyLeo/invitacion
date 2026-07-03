@@ -2,9 +2,9 @@
 import '@/src/styles/invitation.css'
 import { useLayoutEffect, useRef, useState } from 'react';
 import { AnswerComponent } from './AnswerComponent';
-import { VideoProps } from '@/src/components/Invitation';
 import { gsap } from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { VideoProps } from '../types/types';
 
 export const FooterConfirm = ({
     dataGuest,
