@@ -3,13 +3,18 @@ export type ObjText = {
     text: string | null;
 }
 
+export interface transferObj {
+    text: string;
+    url: string
+}
+
 export interface ArrayElements {
     church: boolean;
     guests: guestsObj[];
     yani: ObjText;
     leo: ObjText;
     payment_coverage: number;
-    instructionsTransfer: string;
+    instructionsTransfer: transferObj;
 }
 
 export type guestsObj = {
