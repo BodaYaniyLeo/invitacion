@@ -1,23 +1,26 @@
 import { createServerSupabaseClient } from "@/app/lib/supabase/server"
 import Home from "../page"
-import fs from 'fs';
-import path from 'path';
 
 export default async function Page({
     params,
 }: {
     params: Promise<{ id: string }>
 }) {
-
     const { id } = await params
+
+    if (!id) {
+        return (
+            <div className='flex justify-center items-center bg-[#111117] h-dvh'>
+                <p className="text-white">ID no válido</p>
+            </div>
+        )
+    }
 
     const supabase = createServerSupabaseClient()
 
-    const { data, error } = await supabase
+    const { data: slugData, error: errorSlug } = await supabase
         .from("slug")
-        .select(`*,
-            guests(*)
-            `)
+        .select(`*, guests(*)`)
         .eq("name", id)
 
     const { data: infoDate, error: errorDate } = await supabase
@@ -28,7 +31,13 @@ export default async function Page({
         .from("payments")
         .select("*")
 
-    if (!data || !infoDate || !infoPay) {
+    if (
+        errorSlug || errorDate || errorPay ||
+        !slugData || slugData.length === 0 ||
+        !infoDate || !infoPay
+    ) {
+        console.error("Error cargando datos de Supabase:", { errorSlug, errorDate, errorPay });
+
         return (
             <div className='flex justify-center items-center bg-[#111117] h-dvh'>
                 <div className='logo'></div>
@@ -36,5 +45,5 @@ export default async function Page({
         )
     }
 
-    return <Home data={data[0]} infoDate={infoDate} infoPay={infoPay} />
+    return <Home data={slugData[0]} infoDate={infoDate} infoPay={infoPay} />
 }

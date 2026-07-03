@@ -16,33 +16,39 @@ import marriedBg from "@/src/assets/images/countdown/marriedBg.webp"
 import massage from "@/src/assets/images/countdown/massage.webp"
 import massageBg from "@/src/assets/images/countdown/massageBg.webp"
 
-
 import Image from "next/image"
 
 export const Countdown = () => {
-
     let itsToday: Date = new Date("2027-01-09T19:00:00")
 
     const [isMounted, setIsMounted] = useState(false)
     const [timeLeft, setTimeLeft] = useState<number>(0)
+    const [radialGradient, setRadialGradient] = useState<string>(
+        "radial-gradient(ellipse 80% 50% at center, rgba(17,17,23,0) 10%, rgba(17,17,23,1) 100%)"
+    )
 
     useEffect(() => {
-
         setIsMounted(true)
+
+        if (typeof window !== "undefined") {
+            setRadialGradient(
+                window.innerWidth < 991
+                    ? "radial-gradient(ellipse 80% 50% at center, rgba(17,17,23,0) 10%, rgba(17,17,23,1) 100%)"
+                    : "radial-gradient(ellipse 50% 50% at center, rgba(17,17,23,0) 5%, rgba(17,17,23,1) 100%)"
+            )
+        }
 
         const time = setInterval(() => {
             setTimeLeft(+itsToday - Date.now())
         }, 1000);
 
         return () => clearInterval(time)
-
-    }, [timeLeft])
+    }, [])
 
     const dias = Math.floor(timeLeft / (24 * 60 * 60 * 1000)).toString();
-    const horas = Math.floor((timeLeft / (60 * 60 * 1000)) % 24).toString().padStart(2, "0");;
-    const minutos = Math.floor((timeLeft / (60 * 1000)) % 60).toString().padStart(2, "0");;
+    const horas = Math.floor((timeLeft / (60 * 60 * 1000)) % 24).toString().padStart(2, "0");
+    const minutos = Math.floor((timeLeft / (60 * 1000)) % 60).toString().padStart(2, "0");
     const segundos = Math.floor((timeLeft / 1000) % 60).toString().padStart(2, "0");
-
 
     useLayoutEffect(() => {
         if (!isMounted) return;
@@ -72,14 +78,12 @@ export const Countdown = () => {
                         x: 10,
                         autoAlpha: 0
                     })
-
                     .to("#backgroundLoading", { autoAlpha: 1, scale: 1, duration: 3 })
                     .to("#backgroundChar", { autoAlpha: 1, duration: 3 }, "-=1.8")
                     .to("#backgroundChar", { x: 0, duration: 6 }, "<")
                     .to("#backgroundLoading", { autoAlpha: 0, duration: 1.5 })
                     .to("#backgroundChar", { autoAlpha: 0, duration: 1.5 }, "-=0.9");
             });
-
         })
 
         gsap.to("#loadingRing", {
@@ -100,12 +104,7 @@ export const Countdown = () => {
             <div id="backgroundChar" className="absolute bottom-0 h-[80dvh] w-full lg:h-auto lg:aspect-1/1 lg:right-0 bg-cover scale-110 bg-bottom bg-center bg-no-repeat"></div>
             <div
                 className="absolute inset-0 pointer-events-none"
-                style={{
-                    background: `${window.innerWidth < 991
-                        ? "radial-gradient(ellipse 80% 50% at center, rgba(17,17,23,0) 10%, rgba(17,17,23,1) 100%)"
-                        : "radial-gradient(ellipse 50% 50% at center, rgba(17,17,23,0) 5%, rgba(17,17,23,1) 100%)"
-                        }`
-                }}
+                style={{ background: radialGradient }}
             ></div>
             {
                 isMounted
@@ -117,7 +116,6 @@ export const Countdown = () => {
                                     : dias === "1" ?
                                         <p>{dias} <span className="text-[24px]">día,</span></p>
                                         : <p>{dias} <span className="text-[24px]">días,</span></p>
-
                                 }
                                 <div className="flex align-bottom">
                                     <p>{horas}<span className="text-[24px]">hs</span>&nbsp;</p>
