@@ -18,6 +18,7 @@ import { DressCode } from './DressCode';
 import { Gifts } from './Gifts';
 import { FinalLogo } from './FinalLogo';
 import { ButtonSend } from './ButtonSend';
+import { InfoTransfer } from './InfoTransfer';
 
 export const Invitation = ({
     data,
@@ -220,6 +221,11 @@ export const Invitation = ({
             <ButtonSend
                 dataGuest={dataGuest}
             />
+
+            <InfoTransfer
+                data={data}
+            />
+
         </div>
     );
 };

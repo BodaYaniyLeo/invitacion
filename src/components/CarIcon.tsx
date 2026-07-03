@@ -1,4 +1,5 @@
 import { myAnswer } from "../helpers/useAnsGuest";
+import { useDeadLine } from "../hooks/useDeadLine";
 import { guestsObj } from "../types/types";
 
 interface Props {
@@ -12,10 +13,13 @@ export function CarIcon({ data, setDataGuest }: Props) {
         setDataGuest(prev => myAnswer(newValue, prev, data.id, "transfer"))
     }
 
+    const isDeadLine = useDeadLine()
+
     return (
         <button
             onClick={() => handleAnswer(!data.transfer)}
-            className={`${data.transfer ? "opacity-100" : "opacity-50"} ${data.confirm ? "pointer-events-auto" : "pointer-events-none"} transition-opacity duration-500`}
+            className={`${data.transfer ? "opacity-100" : "opacity-50"} transition-opacity duration-500`}
+            disabled={data.confirm && isDeadLine}
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"

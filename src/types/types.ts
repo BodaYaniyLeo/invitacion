@@ -9,6 +9,7 @@ export interface ArrayElements {
     yani: ObjText;
     leo: ObjText;
     payment_coverage: number;
+    instructionsTransfer: string;
 }
 
 export type guestsObj = {

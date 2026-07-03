@@ -45,7 +45,7 @@ export const HeroSection = ({ id }: HeroProps) => {
                     id='chevron'
                     src={chevron}
                     alt="Logo"
-                    className={`w-[15vw] max-w-[60px] absolute mx-auto z-999 bottom-0 left-1/2 -translate-x-1/2 text-white animate-bounce duration-[1000ms] ${visible ? "opacity-100" : "opacity-0"}`}
+                    className={`w-[15vw] max-w-[60px] absolute mx-auto z-90 bottom-0 left-1/2 -translate-x-1/2 text-white animate-bounce duration-[1000ms] ${visible ? "opacity-100" : "opacity-0"}`}
                 />
 
                 <div id='dateLogo' className="absolute inset-0 z-20 opacity-0 flex flex-col items-center justify-center text-white">

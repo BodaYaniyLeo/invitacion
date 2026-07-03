@@ -142,6 +142,14 @@ button.btn-send {
     border: none;
 }
 
+.btn-transfer {
+    text-wrap: pretty;
+    letter-spacing: -.03em;
+    line-height: 120%;
+    background: linear-gradient(90deg, rgb(223, 58, 147) 0%, rgb(92, 22, 99) 100%);
+    color: white;
+    border: none;
+}
 
 .btn-gradient-inactive {
     color: rgba(255, 255, 255, 0.3) !important;
@@ -313,6 +321,19 @@ a {
 }
 
 @keyframes sweep {
+    0% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% -100%;
+    }
+
+}
+
+
+
+@keyframes textOp {
     0% {
         background-position: 0% 100%;
     }

@@ -182,7 +182,7 @@ export const DressCode = () => {
         <div
             id="dresscode"
             ref={containerRef}
-            className="overflow-hidden h-dvh lg:h-auto w-screen flex flex-col relative lg:mt-[10dvh] bg-[#111117] max-w-[1000px] lg:justify-self-center"
+            className="overflow-hidden h-dvh lg:h-auto flex flex-col relative lg:mt-[10dvh] bg-[#111117] max-w-[1000px] lg:justify-self-center"
         >
             <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size) tracking-[-.04em] px-8'>
                 Código de vestimenta

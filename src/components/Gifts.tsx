@@ -51,7 +51,7 @@ export const Gifts = ({
                 scrollTrigger: {
                     trigger: "#gifts",
                     start: 'top 66%',
-                    end: '+=133%',
+                    end: '+=175%',
                     scrub: 0.5,
                 }
             });

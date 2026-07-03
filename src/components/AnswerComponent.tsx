@@ -2,6 +2,7 @@ import React from 'react'
 import { myAnswer } from '@/src/helpers/useAnsGuest'
 import { CarIcon } from './CarIcon';
 import { guestsObj } from '../types/types';
+import { useDeadLine } from '../hooks/useDeadLine';
 
 type statusAnswer = {
     id: number;
@@ -23,6 +24,8 @@ export const AnswerComponent = ({
         setDataGuest(prev => myAnswer(newValue, prev, id, status))
     }
 
+    const isDeadLine = useDeadLine()
+
     if (status === "confirm") {
         const guest = dataGuest.find(f => f.id === id)
         return (
@@ -40,6 +43,7 @@ export const AnswerComponent = ({
                         ? 'btn-gradient-active'
                         : 'btn-gradient-inactive'
                         }`}
+                    disabled={isDeadLine}
                 >
                     Voy
                 </button>
@@ -49,6 +53,7 @@ export const AnswerComponent = ({
                         ? 'btn-gradient-active'
                         : 'btn-gradient-inactive'
                         }`}
+                    disabled={isDeadLine}
                 >
                     No voy
                 </button>
@@ -65,6 +70,7 @@ export const AnswerComponent = ({
                         ? 'btn-gradient-active'
                         : 'btn-gradient-inactive'
                         }`}
+                    disabled={isDeadLine}
                 >
                     {confirm ? "Solicitado" : "No solicitado"}
                 </button>

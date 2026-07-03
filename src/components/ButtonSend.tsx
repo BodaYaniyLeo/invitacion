@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { sendChanges } from '../helpers/sendAnswer'
 import { GuestData, guestsObj } from '../types/types';
+import { useDeadLine } from '../hooks/useDeadLine';
 
 interface ButtonSendProps {
     dataGuest: Array<guestsObj>;
@@ -9,7 +10,7 @@ interface ButtonSendProps {
 
 export const ButtonSend = ({ dataGuest }: ButtonSendProps) => {
     const [animateButton, setAnimateButton] = useState<boolean>(false)
-    const [textButton, setTextButton] = useState<string>("Enviar respuesta")
+    const [textButton, setTextButton] = useState<string>("Confirmar")
 
     const [lastData, setLastData] = useState<Array<GuestData>>([])
     const isInitialized = useRef<boolean>(false)
@@ -54,22 +55,29 @@ export const ButtonSend = ({ dataGuest }: ButtonSendProps) => {
         }, 5000);
     };
 
+    const isDeadLine = useDeadLine()
+
     return (
-        <button
-            className={`btn-send p-3 font-bold uppercase transition-all duration-500 transform min-w-40 w-fit self-end rounded-full fixed bottom-4 right-4 z-999
+        <>
+            {!isDeadLine &&
+
+                <button
+                    className={`btn-send p-3 font-bold uppercase transition-all duration-500 transform min-w-[130px] w-fit self-end rounded-full fixed bottom-4 right-4 z-91
                 ${hasChanges
-                    ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
-                    : 'opacity-0 translate-y-10 scale-90 pointer-events-none'
-                }
-            `}
-            onClick={handleSend}
-        >
-            <span
-                className={`${animateButton ? "opacity-0" : "opacity-100"} duration-500 justify-center
-                            font-[family-name:var(--fontNormal)] flex items-center gap-2`}
-            >
-                <span className="text-sm tracking-wider">{textButton}</span>
-            </span>
-        </button>
+                            ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
+                            : 'opacity-0 translate-y-10 scale-90 pointer-events-none'
+                        }
+                `}
+                    onClick={handleSend}
+                >
+                    <span
+                        className={`${animateButton ? "opacity-0" : "opacity-100"} duration-500 justify-center
+                font-[family-name:var(--fontNormal)] flex items-center gap-2`}
+                    >
+                        <span className="text-sm tracking-wider">{textButton}</span>
+                    </span>
+                </button>
+            }
+        </>
     )
 }

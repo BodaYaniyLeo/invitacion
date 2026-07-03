@@ -25,7 +25,7 @@ export const sendChanges = async ({ guests, setTextButton, setAnimateButton }: b
     } else {
         setAnimateButton(true)
         setTimeout(() => {
-            setTextButton("Listo!");
+            setTextButton("Confirmado!");
             setAnimateButton(false)
         }, 500);
         setTimeout(() => {
@@ -34,7 +34,7 @@ export const sendChanges = async ({ guests, setTextButton, setAnimateButton }: b
             }, 500);
             setTimeout(() => {
                 setAnimateButton(false)
-                setTextButton("Enviar respuesta");
+                setTextButton("Confirmar");
             }, 1000);
         }, 5000);
     }
