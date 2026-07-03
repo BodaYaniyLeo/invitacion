@@ -3,7 +3,7 @@ import Image from 'next/image';
 import '@/src/styles/invitation.css'
 import arrowLeft from '../assets/images/salon/arrowLeft.webp'
 import { useEffect, useState } from 'react';
-import { guestsObj, typeInfo } from '@/app/page'
+import { guestsObj, typeInfo } from "../types/types";
 import { AnswerComponent } from './AnswerComponent';
 import chevronR from '@/public/chevronR.svg'
 

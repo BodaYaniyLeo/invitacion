@@ -1,3 +1,52 @@
+export type ObjText = {
+    sub: string | null;
+    text: string | null;
+}
+
+export interface ArrayElements {
+    church: boolean;
+    guests: guestsObj[];
+    yani: ObjText;
+    leo: ObjText;
+    payment_coverage: number;
+}
+
+export type guestsObj = {
+    id: number;
+    name: string;
+    lastname: string;
+    confirm: boolean;
+    transfer: boolean;
+    timeConfirm: Date;
+    lastTimeConfirm: Date;
+}
+
+export type buttonConfirm = {
+    guests: guestsObj[];
+    setTextButton: (text: string) => void;
+    setAnimateButton: (value: boolean) => void;
+}
+
+export interface typeInfo {
+    id: string;
+    time: string;
+    place: string;
+    url: string;
+}
+
+export interface typePay {
+    id: string;
+    data: Record<string, string>[];
+    value: number;
+}
+
+export type dataInv = {
+    data: ArrayElements,
+    infoDate: typeInfo[],
+    isDesktop?: boolean | null,
+    infoPay: typePay[];
+}
+
 export interface Option {
     name: string
     url: string
@@ -29,4 +78,15 @@ export interface GuestData {
     lastname: string;
     bond: string;
     slug: string;
+}
+
+export interface VideoProps {
+    id?: string;
+    dataGuest: Array<guestsObj>;
+    setDataGuest: React.Dispatch<React.SetStateAction<guestsObj[]>>;
+}
+
+export interface PriceProps {
+    id?: string;
+    data: ArrayElements;
 }

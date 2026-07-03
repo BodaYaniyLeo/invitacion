@@ -4,55 +4,7 @@ import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { Invitation } from '@/src/components/Invitation';
-
-export type ObjText = {
-  sub: string | null;
-  text: string | null;
-}
-
-export interface ArrayElements {
-  church: boolean;
-  guests: guestsObj[];
-  yani: ObjText;
-  leo: ObjText;
-  payment_coverage: number;
-}
-
-export type guestsObj = {
-  id: number;
-  name: string;
-  lastname: string;
-  confirm: boolean;
-  transfer: boolean;
-  timeConfirm: Date;
-  lastTimeConfirm: Date;
-}
-
-export type buttonConfirm = {
-  guests: guestsObj[];
-  setTextButton: (text: string) => void;
-  setAnimateButton: (value: boolean) => void;
-}
-
-export interface typeInfo {
-  id: string;
-  time: string;
-  place: string;
-  url: string;
-}
-
-export interface typePay {
-  id: string;
-  data: Record<string, string>[];
-  value: number;
-}
-
-export type dataInv = {
-  data: ArrayElements,
-  infoDate: typeInfo[],
-  isDesktop?: boolean | null,
-  infoPay: typePay[];
-}
+import { dataInv } from '@/src/types/types';
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollToPlugin);

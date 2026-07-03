@@ -1,7 +1,7 @@
 'use client'
 import '@/src/styles/invitation.css'
 import menu from "@/src/assets/images/menu/maps.png"
-import { ArrayElements, typeInfo } from '@/app/page'
+import { ArrayElements, typeInfo } from "../types/types";
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 

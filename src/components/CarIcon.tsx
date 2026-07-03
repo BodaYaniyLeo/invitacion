@@ -1,5 +1,5 @@
-import { guestsObj } from "@/app/page";
 import { myAnswer } from "../helpers/useAnsGuest";
+import { guestsObj } from "../types/types";
 
 interface Props {
     data: guestsObj;

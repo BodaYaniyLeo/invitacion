@@ -13,17 +13,11 @@ import { Countdown } from './Countdown'
 import { FooterConfirm } from './FooterConfirm'
 import { InfoSalon } from './InfoSalon'
 import { MenuComponent } from './MenuComponent'
-import { dataInv, guestsObj } from '@/app/page'
+import { dataInv, guestsObj } from "../types/types";
 import { DressCode } from './DressCode';
 import { Gifts } from './Gifts';
 import { FinalLogo } from './FinalLogo';
 import { ButtonSend } from './ButtonSend';
-
-export interface VideoProps {
-    id?: string;
-    dataGuest: Array<guestsObj>;
-    setDataGuest: React.Dispatch<React.SetStateAction<guestsObj[]>>;
-}
 
 export const Invitation = ({
     data,

@@ -4,12 +4,12 @@ import Image from 'next/image';
 import footerLogoP from '../assets/images/footer/footerLogoP.svg'
 import footerLogoS from '../assets/images/footer/footerLogoS.svg'
 import { useEffect, useState } from 'react';
-import { VideoProps } from './Invitation'
+import { PriceProps } from '../types/types';
 
 export const Price = ({
     id,
     data,
-}: VideoProps) => {
+}: PriceProps) => {
 
     const [discount, setDiscount] = useState<number>(0)
 
