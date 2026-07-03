@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         description: "Invitación Yani y Leo.",
         images: [
             {
-                url: "/favicon.png",
+                url: "/imgMeta.png",
                 width: 1200,
                 height: 630,
                 alt: "Te invitamos. Yani y Leo",
