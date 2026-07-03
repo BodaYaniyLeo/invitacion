@@ -1,5 +1,5 @@
-import { ArrayElements, ObjText } from "@/app/page";
 import { useEffect, useState } from "react";
+import { ArrayElements, ObjText } from "../types/types";
 
 interface Props {
     id: string,

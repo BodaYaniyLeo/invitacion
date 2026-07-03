@@ -1,6 +1,5 @@
 "use client"
 
-import { typePay } from "@/app/page";
 import { useState } from "react";
 
 interface Props {

@@ -1,6 +1,5 @@
 import { createBrowserSupabaseClient } from "@/app/lib/supabase/client";
-import { buttonConfirm } from "@/app/page";
-
+import { buttonConfirm } from "../types/types";
 
 export const sendChanges = async ({ guests, setTextButton, setAnimateButton }: buttonConfirm) => {
 
