@@ -1,5 +1,21 @@
+import { Metadata } from 'next'
 import { createServerSupabaseClient } from "@/app/lib/supabase/server"
 import Home from "../page"
+
+export const metadata: Metadata = {
+    title: "Yani y Leo",
+    description: "Invitación Yani y Leo.",
+    openGraph: {
+        title: "Yani y Leo | ",
+        description: "Invitación Yani y Leo.",
+        images: [
+            {
+                url: "/favicon.png",
+            }
+        ],
+        type: "website",
+    },
+}
 
 export default async function Page({
     params,
