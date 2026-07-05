@@ -25,6 +25,7 @@ export type guestsObj = {
     transfer: boolean;
     timeConfirm: Date;
     lastTimeConfirm: Date;
+    foodPreferents: string;
 }
 
 export type buttonConfirm = {
@@ -82,8 +83,8 @@ export interface GuestData {
     group: string;
     name: string;
     lastname: string;
-    bond: string;
     slug: string;
+    foodPreferents: string;
 }
 
 export interface VideoProps {
@@ -95,4 +96,10 @@ export interface VideoProps {
 export interface PriceProps {
     id?: string;
     data: ArrayElements;
+}
+
+export interface FoodProps {
+    id: number;
+    setDataGuest: React.Dispatch<React.SetStateAction<guestsObj[]>>;
+    lastAnswer: string;
 }

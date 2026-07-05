@@ -4,7 +4,6 @@ import '@/src/styles/invitation.css'
 import arrowLeft from '../assets/images/salon/arrowLeft.webp'
 import { useEffect, useState } from 'react';
 import { guestsObj, typeInfo } from "../types/types";
-import { AnswerComponent } from './AnswerComponent';
 import chevronR from '@/public/chevronR.svg'
 
 interface InfoProps {
@@ -134,24 +133,6 @@ export const InfoSalon = ({
                                 <br />
                                 Cualquier consulta, no dudes en escribirnos.
                             </p>
-                            <div className='overflow-auto'>
-                                {
-                                    dataGuest?.map(g => {
-                                        return (
-                                            <div key={g.id} className='flex justify-between mx-1 my-3'>
-                                                <p className='self-center text-white'>{g.name} {g.lastname}</p>
-                                                <AnswerComponent
-                                                    id={g.id}
-                                                    setDataGuest={setDataGuest}
-                                                    dataGuest={dataGuest}
-                                                    confirm={g.transfer}
-                                                    status={"transfer"}
-                                                />
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
                         </div>
                     </div>
                 </div>

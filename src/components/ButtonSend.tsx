@@ -38,8 +38,9 @@ export const ButtonSend = ({ dataGuest }: ButtonSendProps) => {
 
             const cambioConfirm = guest.confirm !== originalGuest.confirm;
             const cambioTransfer = guest.transfer !== originalGuest.transfer;
+            const cambioFoodPreferents = guest.foodPreferents !== originalGuest.foodPreferents;
 
-            return cambioConfirm || cambioTransfer;
+            return cambioConfirm || cambioTransfer || cambioFoodPreferents;
         });
 
         setHasChanges(anyChange);
@@ -72,7 +73,7 @@ export const ButtonSend = ({ dataGuest }: ButtonSendProps) => {
                 >
                     <span
                         className={`${animateButton ? "opacity-0" : "opacity-100"} duration-500 justify-center
-                font-[family-name:var(--fontNormal)] flex items-center gap-2`}
+                        font-[family-name:var(--fontNormal)] flex items-center gap-2`}
                     >
                         <span className="text-sm tracking-wider">{textButton}</span>
                     </span>

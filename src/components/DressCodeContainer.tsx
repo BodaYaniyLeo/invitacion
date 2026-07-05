@@ -132,7 +132,7 @@ export const DressCodeContainer = ({
                 }
             `}</style>
 
-            <div id={`selector${genderId}`} className="absolute w-1/2 lg:w-1/5 right-[32px] lg:right-1/4 top-1/8 border z-60 bg-[#00000090] opacity-0 invisible">
+            <div id={`selector${genderId}`} className="absolute w-1/2 right-[32px] top-1/8 border z-60 bg-[#00000090] opacity-0 invisible">
                 <div className="text-center dressSelector px-1 py-2">
                     <h3 className="font-bold text-white">Sugerencias</h3>
                 </div>
@@ -148,7 +148,7 @@ export const DressCodeContainer = ({
                                     className="flex justify-between w-full px-1 text-white"
                                 >
                                     <h3 className="font-bold capitalize">{categoryName}</h3>
-                                    <div className="relative w-[4vw] self-center">
+                                    <div className="relative self-center">
                                         <span className="block w-[4vw] max-w-6">
                                             <Image src={minus} alt="" />
                                         </span>
@@ -252,15 +252,10 @@ export const DressCodeContainer = ({
             </div>
 
             <div id="showcase" className={`w-full flex relative ${gender === "she" ? "justify-end" : "justify-start"}`}>
-                {/* {select && (
-                    <div className="absolute left-0 -top-9 w-full text-center my-2 animate-bounce text-white z-50 my-4">
-                        <p>Selecciona tu estilo</p>
-                    </div>
-                )} */}
 
                 <div
                     id={`maniqui${genderId}`}
-                    className="w-full md:w-1/2 relative items-center max-w-125 cursor-pointer"
+                    className="w-full relative items-center max-w-125 cursor-pointer"
                     onClick={() => {
                         if (!select) return;
                         widthOpposite(genderId, gender === "she" ? "He" : "She");

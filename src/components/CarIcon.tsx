@@ -16,40 +16,58 @@ export function CarIcon({ data, setDataGuest }: Props) {
     const isDeadLine = useDeadLine()
 
     return (
-        <button
-            onClick={() => handleAnswer(!data.transfer)}
-            className={`${data.transfer ? "opacity-100" : "opacity-50"} transition-opacity duration-500`}
-            disabled={data.confirm && isDeadLine}
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                viewBox="0 0 24 24"
-            >
-                {data.confirm && (
-                    <>
-                        <path
-                            fill="currentColor"
-                            d="m5 11l1.5-4.5h11L19 11m-1.5 5a1.5 1.5 0 0 1-1.5-1.5a1.5 1.5 0 0 1 1.5-1.5a1.5 1.5 0 0 1 1.5 1.5a1.5 1.5 0 0 1-1.5 1.5m-11 0A1.5 1.5 0 0 1 5 14.5A1.5 1.5 0 0 1 6.5 13A1.5 1.5 0 0 1 8 14.5A1.5 1.5 0 0 1 6.5 16M18.92 6c-.2-.58-.76-1-1.42-1h-11c-.66 0-1.22.42-1.42 1L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8z"
-                        />
+        <div className="flex justify-between px-2">
+            <p className="me-2">Solicitar servicio de traslado</p>
 
-                        {!data.transfer && (
-                            <line
-                                x1="21"
-                                y1="3"
-                                x2="3"
-                                y2="21"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                className="[stroke-dasharray:26] animate-draw-line"
-                            />
-                        )}
+            <button
+                onClick={() => handleAnswer(true)}
+                className={`transition-opacity duration-500 flex mx-1`}
+                disabled={(!data.confirm || isDeadLine)}
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 15 15"
+                    className={`${data.transfer ? "opacity-100" : "opacity-50"} duration-500`}
+                >
+                    <>
+                        <path fill="currentColor" d="M2 3c0-1.1.9-2 2-2h7c1.1 0 2 .9 2 2v8c0 1-1 1-1 1v1c0 .55-.45 1-1 1s-1-.45-1-1v-1H5v1c0 .55-.45 1-1 1s-1-.45-1-1v-1c-1 0-1-1-1-1zm1.5 1c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5h8c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5zM4 9c-.55 0-1 .45-1 1s.45 1 1 1s1-.45 1-1s-.45-1-1-1m7 0c-.55 0-1 .45-1 1s.45 1 1 1s1-.45 1-1s-.45-1-1-1M4 2.5c0 .28.22.5.5.5h6c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-6c-.28 0-.5.22-.5.5" />
+
                     </>
-                )}
-            </svg>
-        </button>
+                </svg>
+            </button>
+
+            <button
+                onClick={() => handleAnswer(false)}
+                className={`transition-opacity duration-500 flex mx-1`}
+                disabled={(!data.confirm || isDeadLine)}
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 15 15"
+                    className={`${!data.transfer ? "opacity-100" : "opacity-50"} duration-500`}
+                >
+                    <>
+                        <path fill="currentColor" d="M2 3c0-1.1.9-2 2-2h7c1.1 0 2 .9 2 2v8c0 1-1 1-1 1v1c0 .55-.45 1-1 1s-1-.45-1-1v-1H5v1c0 .55-.45 1-1 1s-1-.45-1-1v-1c-1 0-1-1-1-1zm1.5 1c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5h8c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5zM4 9c-.55 0-1 .45-1 1s.45 1 1 1s1-.45 1-1s-.45-1-1-1m7 0c-.55 0-1 .45-1 1s.45 1 1 1s1-.45 1-1s-.45-1-1-1M4 2.5c0 .28.22.5.5.5h6c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-6c-.28 0-.5.22-.5.5" />
+
+                        <line
+                            x1="15"
+                            y1="0"
+                            x2="0"
+                            y2="15"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            className="[stroke-dasharray:26] animate-draw-line"
+                        />
+                    </>
+                </svg>
+            </button>
+
+        </div>
     );
 
 }

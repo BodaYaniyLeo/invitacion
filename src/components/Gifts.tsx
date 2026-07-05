@@ -94,7 +94,7 @@ export const Gifts = ({
                         <br />
                         {discount === 1
                             ? "Si de todas formas querés darnos un empujón para arrancar esta nueva aventura, nos ayudás un montón colaborando con nuestra luna de miel."
-                            : `Para confirmar tu asistencia, te solicitamos realizar la reserva de tu lugar. El valor de la tarjeta es de $${price && price.value - (price.value * discount)} por persona.`
+                            : `Para confirmar tu asistencia, te solicitamos realizar la reserva de tu lugar. El valor de la tarjeta es de $${price && (price.value - (price.value * discount)).toLocaleString('es-ES')} por persona.`
                         }
                         <br />
                         <br />
