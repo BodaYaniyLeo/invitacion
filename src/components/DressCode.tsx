@@ -58,7 +58,7 @@ export const DressCode = () => {
         ]);
 
         const q = gsap.utils.selector(containerRef.current)
-        const mask = `linear-gradient(to right, #111117 20%, transparent 50%), linear-gradient(to bottom, transparent, #111117 70%, #111117 0%, transparent 100%)`
+        const mask = `linear-gradient(to right, #111117 20%, transparent 70%), linear-gradient(to top, transparent 10%, #111117 90%, #111117 100%)`
         const tl = gsap.timeline({ defaults: { ease: "power2.out", overwrite: "auto" } })
 
         tl
@@ -201,9 +201,9 @@ export const DressCode = () => {
                     <p>▼</p>
                 </div>
             </div>
-            <div className="w-full relative h-full flex content-center overflow-hidden">
+            <div className="h-dvh relative flex content-center overflow-hidden">
 
-                <div id="iconChange" className="flex justify-around max-w-[150px] w-1/3 absolute bottom-10 right-[32px] lg:right-1/4 text-center z-40 opacity-0 invisible">
+                <div id="iconChange" className="flex justify-around max-w-[150px] w-1/3 absolute bottom-1/6 right-[32px] lg:right-1/4 text-center z-40 opacity-0 invisible">
                     <div
                         role="button"
                         tabIndex={0}
@@ -237,12 +237,12 @@ export const DressCode = () => {
 
                 <div
                     id="salonBack"
-                    className="w-full lg:hidden absolute bottom-1/2 translate-y-2/5 left-0 z-0 opacity-0 invisible aspect-2/1 bg-red-500"
+                    className="w-full h-full absolute inset-0 z-0 opacity-0 invisible overflow-hidden"
                 >
                     <Image
                         src={fondo}
                         alt=""
-                        className="inset-0 h-auto w-full z-30 object-contain"
+                        className="absolute bottom-1/6 h-[130%] w-auto object-cover object-bottom-left"
                         loading="eager"
                     />
                 </div>
