@@ -24,8 +24,8 @@ export const MenuComponent = ({
 
     useEffect(() => {
         if (!infoDate || infoDate.length === 0) return;
-        setUrlMaps(infoDate.find(f => f.id === "recepcion")?.url ?? "");
-        setUrlChurch(infoDate.find(f => f.id === "iglesia")?.url ?? "");
+        setUrlMaps(infoDate.find(f => f.moment === "recepcion")?.url ?? "");
+        setUrlChurch(infoDate.find(f => f.moment === "iglesia")?.url ?? "");
 
     }, [infoDate]);
 

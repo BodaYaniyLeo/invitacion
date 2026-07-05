@@ -192,11 +192,11 @@ export const DressCode = () => {
             </h4>
 
             <div className={`flex self-center w-full ${select ? "opacity-100" : "opacity-0"} duration-500`}>
-                <div className="w-1/2 text-center my-2 animate-bounce text-white my-4">
+                <div className="w-1/2 text-center my-2 animate-bounce text-white mt-4">
                     <p>Selecciona tu estilo</p>
                     <p>▼</p>
                 </div>
-                <div className="w-1/2 text-center my-2 animate-bounce text-white my-4">
+                <div className="w-1/2 text-center my-2 animate-bounce text-white mt-4">
                     <p>Selecciona tu estilo</p>
                     <p>▼</p>
                 </div>

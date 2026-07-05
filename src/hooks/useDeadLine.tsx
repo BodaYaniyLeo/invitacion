@@ -18,6 +18,7 @@ export const useDeadLine = () => {
         const alreadyExpired = checkDeadline();
 
         let intervalId: NodeJS.Timeout;
+
         if (!alreadyExpired) {
             intervalId = setInterval(() => {
                 const expired = checkDeadline();
@@ -27,8 +28,20 @@ export const useDeadLine = () => {
             }, 1000);
         }
 
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === "visible") {
+                const expired = checkDeadline();
+                if (expired && intervalId) {
+                    clearInterval(intervalId);
+                }
+            }
+        };
+
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+
         return () => {
             if (intervalId) clearInterval(intervalId);
+            document.removeEventListener("visibilitychange", handleVisibilityChange);
         };
     }, []);
 

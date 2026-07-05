@@ -53,7 +53,7 @@ export const VisitCalina = ({
 
                     </div>
                 </div>
-                <div id='photoSalon' className="pointer-events-auto flex flex-col items-center justify-between h-[120lvh] lg:h-auto">
+                <div id='photoSalon' className="pointer-events-auto flex flex-col items-center justify-between h-auto">
                     <button
                         className='flex mt-4 rounded-full bg-white px-8 py-4 text-black justify-center mt-5 font-bold text-(length:--h5size) animated-shadow'
                         onClick={() => {

@@ -6,7 +6,7 @@ import iglesia from "@/src/assets/images/itinerary/church.svg"
 import recepcion from "@/src/assets/images/itinerary/martini.svg"
 import salon from "@/src/assets/images/itinerary/music.svg"
 import civil from "@/src/assets/images/itinerary/ring.svg"
-import Image, { StaticImageData } from "next/image"
+import Image from "next/image"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import '@/src/styles/invitation.css'
 import { ArrayElements, typeInfo } from "../types/types"
@@ -15,13 +15,6 @@ import { ArrayElements, typeInfo } from "../types/types"
 interface MenuProps {
     data: ArrayElements;
     infoDate: Array<typeInfo>;
-}
-
-interface itineraryObj {
-    id: string,
-    image: StaticImageData | string,
-    text: string,
-    horario: string
 }
 
 export const Itinerary = ({
@@ -36,14 +29,17 @@ export const Itinerary = ({
         civil: civil,
     };
 
-    const ids = infoDate.map(info => {
-        return {
-            id: info.id,
-            image: imageMap[info.id],
-            text: info.place,
-            horario: info.time + "hs"
-        }
-    });
+    const ids = infoDate
+        .sort((a, b) => a.id - b.id)
+        .map(info => {
+            return {
+                id: info.id,
+                moment: info.moment,
+                image: imageMap[info.moment],
+                text: info.place,
+                horario: info.time + "hs"
+            }
+        });
 
     useLayoutEffect(() => {
 
@@ -56,26 +52,26 @@ export const Itinerary = ({
                 const tl = gsap.timeline({
                     paused: true,
                     scrollTrigger: {
-                        trigger: `#${id.id}`,
+                        trigger: `#${id.moment}`,
                         start: 'top 75%',
                         toggleActions: "play none none none",
                         once: true
                     }
                 });
 
-                tl.to(`#${id.id}`, { autoAlpha: 1, scale: 1, duration: 2 });
+                tl.to(`#${id.moment}`, { autoAlpha: 1, scale: 1, duration: 2 });
 
                 const tlBg = gsap.timeline({
                     paused: true,
                     scrollTrigger: {
-                        trigger: `#${id.id}`,
+                        trigger: `#${id.moment}`,
                         start: 'top 95%',
                         end: "bottom 5%",
                         scrub: 0.3
                     }
                 });
 
-                tlBg.to(`#${id.id} .imageBg`, {
+                tlBg.to(`#${id.moment} .imageBg`, {
                     "--mask-size": "20vh",
                     ease: "none",
                 });
@@ -91,7 +87,7 @@ export const Itinerary = ({
             <div className="flex flex-1 flex-col lg:flex-row justify-self-center self-center lg:h-auto lg:w-full lg:justify-around">
 
                 {ids.map(e =>
-                    <div key={e.id} id={e.id} className="flex flex-around lg:flex-col lg:max-w-[80px] lg:max-h-[80px] opacity-0 invisible lg:opacity-100 lg:visible my-[3dvh] scale-125 lg:scale-100">
+                    <div key={e.id} id={e.moment} className="flex flex-around lg:flex-col lg:max-w-[80px] lg:max-h-[80px] opacity-0 invisible lg:opacity-100 lg:visible my-[3dvh] scale-125 lg:scale-100">
                         <Image
                             src={e.image}
                             alt=""

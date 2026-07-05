@@ -35,7 +35,8 @@ export type buttonConfirm = {
 }
 
 export interface typeInfo {
-    id: string;
+    id: number;
+    moment: string;
     time: string;
     place: string;
     url: string;

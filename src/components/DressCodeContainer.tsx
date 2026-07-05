@@ -120,7 +120,7 @@ export const DressCodeContainer = ({
     const genderId = gender === "she" ? "She" : "He"
 
     return (
-        <div id={`dresscode${genderId}`} className='content-center w-1/2 align-self-center min-h-[50dvh]'>
+        <div id={`dresscode${genderId}`} className='content-center w-1/2 align-self-center h-fit'>
             <style jsx global>{`
                 @keyframes fadeIn {
                     from { opacity: 0; transform: translate(-50%, -2%) scale(0.98); }

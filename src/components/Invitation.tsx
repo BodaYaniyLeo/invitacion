@@ -187,7 +187,9 @@ export const Invitation = ({
                 setDataGuest={setDataGuest}
             />
 
-            <Countdown />
+            <Countdown
+                infoDate={infoDate}
+            />
 
             <div className="w-full h-[250dvh] relative bg-[#111117]" id="finalContainer">
                 <div ref={finalSection} className="w-full h-dvh bg-[#111117]">

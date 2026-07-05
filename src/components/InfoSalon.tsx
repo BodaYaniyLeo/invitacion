@@ -30,8 +30,8 @@ export const InfoSalon = ({
 
     useEffect(() => {
         if (!infoDate || infoDate.length === 0) return;
-        setUrlMaps(infoDate.find(f => f.id === "recepcion")?.url ?? "");
-        setUrlIframe(infoDate.find(f => f.id === "civil")?.url ?? "");
+        setUrlMaps(infoDate.find(f => f.moment === "recepcion")?.url ?? "");
+        setUrlIframe(infoDate.find(f => f.moment === "civil")?.url ?? "");
 
     }, [infoDate]);
 

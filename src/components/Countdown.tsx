@@ -17,10 +17,13 @@ import massage from "@/src/assets/images/countdown/massage.webp"
 import massageBg from "@/src/assets/images/countdown/massageBg.webp"
 
 import Image from "next/image"
+import { typeInfo } from "../types/types"
 
-export const Countdown = () => {
-    let itsToday: Date = new Date("2027-01-09T19:00:00")
+interface MenuProps {
+    infoDate: Array<typeInfo>
+}
 
+export const Countdown = ({ infoDate }: MenuProps) => {
     const [isMounted, setIsMounted] = useState(false)
     const [timeLeft, setTimeLeft] = useState<number>(0)
     const [radialGradient, setRadialGradient] = useState<string>(
@@ -30,20 +33,31 @@ export const Countdown = () => {
     useEffect(() => {
         setIsMounted(true)
 
-        if (typeof window !== "undefined") {
-            setRadialGradient(
-                window.innerWidth < 991
-                    ? "radial-gradient(ellipse 80% 50% at center, rgba(17,17,23,0) 10%, rgba(17,17,23,1) 100%)"
-                    : "radial-gradient(ellipse 50% 50% at center, rgba(17,17,23,0) 5%, rgba(17,17,23,1) 100%)"
-            )
+        const iglesia = infoDate.find(f => f.moment === "iglesia")
+        if (!iglesia) return;
+
+        const targetTimeMs = new Date(`2027-01-09T${iglesia.time}:00:00`).getTime()
+
+        const updateCountdown = () => {
+            setTimeLeft(targetTimeMs - Date.now())
         }
 
-        const time = setInterval(() => {
-            setTimeLeft(+itsToday - Date.now())
-        }, 1000);
+        updateCountdown()
 
-        return () => clearInterval(time)
-    }, [])
+        const interval = setInterval(updateCountdown, 1000);
+
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === "visible") {
+                updateCountdown()
+            }
+        }
+        document.addEventListener("visibilitychange", handleVisibilityChange)
+
+        return () => {
+            clearInterval(interval)
+            document.removeEventListener("visibilitychange", handleVisibilityChange)
+        }
+    }, [infoDate])
 
     const dias = Math.floor(timeLeft / (24 * 60 * 60 * 1000)).toString();
     const horas = Math.floor((timeLeft / (60 * 60 * 1000)) % 24).toString().padStart(2, "0");
