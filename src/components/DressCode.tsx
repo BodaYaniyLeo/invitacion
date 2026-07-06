@@ -58,20 +58,21 @@ export const DressCode = () => {
         ]);
 
         const q = gsap.utils.selector(containerRef.current)
-        const mask = `linear-gradient(to right, #111117 20%, transparent 70%), linear-gradient(to top, transparent 10%, #111117 90%, #111117 100%)`
+        const mask = `radial-gradient(circle at 4% 3%,rgba(0, 0, 0, 1) 13%, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.6) 26%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 80%)`
         const tl = gsap.timeline({ defaults: { ease: "power2.out", overwrite: "auto" } })
 
         tl
             .to(q(`#maniqui${idNoSelected}, #selector${idNoSelected}`), {
                 autoAlpha: 0,
-                display: "none",
                 duration: 0.2,
             })
             .to(q(`#maniqui${idSelected}`), {
                 x: idSelected === "He" ? "-100%" : "0%",
-                display: "block",
                 autoAlpha: 1,
                 duration: 0.3,
+            })
+            .to(q(`#maniquiHe`), {
+                x: "-100%",
             })
             .to(q("#salonBack"), {
                 maskImage: mask,
@@ -130,7 +131,7 @@ export const DressCode = () => {
                 display: "block",
                 autoAlpha: 1,
                 duration: 0.4,
-            }, "<")
+            }, "-=0.4")
 
         setManiquiSelect({ selected: null, noSelected: null });
         setTimeout(() => {
@@ -152,20 +153,18 @@ export const DressCode = () => {
         tl
             .to(q(`#maniqui${byeManiqui}, #selector${byeManiqui}`), {
                 autoAlpha: 0,
-                display: "none",
                 duration: 0.4,
             })
             .to(q(`#maniqui${hiManiqui}`), {
                 x: hiManiqui === "He" ? "-100%" : "0%",
-                display: "block",
                 autoAlpha: 1,
-                duration: 0.3,
+                duration: 0.4,
             })
             .to(q(`#selector${hiManiqui}`), {
                 display: "block",
                 autoAlpha: 1,
                 duration: 0.4,
-            }, ">")
+            }, "-=0.4")
 
         setManiquiSelect({
             selected: hiManiqui,
@@ -182,7 +181,7 @@ export const DressCode = () => {
         <div
             id="dresscode"
             ref={containerRef}
-            className="overflow-hidden h-dvh lg:h-auto flex flex-col relative lg:mt-[10dvh] bg-[#111117] max-w-[1000px] lg:justify-self-center"
+            className="overflow-hidden lg:h-auto flex flex-col relative lg:mt-[10dvh] bg-[#111117] max-w-[1000px] lg:justify-self-center"
         >
             <h2 className='text-center text-white font-(family-name:--fontBold) text-(length:--h1size) tracking-[-.04em] px-8'>
                 Código de vestimenta
@@ -201,9 +200,9 @@ export const DressCode = () => {
                     <p>▼</p>
                 </div>
             </div>
-            <div className="h-dvh relative flex content-center overflow-hidden">
+            <div className="relative h-[100%] flex content-center overflow-hidden">
 
-                <div id="iconChange" className="flex justify-around max-w-[150px] w-1/3 absolute bottom-1/6 right-[32px] lg:right-1/4 text-center z-40 opacity-0 invisible">
+                <div id="iconChange" className="flex justify-around max-w-[150px] w-1/3 absolute bottom-5 right-[32px] lg:right-1/4 text-center z-40 opacity-0 invisible">
                     <div
                         role="button"
                         tabIndex={0}
@@ -242,7 +241,7 @@ export const DressCode = () => {
                     <Image
                         src={fondo}
                         alt=""
-                        className="absolute bottom-1/6 h-[130%] w-auto object-cover object-bottom-left"
+                        className="absolute bottom-0 h-[160%] w-auto object-cover object-bottom-left"
                         loading="eager"
                     />
                 </div>
