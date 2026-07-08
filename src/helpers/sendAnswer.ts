@@ -14,7 +14,7 @@ export const sendChanges = async ({ guests, setTextButton, setAnimateButton }: b
         return g;
     });
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from('guests')
         .upsert(finalList)
         .select()

@@ -35,20 +35,17 @@ export default async function Page({
         )
     }
 
-    const supabase = createServerSupabaseClient()
+    const supabase = await createServerSupabaseClient()
 
-    const { data: slugData, error: errorSlug } = await supabase
-        .from("slug")
-        .select(`*, guests(*)`)
-        .eq("name", id)
+    const [slugResult, dateResult, payResult] = await Promise.all([
+        supabase.from("slug").select(`*, guests(*)`).eq("name", id),
+        supabase.from("info").select("*"),
+        supabase.from("payments").select("*")
+    ])
 
-    const { data: infoDate, error: errorDate } = await supabase
-        .from("info")
-        .select("*")
-
-    const { data: infoPay, error: errorPay } = await supabase
-        .from("payments")
-        .select("*")
+    const { data: slugData, error: errorSlug } = slugResult
+    const { data: infoDate, error: errorDate } = dateResult
+    const { data: infoPay, error: errorPay } = payResult
 
     if (
         errorSlug || errorDate || errorPay ||

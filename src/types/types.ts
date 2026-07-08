@@ -9,12 +9,15 @@ export interface transferObj {
 }
 
 export interface ArrayElements {
+    id: number;
+    name: string;
     church: boolean;
     guests: guestsObj[];
     yani: ObjText;
     leo: ObjText;
     payment_coverage: number;
     instructionsTransfer: transferObj;
+    textInvitation: string;
 }
 
 export type guestsObj = {
@@ -26,12 +29,16 @@ export type guestsObj = {
     timeConfirm: Date;
     lastTimeConfirm: Date;
     foodPreferents: string;
+    pay: boolean;
+    phone: number;
+    [key: string]: string | number | boolean | Date;
 }
 
 export type buttonConfirm = {
     guests: guestsObj[];
     setTextButton: (text: string) => void;
     setAnimateButton: (value: boolean) => void;
+    col?: string;
 }
 
 export interface typeInfo {
@@ -103,4 +110,39 @@ export interface FoodProps {
     id: number;
     setDataGuest: React.Dispatch<React.SetStateAction<guestsObj[]>>;
     lastAnswer: string;
+}
+
+export interface PayType {
+    id: number;
+    pay: boolean;
+}
+
+export interface DataAdminType {
+    group: ArrayElements;
+    price: number;
+}
+
+export interface SaveButtonParams {
+    setTextButton: (text: string) => void;
+    setAnimateButton: (value: boolean) => void;
+}
+
+export interface PropsSetGroup {
+    updateGroupField: <K extends keyof ArrayElements>(key: K, value: ArrayElements[K]) => void;
+    groupData: ArrayElements;
+    handleSaveGroup: (params: SaveButtonParams) => Promise<void> | void;
+}
+
+export interface DataGuestQProps {
+    guests: guestsObj[];
+    coverage: number;
+    payment: PayType[];
+    price: number;
+    groupName: string;
+}
+
+export interface DataGuestAdProps {
+    assist: boolean | null;
+    transfer: boolean;
+    food: string;
 }
