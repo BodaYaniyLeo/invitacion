@@ -145,4 +145,6 @@ export interface DataGuestAdProps {
     assist: boolean | null;
     transfer: boolean;
     food: string;
+    phone: number;
+    textInv: string;
 }

@@ -25,8 +25,6 @@ export const InfoTransfer = ({ data }: MenuProps) => {
 
     const isDeadLine = useDeadLine()
 
-    console.log(isDeadLine)
-
     return (
         (!isDeadLine && data.instructionsTransfer.text) &&
         < div className={`btn-transfer content-end font-bold transition-all duration-500 transform rounded-[22px] fixed bottom-4 right-4 z-92

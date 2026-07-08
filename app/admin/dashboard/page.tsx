@@ -47,12 +47,13 @@ export default async function AdminDashboard() {
                 <p className='text-[yellow]'>No respondieron: <span>{allGuests.filter(f => f.confirm === null).length}</span></p>
             </div>
 
-            <div className='grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 items-center w-full border-b pb-2 font-bold'>
+            <div className='grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr_0.5fr_1.5fr] gap-4 items-center w-full border-b pb-2 font-bold'>
                 <p>Grupo</p>
                 <p className='text-center'>Total invitados (grupo)</p>
                 <p className='text-[green] text-center'>Confirmado</p>
                 <p className='text-[red] text-center'>No van</p>
                 <p className='text-[yellow] text-center'>No respondieron</p>
+                <p className='text-center'>Pagos</p>
             </div>
 
             <div className="flex flex-col w-full mt-2">

@@ -22,16 +22,23 @@ export const DataGuestQ = ({ guests, coverage, payment, price, groupName }: Data
                     ({guests.filter((f: guestsObj) => f.confirm === null).length})
                 </p>
             </div>
+            {
+                coverage < 1
+                    ?
+                    <div className="contents">
+                        <div className="flex gap-4 justify-center">
+                            <p className='whitespace-nowrap'>Pago tarjeta: <span className="font-semibold text-green-700">${(payment.filter((f) => f.pay).length * (coverage * price)).toLocaleString('es-ES')}</span></p>
+                            <p className='whitespace-nowrap'>Pendiente: <span className="font-semibold text-amber-700">${(payment.filter((f) => !f.pay).length * (coverage * price)).toLocaleString('es-ES')}</span></p>
+                        </div>
+                    </div>
+                    :
+                    <div className="contents text-center">
+                        <p className="text-gray-400 italic">El grupo no paga tarjeta</p>
+                    </div>
+            }
+
 
             <div className="col-span-5 flex justify-between items-center px-2 py-1 rounded text-xs mt-1">
-                {
-                    coverage < 1
-                        ? <div className="flex gap-4">
-                            <p>Pago tarjeta: <span className="font-semibold text-green-700">${(payment.filter((f) => f.pay).length * (coverage * price)).toLocaleString('es-ES')}</span></p>
-                            <p>Pendiente: <span className="font-semibold text-amber-700">${(payment.filter((f) => !f.pay).length * (coverage * price)).toLocaleString('es-ES')}</span></p>
-                        </div>
-                        : <p className="text-gray-400 italic">El grupo no paga tarjeta</p>
-                }
 
                 <a className="text-blue-600 hover:text-blue-800 flex items-center gap-1 font-semibold" target="_blank" href={`https://casamientoyaniyleo.vercel.app/${groupName}`} rel="noreferrer">
                     Ver invitación
