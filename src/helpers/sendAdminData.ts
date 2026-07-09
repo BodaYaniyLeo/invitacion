@@ -1,7 +1,7 @@
 import { createBrowserSupabaseClient } from "@/app/lib/supabase/client";
 import { buttonConfirm } from "../types/types";
 
-export const sendAdminData = async ({ guests, setTextButton, setAnimateButton, col }: buttonConfirm) => {
+export const sendAdminData = async ({ guests, setTextButton, setAnimateButton, col, setPendingChanges }: buttonConfirm) => {
 
     const supabase = createBrowserSupabaseClient();
 
@@ -24,7 +24,7 @@ export const sendAdminData = async ({ guests, setTextButton, setAnimateButton, c
         } else {
             setAnimateButton(true)
             setTimeout(() => {
-                setTextButton("Confirmado!");
+                setTextButton("Guardado!");
                 setAnimateButton(false)
             }, 500);
             setTimeout(() => {
@@ -33,9 +33,11 @@ export const sendAdminData = async ({ guests, setTextButton, setAnimateButton, c
                 }, 500);
                 setTimeout(() => {
                     setAnimateButton(false)
-                    setTextButton("Confirmar");
+                    setTextButton("Guardar Pagos");
                 }, 1000);
+                setPendingChanges([])
             }, 5000);
+
         }
 
     } catch (err) {

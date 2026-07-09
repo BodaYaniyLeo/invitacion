@@ -2,15 +2,15 @@ import { loginAdmin } from "../actions";
 
 export default function AdminLoginPage({ searchParams }: { searchParams: { error?: string } }) {
     return (
-        <div className="w-full max-w-md mx-auto p-6 bg-white rounded-xl shadow-md border border-gray-100">
+        <div className="w-full max-w-md mx-auto p-6 bg-[hsl(200,5,12,1)] rounded-xl shadow-md border border-gray-100">
             <div className="mb-6 text-center">
-                <h2 className="text-2xl font-bold text-gray-800">Panel de Administración</h2>
+                <h2 className="text-2xl font-bold text-gray-400">Panel de Administración</h2>
                 <p className="text-sm text-gray-500 mt-1">Ingresa tus credenciales para continuar</p>
             </div>
 
             <form action={loginAdmin} className="space-y-4">
                 <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1.5">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5">
                         Correo Electrónico
                     </label>
                     <input
@@ -18,12 +18,12 @@ export default function AdminLoginPage({ searchParams }: { searchParams: { error
                         name="email"
                         required
                         placeholder="admin@ejemplo.com"
-                        className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all duration-200"
+                        className="w-full px-3 py-2.5 bg-[hsl(200,5,12,1)] border border-gray-200 rounded-lg text-sm text-gray-400 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all duration-200"
                     />
                 </div>
 
                 <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-1.5">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5">
                         Contraseña
                     </label>
                     <input
@@ -31,7 +31,7 @@ export default function AdminLoginPage({ searchParams }: { searchParams: { error
                         name="password"
                         required
                         placeholder="••••••••"
-                        className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all duration-200"
+                        className="w-full px-3 py-2.5 bg-[hsl(200,5,12,1)] border border-gray-200 rounded-lg text-sm text-gray-400 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all duration-200"
                     />
                 </div>
 

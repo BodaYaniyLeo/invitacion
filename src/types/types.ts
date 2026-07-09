@@ -39,6 +39,7 @@ export type buttonConfirm = {
     setTextButton: (text: string) => void;
     setAnimateButton: (value: boolean) => void;
     col?: string;
+    setPendingChanges: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 export interface typeInfo {

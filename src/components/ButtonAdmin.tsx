@@ -15,7 +15,7 @@ export const ButtonAdmin = ({ action, text }: ButtonAdminProps) => {
 
     return (
         <button
-            className="btn-send rounded-lg p-3 font-bold uppercase transition-all duration-500 transform min-w-[130px] w-fit"
+            className="btn-send rounded-lg p-3 font-bold uppercase transition-all duration-500 transform whitespace-nowrap min-w-40"
             onClick={() => action({ setTextButton, setAnimateButton })}
         >
             <p className={`${animateButton ? "opacity-0" : "opacity-100"} duration-500 justify-center font-[family-name:var(--fontNormal)] flex items-center gap-2`}>

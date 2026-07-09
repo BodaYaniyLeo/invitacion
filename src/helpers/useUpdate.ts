@@ -1,6 +1,6 @@
 import { createBrowserSupabaseClient } from '@/app/lib/supabase/client';
 import React from 'react'
-import { ArrayElements, ObjText, transferObj } from '../types/types';
+import { ObjText, transferObj } from '../types/types';
 
 interface props {
     id: number;
