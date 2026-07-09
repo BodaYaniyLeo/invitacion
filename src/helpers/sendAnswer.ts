@@ -22,7 +22,7 @@ export const sendChanges = async ({ guests, setTextButton, setAnimateButton }: b
 
     if (error) {
         console.log(error.message)
-    } else {
+    } else if (setTextButton) {
         setAnimateButton(true)
         setTimeout(() => {
             setTextButton("Confirmado!");
