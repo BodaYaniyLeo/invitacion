@@ -1,7 +1,7 @@
 import { createBrowserSupabaseClient } from "@/app/lib/supabase/client";
 import { buttonConfirm } from "../types/types";
 
-export const sendAdminData = async ({ guests, setTextButton, setAnimateButton, col, setPendingChanges }: buttonConfirm) => {
+export const sendAdminData = async ({ guests, setTextButton, setAnimateButton, col, setPendingChanges, text }: buttonConfirm) => {
 
     const supabase = createBrowserSupabaseClient();
 
@@ -21,7 +21,7 @@ export const sendAdminData = async ({ guests, setTextButton, setAnimateButton, c
 
         if (hasError) {
             console.log("Hubo un error en alguna de las actualizaciones");
-        } else if (setPendingChanges) {
+        } else if (setPendingChanges && setAnimateButton && setTextButton) {
             setAnimateButton(true)
             setTimeout(() => {
                 setTextButton("Guardado!");
@@ -33,11 +33,13 @@ export const sendAdminData = async ({ guests, setTextButton, setAnimateButton, c
                 }, 500);
                 setTimeout(() => {
                     setAnimateButton(false)
-                    setTextButton("Guardar Pagos");
+                    setTextButton(text);
                 }, 1000);
                 setPendingChanges([])
             }, 5000);
 
+        } else {
+            setAnimateButton(false)
         }
 
     } catch (err) {

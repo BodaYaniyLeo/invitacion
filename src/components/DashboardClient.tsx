@@ -3,17 +3,20 @@ import { useState, useMemo } from "react"
 import GuestTable from "./GuestTable";
 import GroupConfig from "./GroupConfig";
 
-export default function DashboardClient({ initialGuests, groups, price }: any) {
+export default function DashboardClient({ initialGuests, groups: initialGroups, price }: any) {
     const [activeTab, setActiveTab] = useState<'guests' | 'groups'>('guests')
     const [searchTerm, setSearchTerm] = useState("")
     const [filterGroup, setFilterGroup] = useState("all")
     const [otherFilters, setOtherFilters] = useState<Record<string, any>>({})
 
+    const [guests, setGuests] = useState(initialGuests)
+    const [groups, setGroups] = useState(initialGroups)
+
     const filteredGuests = useMemo(() => {
         const searchLower = searchTerm.toLowerCase();
         const filterKeys = Object.keys(otherFilters);
 
-        return initialGuests
+        return guests
             .filter((guest: any) => {
                 const matchesName = `${guest.name} ${guest.lastname}`.toLowerCase().includes(searchLower)
                 if (!matchesName) return false;
@@ -27,7 +30,6 @@ export default function DashboardClient({ initialGuests, groups, price }: any) {
 
                 return filterKeys.every(key => {
                     const valorFiltro = otherFilters[key];
-
                     if (key === 'phone' && valorFiltro === true) {
                         return !!guest.phone;
                     }
@@ -35,7 +37,30 @@ export default function DashboardClient({ initialGuests, groups, price }: any) {
                 });
             })
             .sort((a: any, b: any) => a.id - b.id);
-    }, [initialGuests, searchTerm, filterGroup, otherFilters])
+    }, [guests, searchTerm, filterGroup, otherFilters])
+
+    const updateGuestsPayments = (updatedPayments: any[]) => {
+        setGuests((prevGuests: any) =>
+            prevGuests.map((guest: any) => {
+                const updated = updatedPayments.find(p => p.id === guest.id);
+                return updated ? { ...guest, pay: updated.pay } : guest;
+            })
+        );
+    };
+
+    const updateGroupInState = (updatedGroup: any) => {
+        setGroups((prevGroups: any) =>
+            prevGroups.map((g: any) => g.id === updatedGroup.id ? updatedGroup : g)
+        );
+        setGuests((prevGuests: any) =>
+            prevGuests.map((guest: any) => {
+                if (guest.groupName === updatedGroup.name) {
+                    return { ...guest, groupCoverage: updatedGroup.payment_coverage };
+                }
+                return guest;
+            })
+        );
+    };
 
     const handleCheckboxChange = (key: string, value: any) => {
         setOtherFilters(prev => {
@@ -94,7 +119,7 @@ export default function DashboardClient({ initialGuests, groups, price }: any) {
                                 onChange={(e) => setFilterGroup(e.target.value)}
                             >
                                 <option value="all">Todos los grupos</option>
-                                {groups.map((g: any) => (
+                                {groups?.map((g: any) => (
                                     <option key={g.id} value={g.name}>{g.name}</option>
                                 ))}
                             </select>
@@ -117,14 +142,14 @@ export default function DashboardClient({ initialGuests, groups, price }: any) {
                             })}
                         </div>
 
-                        <GuestTable guests={filteredGuests} price={price} />
+                        <GuestTable guests={filteredGuests} price={price} onPaymentsSaved={updateGuestsPayments} />
                     </>
                 )}
 
                 {activeTab === 'groups' && (
                     <div className="flex flex-col gap-4">
                         {groups.map((group: any) => (
-                            <GroupConfig key={group.id} group={group} />
+                            <GroupConfig key={group.id} group={group} onGroupSaved={updateGroupInState} />
                         ))}
                     </div>
                 )}

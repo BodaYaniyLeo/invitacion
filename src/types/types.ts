@@ -1,4 +1,4 @@
-export type ObjText = {
+export interface ObjText {
     sub: string | null;
     text: string | null;
 }
@@ -20,8 +20,13 @@ export interface ArrayElements {
     textInvitation: string;
 }
 
-export type guestsObj = {
+export interface phoneType {
     id: number;
+    phone: number | "";
+    [key: string]: string | number | boolean | Date;
+}
+
+export interface guestsObj extends phoneType {
     name: string;
     lastname: string;
     confirm: boolean;
@@ -30,16 +35,15 @@ export type guestsObj = {
     lastTimeConfirm: Date;
     foodPreferents: string;
     pay: boolean;
-    phone: number;
-    [key: string]: string | number | boolean | Date;
 }
 
-export type buttonConfirm = {
-    guests: guestsObj[];
-    setTextButton: (text: string) => void;
-    setAnimateButton: (value: boolean) => void;
-    col?: string;
-    setPendingChanges?: React.Dispatch<React.SetStateAction<any[]>>;
+export interface buttonConfirm {
+    guests: Partial<guestsObj>[];
+    col: string;
+    text?: string;
+    setTextButton?: (text: any) => void;
+    setAnimateButton: (animate: boolean) => void;
+    setPendingChanges?: (changes: any[]) => void;
 }
 
 export interface typeInfo {
@@ -56,7 +60,7 @@ export interface typePay {
     value: number;
 }
 
-export type dataInv = {
+export interface dataInv {
     data: ArrayElements,
     infoDate: typeInfo[],
     isDesktop?: boolean | null,
