@@ -21,7 +21,7 @@ export const sendAdminData = async ({ guests, setTextButton, setAnimateButton, c
 
         if (hasError) {
             console.log("Hubo un error en alguna de las actualizaciones");
-        } else if (setPendingChanges && setAnimateButton && setTextButton) {
+        } else if (setPendingChanges && setTextButton) {
             setAnimateButton(true)
             setTimeout(() => {
                 setTextButton("Guardado!");
