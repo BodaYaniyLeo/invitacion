@@ -36,7 +36,7 @@ export const Countdown = ({ infoDate }: MenuProps) => {
         const iglesia = infoDate.find(f => f.moment === "iglesia")
         if (!iglesia) return;
 
-        const targetTimeMs = new Date(`2027-01-09T${iglesia.time}:00:00`).getTime()
+        const targetTimeMs = new Date(`2027-01-09T${iglesia.time}:00:00-03:00`).getTime()
 
         const updateCountdown = () => {
             setTimeLeft(targetTimeMs - Date.now())
