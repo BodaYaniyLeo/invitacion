@@ -39,7 +39,7 @@ export interface guestsObj extends phoneType {
 
 export interface buttonConfirm {
     guests: Partial<guestsObj>[];
-    col: string;
+    col?: string;
     text?: string;
     setTextButton?: (text: any) => void;
     setAnimateButton: (animate: boolean) => void;
