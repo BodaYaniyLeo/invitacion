@@ -93,7 +93,7 @@ export const MenuComponent = ({
                             Salón
                         </a>
                     </div>
-                    {data.church && urlChurch === "" &&
+                    {urlChurch && urlChurch === "" &&
                         <div>
                             <a onClick={() => setOpenMenu(false)} href={urlChurch} target='_blank' className='flex items-center text-[length:var(--menusize)] mb-3 text-white'>
                                 <Image

@@ -153,7 +153,7 @@ export const Countdown = ({ infoDate }: MenuProps) => {
                                 </p>
                             </div>
                             <div className="flex justify-between absolute top-[130%] left-0 w-full">
-                                <a href="https://calendar.app.google/YWCwpzWNMJrucNB1A" target="_blank" className="flex items-center">
+                                <a href="https://calendar.app.google/7iKGwkDm6YhYY7XP6" target="_blank" className="flex items-center">
                                     <span className="me-1 text-white lg:text-(length:--h5size)">Agendar</span>
                                     <Image
                                         src={googleLogo}
